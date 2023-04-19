@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Sovereign's Will"
+run/main_scene="res://Scene/start.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,7 +24,7 @@ Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
 editor/character_preview_mode=0
 editor/current_editor=&"Timeline Editor"
 editor/current_resources={
-"Character Editor": "res://chara/dd.dch",
+"Character Editor": "res://chara/NewChara.dch",
 "Timeline Editor": "res://timelines/start.dtl"
 }
 editor/last/resources=[]
@@ -41,7 +42,7 @@ text/speed=0.01
 text/skippable=true
 text/autocontinue_delay=1.0
 glossary/default_case_sensitive=true
-layout/mode=0
+layout/mode=1
 layout_scene="res://addons/dialogic/Events/DefaultLayouts/Default/DialogicDefaultLayout.tscn"
 editor/custom_testing_layout="res://addons/dialogic/Events/DefaultLayouts/Default/DialogicDefaultLayout.tscn"
 editor/current_timeline_path="res://timelines/start.dtl"
@@ -49,13 +50,10 @@ editor/layout/mode=2
 editor/visual_timeline_editor_sidebar=200.0
 variables={}
 layout/export_overrides={
-"box_modulate": "Color(1, 1, 1, 0.843137)",
-"name_label_color": "Color(0.921569, 0.764706, 0.152941, 0.988235)",
-"name_label_font": "\"res://Res/Fonts/Genshin Impact.ttf\"",
 "name_label_font_size": "39.0",
-"name_label_use_character_color": "false",
 "text_size": "26.0"
 }
+editor/timeline_editor_mode=0
 
 [display]
 

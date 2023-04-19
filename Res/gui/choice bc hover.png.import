@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u0o8qgccs5df"
-path="res://.godot/imported/next-indicator.png-e3b7b80d9da791a1d0a061a728b6f781.ctex"
+uid="uid://cvyuh2klqn60b"
+path="res://.godot/imported/choice bc hover.png-2227482530841a1d41345ddf1c130a5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/dialogic/Example Assets/next-indicator/next-indicator.png"
-dest_files=["res://.godot/imported/next-indicator.png-e3b7b80d9da791a1d0a061a728b6f781.ctex"]
+source_file="res://Res/gui/choice bc hover.png"
+dest_files=["res://.godot/imported/choice bc hover.png-2227482530841a1d41345ddf1c130a5d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxriwsgunirgd"
-path="res://.godot/imported/Paimon.webp-4c16271668bd2df5eea59849402b03bf.ctex"
+uid="uid://cluyltmcsvpbj"
+path="res://.godot/imported/choice bc.png-deba70a092ba76b060b1c0be8a218fe0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Res/art/Paimon.webp"
-dest_files=["res://.godot/imported/Paimon.webp-4c16271668bd2df5eea59849402b03bf.ctex"]
+source_file="res://Res/gui/choice bc.png"
+dest_files=["res://.godot/imported/choice bc.png-deba70a092ba76b060b1c0be8a218fe0.ctex"]
 
 [params]
 
