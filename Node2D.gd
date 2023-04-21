@@ -5,6 +5,4 @@ extends Node2D
 func _ready():
 	var dialog = Dialogic.start("res://timelines/start.dtl")
 	add_child(dialog)
-
-
-
+	pass

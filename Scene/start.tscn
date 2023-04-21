@@ -8,11 +8,18 @@
 script = ExtResource("1_r4vrk")
 metadata/_edit_lock_ = true
 
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-offset_right = 1923.0
+offset_right = 1920.0
 offset_bottom = 1080.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 stream = ExtResource("2_pmyt2")
 autoplay = true
+expand = true
 script = ExtResource("3_peuc3")
+
+[connection signal="finished" from="VideoStreamPlayer" to="VideoStreamPlayer" method="_on_finished"]
