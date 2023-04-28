@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqev8v5ag51l2"]
+
+[ext_resource type="Script" path="res://Scene/DialogicSystem/TextArea.gd" id="1_ecgk3"]
+[ext_resource type="Script" path="res://Scene/DialogicSystem/RichTextLabel.gd" id="1_gqpw2"]
+
+[node name="TextArea" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ecgk3")
+text = ""
+charactersPerSecond = 200
+
+[node name="RichLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+script = ExtResource("1_gqpw2")
+
+[connection signal="gui_input" from="RichLabel" to="." method="_on_rich_label_gui_input"]

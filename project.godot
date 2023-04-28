@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Sovereign's Will"
-run/main_scene="res://Scene/start.tscn"
+run/main_scene="res://Scene/video.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,7 +27,7 @@ editor/current_resources={
 "Character Editor": "res://chara/NewChara.dch",
 "Timeline Editor": "res://timelines/start.dtl"
 }
-editor/last/resources=[]
+editor/last/resources=["res://timelines/start.dtl"]
 animations/join_default_length=0.5
 animations/leave_default_length=0.5
 animations/leave_default_wait=true
@@ -47,7 +47,7 @@ layout_scene="res://addons/dialogic/Events/DefaultLayouts/Default/DialogicDefaul
 editor/custom_testing_layout="res://addons/dialogic/Events/DefaultLayouts/Default/DialogicDefaultLayout.tscn"
 editor/current_timeline_path="res://timelines/start.dtl"
 editor/layout/mode=2
-editor/visual_timeline_editor_sidebar=200.0
+editor/visual_timeline_editor_sidebar=214.0
 variables={}
 layout/export_overrides={
 "name_label_font_size": "39.0",
@@ -78,5 +78,4 @@ dialogic_default_action={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
