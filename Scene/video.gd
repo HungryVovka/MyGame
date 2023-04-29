@@ -1,35 +1,42 @@
 extends Control
 
-@onready var textArea = $PanelContainer/TextArea
+@onready var textArea = $MarginContainer/TextArea
+@onready var dialogManager = $DialogManager
+@onready var fadebleBackground = $FadebleBackground
 
-var text_data : Dictionary = {}
+@export var clickable_background = false
 
-var current_index = 0
-
-
-func read_json(filename):
-	var file = FileAccess.open(filename, FileAccess.READ)
-	var txt = file.get_as_text()
-	var json_object = JSON.new()
-	var parse_err = json_object.parse_string(txt)
-	file.close()
-	return parse_err
-	
-	
-func play_next_event():
-	if (current_index < text_data.events.size()):
-		textArea.text = text_data.events[current_index].text
-		current_index += 1
-	else: 
-		textArea.text = ""
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	text_data = read_json("res://timelines/testTimeline.json")
-	play_next_event()
-	pass # Replace with function body.
+	dialogManager.play_next_event()
+	fadebleBackground.z_index = -1
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+func _on_dialog_manager_end():
+	textArea.resetCharacter()
+	textArea.text = ""
+
+func _on_dialog_manager_reset_character():
+	textArea.resetCharacter()
+
+func _on_dialog_manager_update_character(portrait, character_name):
+	textArea.setCharacter(portrait, character_name)
+
+func _on_dialog_manager_update_text(text):
+	textArea.text = text
+
+func _on_text_area_on_next():
+	dialogManager.play_next_event()
+
+func _on_dialog_manager_set_background(res, fade_time):
+	fadebleBackground.set_texture(res, fade_time)
+
+
+func _on_fadeble_background_gui_input(event):
+	if event is InputEventMouseButton && clickable_background && event.button_index == MOUSE_BUTTON_LEFT && event.pressed == true:
+		dialogManager.play_next_event()
+
+
+func _on_dialog_manager_set_background_clickable(value):
+	clickable_background = value

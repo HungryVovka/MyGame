@@ -1,0 +1,16 @@
+{
+  "characters": {
+	"enstein": {
+	  "portrait": "res://Res/characters/portraits/Icon_Einstein_256x256.png",
+	  "name": "Enstein"
+	},
+	"gurl": {
+	  "portrait": "res://Res/characters/portraits/gurl.jpg",
+	  "name": "Random Girl"
+	},
+	"bonbi": {
+	  "portrait": "res://Res/characters/portraits/bonbi.png",
+	  "name": "Bonbibonkers"
+	},
+  }
+}

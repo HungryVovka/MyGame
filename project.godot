@@ -27,7 +27,7 @@ editor/current_resources={
 "Character Editor": "res://chara/NewChara.dch",
 "Timeline Editor": "res://timelines/start.dtl"
 }
-editor/last/resources=["res://timelines/start.dtl"]
+editor/last/resources=[]
 animations/join_default_length=0.5
 animations/leave_default_length=0.5
 animations/leave_default_wait=true
