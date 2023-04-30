@@ -11,12 +11,17 @@ signal end()
 signal setBackground(res, fade_time)
 signal setBackgroundClickable(value)
 
+signal playSound(name, channel, loop, bus, volume, fade)
+signal stopSound(channel)
+
 var text_data : Dictionary = {}
 var characters_data : Dictionary = {}
 var portraits_resources: Dictionary = {}
 var background_resources: Dictionary = {}
 
 var current_index = 0
+
+var audio_players: Dictionary = {}
 	
 func setTimeline(filename):
 	if filename:
@@ -43,31 +48,48 @@ func _read_json(filename):
 	var data = JSON.parse_string(txt)
 	file.close()
 	return data
-	
+
 func play_next_event():
 	if (current_index < text_data.events.size()):
 		var event = text_data.events[current_index]
 		updateText.emit(event.text)
 		if event.has("character"):
-			if characters_data.characters.has(event.character):
-				var character = characters_data.characters[event.character]
-				updateCharacter.emit(portraits_resources[event.character], character.name)
-			else:
-				resetCharacter.emit()
+			process_character(event.character)
 		if event.has("background"):
-			var fade_time = event.background.fade if event.background.has("fade") else 0.0
-			var bg_name = event.background.name if event.background.has("name") else ""
-			if background_resources.has(bg_name):
-				setBackground.emit(background_resources[bg_name], fade_time)
-			else:
-				setBackground.emit(null, fade_time)
-			if event.background.has("clickable") && event.background.clickable:
-				setBackgroundClickable.emit(true)
-			else:
-				setBackgroundClickable.emit(false)
+			process_background(event.background)
+		if event.has("play_sound"):
+			process_sound(event.play_sound)
+		if event.has("stop_sound") && event.stop_sound != "":
+			stopSound.emit(event.stop_sound)
 		current_index += 1
 	else: 
 		end.emit()
 
 func _ready():
 	pass 
+	
+func process_character(event):
+	if characters_data.characters.has(event):
+		var character = characters_data.characters[event]
+		updateCharacter.emit(portraits_resources[event], character.name)
+	else:
+		resetCharacter.emit()
+
+func process_background(event):
+	var fade_time = event.fade if event.has("fade") else 0.0
+	var bg_name = event.name if event.has("name") else ""
+	if background_resources.has(bg_name):
+		setBackground.emit(background_resources[bg_name], fade_time)
+	else:
+		setBackground.emit(null, fade_time)
+	if event.has("clickable"):
+		setBackgroundClickable.emit(event.clickable)
+
+func process_sound(event):
+	if event.has("name") && event.has("channel"):
+		var loop = event.loop if event.has("loop") else false
+		var bus = event.bus if event.has("bus") else "SFX"
+		var volume = event.volume if event.has("volume") else 1.0
+		var fade = event.fade if event.has("fade") else 0.0
+		playSound.emit(event.name, event.channel, loop, bus, volume, fade)
+	

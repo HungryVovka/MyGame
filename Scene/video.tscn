@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpxdw1wi5jggw"]
+[gd_scene load_steps=8 format=3 uid="uid://dpxdw1wi5jggw"]
 
 [ext_resource type="Script" path="res://Scene/video.gd" id="1_m2t7x"]
 [ext_resource type="VideoStream" path="res://Res/movie/JaCrp6.ogv" id="1_vd3qs"]
@@ -6,20 +6,25 @@
 [ext_resource type="PackedScene" uid="uid://0xb1dg2x3ns5" path="res://Scene/DialogicSystem/FadebleBackground.tscn" id="2_qreeh"]
 [ext_resource type="PackedScene" uid="uid://daf84icc03tyk" path="res://Scene/DialogicSystem/TextArea.tscn" id="3_4v5x7"]
 [ext_resource type="PackedScene" uid="uid://b4jnsyyw1ce7o" path="res://Scene/DialogicSystem/DialogManager.tscn" id="5_hx7hm"]
+[ext_resource type="PackedScene" uid="uid://bxg7ilqhk1qw" path="res://Scene/DialogicSystem/AudioManager.tscn" id="7_dp16l"]
 
 [node name="Control" type="Control"]
 layout_direction = 1
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_m2t7x")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer"]
 layout_mode = 2
@@ -27,7 +32,6 @@ layout_mode = 2
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelContainer"]
 layout_mode = 2
 stream = ExtResource("1_vd3qs")
-autoplay = true
 expand = true
 script = ExtResource("2_4caap")
 
@@ -57,15 +61,38 @@ clickingSound = "res://Res/sfx/button_hov1.ogg"
 
 [node name="DialogManager" parent="." instance=ExtResource("5_hx7hm")]
 timeline = "res://timelines/testTimeline.json"
-character_list = "res://timelines/characters.json"
-background_list = "res://timelines/backgrounds.json"
+character_list = "res://configs/characters.json"
+background_list = "res://configs/backgrounds.json"
+
+[node name="AudioManager" parent="." instance=ExtResource("7_dp16l")]
+resources = "res://configs/sounds.json"
+
+[node name="Choises" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.5
+offset_right = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Button" type="Button" parent="Choises"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+text = "Hrue"
 
 [connection signal="finished" from="PanelContainer/VideoStreamPlayer" to="PanelContainer/VideoStreamPlayer" method="_on_finished"]
 [connection signal="gui_input" from="FadebleBackground" to="." method="_on_fadeble_background_gui_input"]
 [connection signal="on_next" from="MarginContainer/TextArea" to="." method="_on_text_area_on_next"]
 [connection signal="end" from="DialogManager" to="." method="_on_dialog_manager_end"]
+[connection signal="playSound" from="DialogManager" to="." method="_on_dialog_manager_play_sound"]
 [connection signal="resetCharacter" from="DialogManager" to="." method="_on_dialog_manager_reset_character"]
 [connection signal="setBackground" from="DialogManager" to="." method="_on_dialog_manager_set_background"]
 [connection signal="setBackgroundClickable" from="DialogManager" to="." method="_on_dialog_manager_set_background_clickable"]
+[connection signal="stopSound" from="DialogManager" to="." method="_on_dialog_manager_stop_sound"]
 [connection signal="updateCharacter" from="DialogManager" to="." method="_on_dialog_manager_update_character"]
 [connection signal="updateText" from="DialogManager" to="." method="_on_dialog_manager_update_text"]

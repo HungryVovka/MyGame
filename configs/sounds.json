@@ -1,0 +1,8 @@
+{
+	"always": "res://Res/music/Blink 182 - Always.mp3",
+	"click_hover": "res://Res/sfx/1.mp3",
+	"button_hov": "res://Res/sfx/button_hov1.ogg",
+	"dialog_press": "res://Res/sfx/Genshin dialog press.mp3",
+	"dialog_hover": "res://Res/sfx/genshin dialog.mp3",
+	"keyboar_typing": "res://Res/sfx/keyboard_typing.wav"
+}
