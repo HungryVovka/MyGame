@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://41tw2y7jutve"]
+
+[ext_resource type="Script" path="res://Scene/DialogicSystem/ChoicesBlock.gd" id="1_756bu"]
+[ext_resource type="Script" path="res://Scene/DialogicSystem/Button.gd" id="2_fk013"]
+[ext_resource type="AudioStream" uid="uid://bmowggm24lfr4" path="res://Res/sfx/genshin dialog.mp3" id="3_5txup"]
+[ext_resource type="AudioStream" uid="uid://by8u44rwp6g8n" path="res://Res/sfx/button_hov1.ogg" id="4_fvcse"]
+
+[node name="ChoisesBlock" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_756bu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+script = ExtResource("2_fk013")
+
+[node name="Hover" type="AudioStreamPlayer" parent="VBoxContainer/Button"]
+stream = ExtResource("3_5txup")
+
+[node name="Click" type="AudioStreamPlayer" parent="VBoxContainer/Button"]
+stream = ExtResource("4_fvcse")
+
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_pressed"]

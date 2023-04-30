@@ -24,8 +24,7 @@ Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
 editor/character_preview_mode=0
 editor/current_editor=&"Timeline Editor"
 editor/current_resources={
-"Character Editor": "res://chara/NewChara.dch",
-"Timeline Editor": "res://timelines/start.dtl"
+"Character Editor": "res://chara/NewChara.dch"
 }
 editor/last/resources=[]
 animations/join_default_length=0.5

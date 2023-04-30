@@ -5,6 +5,9 @@ var image = null
 @onready
 var bgTexture = $"../TextureRect"
 	
+func reset_image():
+	image = null
+	
 func _process(_delta):
 	if is_playing() && stream_position && !image:
 		store_first_frame()
