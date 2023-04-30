@@ -1,0 +1,33 @@
+{
+  "unique_name": "StartTimeline",
+  "display_name": "StartTimeline",
+  "events": [
+	{
+	  "text": "",
+	  "play_sound": {
+		"name": "always",
+		"channel": "bg",
+		"loop": true,
+		"volume": 0.7,
+		"fade": 1.5
+	  },
+	  "background": {
+		"name": "air1",
+		"clickable": true,
+		"fade": 1.5
+	  }
+	},
+	{
+	  "text": "",
+	  "background": {
+		"name": "air2"
+	  }
+	},
+	{
+	  "text": "",
+	  "background": {
+		"name": "air3"
+	  }
+	}
+  ]
+}

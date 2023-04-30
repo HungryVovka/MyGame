@@ -1,4 +1,7 @@
 {
+	"air1": "res://Res/art/Scene1/20221119204301294.png",
+	"air2": "res://Res/art/Scene1/20221119204414355.png",
+	"air3": "res://Res/art/Scene1/20221119204559119.png",
   "city": "res://Res/backgrounds/city.png",
   "mountains": "res://Res/backgrounds/mountains.jpg",
   "orange": "res://Res/backgrounds/orange.jpg",

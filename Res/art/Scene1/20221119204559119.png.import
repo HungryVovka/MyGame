@@ -2,19 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx3o2ild56i76"
-path="res://.godot/imported/closed-icon.svg-b4f16653b91d6792313a130565319b2f.ctex"
+uid="uid://ds22x6nu73o7n"
+path="res://.godot/imported/20221119204559119.png-f1c95cc5292a9a4164a164f47f6f4c7a.ctex"
 metadata={
-"editor_dark_theme": true,
-"editor_scale": 1.0,
-"has_editor_variant": true,
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/dialogic/Editor/Images/Pieces/closed-icon.svg"
-dest_files=["res://.godot/imported/closed-icon.svg-b4f16653b91d6792313a130565319b2f.ctex"]
+source_file="res://Res/art/Scene1/20221119204559119.png"
+dest_files=["res://.godot/imported/20221119204559119.png-f1c95cc5292a9a4164a164f47f6f4c7a.ctex"]
 
 [params]
 
@@ -35,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=true
-editor/convert_colors_with_editor_theme=true
