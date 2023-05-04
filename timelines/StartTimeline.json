@@ -20,13 +20,15 @@
 	{
 	  "text": "",
 	  "background": {
-		"name": "air2"
+		"name": "air2",
+		"fade": 1.5
 	  }
 	},
 	{
 	  "text": "",
 	  "background": {
-		"name": "air3"
+		"name": "air3",
+		"fade": 1.5
 	  }
 	}
   ]
