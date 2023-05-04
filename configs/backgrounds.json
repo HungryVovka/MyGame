@@ -2,8 +2,9 @@
 	"air1": "res://Res/art/Scene1/1.png",
 	"air2": "res://Res/art/Scene1/2.png",
 	"air3": "res://Res/art/Scene1/3.png",
-  "city": "res://Res/backgrounds/city.png",
-  "mountains": "res://Res/backgrounds/mountains.jpg",
-  "orange": "res://Res/backgrounds/orange.jpg",
-  "winter_trees": "res://Res/backgrounds/winter_trees.jpg"
+	"city": "res://Res/backgrounds/city.png",
+	"dice": "res://Res/backgrounds/dice.png",
+	"mountains": "res://Res/backgrounds/mountains.jpg",
+	"orange": "res://Res/backgrounds/orange.jpg",
+	"winter_trees": "res://Res/backgrounds/winter_trees.jpg"
 }

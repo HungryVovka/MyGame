@@ -58,7 +58,7 @@ func get_next_event():
 	
 func jump_to(id):
 	if event_index_cache.has(id):
-		current_index = event_index_cache[id]
+		current_index = [] + event_index_cache[id]
 		deep_index = current_index.size() - 1
 		play_next_event()
 
@@ -74,6 +74,7 @@ func make_choice(index):
 	
 	
 func setTimeline(filename):
+	event_index_cache.clear()
 	if filename:
 		text_data = _read_json(filename)
 		reset_index()
@@ -130,6 +131,10 @@ func play_next_event():
 	if event:
 		if event.has("state"):
 			process_state(event.state)
+		if event.has("play_sound"):
+			process_sound(event.play_sound)
+		if event.has("stop_sound") && event.stop_sound != "":
+			stopSound.emit(event.stop_sound)
 		if event.has("jump_to"):
 			jump_to(preprocess_string_to_state(event.jump_to))
 			return
@@ -138,10 +143,12 @@ func play_next_event():
 			process_character(event.character)
 		if event.has("background"):
 			process_background(event.background)
-		if event.has("play_sound"):
-			process_sound(event.play_sound)
-		if event.has("stop_sound") && event.stop_sound != "":
-			stopSound.emit(event.stop_sound)
+		if event.has("timer"):
+			var timer = Timer.new()
+			timer.one_shot = true
+			add_child(timer)
+			timer.connect("timeout", play_next_event)
+			timer.start(event.timer)
 		if event.has("choices"):
 			process_choices(event.choices)
 		else:

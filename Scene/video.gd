@@ -12,7 +12,7 @@ extends Control
 
 func _ready():
 	choicesBlock.visible = false
-	dialogManager.timeline = "res://timelines/StartTimeline.json"
+	dialogManager.timeline = "res://timelines/testTimeline.json"
 	dialogManager.play_next_event()
 
 func _process(_delta):
@@ -21,7 +21,7 @@ func _process(_delta):
 func _on_dialog_manager_end():
 	textArea.resetCharacter()
 	textArea.text = ""
-	dialogManager.timeline = "res://timelines/StartTimeline.json"
+	dialogManager.timeline = "res://timelines/testTimeline.json"
 	dialogManager.play_next_event()
 
 func _on_dialog_manager_reset_character():
