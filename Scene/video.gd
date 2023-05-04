@@ -34,6 +34,8 @@ func _on_dialog_manager_update_text(text):
 	textArea.text = text
 
 func _on_text_area_on_next():
+	if !clickable_background && textArea.text == "":
+		return
 	if !choicesBlock.visible:
 		dialogManager.play_next_event()
 
