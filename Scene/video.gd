@@ -16,10 +16,11 @@ extends Control
 
 @export var clickable_background = false
 
+@export_file("*.json") var fn: String
 
 func _ready():
 	choicesBlock.visible = false
-	dialogManager.timeline = "res://timelines/testTimeline.json"
+	dialogManager.timeline = fn
 	dialogManager.play_next_event()
 	
 func _process(_delta):
@@ -28,7 +29,7 @@ func _process(_delta):
 func _on_dialog_manager_end():
 	textArea.resetCharacter()
 	textArea.text = ""
-	dialogManager.timeline = "res://timelines/testTimeline.json"
+	dialogManager.timeline = fn
 	dialogManager.play_next_event()
 
 func _on_dialog_manager_reset_character():
@@ -74,8 +75,8 @@ func _on_dialog_manager_show_choices(data):
 	choicesBlock.visible = true
 
 
-func _on_choices_block_choice_clicked(id):
-	dialogManager.make_choice(id)
+func _on_choices_block_choice_clicked(id, text):
+	dialogManager.make_choice(id, text)
 	if !dialogManager.is_choice:
 		choicesBlock.visible = false
 

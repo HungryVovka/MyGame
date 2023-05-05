@@ -3,7 +3,7 @@ extends Control
 @onready var vbox = $VBoxContainer
 
 var choices: Dictionary = {}
-signal choiceClicked(id)
+signal choiceClicked(id, text)
 
 
 func _ready():
@@ -31,5 +31,5 @@ func clearChoices():
 		vbox.remove_child(choices[k])
 	choices.clear()
 
-func onChoiceClicked(id):
-	choiceClicked.emit(id)
+func onChoiceClicked(id, text):
+	choiceClicked.emit(id, text)

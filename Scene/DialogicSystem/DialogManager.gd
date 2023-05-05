@@ -33,6 +33,8 @@ var event_index_cache: Dictionary = {}
 var current_index = [0]
 var deep_index = 0
 
+var current_event = null
+
 var conditionManager
 
 
@@ -70,8 +72,16 @@ func update_state(new_state: Dictionary = {}):
 	for k in new_state:
 		dialog_state[k] = new_state[k]
 	
-func make_choice(index): 
-	current_index.append(index)
+func make_choice(index, text):
+	
+	var found_index = 0
+	var ci = 0
+	for c in current_event.choices:
+		if c.text == text:
+			found_index = ci
+			break
+		ci += 1
+	current_index.append(found_index)
 	current_index.append(0)
 	deep_index += 2
 	play_next_event()
@@ -132,6 +142,7 @@ func _read_json(filename):
 
 func play_next_event():
 	var event = get_next_event()
+	current_event = event
 	if event:
 		if event.has("condition"):
 			if !conditionManager.process(event.condition): 
@@ -209,7 +220,8 @@ func process_sound(event):
 func process_choices(event):
 	var data = []
 	for choice in event:
-		data.append(preprocess_string_to_state(choice.text))
+		if (choice.has("condition") && conditionManager.process(choice.condition)) or !choice.has("condition"):
+			data.append(preprocess_string_to_state(choice.text))
 	showChoices.emit(data)
 	
 func process_state(event):
