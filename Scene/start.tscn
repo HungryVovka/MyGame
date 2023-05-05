@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://f6hx0n7gr3m7"]
+[gd_scene load_steps=2 format=3 uid="uid://dtgugtwdswpti"]
 
-[ext_resource type="Script" path="res://Node2D.gd" id="1_r4vrk"]
-[ext_resource type="PackedScene" uid="uid://iqrpv5gmxjxr" path="res://Scene/video.tscn" id="2_ha61f"]
+[ext_resource type="PackedScene" uid="uid://iqrpv5gmxjxr" path="res://Scene/DialogScene.tscn" id="2_ha61f"]
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_r4vrk")
-metadata/_edit_lock_ = true
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Control" parent="." instance=ExtResource("2_ha61f")]
+[node name="DialogSystem" parent="." instance=ExtResource("2_ha61f")]
+layout_mode = 1

@@ -7,6 +7,8 @@ extends Node
 
 @export var dialog_state: Dictionary = {}
 
+@export var is_choice = false
+
 signal updateText(text)
 signal updateCharacter(portrait, name)
 signal resetCharacter()
@@ -151,8 +153,10 @@ func play_next_event():
 			timer.start(event.timer)
 		if event.has("choices"):
 			process_choices(event.choices)
+			is_choice = true
 		else:
 			current_index[deep_index] += 1
+			is_choice = false
 
 func _ready():
 	pass 

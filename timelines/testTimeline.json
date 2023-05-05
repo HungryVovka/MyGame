@@ -48,6 +48,41 @@
 								"fade": 2,
 								"name": "orange"
 							},
+							"choices": [
+								{
+									"events": [
+										{
+											"background": {
+												"fade": 7,
+												"name": "dice"
+											},
+											"character": "enstein",
+											"text": "OK? Ok"
+										},
+										{
+											"character": "enstein",
+											"text": "U dolbaeb?"
+										}
+									],
+									"text": "OK"
+								},
+								{
+									"events": [
+										{
+											"background": {
+												"fade": 1,
+												"name": "winter_trees"
+											},
+											"character": "gurl",
+											"text": "never say never"
+										},
+										{
+											"text": "Fuck that"
+										}
+									],
+									"text": "Nyet"
+								}
+							],
 							"id": "yes-enter",
 							"state": {
 								"character": "enstein",

@@ -75,7 +75,8 @@ func _on_dialog_manager_show_choices(data):
 
 func _on_choices_block_choice_clicked(id):
 	dialogManager.make_choice(id)
-	choicesBlock.visible = false
+	if !dialogManager.is_choice:
+		choicesBlock.visible = false
 
 
 
