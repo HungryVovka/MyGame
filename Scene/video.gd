@@ -8,13 +8,19 @@ extends Control
 @onready var videoPlayer = $PanelContainer/VideoStreamPlayer
 @onready var videoPanel = $PanelContainer
 
+@onready var personLeft = $PersonTexture
+@onready var personMiddleLeft = $PersonTexture2
+@onready var personMiddle = $PersonTexture3
+@onready var personMiddleRight = $PersonTexture4
+@onready var personRight = $PersonTexture5
+
 @export var clickable_background = false
 
 func _ready():
 	choicesBlock.visible = false
 	dialogManager.timeline = "res://timelines/testTimeline.json"
 	dialogManager.play_next_event()
-
+	
 func _process(_delta):
 	pass
 

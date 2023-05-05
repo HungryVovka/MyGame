@@ -137,7 +137,7 @@
 		},
 		{
 			"background": {
-				"fade": 0.5,
+				"fade": 1.9000000000000006,
 				"name": "dice",
 				"video": "kissing"
 			},
