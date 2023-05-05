@@ -16,6 +16,7 @@ extends Control
 
 @export var clickable_background = false
 
+
 func _ready():
 	choicesBlock.visible = false
 	dialogManager.timeline = "res://timelines/testTimeline.json"

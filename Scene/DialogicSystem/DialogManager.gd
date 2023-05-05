@@ -33,6 +33,8 @@ var event_index_cache: Dictionary = {}
 var current_index = [0]
 var deep_index = 0
 
+var conditionManager
+
 
 
 func reset_index():
@@ -131,6 +133,12 @@ func _read_json(filename):
 func play_next_event():
 	var event = get_next_event()
 	if event:
+		if event.has("condition"):
+			if !conditionManager.process(event.condition): 
+				is_choice = false
+				current_index[deep_index] += 1
+				play_next_event()
+				return
 		if event.has("state"):
 			process_state(event.state)
 		if event.has("play_sound"):
@@ -159,6 +167,9 @@ func play_next_event():
 			is_choice = false
 
 func _ready():
+	conditionManager = preload("res://Scene/DialogicSystem/ConditionProcessor.gd").new()
+	conditionManager.context = dialog_state
+	add_child(conditionManager)
 	pass 
 	
 func process_character(event):
