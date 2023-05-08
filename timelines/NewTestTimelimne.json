@@ -1,0 +1,58 @@
+{
+	"display_name": "StartTimeline",
+	"events": [
+		{
+			"choices": [
+				{
+					"events": [
+						{
+							"state": {
+								"+10int": "bigboobas"
+							},
+							"text": "big boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobas"
+						}
+					],
+					"text": "big boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobas"
+				},
+				{
+					"events": [
+						{
+							"state": {
+								"+10int": "bigdick"
+							},
+							"text": "big dick"
+						}
+					],
+					"text": "open route"
+				}
+			],
+			"text": "asdgfvdsxgf edfasfd bxcsadf "
+		},
+		{
+			"background": {
+				"name": "air2"
+			},
+			"condition": {
+				"op": "==",
+				"value": "bigdick",
+				"var": "+10int"
+			},
+			"text": "Very big d"
+		},
+		{
+			"background": {
+				"name": "air1"
+			},
+			"condition": {
+				"op": "==",
+				"value": "bigboobas",
+				"var": "+10int"
+			},
+			"text": "big boob"
+		},
+		{
+			"text": "4673532 dsf df34"
+		}
+	],
+	"unique_name": "StartTimeline"
+}

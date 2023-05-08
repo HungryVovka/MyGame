@@ -46,26 +46,31 @@ mouse_filter = 1
 [node name="PersonLeft" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
 offset_right = -1407.0
+mouse_filter = 2
 
 [node name="PersonMiddleLeft" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
 offset_left = 384.0
 offset_right = -959.0
+mouse_filter = 2
 
 [node name="PersonMiddle" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
 offset_left = 768.0
 offset_right = 768.0
+mouse_filter = 2
 
 [node name="PersonMiddleRight" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
 offset_left = 1152.0
 offset_right = 1152.0
+mouse_filter = 2
 
 [node name="PersonRight" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
 offset_left = 1536.0
 offset_right = 1536.0
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

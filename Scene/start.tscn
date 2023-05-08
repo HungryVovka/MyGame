@@ -12,4 +12,4 @@ grow_vertical = 2
 
 [node name="DialogSystem" parent="." instance=ExtResource("2_ha61f")]
 layout_mode = 1
-fn = "res://timelines/new.json"
+fn = "res://timelines/NewTestTimelimne.json"

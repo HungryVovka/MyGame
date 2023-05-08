@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://daf84icc03tyk"]
+[gd_scene load_steps=4 format=3 uid="uid://daf84icc03tyk"]
 
 [ext_resource type="Script" path="res://Scene/DialogicSystem/TextArea.gd" id="1_ecgk3"]
 [ext_resource type="Script" path="res://Scene/DialogicSystem/RichTextLabel.gd" id="1_gqpw2"]
+[ext_resource type="Texture2D" uid="uid://c83sikis8d7bk" path="res://Res/gui/background-2.png" id="2_r5cj3"]
 
 [node name="TextArea" type="Control"]
 layout_mode = 3
@@ -15,6 +16,16 @@ size_flags_vertical = 3
 script = ExtResource("1_ecgk3")
 text = ""
 charactersPerSecond = 200
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.505882)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r5cj3")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_direction = 1

@@ -83,6 +83,8 @@ func make_choice(_index, text):
 	
 	var found_index = 0
 	var ci = 0
+	if current_event == null:
+		current_event = get_next_event()
 	for c in current_event.choices:
 		if c.text == text:
 			found_index = ci
@@ -173,14 +175,15 @@ func play_next_event():
 			stopSound.emit(event.stop_sound)
 		if event.has("persons"):
 			process_persons(event.persons)
+		if event.has("background"):
+			process_background(event.background)
 		if event.has("jump_to"):
 			jump_to(preprocess_string_to_state(event.jump_to))
 			return
 		updateText.emit(preprocess_string_to_state(event.text))
 		if event.has("character"):
 			process_character(event.character)
-		if event.has("background"):
-			process_background(event.background)
+
 		if event.has("timer"):
 			nextEventTimer = Timer.new()
 			nextEventTimer.one_shot = true
