@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://0xb1dg2x3ns5" path="res://Scene/DialogicSystem/FadebleBackground.tscn" id="2_qreeh"]
 [ext_resource type="PackedScene" uid="uid://daf84icc03tyk" path="res://Scene/DialogicSystem/TextArea.tscn" id="3_4v5x7"]
 [ext_resource type="PackedScene" uid="uid://b4jnsyyw1ce7o" path="res://Scene/DialogicSystem/DialogManager.tscn" id="5_hx7hm"]
+[ext_resource type="PackedScene" uid="uid://cpac1623kedeg" path="res://Scene/DialogicSystem/Person.tscn" id="5_jcndp"]
 [ext_resource type="PackedScene" uid="uid://bxg7ilqhk1qw" path="res://Scene/DialogicSystem/AudioManager.tscn" id="7_dp16l"]
 [ext_resource type="PackedScene" uid="uid://41tw2y7jutve" path="res://Scene/DialogicSystem/ChoicesBlock.tscn" id="8_56aj0"]
-[ext_resource type="Texture2D" uid="uid://bevkwlc36dsa7" path="res://Res/characters/man.png" id="9_4bsd5"]
 
 [node name="Control" type="Control"]
 layout_direction = 1
@@ -43,78 +43,29 @@ z_index = -1
 layout_mode = 1
 mouse_filter = 1
 
-[node name="PersonTexture" type="TextureRect" parent="."]
-visible = false
-clip_contents = true
+[node name="PersonLeft" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.269
-anchor_bottom = 1.0
-offset_right = 0.519955
-mouse_filter = 2
-texture = ExtResource("9_4bsd5")
-expand_mode = 1
-stretch_mode = 4
+offset_right = -1407.0
 
-[node name="PersonTexture2" type="TextureRect" parent="."]
-visible = false
-clip_contents = true
+[node name="PersonMiddleLeft" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.182
-anchor_right = 0.452
-anchor_bottom = 1.0
-offset_left = 0.559978
-offset_right = -0.840042
-mouse_filter = 2
-texture = ExtResource("9_4bsd5")
-expand_mode = 1
-stretch_mode = 4
+offset_left = 384.0
+offset_right = -959.0
 
-[node name="PersonTexture3" type="TextureRect" parent="."]
-visible = false
-clip_contents = true
+[node name="PersonMiddle" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.391
-anchor_right = 0.66
-anchor_bottom = 1.0
-offset_left = -0.720062
-offset_right = -0.20005
-mouse_filter = 2
-texture = ExtResource("9_4bsd5")
-expand_mode = 1
-stretch_mode = 4
+offset_left = 768.0
+offset_right = 768.0
 
-[node name="PersonTexture4" type="TextureRect" parent="."]
-visible = false
-clip_contents = true
+[node name="PersonMiddleRight" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.573
-anchor_right = 0.842
-anchor_bottom = 1.0
-offset_left = -0.160027
-offset_right = 0.359871
-mouse_filter = 2
-texture = ExtResource("9_4bsd5")
-expand_mode = 1
-stretch_mode = 4
+offset_left = 1152.0
+offset_right = 1152.0
 
-[node name="PersonTexture5" type="TextureRect" parent="."]
-visible = false
-clip_contents = true
+[node name="PersonRight" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.729
-anchor_right = 0.998
-anchor_bottom = 1.0
-offset_left = 0.319939
-offset_right = 0.839951
-mouse_filter = 2
-texture = ExtResource("9_4bsd5")
-expand_mode = 1
-stretch_mode = 4
+offset_left = 1536.0
+offset_right = 1536.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -169,6 +120,9 @@ offset_bottom = 10.64
 [connection signal="gui_input" from="FadebleBackground" to="." method="_on_fadeble_background_gui_input"]
 [connection signal="on_next" from="MarginContainer/TextArea" to="." method="_on_text_area_on_next"]
 [connection signal="end" from="DialogManager" to="." method="_on_dialog_manager_end"]
+[connection signal="personAnimation" from="DialogManager" to="." method="person_animation"]
+[connection signal="personSource" from="DialogManager" to="." method="set_person_source"]
+[connection signal="personVisible" from="DialogManager" to="." method="set_person_visible"]
 [connection signal="playSound" from="DialogManager" to="." method="_on_dialog_manager_play_sound"]
 [connection signal="playVideo" from="DialogManager" to="." method="_on_dialog_manager_play_video"]
 [connection signal="resetCharacter" from="DialogManager" to="." method="_on_dialog_manager_reset_character"]

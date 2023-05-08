@@ -8,15 +8,35 @@ extends Control
 @onready var videoPlayer = $PanelContainer/VideoStreamPlayer
 @onready var videoPanel = $PanelContainer
 
-@onready var personLeft = $PersonTexture
-@onready var personMiddleLeft = $PersonTexture2
-@onready var personMiddle = $PersonTexture3
-@onready var personMiddleRight = $PersonTexture4
-@onready var personRight = $PersonTexture5
-
 @export var clickable_background = false
 
 @export_file("*.json") var fn: String
+
+
+@onready var persons: Dictionary = {
+	"left": $PersonLeft,
+	"middle-left": $PersonMiddleLeft,
+	"middle": $PersonMiddle,
+	"middle-right": $PersonMiddleRight,
+	"right": $PersonRight
+}
+
+func set_person_source(obj: String, src):
+	if persons.has(obj):
+		persons[obj].setSource(src)
+
+func set_person_visible(obj: String, v: bool):
+	if persons.has(obj):
+		persons[obj].setVisible(v)
+		
+func person_animation(obj: String, type: String = "dir", animation: String = "RESET", time: float = 1.0, backwards: bool = false):
+	if persons.has(obj):
+		match type:
+			"dir":
+				persons[obj].play_dir(animation, time, backwards)
+			"fade":
+				persons[obj].play_fade(time, backwards)
+	pass
 
 func _ready():
 	choicesBlock.visible = false

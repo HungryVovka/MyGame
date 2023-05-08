@@ -23,9 +23,15 @@ signal showChoices(data)
 signal playVideo(res)
 signal stopVideo()
 
+
+signal personVisible(name, isVisible)
+signal personSource(name, src)
+signal personAnimation(obj, type, animation, time, backwards)
+
 var text_data : Dictionary = {}
 var characters_data : Dictionary = {}
 var portraits_resources: Dictionary = {}
+var persons_resources: Dictionary = {}
 var videos_resources: Dictionary = {}
 var background_resources: Dictionary = {}
 var event_index_cache: Dictionary = {}
@@ -36,6 +42,7 @@ var deep_index = 0
 var current_event = null
 
 var conditionManager
+var nextEventTimer: Timer = null
 
 
 
@@ -72,7 +79,7 @@ func update_state(new_state: Dictionary = {}):
 	for k in new_state:
 		dialog_state[k] = new_state[k]
 	
-func make_choice(index, text):
+func make_choice(_index, text):
 	
 	var found_index = 0
 	var ci = 0
@@ -118,6 +125,12 @@ func setCharactersList(filename):
 		characters_data = _read_json(filename)
 		for k in characters_data.characters.keys():
 			portraits_resources[k] = load(characters_data.characters[k].portrait)
+		persons_resources.clear()
+		for k in characters_data.persons.keys():
+			var res = {}
+			for mood in characters_data.persons[k].keys():
+				res[mood] = load(characters_data.persons[k][mood])
+			persons_resources[k] = res
 
 func setBackgroundsList(filename):
 	if filename: 
@@ -143,6 +156,8 @@ func _read_json(filename):
 func play_next_event():
 	var event = get_next_event()
 	current_event = event
+	if nextEventTimer && !nextEventTimer.is_stopped():
+		nextEventTimer.stop()
 	if event:
 		if event.has("condition"):
 			if !conditionManager.process(event.condition): 
@@ -156,6 +171,8 @@ func play_next_event():
 			process_sound(event.play_sound)
 		if event.has("stop_sound") && event.stop_sound != "":
 			stopSound.emit(event.stop_sound)
+		if event.has("persons"):
+			process_persons(event.persons)
 		if event.has("jump_to"):
 			jump_to(preprocess_string_to_state(event.jump_to))
 			return
@@ -165,11 +182,11 @@ func play_next_event():
 		if event.has("background"):
 			process_background(event.background)
 		if event.has("timer"):
-			var timer = Timer.new()
-			timer.one_shot = true
-			add_child(timer)
-			timer.connect("timeout", play_next_event)
-			timer.start(event.timer)
+			nextEventTimer = Timer.new()
+			nextEventTimer.one_shot = true
+			add_child(nextEventTimer)
+			nextEventTimer.connect("timeout", play_next_event)
+			nextEventTimer.start(event.timer)
 		if event.has("choices"):
 			process_choices(event.choices)
 			is_choice = true
@@ -229,6 +246,23 @@ func process_state(event):
 	for k in event:
 		dict[preprocess_string_to_state(k)] = preprocess_string_to_state(event[k])
 	update_state(dict)
+
+
+func process_persons(event):
+	for p in event:
+		if event[p].op == "Show":
+			if persons_resources.has(event[p].person) && persons_resources[event[p].person].has(event[p].mood):
+				personSource.emit(p, persons_resources[event[p].person][event[p].mood])
+				personVisible.emit(p, true)
+				if event[p].appear:
+					personAnimation.emit(p, "dir", event[p].appearAnimation, event[p].appearTime, event[p].appearBackwards)
+				if event[p].fade:
+					personAnimation.emit(p, "fade", "", event[p].fadeTime, event[p].fadeBackwards)
+				pass
+			pass
+		if event[p].op == "Hide":
+			personVisible.emit(p, false)
+	pass
 	
 func preprocess_string_to_state(s: String):
 	var result = s
