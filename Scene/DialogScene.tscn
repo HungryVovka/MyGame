@@ -92,7 +92,7 @@ theme_override_constants/margin_bottom = 30
 
 [node name="TextArea" parent="MarginContainer" instance=ExtResource("3_4v5x7")]
 clip_contents = true
-custom_minimum_size = Vector2(1200, 300)
+custom_minimum_size = Vector2(1200, 250)
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 8

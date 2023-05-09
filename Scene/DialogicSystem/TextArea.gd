@@ -5,11 +5,11 @@ extends Control
 @export var nextOnClick: bool = true
 
 
-@onready var richLabel = $GridContainer/MarginContainer/RichLabel
-@onready var characterPortrait = $GridContainer/CharacterLine/CharacterTexture
-@onready var characterName = $GridContainer/CharacterLine/CharacterName
+@onready var richLabel = $VBoxContainer/Control/TextureRect/MarginContainer/RichLabel
+@onready var characterPortrait = $VBoxContainer/CharacterLine/CharacterTexture
+@onready var characterName = $VBoxContainer/CharacterLine/CharacterName
 @onready var clickSound = $ClickSound
-@onready var typeSound = $GridContainer/MarginContainer/RichLabel/TypingSound
+@onready var typeSound = $VBoxContainer/Control/TextureRect/MarginContainer/RichLabel/TypingSound
 
 @export_file("*.wav", "*.ogg", "*.mp3") var typingSound: set = setTypingSound
 @export_file("*.wav", "*.ogg", "*.mp3") var clickingSound: set = setClickingSound
