@@ -4,7 +4,7 @@ extends RichTextLabel
 @onready var typingSound = $TypingSound
 
 var _textTimer = Timer.new()
-var _textAppearTime = 3.0
+var _textAppearTime = 5.0
 var _timerUpdateRate = 0.01
 
 

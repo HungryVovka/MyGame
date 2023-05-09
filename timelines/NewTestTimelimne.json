@@ -2,6 +2,7 @@
 	"display_name": "StartTimeline",
 	"events": [
 		{
+			"character": "enstein",
 			"choices": [
 				{
 					"events": [
@@ -12,7 +13,7 @@
 							"text": "big boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobas"
 						}
 					],
-					"text": "big boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobasbig boobabig boobasbig boobas"
+					"text": "big boobasbigbig boobasbigbig boobasbig"
 				},
 				{
 					"events": [

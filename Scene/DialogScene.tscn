@@ -96,7 +96,7 @@ custom_minimum_size = Vector2(1200, 300)
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 8
-charactersPerSecond = 150
+charactersPerSecond = 100
 typingSound = "res://Res/sfx/keyboard_typing.wav"
 clickingSound = "res://Res/sfx/button_hov1.ogg"
 
@@ -110,16 +110,17 @@ videos_list = "res://configs/videos.json"
 resources = "res://configs/sounds.json"
 
 [node name="ChoicesBlock" parent="." instance=ExtResource("8_56aj0")]
+clip_contents = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.793
-anchor_top = 0.36
-anchor_right = 0.9
-anchor_bottom = 0.467
-offset_left = -111.56
-offset_top = 0.199985
-offset_right = 128.0
-offset_bottom = 10.64
+anchor_left = 0.735
+anchor_top = 0.005
+anchor_right = 0.967
+anchor_bottom = 0.677
+offset_left = -0.200073
+offset_top = -0.400001
+offset_right = -0.640137
+offset_bottom = -0.160034
 
 [connection signal="finished" from="PanelContainer/VideoStreamPlayer" to="PanelContainer/VideoStreamPlayer" method="_on_finished"]
 [connection signal="gui_input" from="FadebleBackground" to="." method="_on_fadeble_background_gui_input"]

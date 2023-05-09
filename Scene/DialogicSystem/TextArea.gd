@@ -1,15 +1,15 @@
 extends Control
 
 @export_multiline var text:  set =  setText, get = getText
-@export var charactersPerSecond: int = 50
+@export var charactersPerSecond: int = 200
 @export var nextOnClick: bool = true
 
 
-@onready var richLabel = $GridContainer/RichLabel
+@onready var richLabel = $GridContainer/MarginContainer/RichLabel
 @onready var characterPortrait = $GridContainer/CharacterLine/CharacterTexture
 @onready var characterName = $GridContainer/CharacterLine/CharacterName
 @onready var clickSound = $ClickSound
-@onready var typeSound = $GridContainer/RichLabel/TypingSound
+@onready var typeSound = $GridContainer/MarginContainer/RichLabel/TypingSound
 
 @export_file("*.wav", "*.ogg", "*.mp3") var typingSound: set = setTypingSound
 @export_file("*.wav", "*.ogg", "*.mp3") var clickingSound: set = setClickingSound
@@ -36,7 +36,7 @@ func setClickingSound(value):
 
 func setText(value):
 	if richLabel:
-		_update_rich_label(value, value.length() / charactersPerSecond)
+		_update_rich_label(value, value.length() * 1.0 / charactersPerSecond)
 	else:
 		if value != null:
 			_text = value
@@ -49,7 +49,7 @@ func getText():
 
 func _ready():
 	if _text:
-		_update_rich_label(_text, _text.length() / charactersPerSecond)
+		_update_rich_label(_text, _text.length() * 1.0 / charactersPerSecond)
 		_text = ""
 	if _typingSoundValue:
 		typeSound.stream = load(_typingSoundValue)
