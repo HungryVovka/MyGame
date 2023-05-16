@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://daf84icc03tyk"]
+[gd_scene load_steps=4 format=3 uid="uid://daf84icc03tyk"]
 
 [ext_resource type="Script" path="res://Scene/DialogicSystem/TextArea.gd" id="1_ecgk3"]
 [ext_resource type="Script" path="res://Scene/DialogicSystem/RichTextLabel.gd" id="1_gqpw2"]
-[ext_resource type="Texture2D" uid="uid://d1pk4jo8wmspj" path="res://Res/characters/portraits/Icon_Einstein_256x256.png" id="2_427fo"]
 [ext_resource type="Texture2D" uid="uid://c83sikis8d7bk" path="res://Res/gui/background-2.png" id="2_r5cj3"]
 
 [node name="TextArea" type="Control"]
@@ -25,48 +24,52 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 60
 alignment = 2
 
 [node name="CharacterLine" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(300, 80)
+custom_minimum_size = Vector2(300, 60)
 layout_direction = 2
 layout_mode = 2
 
 [node name="CharacterTexture" type="TextureRect" parent="VBoxContainer/CharacterLine"]
-custom_minimum_size = Vector2(80, 80)
+visible = false
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.042
 anchor_bottom = 1.0
-offset_right = -0.639999
-texture = ExtResource("2_427fo")
+offset_right = -20.64
 expand_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CharacterLine"]
+visible = false
 modulate = Color(1, 1, 1, 0.505882)
 clip_contents = true
-custom_minimum_size = Vector2(2.08165e-12, 80)
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.063
-anchor_right = 0.302
+anchor_left = 0.001
+anchor_right = 0.192
 anchor_bottom = 1.0
-offset_left = 0.0399981
-offset_right = 0.159969
+offset_left = -0.92
+offset_top = 7.0
+offset_right = -0.640015
+offset_bottom = -1.0
 texture = ExtResource("2_r5cj3")
 expand_mode = 1
 
 [node name="CharacterName" type="Label" parent="VBoxContainer/CharacterLine"]
-custom_minimum_size = Vector2(2.08165e-12, 80)
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.053
-anchor_right = 0.297
+anchor_top = 0.133
+anchor_right = 0.136
 anchor_bottom = 1.0
-offset_left = -0.760006
-offset_top = 1.0
-offset_right = 0.75996
-offset_bottom = 1.0
+offset_left = 1.0
+offset_top = 0.02
+offset_right = -0.120026
+offset_bottom = -1.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
@@ -78,10 +81,13 @@ custom_minimum_size = Vector2(2.08165e-12, 150)
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/Control"]
+self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = -0.373
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -0.0499954
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_r5cj3")
@@ -97,9 +103,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 40
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
 [node name="RichLabel" type="RichTextLabel" parent="VBoxContainer/Control/TextureRect/MarginContainer"]
 clip_contents = false
@@ -110,6 +117,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
+scroll_active = false
 script = ExtResource("1_gqpw2")
 
 [node name="TypingSound" type="AudioStreamPlayer2D" parent="VBoxContainer/Control/TextureRect/MarginContainer/RichLabel"]

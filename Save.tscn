@@ -1,0 +1,186 @@
+[gd_scene load_steps=4 format=3 uid="uid://dx0n1bqkmta13"]
+
+[ext_resource type="Texture2D" uid="uid://ccnr324akr1yo" path="res://Res/gui/overlay/game_menu2.png" id="1_xovka"]
+[ext_resource type="Texture2D" uid="uid://bas15m0i6f2la" path="res://Res/gui/button/slot_idle_background.png" id="2_y5kxr"]
+[ext_resource type="Texture2D" uid="uid://bnlwggo18bq25" path="res://Res/gui/button/slot_hover_background.png" id="3_kcu1a"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xovka")
+
+[node name="GridContainer" type="GridContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.263
+anchor_top = 0.194
+anchor_right = 0.944
+anchor_bottom = 0.806
+offset_left = 0.039978
+offset_top = -0.520004
+offset_right = 0.519897
+offset_bottom = 0.519958
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 33
+theme_override_constants/v_separation = 44
+columns = 3
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_y5kxr")
+texture_hover = ExtResource("3_kcu1a")
+
+[node name="Label" type="Label" parent="TextureRect/GridContainer/TextureButton"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 244.0
+offset_right = 337.0
+offset_bottom = 275.0
+text = "Name - Date"
+horizontal_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_y5kxr")
+texture_hover = ExtResource("3_kcu1a")
+
+[node name="TextureButton3" type="TextureButton" parent="TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_y5kxr")
+texture_hover = ExtResource("3_kcu1a")
+
+[node name="TextureButton4" type="TextureButton" parent="TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_y5kxr")
+texture_hover = ExtResource("3_kcu1a")
+
+[node name="TextureButton5" type="TextureButton" parent="TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_y5kxr")
+texture_hover = ExtResource("3_kcu1a")
+
+[node name="TextureButton6" type="TextureButton" parent="TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_y5kxr")
+texture_hover = ExtResource("3_kcu1a")
+
+[node name="Pages" type="HBoxContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.268
+anchor_top = 0.815
+anchor_right = 0.933
+anchor_bottom = 0.879
+offset_left = -0.559998
+offset_top = -0.200073
+offset_right = -0.360107
+offset_bottom = -0.320068
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 38
+alignment = 1
+
+[node name="Back" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "<"
+flat = true
+
+[node name="Autosaves" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "A"
+flat = true
+
+[node name="1" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "1"
+flat = true
+
+[node name="2" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "2"
+flat = true
+
+[node name="3" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "3"
+flat = true
+
+[node name="4" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "4"
+flat = true
+
+[node name="5" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "5"
+flat = true
+
+[node name="6" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "6"
+flat = true
+
+[node name="7" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "7"
+flat = true
+
+[node name="8" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "8"
+flat = true
+
+[node name="9" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "9"
+flat = true
+
+[node name="Forward" type="Button" parent="TextureRect/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = ">"
+flat = true
+
+[node name="Label" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 1066.0
+offset_top = 106.0
+offset_right = 1258.0
+offset_bottom = 153.0
+text = "Page name / jump to page"
