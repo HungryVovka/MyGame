@@ -10,13 +10,17 @@ extends Control
 @onready var characterName = $VBoxContainer/CharacterLine/CharacterName
 @onready var clickSound = $ClickSound
 @onready var typeSound = $VBoxContainer/Control/TextureRect/MarginContainer/RichLabel/TypingSound
+@onready var rect = $VBoxContainer/Control/TextureRect
 
 @export_file("*.wav", "*.ogg", "*.mp3") var typingSound: set = setTypingSound
 @export_file("*.wav", "*.ogg", "*.mp3") var clickingSound: set = setClickingSound
 
+var current_meta = null
+
 
 signal on_text_clicked(event)
 signal on_next()
+signal event_reached(name)
 
 var _text = ""
 var _typingSoundValue
@@ -37,6 +41,7 @@ func setClickingSound(value):
 func setText(value):
 	if richLabel:
 		_update_rich_label(value, value.length() * 1.0 / charactersPerSecond)
+		rect.visible = value != ""
 	else:
 		if value != null:
 			_text = value
@@ -60,9 +65,7 @@ func _update_rich_label(value, time):
 	richLabel.set_text_animation(value, time)
 	
 func next():
-	if richLabel.visible_ratio < 1.0:
-		richLabel.visible_ratio = 1.0
-	else:
+	if richLabel.next():
 		on_next.emit()
 
 func setCharacter(portrait, character_name):
@@ -75,9 +78,21 @@ func resetCharacter():
 
 func _on_rich_label_gui_input(event):
 	if event is InputEventMouseButton:
+		if current_meta && event.button_index == MOUSE_BUTTON_LEFT && event.pressed == true:
+			event_reached.emit(current_meta)
+			return
 		on_text_clicked.emit(event)
-		if nextOnClick && event.button_index == MOUSE_BUTTON_LEFT && event.pressed == true:
+		if (nextOnClick || richLabel.is_paused) && event.button_index == MOUSE_BUTTON_LEFT && event.pressed == true:
 			clickSound.play()
 			next()
 
+func _on_rich_label_event_reached(n):
+	event_reached.emit(n)
 
+
+func _on_rich_label_meta_hover_started(meta):
+	current_meta = meta
+
+
+func _on_rich_label_meta_hover_ended(meta):
+	current_meta = null

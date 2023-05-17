@@ -129,4 +129,7 @@ area_mask = 1114248
 bus = &"SFX"
 area_mask = 0
 
+[connection signal="event_reached" from="VBoxContainer/Control/TextureRect/MarginContainer/RichLabel" to="." method="_on_rich_label_event_reached"]
 [connection signal="gui_input" from="VBoxContainer/Control/TextureRect/MarginContainer/RichLabel" to="." method="_on_rich_label_gui_input"]
+[connection signal="meta_hover_ended" from="VBoxContainer/Control/TextureRect/MarginContainer/RichLabel" to="." method="_on_rich_label_meta_hover_ended"]
+[connection signal="meta_hover_started" from="VBoxContainer/Control/TextureRect/MarginContainer/RichLabel" to="." method="_on_rich_label_meta_hover_started"]

@@ -65,6 +65,7 @@ func get_next_event():
 			current_index[deep_index] += 1
 			return get_next_event()
 		else:
+			print("END()")
 			end.emit()
 			return null
 	return evs.events[index]
@@ -98,6 +99,15 @@ func make_choice(_index, text):
 	
 func setTimeline(filename):
 	event_index_cache.clear()
+	if nextEventTimer:
+		remove_child(nextEventTimer)
+		nextEventTimer.stop()
+		nextEventTimer.queue_free()
+		
+	current_index = [0]
+	deep_index = 0
+	current_event = null
+	
 	if filename:
 		text_data = _read_json(filename)
 		reset_index()
@@ -158,11 +168,11 @@ func _read_json(filename):
 func play_next_event():
 	var event = get_next_event()
 	current_event = event
-	if nextEventTimer && !nextEventTimer.is_stopped():
+	if nextEventTimer && !nextEventTimer.is_stopped() && event:
 		nextEventTimer.stop()
 	if event:
-		if event.has("condition"):
-			if !conditionManager.process(event.condition): 
+		if event.has("script"):
+			if !process_script(event):
 				is_choice = false
 				current_index[deep_index] += 1
 				play_next_event()
@@ -185,6 +195,11 @@ func play_next_event():
 			process_character(event.character)
 
 		if event.has("timer"):
+			if nextEventTimer:
+				nextEventTimer.stop()
+				remove_child(nextEventTimer)
+				nextEventTimer.queue_free()
+				nextEventTimer = null
 			nextEventTimer = Timer.new()
 			nextEventTimer.one_shot = true
 			add_child(nextEventTimer)
@@ -240,7 +255,7 @@ func process_sound(event):
 func process_choices(event):
 	var data = []
 	for choice in event:
-		if (choice.has("condition") && conditionManager.process(choice.condition)) or !choice.has("condition"):
+		if (choice.has("condition") && process_script(choice)) or !choice.has("condition"):
 			data.append(preprocess_string_to_state(choice.text))
 	showChoices.emit(data)
 	
@@ -272,3 +287,36 @@ func preprocess_string_to_state(s: String):
 	for k in dialog_state:
 		result = result.replace("$(" + k + ")", dialog_state[k])
 	return result
+	
+func process_script(event):
+	var txt = event.script if event.has("script") else event.condition
+	var script = GDScript.new()
+	script.source_code += "extends Node\n"
+	script.source_code += txt
+	script.reload()
+	
+	var obj = Node.new()
+	obj.set_script(script)
+	add_child(obj)
+	var result = obj.condition(self, event)
+	if (result):
+		obj.start(self, event)
+	remove_child(obj)
+	return result
+
+
+func _on_text_area_event_reached(name):
+	if (!current_event.has("script") && !current_event.has("condition")):
+		return
+	var txt = current_event.script if current_event.has("script") else current_event.condition
+	var script = GDScript.new()
+	script.source_code += "extends Node\n"
+	script.source_code += txt
+	script.reload()
+	
+	var obj = Node.new()
+	obj.set_script(script)
+	add_child(obj)
+	if obj.has_method(name):
+		obj.call(name, self, current_event)
+	remove_child(obj)

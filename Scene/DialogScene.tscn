@@ -124,6 +124,7 @@ offset_bottom = -0.160034
 
 [connection signal="finished" from="PanelContainer/VideoStreamPlayer" to="PanelContainer/VideoStreamPlayer" method="_on_finished"]
 [connection signal="gui_input" from="FadebleBackground" to="." method="_on_fadeble_background_gui_input"]
+[connection signal="event_reached" from="MarginContainer/TextArea" to="DialogManager" method="_on_text_area_event_reached"]
 [connection signal="on_next" from="MarginContainer/TextArea" to="." method="_on_text_area_on_next"]
 [connection signal="end" from="DialogManager" to="." method="_on_dialog_manager_end"]
 [connection signal="personAnimation" from="DialogManager" to="." method="person_animation"]
