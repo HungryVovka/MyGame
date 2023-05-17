@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8xptyeixp6y6"]
+[gd_scene load_steps=4 format=3 uid="uid://bktw2jfe7h5wh"]
 
 [ext_resource type="Script" path="res://Node2D.gd" id="1_hh4ax"]
 [ext_resource type="VideoStream" path="res://Res/movie/JaCrp6.ogv" id="2_koe2w"]
@@ -6,7 +6,6 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_hh4ax")
-metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 1920.0

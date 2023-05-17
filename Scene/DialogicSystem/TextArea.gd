@@ -94,5 +94,5 @@ func _on_rich_label_meta_hover_started(meta):
 	current_meta = meta
 
 
-func _on_rich_label_meta_hover_ended(meta):
+func _on_rich_label_meta_hover_ended(_meta):
 	current_meta = null

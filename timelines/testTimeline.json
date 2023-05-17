@@ -33,8 +33,8 @@
 				"name": "always",
 				"volume": 0.7
 			},
-			"script": "func start(dialog, event):\n\tpass\nfunc condition(dialog, event):\n\treturn true\n\nfunc lolka(dialog, event):\n\tdialog.updateText.emit(\"ETO LOLKA HEHEHfcfEH\")\n\nfunc end(dialog, event):\n\tdialog.jump_to(\"end\")",
-			"text": "Ну ты и долбоеб братишка\n\n[url=lolka]link[/url]\n\n[url=end]Jump to End[/url]"
+			"script": "func start(dialog, event):\n\tpass\nfunc condition(dialog, event):\n\treturn true\n\nfunc lolka(dialog, event):\n\tdialog.updateText.emit(\"ETO LOLKA\")\n\nfunc end(dialog, event):\n\tdialog.jump_to(\"end\")",
+			"text": "Ну ты и долбоеб братишка\n\n[url=lolka]YA lOLKA[/url]           [url=end]Jump to End[/url]"
 		},
 		{
 			"background": {

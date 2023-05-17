@@ -107,5 +107,5 @@ func _remove_first(string: String, removal: String):
 	return string
 
 
-func _on_meta_clicked(meta):
+func _on_meta_clicked(_meta):
 	pass # Replace with function body.
