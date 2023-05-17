@@ -197,7 +197,6 @@ func play_next_event():
 		if event.has("timer"):
 			if nextEventTimer:
 				nextEventTimer.stop()
-				remove_child(nextEventTimer)
 				nextEventTimer.queue_free()
 				nextEventTimer = null
 			nextEventTimer = Timer.new()
@@ -255,7 +254,7 @@ func process_sound(event):
 func process_choices(event):
 	var data = []
 	for choice in event:
-		if (choice.has("condition") && process_script(choice)) or !choice.has("condition"):
+		if (choice.has("condition") && process_script(choice).condition) or !choice.has("condition"):
 			data.append(preprocess_string_to_state(choice.text))
 	showChoices.emit(data)
 	
@@ -285,7 +284,8 @@ func process_persons(event):
 func preprocess_string_to_state(s: String):
 	var result = s
 	for k in dialog_state:
-		result = result.replace("$(" + k + ")", dialog_state[k])
+		if result.contains("$(" + String(k) + ")") && dialog_state[k] is String:
+			result = result.replace("$(" + String(k) + ")", dialog_state[k])
 	return result
 	
 func process_script(event):
@@ -298,8 +298,10 @@ func process_script(event):
 	var obj = Node.new()
 	obj.set_script(script)
 	add_child(obj)
-	var result = obj.condition(self, event)
-	if (result):
+	var result = false
+	if obj.has_method("condition"):
+		result = obj.condition(self, event)
+	if (result && obj.has_method("start")):
 		obj.start(self, event)
 	remove_child(obj)
 	return result
