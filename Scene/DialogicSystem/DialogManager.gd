@@ -5,8 +5,6 @@ extends Node
 @export_file("*.json") var background_list: set = setBackgroundsList
 @export_file("*.json") var videos_list: set = setVideosList
 
-@export var dialog_state: Dictionary = {}
-
 @export var is_choice = false
 
 signal updateText(text)
@@ -41,7 +39,6 @@ var deep_index = 0
 
 var current_event = null
 
-var conditionManager
 var nextEventTimer: Timer = null
 
 
@@ -75,13 +72,8 @@ func jump_to(id):
 		current_index = [] + event_index_cache[id]
 		deep_index = current_index.size() - 1
 		play_next_event()
-
-func update_state(new_state: Dictionary = {}):
-	for k in new_state:
-		dialog_state[k] = new_state[k]
 	
 func make_choice(_index, text):
-	
 	var found_index = 0
 	var ci = 0
 	if current_event == null:
@@ -188,9 +180,9 @@ func play_next_event():
 		if event.has("background"):
 			process_background(event.background)
 		if event.has("jump_to"):
-			jump_to(preprocess_string_to_state(event.jump_to))
+			jump_to(DialogState.pps(event.jump_to))
 			return
-		updateText.emit(preprocess_string_to_state(event.text))
+		updateText.emit(DialogState.pps(event.text))
 		if event.has("character"):
 			process_character(event.character)
 
@@ -212,41 +204,38 @@ func play_next_event():
 			is_choice = false
 
 func _ready():
-	conditionManager = preload("res://Scene/DialogicSystem/ConditionProcessor.gd").new()
-	conditionManager.context = dialog_state
-	add_child(conditionManager)
 	pass 
 	
 func process_character(event):
-	var character_name = preprocess_string_to_state(event)
+	var character_name = DialogState.pps(event)
 	if characters_data.characters.has(character_name):
 		var character = characters_data.characters[character_name]
 		updateCharacter.emit(portraits_resources[character_name], 
-			preprocess_string_to_state(character.name))
+			DialogState.pps(character.name))
 	else:
 		resetCharacter.emit()
 
 func process_background(event):
 	var fade_time = event.fade if event.has("fade") else 0.0
 	var bg_name = event.name if event.has("name") else ""
-	bg_name = preprocess_string_to_state(bg_name)
+	bg_name = DialogState.pps(bg_name)
 	if background_resources.has(bg_name):
 		setBackground.emit(background_resources[bg_name], fade_time)
 	else:
 		setBackground.emit(null, fade_time)
 	if event.has("clickable"):
 		setBackgroundClickable.emit(event.clickable)
-	if event.has("video") && videos_resources.has(preprocess_string_to_state(event.video)):
-		playVideo.emit(videos_resources[preprocess_string_to_state(event.video)])
+	if event.has("video") && videos_resources.has(DialogState.pps(event.video)):
+		playVideo.emit(videos_resources[DialogState.pps(event.video)])
 	else:
 		stopVideo.emit()
 
 func process_sound(event):
 	if event.has("name") && event.has("channel"):
-		var _name = preprocess_string_to_state(event.name)
-		var _channel = preprocess_string_to_state(event.channel)
+		var _name = DialogState.pps(event.name)
+		var _channel = DialogState.pps(event.channel)
 		var loop = event.loop if event.has("loop") else false
-		var bus = preprocess_string_to_state(event.bus) if event.has("bus") else "SFX"
+		var bus = DialogState.pps(event.bus) if event.has("bus") else "SFX"
 		var volume = event.volume if event.has("volume") else 1.0
 		var fade = event.fade if event.has("fade") else 0.0
 		playSound.emit(_name, _channel, loop, bus, volume, fade)
@@ -255,14 +244,11 @@ func process_choices(event):
 	var data = []
 	for choice in event:
 		if (choice.has("condition") && process_script(choice).condition) or !choice.has("condition"):
-			data.append(preprocess_string_to_state(choice.text))
+			data.append(DialogState.pps(choice.text))
 	showChoices.emit(data)
 	
 func process_state(event):
-	var dict = {}
-	for k in event:
-		dict[preprocess_string_to_state(k)] = preprocess_string_to_state(event[k])
-	update_state(dict)
+	DialogState.setState(event)
 
 
 func process_persons(event):
@@ -280,13 +266,6 @@ func process_persons(event):
 		if event[p].op == "Hide":
 			personVisible.emit(p, false)
 	pass
-	
-func preprocess_string_to_state(s: String):
-	var result = s
-	for k in dialog_state:
-		if result.contains("$(" + String(k) + ")") && dialog_state[k] is String:
-			result = result.replace("$(" + String(k) + ")", dialog_state[k])
-	return result
 	
 func process_script(event):
 	var txt = event.script if event.has("script") else event.condition

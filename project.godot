@@ -18,6 +18,10 @@ boot_splash/image="res://Res/backgrounds/city.png"
 config/icon="res://icon.svg"
 editor/last/resources=[]
 
+[autoload]
+
+DialogState="*res://singletones/DialogState.gd"
+
 [display]
 
 window/size/viewport_width=1920

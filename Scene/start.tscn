@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtgugtwdswpti"]
+[gd_scene load_steps=4 format=3 uid="uid://dtgugtwdswpti"]
 
+[ext_resource type="Script" path="res://Scene/main.gd" id="1_p01xs"]
 [ext_resource type="PackedScene" uid="uid://iqrpv5gmxjxr" path="res://Scene/DialogScene.tscn" id="2_ha61f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sqnp8"]
+line_spacing = 30.0
+font_size = 40
+font_color = Color(0.839216, 0.698039, 0.227451, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0.886275, 0.4)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,7 +19,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_p01xs")
 
 [node name="DialogSystem" parent="." instance=ExtResource("2_ha61f")]
 layout_mode = 1
 fn = "res://timelines/testTimeline.json"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.864
+anchor_top = -0.003
+anchor_right = 1.0
+anchor_bottom = 0.076
+offset_left = -0.880043
+offset_top = 0.240001
+offset_right = 3.0
+offset_bottom = -0.0800054
+text = "Scores: 0"
+label_settings = SubResource("LabelSettings_sqnp8")
