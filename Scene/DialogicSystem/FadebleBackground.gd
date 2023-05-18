@@ -2,10 +2,23 @@ extends Control
 
 @onready var first = $First
 @onready var second = $Second
+@onready var under = $Under
+@onready var face = $Face
+
+@export var movable = 40
 
 var tween
 
 var is_first = true
+
+func _ready():
+	pass
+
+func apply_shader(id: String, params: Dictionary, texture = null, where: String = "under"):
+	var mat = Shaders.new_material(id, params)
+	var dest: TextureRect = under if where == "under" else face
+	dest.texture = load(texture) if texture else null
+	dest.material = mat if mat else null
 
 func animateBackground(from, to, time): 
 	if tween:
@@ -36,3 +49,10 @@ func set_texture(res, fade_time):
 			first.texture = res
 			animateBackground(second, first, fade_time)
 			is_first = true
+		
+func _input(event):
+	scale = Vector2(1.0 + 0.1*movable/40, 1.0 + 0.1*movable/40)
+	if event is InputEventMouseMotion:
+		var x = min(max((event.position.x*1.0 - 1920/2.0)/960.0, -1.0), 1.0)
+		var y = min(max((event.position.y*1.0 - 1080/2.0)/540.0, -1.0), 1.0)
+		position = Vector2(-movable - x*movable, -movable - y*movable)

@@ -148,7 +148,7 @@
 					"text": "Jump To Video"
 				}
 			],
-			"script": "func start(dialog, event):\n\tpass\nfunc condition(dialog, event):\n\treturn true\n\nfunc hehe(dialog, event):\n\tdialog.process_background({\"name\": \"dice\", \"fade\": 0.15})\n\nfunc xxx(dialog, event):\n\tdialog.process_background({\"name\": \"mountains\", \"fade\": 0.2})\n\nfunc black(dialog, event):\n\tdialog.process_background({\"name\": \"city\", \"fade\": 0.4})",
+			"script": "func start(dialog, event):\n\tpass\nfunc condition(dialog, event):\n\treturn true\n\nfunc hehe(dialog, event):\n\tdialog.process_background({\"name\": \"dice\", \"fade\": 0.15})\n\nfunc xxx(dialog, event):\n\tdialog.process_background({\"name\": \"mountains\", \"fade\": 0.2})\n\nfunc black(dialog, event):\n\tdialog.process_background({\"name\": \"city\", \"fade\": 0.4})\n\tdialog.get_parent().fadebleBackground.apply_shader(\"god_light\", {\"speed\": 6.0, \"color\": Color(\"#ff0000\", 0.4)}, \"res://Res/backgrounds/orange.jpg\", \"face\")",
 			"text": "Это{:hehe} решение совпало с ожиданиями большинства{:xxx} аналитиков {||}, которые, с одной стороны отмечали сохранение проинфляционных курсов и ослабление курса, {||}а другой подавленный спрос, {:black}что сдерживает рост цен."
 		},
 		{

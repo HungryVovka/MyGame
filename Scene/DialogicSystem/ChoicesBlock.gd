@@ -33,3 +33,4 @@ func clearChoices():
 
 func onChoiceClicked(id, text):
 	choiceClicked.emit(id, text)
+

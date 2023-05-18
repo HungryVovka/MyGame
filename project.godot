@@ -21,11 +21,15 @@ editor/last/resources=[]
 [autoload]
 
 DialogState="*res://singletones/DialogState.gd"
+Shaders="*res://shaders/Shaders.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/vsync/vsync_mode=2
 
 [rendering]
 
