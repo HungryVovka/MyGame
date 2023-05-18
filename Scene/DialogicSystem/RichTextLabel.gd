@@ -37,8 +37,11 @@ func next():
 		_textTimer.start(_timerUpdateRate)
 		return false
 	else:
-		visible_ratio = 1.0
-		return true
+		if visible_ratio < 1.0:
+			visible_ratio = 1.0
+			return false
+		else:
+			return true
 
 func _ready():
 	_textTimer.connect("timeout", _on_timer)
