@@ -211,7 +211,6 @@
 		},
 		{
 			"id": "end",
-			"script": "func start(dialog, event):\n\tpass\nfunc condition(dialog, event):\n\treturn true",
 			"text": "End((\nScore: $(scores)"
 		}
 	],

@@ -152,10 +152,10 @@ script = ExtResource("1_k7y8v")
 [node name="Texture" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.2
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 9600.0
-offset_bottom = 27000.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 2

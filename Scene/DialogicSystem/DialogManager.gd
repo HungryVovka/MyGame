@@ -277,7 +277,7 @@ func process_script(event):
 	var obj = Node.new()
 	obj.set_script(script)
 	add_child(obj)
-	var result = false
+	var result = true
 	if obj.has_method("condition"):
 		result = obj.condition(self, event)
 	if (result && obj.has_method("start")):
