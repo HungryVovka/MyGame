@@ -6,11 +6,6 @@
 			},
 			"choices": [
 				{
-					"condition": {
-						"op": "==",
-						"value": "heh",
-						"var": "character"
-					},
 					"events": [
 						{
 							"text": "frcc"
@@ -48,7 +43,10 @@
 					"person": "man"
 				},
 				"middle": {
-					"appear": false,
+					"appear": true,
+					"appearAnimation": "",
+					"appearBackwards": false,
+					"appearTime": 1,
 					"fade": true,
 					"fadeBackwards": false,
 					"fadeTime": 1,
