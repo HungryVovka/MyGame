@@ -1,35 +1,143 @@
 {
-  "unique_name": "StartTimeline",
-  "display_name": "StartTimeline",
-  "events": [
-	{
-	  "text": "",
-	  "play_sound": {
-		"name": "always",
-		"channel": "bg",
-		"loop": true,
-		"volume": 0.7,
-		"fade": 1.5
-	  },
-	  "background": {
-		"name": "air1",
-		"clickable": true,
-		"fade": 1.5
-	  }
-	},
-	{
-	  "text": "",
-	  "background": {
-		"name": "air2",
-		"fade": 1.5
-	  }
-	},
-	{
-	  "text": "",
-	  "background": {
-		"name": "air3",
-		"fade": 1.5
-	  }
-	}
-  ]
+	"display_name": "StartTimeline",
+	"events": [
+		{
+			"background": {
+				"clickable": true,
+				"fade": 1.5,
+				"name": "air1"
+			},
+			"play_sound": {
+				"channel": "bg",
+				"fade": 1.5,
+				"loop": true,
+				"name": "always",
+				"volume": 0.7
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 1.5,
+				"name": "air2"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 1.5,
+				"name": "air3"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air4"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air5"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air6"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air7"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air8"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air9"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air10"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air11"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air12"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air13"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air14"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air15"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "air16"
+			},
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		}
+	],
+	"unique_name": "StartTimeline"
 }
