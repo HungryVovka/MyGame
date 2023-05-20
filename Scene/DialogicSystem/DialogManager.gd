@@ -268,7 +268,7 @@ func process_persons(event):
 	pass
 	
 func process_script(event):
-	var txt = event.script if event.has("script") else event.condition
+	var txt = event.script if event.has("script") else event.condition if event.condition else ""
 	var script = GDScript.new()
 	script.source_code += "extends Node\n"
 	script.source_code += txt

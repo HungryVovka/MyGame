@@ -43,6 +43,8 @@ func _ready():
 	dialogManager.timeline = fn
 	dialogManager.play_next_event()
 	
+	
+	
 func _process(_delta):
 	pass
 

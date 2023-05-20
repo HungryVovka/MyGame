@@ -23,7 +23,7 @@ script = ExtResource("1_p01xs")
 
 [node name="DialogSystem" parent="." instance=ExtResource("2_ha61f")]
 layout_mode = 1
-fn = "res://timelines/testTimeline.json"
+fn = "res://timelines/new.json"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
