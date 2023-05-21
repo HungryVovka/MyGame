@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://bph12yfj7ymps"
+path="res://.godot/imported/Caslon BoldItalic.ttf-557c2176ad77b999683ae4c52147ad52.fontdata"
+
+[deps]
+
+source_file="res://Resources/1Main/Fonts/caslon_LgbI4/Caslon/Caslon BoldItalic/Caslon BoldItalic.ttf"
+dest_files=["res://.godot/imported/Caslon BoldItalic.ttf-557c2176ad77b999683ae4c52147ad52.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

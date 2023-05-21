@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckutxij8wp0qp"]
+[gd_scene load_steps=8 format=3 uid="uid://xrnt7pa2lq48"]
 
 [ext_resource type="Script" path="res://Scene/main_menu.gd" id="1_fari8"]
-[ext_resource type="Texture2D" uid="uid://dqrqyhgaiumpw" path="res://Res/gui/mainmenu.png" id="1_qkylq"]
-[ext_resource type="FontFile" uid="uid://dy7m3vcq7d60c" path="res://Res/Fonts/montserrat.regular.ttf" id="2_6x57e"]
-[ext_resource type="AudioStream" uid="uid://ckfnlbaupivdp" path="res://Res/music/Blink 182 - Always.mp3" id="2_opb4d"]
+[ext_resource type="Texture2D" uid="uid://dqrqyhgaiumpw" path="res://Resources/1Main/GUI/Menus/mainmenu.png" id="1_qkylq"]
+[ext_resource type="FontFile" uid="uid://dy7m3vcq7d60c" path="res://Resources/1Main/Fonts/montserrat.regular.ttf" id="2_6x57e"]
+[ext_resource type="AudioStream" uid="uid://ckfnlbaupivdp" path="res://Resources/1Main/Audio/Music/Blink 182 - Always.mp3" id="2_opb4d"]
 
 [sub_resource type="FontVariation" id="FontVariation_68yte"]
 base_font = ExtResource("2_6x57e")

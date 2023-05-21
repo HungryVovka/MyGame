@@ -1,14 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://iqrpv5gmxjxr"]
+[gd_scene load_steps=9 format=3 uid="uid://iqrpv5gmxjxr"]
 
 [ext_resource type="Script" path="res://Scene/video.gd" id="1_m2t7x"]
-[ext_resource type="VideoStream" path="res://Res/movie/JaCrp6.ogv" id="1_vd3qs"]
 [ext_resource type="Script" path="res://Scene/VideoStreamPlayer.gd" id="2_4caap"]
 [ext_resource type="PackedScene" uid="uid://0xb1dg2x3ns5" path="res://Scene/DialogicSystem/FadebleBackground.tscn" id="2_qreeh"]
 [ext_resource type="PackedScene" uid="uid://daf84icc03tyk" path="res://Scene/DialogicSystem/TextArea.tscn" id="3_4v5x7"]
 [ext_resource type="PackedScene" uid="uid://b4jnsyyw1ce7o" path="res://Scene/DialogicSystem/DialogManager.tscn" id="5_hx7hm"]
 [ext_resource type="PackedScene" uid="uid://cpac1623kedeg" path="res://Scene/DialogicSystem/Person.tscn" id="5_jcndp"]
 [ext_resource type="PackedScene" uid="uid://bxg7ilqhk1qw" path="res://Scene/DialogicSystem/AudioManager.tscn" id="7_dp16l"]
-[ext_resource type="PackedScene" uid="uid://41tw2y7jutve" path="res://Scene/DialogicSystem/ChoicesBlock.tscn" id="8_56aj0"]
+[ext_resource type="PackedScene" uid="uid://b3xycrlwc280n" path="res://Scene/DialogicSystem/ChoicesBlock.tscn" id="8_w8dfg"]
 
 [node name="Control" type="Control"]
 layout_direction = 1
@@ -36,7 +35,6 @@ layout_mode = 2
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelContainer"]
 layout_mode = 2
 mouse_filter = 1
-stream = ExtResource("1_vd3qs")
 expand = true
 script = ExtResource("2_4caap")
 
@@ -101,30 +99,25 @@ size_flags_horizontal = 1
 size_flags_vertical = 8
 mouse_filter = 1
 charactersPerSecond = 100
-typingSound = "res://Res/sfx/keyboard_typing.wav"
-clickingSound = "res://Res/sfx/button_hov1.ogg"
 
 [node name="DialogManager" parent="." instance=ExtResource("5_hx7hm")]
 timeline = "res://timelines/testTimeline.json"
-character_list = "res://configs/characters.json"
-background_list = "res://configs/backgrounds.json"
-videos_list = "res://configs/videos.json"
+character_list = "res://Resources/Scene1/configs/characters.json"
+background_list = "res://Resources/Scene1/configs/backgrounds.json"
+videos_list = "res://Resources/Scene1/configs/videos.json"
 
 [node name="AudioManager" parent="." instance=ExtResource("7_dp16l")]
-resources = "res://configs/sounds.json"
+resources = "res://Resources/Scene1/configs/sounds.json"
 
-[node name="ChoicesBlock" parent="." instance=ExtResource("8_56aj0")]
-clip_contents = true
+[node name="ChoisesBlock" parent="." instance=ExtResource("8_w8dfg")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.735
-anchor_top = 0.005
 anchor_right = 0.967
-anchor_bottom = 0.677
+anchor_bottom = 0.672
 offset_left = -0.200073
-offset_top = -0.400001
 offset_right = -0.640137
-offset_bottom = -0.160034
+offset_bottom = 0.239929
 
 [connection signal="finished" from="PanelContainer/VideoStreamPlayer" to="PanelContainer/VideoStreamPlayer" method="_on_finished"]
 [connection signal="gui_input" from="FadebleBackground" to="." method="_on_fadeble_background_gui_input"]
@@ -144,4 +137,4 @@ offset_bottom = -0.160034
 [connection signal="stopVideo" from="DialogManager" to="." method="_on_dialog_manager_stop_video"]
 [connection signal="updateCharacter" from="DialogManager" to="." method="_on_dialog_manager_update_character"]
 [connection signal="updateText" from="DialogManager" to="." method="_on_dialog_manager_update_text"]
-[connection signal="choiceClicked" from="ChoicesBlock" to="." method="_on_choices_block_choice_clicked"]
+[connection signal="choiceClicked" from="ChoisesBlock" to="." method="_on_choices_block_choice_clicked"]

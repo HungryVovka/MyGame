@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://41tw2y7jutve"]
+[gd_scene load_steps=11 format=3 uid="uid://b3xycrlwc280n"]
 
 [ext_resource type="Script" path="res://Scene/DialogicSystem/ChoicesBlock.gd" id="1_756bu"]
 [ext_resource type="Script" path="res://Scene/DialogicSystem/Button.gd" id="2_fk013"]
-[ext_resource type="Texture2D" uid="uid://cuij02fy8ojrl" path="res://Res/gui/choice bc 2.5.png" id="2_je87g"]
-[ext_resource type="AudioStream" uid="uid://bmowggm24lfr4" path="res://Res/sfx/genshin dialog.mp3" id="3_5txup"]
-[ext_resource type="Texture2D" uid="uid://s00i1bkrpssw" path="res://Res/gui/choice bc 2.5 hover.png" id="3_rqjiv"]
-[ext_resource type="AudioStream" uid="uid://by8u44rwp6g8n" path="res://Res/sfx/button_hov1.ogg" id="4_fvcse"]
+[ext_resource type="Texture2D" uid="uid://cuij02fy8ojrl" path="res://Resources/1Main/GUI/choice bc 2.5.png" id="2_je87g"]
+[ext_resource type="AudioStream" uid="uid://bmowggm24lfr4" path="res://Resources/1Main/Audio/SFX/genshin dialog.mp3" id="3_5txup"]
+[ext_resource type="Texture2D" uid="uid://s00i1bkrpssw" path="res://Resources/1Main/GUI/choice bc 2.5 hover.png" id="3_rqjiv"]
+[ext_resource type="AudioStream" uid="uid://by8u44rwp6g8n" path="res://Resources/1Main/Audio/SFX/button_hov1.ogg" id="4_fvcse"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_srj2i"]
 content_margin_left = 65.0

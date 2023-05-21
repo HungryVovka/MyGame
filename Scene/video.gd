@@ -4,7 +4,7 @@ extends Control
 @onready var dialogManager = $DialogManager
 @onready var audioManager = $AudioManager
 @onready var fadebleBackground = $FadebleBackground
-@onready var choicesBlock = $ChoicesBlock
+@onready var choicesBlock = $ChoisesBlock
 @onready var videoPlayer = $PanelContainer/VideoStreamPlayer
 @onready var videoPanel = $PanelContainer
 

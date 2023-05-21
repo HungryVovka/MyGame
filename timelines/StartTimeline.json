@@ -1,143 +1,39 @@
 {
-	"display_name": "StartTimeline",
-	"events": [
-		{
-			"background": {
-				"clickable": true,
-				"fade": 1.5,
-				"name": "air1"
-			},
-			"play_sound": {
-				"channel": "bg",
-				"fade": 1.5,
-				"loop": true,
-				"name": "always",
-				"volume": 0.7
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"fade": 1.5,
-				"name": "air2"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"fade": 1.5,
-				"name": "air3"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air4"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air5"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air6"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air7"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air8"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air9"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air10"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air11"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air12"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air13"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air14"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air15"
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "air16"
-			},
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		}
-	],
-	"unique_name": "StartTimeline"
+    "display_name": "StartTimeline",
+    "events": [
+        {
+            "text": "12"
+        },
+        {
+            "choices": [
+                {
+                    "events": [
+                        {
+                            "text": "1"
+                        },
+                        {
+                            "text": "tsdsd"
+                        }
+                    ],
+                    "text": "XXX"
+                },
+                {
+                    "events": [
+                        {
+                            "text": "2"
+                        },
+                        {
+                            "text": "hddfgd\n"
+                        }
+                    ],
+                    "text": "YYY"
+                }
+            ],
+            "text": "asd asd"
+        },
+        {
+            "text": "fin"
+        }
+    ],
+    "unique_name": "StartTimeline"
 }
