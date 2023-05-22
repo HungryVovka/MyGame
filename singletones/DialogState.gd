@@ -3,6 +3,7 @@ extends Node
 signal updated(oldD: Dictionary, newD: Dictionary)
 
 var dialog_state: Dictionary = {}
+var scene_state: Dictionary = {}
 
 func setState(newD: Dictionary):
 	var dict = {}
@@ -27,10 +28,14 @@ func g(key):
 func all():
 	return dialog_state
 
-func pps(s):
-	if s is String:
-		var result = s
+func pps(st):
+	if st is String:
+		var result = st
 		for k in dialog_state:
 			result = result.replace("$(" + str(k) + ")", str(dialog_state[k]))
 		return result
-	return s
+	return st
+	
+func setSceneState(dict):
+	scene_state = dict
+

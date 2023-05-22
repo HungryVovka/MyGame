@@ -1,8 +1,7 @@
 {
 	"scene1": {
 		"filename": "Scene1.pck",
-		"size": 63397120,
-		"name": "Airplane Journey",
-		"scene": "res://Scene/start.tscn"
+		"scene": "res://Resources/Scene1/",
+		"url": "https://storage.yandexcloud.net/sovereign-scenes/Scene1.pck"
 	}
 }

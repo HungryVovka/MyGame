@@ -21,6 +21,16 @@ extends Control
 	"right": $PersonRight
 }
 
+func setDialogParams(dict: Dictionary):
+	choicesBlock.visible = false
+	dialogManager.videos_list = dict.videos
+	dialogManager.background_list = dict.backgrounds
+	dialogManager.character_list = dict.characters
+	audioManager.resources = dict.sounds
+	dialogManager.timeline = dict.timeline
+	dialogManager.reset_index()
+	dialogManager.play_next_event()
+
 func set_person_source(obj: String, src):
 	if persons.has(obj):
 		persons[obj].setSource(src)
@@ -51,8 +61,8 @@ func _process(_delta):
 func _on_dialog_manager_end():
 	textArea.resetCharacter()
 	textArea.text = ""
-	dialogManager.timeline = fn
-	dialogManager.play_next_event()
+	if (DialogState.g("_next_scene") != ""):
+		get_tree().change_scene_to_file("res://Scene/Empty.tscn")
 
 func _on_dialog_manager_reset_character():
 	textArea.resetCharacter()

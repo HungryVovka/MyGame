@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://iqrpv5gmxjxr"]
+[gd_scene load_steps=9 format=3 uid="uid://oisg30whygac"]
 
-[ext_resource type="Script" path="res://Scene/video.gd" id="1_m2t7x"]
+[ext_resource type="Script" path="res://Scene/DialogScene.gd" id="1_y2kxs"]
 [ext_resource type="Script" path="res://Scene/VideoStreamPlayer.gd" id="2_4caap"]
 [ext_resource type="PackedScene" uid="uid://0xb1dg2x3ns5" path="res://Scene/DialogicSystem/FadebleBackground.tscn" id="2_qreeh"]
 [ext_resource type="PackedScene" uid="uid://daf84icc03tyk" path="res://Scene/DialogicSystem/TextArea.tscn" id="3_4v5x7"]
@@ -17,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_m2t7x")
+script = ExtResource("1_y2kxs")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 z_index = -1

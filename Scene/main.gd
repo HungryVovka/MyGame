@@ -1,11 +1,9 @@
 extends Control
 
 @onready var label = $Label
+@onready var dialog = $DialogSystem
 
 func _ready():
-	DialogState.connect("updated", update_label)
-	DialogState.s("scores", 100)
-
-func update_label(_oldV, _newV):
-	label.text = "Scores: " + DialogState.gs("scores")
+	var cfg = DialogState.scene_state
+	dialog.setDialogParams(cfg)
 	

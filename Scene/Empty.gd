@@ -1,59 +1,59 @@
 extends Control
 
-var http: HTTPRequest
-@onready var pb: ProgressBar = $ProgressBar
-@onready var label: Label = $ProgressBar/Label
+@onready var pb: ProgressBar = $Base/ProgressBar
+@onready var label: Label = $Base/ProgressBar/Label
+@onready var player: AnimationPlayer = $AnimationPlayer
+@onready var color = $ColorRect
+@onready var shader = $Base/Shader
 
-var timer: Timer = null
-var scenes: Dictionary = _read_json("res://scenes/scenes.json")
-
-func getUrl():
-	if OS.get_name() == "Web":
-		return JavaScriptBridge.eval(""" 
-			window.location.href;
-			""")
-	return ""
+var appeared = false
 
 func _ready():
-	if OS.get_name() != "Web":
-		get_tree().change_scene_to_file(scenes.scene1.scene)
-		return
-	var scene = scenes.scene1
-	http = HTTPRequest.new()
-	add_child(http)
-	http.download_file = "user://" + scene.filename
-	http.connect("request_completed", _file_ready)
-	var error = http.request(getUrl() + "/" + scene.filename)
-	if error == OK:
-		if timer:
-			timer.stop()
-			timer.queue_free()
-		timer = Timer.new()
-		add_child(timer)
-		timer.connect("timeout", _update)
-		timer.start(0.05)
+	DownloadManager.sceneReady.connect(_scene_ready)
+	DownloadManager.progress.connect(_progress)
+	
+	if (DialogState.gs("_next_scene") != ""):
+		DownloadManager.downloadScene(DialogState.gs("_next_scene"))
+	else:
+		DownloadManager.downloadScene("scene1")
+	_progress(0.0)
+	
+	
+func _scene_ready(value: String):
+	var cfg = _read_json(value + "config.json");
+	var dict = {
+		"timeline": value + "timelines/" + cfg.start + ".json",
+		"backgrounds": value + "configs/backgrounds.json",
+		"videos": value + "configs/videos.json",
+		"sounds": value + "configs/sounds.json",
+		"characters": value + "configs/characters.json",
+		"end": cfg.end
+	}
+	
+	player.stop()
+	player.play("appear", -1, -10.0, true)
+	shader.visible = false
+	player.animation_finished.connect(
+		func (_v):
+			var t = Timer.new()
+			t.one_shot = true
+			t.timeout.connect(
+				func():
+					DialogState.setSceneState(dict)
+					get_tree().change_scene_to_file("res://Scene/start.tscn")
+					)
+			add_child(t)
+			t.start(0.05)
 			
-func _file_ready(result, response_code, headers, body):
-	print("ready", body.size())
-	timer.stop()
-	var t: Timer = Timer.new()
-	add_child(t)
-	t.one_shot = true
-	t.connect("timeout", _jump_to_scene)
-	t.start(2.0)
+			)
 	
-func _jump_to_scene():
-	print("jumping...")
-	var success = ProjectSettings.load_resource_pack("user://" + scenes.scene1.filename)
-	if (success):
-		get_tree().change_scene_to_file(scenes.scene1.scene)
 
-func _update():
-	http.get_http_client_status()
-	pb.max_value = scenes.scene1.size
-	pb.value = http.get_downloaded_bytes()
-	pass
-	
+func _progress(value: float):
+	if !appeared:
+		player.play("appear", -1, 10.0)
+		appeared = true
+	pb.value = value*100
+
 func _read_json(filename):
 	var file = FileAccess.open(filename, FileAccess.READ)
 	var txt = file.get_as_text()
