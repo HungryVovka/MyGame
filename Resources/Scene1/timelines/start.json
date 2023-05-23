@@ -2,6 +2,9 @@
 	"display_name": "StartTimeline",
 	"events": [
 		{
+			"background": {
+				"name": "1"
+			},
 			"text": "12"
 		},
 		{
@@ -32,7 +35,9 @@
 			"text": "asd asd"
 		},
 		{
-			"text": "fin"
+			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"vignette\", {\"speed\": 4.0, \"fade_out_speed\": 0.5}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
+			"text": "fin",
+			"timer": 3
 		}
 	],
 	"unique_name": "StartTimeline"

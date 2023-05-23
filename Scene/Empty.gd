@@ -7,6 +7,8 @@ extends Control
 @onready var shader = $Base/Shader
 
 var appeared = false
+	
+
 
 func _ready():
 	DownloadManager.sceneReady.connect(_scene_ready)
@@ -17,7 +19,6 @@ func _ready():
 	else:
 		DownloadManager.downloadScene("scene1")
 	_progress(0.0)
-	
 	
 func _scene_ready(value: String):
 	var cfg = _read_json(value + "config.json");
@@ -44,7 +45,6 @@ func _scene_ready(value: String):
 					)
 			add_child(t)
 			t.start(0.05)
-			
 			)
 	
 

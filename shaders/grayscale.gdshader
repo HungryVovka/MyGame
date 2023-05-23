@@ -33,13 +33,13 @@ float colordiff(vec4 c, float v) {
 vec4 blend(vec4 c, float x, float y) {
 	vec4 v = avg(c, x, y);
 	vec4 diff = v * colordiff(c, v.r);
-	float sat = 1.12;
+	float sat = 2.00;
 	return vec4(vec3(diff.r + (c.r - diff.r)/sat, 
 	diff.g + (c.g - diff.g)/sat,
 	diff.b + (c.b - diff.b)/sat) * cut_edges(x, y), 1.0);
 }
 void fragment() {
-	float x = UV.x + sin(TIME*0.25)/1.1;
+	float x = UV.x + sin(TIME*0.25)/100.1;
 	float y = UV.y - cos(TIME*100.5)/64.0;
 	COLOR = blend(texture(TEXTURE, UV - vec2(sin(TIME*0.5*pow(x*x*-y*y, -1.0))/64.0, cos(TIME*0.5*pow(y*y-x*x*x,-2))/120.0)), x, y);
 }
