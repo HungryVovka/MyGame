@@ -18,5 +18,5 @@ float edges(float x, float y) {
 }
 
 void fragment() {
-	COLOR = vec4((texture(SCREEN_TEXTURE, UV)*edges(UV.x, UV.y)).rgb, 1.0);
+	COLOR = vec4((texture(SCREEN_TEXTURE, SCREEN_UV)*edges(SCREEN_UV.x, SCREEN_UV.y)).rgb, 1.0);
 }

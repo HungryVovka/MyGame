@@ -20,10 +20,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p01xs")
+backgrounds = "res://Resources/Scene1/configs/backgrounds.json"
+timeline = "res://Resources/Scene1/timelines/start.json"
+videos = "res://Resources/Scene1/configs/videos.json"
+sounds = "res://Resources/Scene1/configs/sounds.json"
+characters = "res://Resources/Scene1/configs/characters.json"
 
 [node name="DialogSystem" parent="." instance=ExtResource("2_ha61f")]
 layout_mode = 1
-fn = "res://timelines/StartTimeline.json"
 
 [node name="Label" type="Label" parent="."]
 visible = false

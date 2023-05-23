@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://21lwmf7sxpt3"]
+
+[ext_resource type="Texture2D" uid="uid://c7w1qe5pv4dju" path="res://Resources/Scene1/Art/1.png" id="1_l3t3g"]
+[ext_resource type="Script" path="res://ShaderTest.gd" id="1_p4kvm"]
+[ext_resource type="Shader" path="res://shaders/vingette.gdshader" id="2_oqfwx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwkim"]
+shader = ExtResource("2_oqfwx")
+shader_parameter/speed = 4.0
+shader_parameter/time = 1.0
+shader_parameter/coef_x = 5.0
+shader_parameter/coef_y = 3.0
+shader_parameter/power = 2.0
+shader_parameter/fade_out_speed = 2.0
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p4kvm")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_l3t3g")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_vwkim")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_l3t3g")
+expand_mode = 1
+stretch_mode = 6
