@@ -21,6 +21,8 @@ extends Control
 	"right": $PersonRight
 }
 
+var scene_root = ""
+
 func setDialogParams(dict: Dictionary):
 	choicesBlock.visible = false
 	dialogManager.videos_list = dict.videos
@@ -28,6 +30,7 @@ func setDialogParams(dict: Dictionary):
 	dialogManager.character_list = dict.characters
 	audioManager.resources = dict.sounds
 	dialogManager.timeline = dict.timeline
+	scene_root = dict.scene_root
 	dialogManager.reset_index()
 	dialogManager.play_next_event()
 
@@ -61,7 +64,13 @@ func _process(_delta):
 func _on_dialog_manager_end():
 	textArea.resetCharacter()
 	textArea.text = ""
-	if (DialogState.g("_next_scene") != ""):
+	if DialogState.gs("_next_timeline") != "":
+		choicesBlock.visible = false
+		dialogManager.timeline = scene_root + "timelines/" + DialogState.gs("_next_timeline") + ".json"
+		dialogManager.reset_index()
+		dialogManager.play_next_event()
+		return
+	if DialogState.gs("_next_scene") != "":
 		get_tree().change_scene_to_file("res://Scene/Empty.tscn")
 
 func _on_dialog_manager_reset_character():

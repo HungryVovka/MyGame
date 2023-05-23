@@ -13,4 +13,5 @@ func reset_time():
 
 func _process(delta):
 	time += delta
-	mat.set_shader_parameter(property, time)
+	if mat:
+		mat.set_shader_parameter(property, time)

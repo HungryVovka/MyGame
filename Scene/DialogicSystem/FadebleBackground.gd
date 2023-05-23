@@ -18,14 +18,23 @@ func _ready():
 func apply_shader(id: String, params: Dictionary, texture = null, where: String = "under"):
 	var mat = Shaders.new_material(id, params)
 	var dest: TextureRect = under if where == "under" else face
-	dest.texture = load(texture) if texture else load("res://Resources/1Main/GUI/Menus/game_menu.png")
+	if id != "":
+		dest.texture = load(texture) if texture else load("res://Resources/1Main/GUI/Menus/game_menu.png")
+	else:
+		dest.texture = null
 	dest.material = mat if mat else null
 	
-	var a_class = preload("res://shaders/AnimatedShader.gd")
-	var a = a_class.new()
-	a.set_material(dest.material, "time")
-	shader_animations.push_back(a)
-	add_child(a)
+	if (id != ""): 
+		var a_class = preload("res://shaders/AnimatedShader.gd")
+		var a = a_class.new()
+		a.set_material(dest.material, "time")
+		shader_animations.push_back(a)
+		add_child(a)
+		
+func remove_shader(where: String = "under"):
+	var dest: TextureRect = under if where == "under" else face
+	dest.material = null
+	dest.texture = null
 
 func animateBackground(from, to, time): 
 	if tween:

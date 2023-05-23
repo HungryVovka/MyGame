@@ -1,0 +1,36 @@
+{
+	"display_name": "StartTimeline",
+	"events": [
+		{
+			"background": {
+				"clickable": true,
+				"fade": 1,
+				"name": "10"
+			},
+			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.remove_shader(\"face\")\n\tpass\nfunc condition(dialog, event):\n\treturn true",
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "11"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "12"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "13"
+			},
+			"text": ""
+		}
+	],
+	"unique_name": "StartTimeline"
+}

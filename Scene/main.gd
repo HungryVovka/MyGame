@@ -15,6 +15,7 @@ var dict = {
 	"videos": videos,
 	"sounds": sounds,
 	"characters": characters,
+	"scene_root": "res://Resources/Scene1/",
 	"end": ""
 }
 

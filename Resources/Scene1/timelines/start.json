@@ -3,6 +3,7 @@
 	"events": [
 		{
 			"background": {
+				"clickable": true,
 				"name": "1"
 			},
 			"text": "12"
@@ -36,6 +37,9 @@
 		},
 		{
 			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"vignette\", {\"speed\": 4.0, \"fade_out_speed\": 0.5}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
+			"state": {
+				"_next_timeline": "second"
+			},
 			"text": "fin",
 			"timer": 3
 		}

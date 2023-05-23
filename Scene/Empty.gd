@@ -28,7 +28,8 @@ func _scene_ready(value: String):
 		"videos": value + "configs/videos.json",
 		"sounds": value + "configs/sounds.json",
 		"characters": value + "configs/characters.json",
-		"end": cfg.end
+		"end": cfg.end,
+		"scene_root": value
 	}
 	
 	player.stop()

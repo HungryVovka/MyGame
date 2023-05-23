@@ -46,6 +46,9 @@ var nextEventTimer: Timer = null
 func reset_index():
 	current_index = [0]
 	deep_index = 0
+	if nextEventTimer:
+		nextEventTimer.queue_free()
+		nextEventTimer = null
 	
 func get_next_event():
 	var evs = text_data

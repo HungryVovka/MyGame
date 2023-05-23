@@ -19,11 +19,11 @@ func s(key, value):
 	dict[key] = value
 	setState(dict)
 
-func gs(key):
-	return str(dialog_state[key]) if dialog_state.has(key) else ""
+func gs(k):
+	return str(dialog_state[k]) if dialog_state.has(k) else ""
 
-func g(key):
-	return dialog_state[key] if dialog_state.has(key) else null
+func g(k):
+	return dialog_state[k] if dialog_state.has(k) else null
 
 func all():
 	return dialog_state
