@@ -22,6 +22,7 @@ extends Control
 }
 
 var scene_root = ""
+var scene_ready = false
 
 func setDialogParams(dict: Dictionary):
 	choicesBlock.visible = false
@@ -55,6 +56,15 @@ func _ready():
 	choicesBlock.visible = false
 	dialogManager.timeline = fn
 	dialogManager.play_next_event()
+	
+	var timer = Timer.new()
+	timer.one_shot = true
+	timer.timeout.connect(
+		func():
+			scene_ready = true
+			)
+	add_child(timer)
+	timer.start(0.1)
 	
 	
 	
@@ -92,6 +102,8 @@ func _on_dialog_manager_set_background(res, fade_time):
 	fadebleBackground.set_texture(res, fade_time)
 
 func _on_fadeble_background_gui_input(event):
+	if !scene_ready:
+		return
 	if event is InputEventMouseButton \
 		&& clickable_background \
 		&& !choicesBlock.visible \
