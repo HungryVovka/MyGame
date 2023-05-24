@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6xdajyn6vk87"]
+
+[ext_resource type="Script" path="res://Control.gd" id="1_pdeuu"]
+[ext_resource type="Shader" path="res://shaders/transitions.gdshader" id="2_ajtu4"]
+[ext_resource type="Texture2D" uid="uid://d0ea3nspv3acr" path="res://Resources/backgrounds/city.png" id="3_0l8w1"]
+[ext_resource type="Texture2D" uid="uid://b68vudox7abdg" path="res://Resources/backgrounds/mountains.jpg" id="3_irm2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rnqbo"]
+shader = ExtResource("2_ajtu4")
+shader_parameter/time = 0.0
+shader_parameter/swipe_mode_horizontal = false
+shader_parameter/swipe_mode_vertical = false
+shader_parameter/swipe_speed_horizontal = 2.08165e-12
+shader_parameter/swipe_speed_vertical = 2.08165e-12
+shader_parameter/swipe_limit_x_min = -1920.0
+shader_parameter/swipe_limit_x_max = 1920.0
+shader_parameter/swipe_limit_y_min = -1080.0
+shader_parameter/swipe_limit_y_max = 1080.0
+shader_parameter/shift_x = 0.0
+shader_parameter/shift_y = 0.0
+shader_parameter/scale_mode = false
+shader_parameter/scale_speed = -1.0
+shader_parameter/scale_min = 0.0
+shader_parameter/scale_max = 1.0
+shader_parameter/scale_shift = 1.0
+shader_parameter/shake_mode = false
+shader_parameter/shake_vertical = false
+shader_parameter/shake_horizontal = false
+shader_parameter/shake_speed = 80.0
+shader_parameter/shake_height = 30.0
+shader_parameter/shake_time = 1.0
+shader_parameter/blend_mode = false
+shader_parameter/blend_speed = 0.1
+shader_parameter/src_color = Color(0, 0, 0, 1)
+shader_parameter/fade_to = false
+shader_parameter/fade_from = false
+shader_parameter/fade_speed = 0.2
+shader_parameter/slide_mode_x = false
+shader_parameter/slide_mode_y = true
+shader_parameter/slide_speed = 0.1
+shader_parameter/slide_reverse = true
+shader_parameter/secondTexture = ExtResource("3_irm2m")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pdeuu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_rnqbo")
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0l8w1")
+expand_mode = 1
+stretch_mode = 2
+
+[connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]
