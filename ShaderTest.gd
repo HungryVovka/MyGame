@@ -10,8 +10,5 @@ func _ready():
 	var shader = animator.new()
 	shader.set_material(rect.material, "time")
 	add_child(shader)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

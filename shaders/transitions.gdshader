@@ -113,14 +113,15 @@ vec4 slideY(sampler2D tex, vec4 color, vec2 pos) {
 }
 
 void fragment() {
+
+	if (slide_mode_x)
+		COLOR = slideX(TEXTURE, COLOR, UV);
+	if (slide_mode_y)
+		COLOR = slideY(TEXTURE, COLOR, UV);
 	if (blend_mode)
 		COLOR = blend(COLOR, texture(secondTexture, UV));
 	if (fade_to)
 		COLOR = blend_to(COLOR);
 	if (fade_from)
 		COLOR = blend_from(COLOR);
-	if (slide_mode_x)
-		COLOR = slideX(TEXTURE, COLOR, UV);
-	if (slide_mode_y)
-		COLOR = slideY(TEXTURE, COLOR, UV);
 }
