@@ -64,7 +64,7 @@ func _ready():
 			scene_ready = true
 			)
 	add_child(timer)
-	timer.start(0.1)
+	timer.start(1)
 	
 	
 	
@@ -93,6 +93,8 @@ func _on_dialog_manager_update_text(text):
 	textArea.text = text
 
 func _on_text_area_on_next():
+	if !scene_ready:
+		return
 	if !clickable_background && textArea.text == "":
 		return
 	if !choicesBlock.visible:

@@ -3,45 +3,136 @@
 	"events": [
 		{
 			"background": {
-				"clickable": true,
+				"fade": 7,
 				"name": "1"
 			},
-			"text": "12"
+			"text": "",
+			"timer": 7
 		},
 		{
-			"choices": [
-				{
-					"events": [
-						{
-							"text": "1"
-						},
-						{
-							"text": "tsdsd"
-						}
-					],
-					"text": "XXX"
-				},
-				{
-					"events": [
-						{
-							"text": "2"
-						},
-						{
-							"text": "hddfgd\n"
-						}
-					],
-					"text": "YYY"
-				}
-			],
-			"text": "asd asd"
-		},
-		{
-			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"vignette\", {\"speed\": 4.0, \"fade_out_speed\": 0.5}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
-			"state": {
-				"_next_timeline": "second"
+			"background": {
+				"clickable": true,
+				"fade": 2,
+				"name": "1Logo"
 			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "2"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 2,
+				"name": "3"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "4"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "5"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "6"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 0.5,
+				"name": "7b"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 0.5,
+				"name": "8"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 0.5,
+				"name": "9"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 0.5,
+				"name": "10"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"fade": 0.5,
+				"name": "11"
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"clickable": false,
+				"fade": 0.5,
+				"name": "12"
+			},
+			"play_sound": {
+				"channel": "",
+				"name": "Simon And Garfunkel - The Sound Of Silence",
+				"volume": 0.68
+			},
+			"text": "",
+			"timer": 2
+		},
+		{
+			"background": {
+				"fade": 0.9,
+				"name": "13"
+			},
+			"text": "",
+			"timer": 2
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "14"
+			},
+			"text": "",
+			"timer": 2
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "15"
+			},
+			"text": "",
+			"timer": 2
+		},
+		{
+			"background": {
+				"fade": 1,
+				"name": "16"
+			},
+			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"vignette\", {\"speed\": 10.0, \"fade_out_speed\": 5}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
 			"text": "fin",
-			"timer": 3
+			"timer": 4
 		}
 	],
 	"unique_name": "StartTimeline"

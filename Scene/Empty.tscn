@@ -118,6 +118,7 @@ texture = ExtResource("3_yx16w")
 stretch_mode = 6
 
 [node name="Shader" type="TextureRect" parent="Base"]
+visible = false
 material = SubResource("ShaderMaterial_wyutf")
 layout_mode = 1
 anchors_preset = 15
