@@ -1,9 +1,9 @@
 extends Control
 
 @onready var first = $First
-@onready var second = $Second
 @onready var under = $Under
 @onready var face = $Face
+@onready var back = $Back
 
 @export var movable = 40
 
@@ -12,7 +12,12 @@ var is_first = true
 
 var shader_animations = []
 
+var shader = preload("res://shaders/AnimatedShader.gd").new()
+
 func _ready():
+	shader.set_material(first.material, "time")
+	shader.reset_time()
+	add_child(shader)
 	pass
 
 func apply_shader(id: String, params: Dictionary, texture = null, where: String = "under"):
@@ -36,35 +41,74 @@ func remove_shader(where: String = "under"):
 	dest.material = null
 	dest.texture = null
 
-func animateBackground(from, to, time): 
-	if tween:
-		tween.kill()
-	tween = create_tween()
-	tween.set_parallel(true)
-	tween.tween_property(from, "modulate", Color.TRANSPARENT, time)
-	tween.tween_property(to, "modulate", Color.WHITE, time)
-
 func clear():
 	first.texture = null
-	second.texture = null
-
-func set_texture(res, fade_time):
-	if fade_time == 0.0:
-		if is_first:
+	
+func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}):
+	
+	if has_transition:
+		swap_textures()
+		if first.texture == null:
 			first.texture = res
-			first.modulate = Color.WHITE
-		else:
-			second.texture = res
-			second.modulate = Color.WHITE
+		first.material.set_shader_parameter("secondTexture", res)
 	else:
-		if is_first:
-			second.texture = res
-			animateBackground(first, second, fade_time)
-			is_first = false
-		else:
-			first.texture = res
-			animateBackground(second, first, fade_time)
-			is_first = true
+		first.texture = res
+	var t = first.material.get_shader_parameter("secondTexture")
+	var to = first.texture
+	shader.reset_time()
+	if has_transition:
+		for k in shader_params:
+			if k == "fade_color":
+				first.material.set_shader_parameter(k, Color.html(shader_params[k]))
+			else:
+				first.material.set_shader_parameter(k, shader_params[k])
+	else:
+		reset_transition()
+
+		
+func reset_transition():
+	first.material.set_shader_parameter("swipe_mode_h", null)
+	first.material.set_shader_parameter("swipe_mode_v", null)
+	first.material.set_shader_parameter("swipe_speed_h", null)
+	first.material.set_shader_parameter("swipe_speed_v", null)
+	first.material.set_shader_parameter("swipe_min_h", null)
+	first.material.set_shader_parameter("swipe_max_h", null)
+	first.material.set_shader_parameter("swipe_min_v", null)
+	first.material.set_shader_parameter("swipe_max_v", null)
+	first.material.set_shader_parameter("swipe_shift_h", null)
+	first.material.set_shader_parameter("swipe_shift_v", null)
+	
+	first.material.set_shader_parameter("scale_mode", null)
+	first.material.set_shader_parameter("scale_speed", null)
+	first.material.set_shader_parameter("scale_min", null)
+	first.material.set_shader_parameter("scale_max", null)
+	first.material.set_shader_parameter("scale_shift", null)
+	
+	first.material.set_shader_parameter("shade_mode", null)
+	first.material.set_shader_parameter("shake_v", null)
+	first.material.set_shader_parameter("shake_h", null)
+	first.material.set_shader_parameter("shake_speed", null)
+	first.material.set_shader_parameter("shake_height", null)
+	first.material.set_shader_parameter("shake_time", null)
+	
+	first.material.set_shader_parameter("blend_mode", null)
+	first.material.set_shader_parameter("blend_speed", null)
+	
+	first.material.set_shader_parameter("fade_color", null)
+	first.material.set_shader_parameter("fade_to", null)
+	first.material.set_shader_parameter("fade_from", null)
+	first.material.set_shader_parameter("fade_speed", null)
+	
+	first.material.set_shader_parameter("slide_h", null)
+	first.material.set_shader_parameter("slide_v", null)
+	first.material.set_shader_parameter("slide_speed", null)
+	first.material.set_shader_parameter("slide_reverse", null)
+
+func swap_textures():
+	var tex = first.texture
+	back.texture = tex
+	first.texture = first.material.get_shader_parameter("secondTexture")
+	first.material.set_shader_parameter("secondTexture", tex)
 		
 func _input(event):
 	scale = Vector2(1.0 + 0.1*movable/40, 1.0 + 0.1*movable/40)

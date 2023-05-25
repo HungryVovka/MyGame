@@ -11,7 +11,7 @@ signal updateText(text)
 signal updateCharacter(portrait, name)
 signal resetCharacter()
 signal end()
-signal setBackground(res, fade_time)
+signal setBackground(res, has_trasnsition, transition_params)
 signal setBackgroundClickable(value)
 
 signal playSound(name, channel, loop, bus, volume, fade)
@@ -219,13 +219,14 @@ func process_character(event):
 		resetCharacter.emit()
 
 func process_background(event):
-	var fade_time = event.fade if event.has("fade") else 0.0
+	var has_transition = event.has("transition")
+	var params = event.transition if has_transition else {}
 	var bg_name = event.name if event.has("name") else ""
 	bg_name = DialogState.pps(bg_name)
 	if background_resources.has(bg_name):
-		setBackground.emit(background_resources[bg_name], fade_time)
+		setBackground.emit(background_resources[bg_name], has_transition, params)
 	else:
-		setBackground.emit(null, fade_time)
+		setBackground.emit(null, has_transition, params)
 	if event.has("clickable"):
 		setBackgroundClickable.emit(event.clickable)
 	if event.has("video") && videos_resources.has(DialogState.pps(event.video)):

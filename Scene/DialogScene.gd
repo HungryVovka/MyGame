@@ -100,8 +100,8 @@ func _on_text_area_on_next():
 	if !choicesBlock.visible:
 		dialogManager.play_next_event()
 
-func _on_dialog_manager_set_background(res, fade_time):
-	fadebleBackground.set_texture(res, fade_time)
+func _on_dialog_manager_set_background(res, has_background, params):
+	fadebleBackground.set_background(res, has_background, params)
 
 func _on_fadeble_background_gui_input(event):
 	if !scene_ready:
