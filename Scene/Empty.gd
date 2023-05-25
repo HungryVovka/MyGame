@@ -11,6 +11,9 @@ var appeared = false
 
 
 func _ready():
+	
+	RenderingServer.set_default_clear_color(Color.BLACK)
+	
 	DownloadManager.sceneReady.connect(_scene_ready)
 	DownloadManager.progress.connect(_progress)
 	

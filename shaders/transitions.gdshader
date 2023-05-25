@@ -118,8 +118,12 @@ void fragment() {
 		COLOR = slideX(TEXTURE, COLOR, UV);
 	if (slide_v)
 		COLOR = slideY(TEXTURE, COLOR, UV);
-	if (blend_mode)
-		COLOR = blend(COLOR, texture(secondTexture, UV));
+	if (blend_mode) {
+		ivec2 ibackSize = textureSize(TEXTURE, 0);
+		ivec2 iBlendSize = textureSize(secondTexture, 0);
+		vec2 diff = vec2(float(ibackSize.x) / float(iBlendSize.x), float(ibackSize.y) / float(iBlendSize.y));
+		COLOR = blend(COLOR, texture(secondTexture, vec2(UV.x * diff.x, UV.y*diff.y)));
+		}
 	if (fade_to)
 		COLOR = blend_to(COLOR);
 	if (fade_from)

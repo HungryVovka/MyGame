@@ -54,6 +54,7 @@ func set_background(res, has_transition: bool = false, shader_params: Dictionary
 		first.texture = res
 	shader.reset_time()
 	if has_transition:
+		reset_transition()
 		for k in shader_params:
 			if k == "blend":
 				continue;

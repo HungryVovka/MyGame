@@ -41,7 +41,7 @@ func setClickingSound(value):
 func setText(value):
 	if richLabel:
 		_update_rich_label(value, value.length() * 1.0 / charactersPerSecond)
-		rect.visible = value != ""
+		rect.modulate = Color.WHITE if value != "" else Color.TRANSPARENT
 	else:
 		if value != null:
 			_text = value
@@ -96,3 +96,4 @@ func _on_rich_label_meta_hover_started(meta):
 
 func _on_rich_label_meta_hover_ended(_meta):
 	current_meta = null
+
