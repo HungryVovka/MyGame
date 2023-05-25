@@ -4,11 +4,54 @@
 		{
 			"background": {
 				"clickable": true,
+				"fade": 2,
+				"name": "milf",
+				"transition": {
+					"blend": false,
+					"blend_mode": false,
+					"blend_speed": 100,
+					"fade_color": "",
+					"fade_from": false,
+					"fade_speed": 0,
+					"fade_to": false,
+					"scale_max": 1,
+					"scale_min": 0,
+					"scale_mode": false,
+					"scale_shift": 1,
+					"scale_speed": 0,
+					"shake_h": false,
+					"shake_height": 20,
+					"shake_mode": false,
+					"shake_speed": 0,
+					"shake_time": 1,
+					"shake_v": false,
+					"slide_h": false,
+					"slide_reverse": false,
+					"slide_speed": 0,
+					"slide_v": false,
+					"swipe_max_h": 1920,
+					"swipe_max_v": 1080,
+					"swipe_min_h": -1920,
+					"swipe_min_v": -1080,
+					"swipe_mode_h": false,
+					"swipe_mode_v": true,
+					"swipe_shift_h": 0,
+					"swipe_shift_v": -1080,
+					"swipe_speed_h": 0,
+					"swipe_speed_v": 300
+				}
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"clickable": true,
 				"fade": 7,
 				"name": "1",
 				"transition": {
+					"blend": false,
 					"blend_mode": false,
-					"blend_speed": 1,
+					"blend_speed": 100,
 					"fade_color": "#000000ff",
 					"fade_from": true,
 					"fade_speed": 1,
@@ -48,6 +91,7 @@
 				"fade": 2,
 				"name": "1Logo",
 				"transition": {
+					"blend": true,
 					"blend_mode": true,
 					"blend_speed": 0.2,
 					"fade_color": "",
@@ -88,6 +132,7 @@
 				"fade": 1,
 				"name": "2",
 				"transition": {
+					"blend": true,
 					"blend_mode": false,
 					"blend_speed": 1,
 					"fade_color": "",
@@ -125,17 +170,11 @@
 		},
 		{
 			"background": {
-				"fade": 2,
-				"name": "3"
-			},
-			"text": ""
-		},
-		{
-			"background": {
 				"fade": 1,
 				"name": "4",
 				"transition": {
-					"blend_mode": true,
+					"blend": false,
+					"blend_mode": false,
 					"blend_speed": 20,
 					"fade_color": "#ff0036ff",
 					"fade_from": true,
@@ -175,7 +214,8 @@
 				"fade": 1,
 				"name": "5",
 				"transition": {
-					"blend_mode": true,
+					"blend": false,
+					"blend_mode": false,
 					"blend_speed": 100,
 					"fade_color": "",
 					"fade_from": false,

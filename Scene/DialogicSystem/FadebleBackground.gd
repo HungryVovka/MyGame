@@ -47,16 +47,16 @@ func clear():
 func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}):
 	if has_transition:
 		swap_textures()
-		if first.texture == null:
+		if first.texture == null || !(shader_params.has("blend") && shader_params.blend):
 			first.texture = res
 		first.material.set_shader_parameter("secondTexture", res)
 	else:
 		first.texture = res
-	var t = first.material.get_shader_parameter("secondTexture")
-	var to = first.texture
 	shader.reset_time()
 	if has_transition:
 		for k in shader_params:
+			if k == "blend":
+				continue;
 			if k == "fade_color":
 				first.material.set_shader_parameter(k, Color.html(shader_params[k]))
 			else:

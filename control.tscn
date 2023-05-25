@@ -2,22 +2,22 @@
 
 [ext_resource type="Script" path="res://Control.gd" id="1_pdeuu"]
 [ext_resource type="Shader" path="res://shaders/transitions.gdshader" id="2_ajtu4"]
-[ext_resource type="Texture2D" uid="uid://d0ea3nspv3acr" path="res://Resources/backgrounds/city.png" id="3_0l8w1"]
 [ext_resource type="Texture2D" uid="uid://b68vudox7abdg" path="res://Resources/backgrounds/mountains.jpg" id="3_irm2m"]
+[ext_resource type="Texture2D" uid="uid://cutr4g346nbjl" path="res://Resources/Scene1/Art/milf.jpg" id="4_rckr8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rnqbo"]
 shader = ExtResource("2_ajtu4")
 shader_parameter/time = 0.0
 shader_parameter/swipe_mode_h = false
-shader_parameter/swipe_mode_v = false
+shader_parameter/swipe_mode_v = true
 shader_parameter/swipe_speed_h = 1.0
-shader_parameter/swipe_speed_v = 1.0
+shader_parameter/swipe_speed_v = 100.0
 shader_parameter/swipe_min_h = -1920.0
 shader_parameter/swipe_max_h = 1920.0
 shader_parameter/swipe_min_v = -1080.0
 shader_parameter/swipe_max_v = 1080.0
 shader_parameter/swipe_shift_h = 0.0
-shader_parameter/swipe_shift_v = 0.0
+shader_parameter/swipe_shift_v = -1080.0
 shader_parameter/scale_mode = false
 shader_parameter/scale_speed = -20.0
 shader_parameter/scale_min = 1.0
@@ -32,7 +32,7 @@ shader_parameter/shake_time = 4.6
 shader_parameter/blend_mode = false
 shader_parameter/blend_speed = 3.0
 shader_parameter/fade_color = Color(1, 0, 0, 1)
-shader_parameter/fade_to = true
+shader_parameter/fade_to = false
 shader_parameter/fade_from = false
 shader_parameter/fade_speed = 1.0
 shader_parameter/slide_h = false
@@ -59,7 +59,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_0l8w1")
+texture = ExtResource("4_rckr8")
 expand_mode = 1
 stretch_mode = 2
 

@@ -43,12 +43,7 @@ uniform float slide_speed = 0.05;
 uniform bool slide_reverse = false;
 
 void vertex() {
-	if (swipe_mode_h) {
-		VERTEX.x += swipe_shift_h + max(min(time * swipe_speed_h, swipe_max_h), swipe_min_h);
-	}
-	if (swipe_mode_v) {
-		VERTEX.y += swipe_shift_v + max(min(time * swipe_speed_v, swipe_max_v), swipe_min_v);
-	}
+
 	if (scale_mode) {
 		float scale = max(min(time * scale_speed + scale_shift, scale_max), scale_min);
 		vec2 scaled = VERTEX * scale;
@@ -63,6 +58,12 @@ void vertex() {
 				VERTEX.x += shake_height * cos(shake_speed * time);
 			}
 		}
+	}
+	if (swipe_mode_h) {
+		VERTEX.x += swipe_shift_h + max(min(time * swipe_speed_h, swipe_max_h), swipe_min_h);
+	}
+	if (swipe_mode_v) {
+		VERTEX.y += swipe_shift_v + max(min(time * swipe_speed_v, swipe_max_v), swipe_min_v);
 	}
 }
 
