@@ -45,7 +45,6 @@ func clear():
 	first.texture = null
 	
 func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}):
-	
 	if has_transition:
 		swap_textures()
 		if first.texture == null:
@@ -106,8 +105,8 @@ func reset_transition():
 
 func swap_textures():
 	var tex = first.texture
-	back.texture = tex
 	first.texture = first.material.get_shader_parameter("secondTexture")
+	back.texture = first.texture
 	first.material.set_shader_parameter("secondTexture", tex)
 		
 func _input(event):
