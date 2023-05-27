@@ -45,6 +45,7 @@ func clear():
 	first.texture = null
 	
 func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}):
+	shader.reset_time()
 	if has_transition:
 		swap_textures()
 		if first.texture == null || !(shader_params.has("blend") && shader_params.blend):
@@ -52,7 +53,7 @@ func set_background(res, has_transition: bool = false, shader_params: Dictionary
 		first.material.set_shader_parameter("secondTexture", res)
 	else:
 		first.texture = res
-	shader.reset_time()
+		first.material.set_shader_parameter("secondTexture", null)
 	if has_transition:
 		reset_transition()
 		for k in shader_params:
@@ -106,8 +107,10 @@ func reset_transition():
 
 func swap_textures():
 	var tex = first.texture
-	first.texture = first.material.get_shader_parameter("secondTexture")
-	back.texture = first.texture
+	var sec = first.material.get_shader_parameter("secondTexture")
+	if sec:
+		first.texture = sec
+		back.texture = first.texture
 	first.material.set_shader_parameter("secondTexture", tex)
 		
 func _input(event):
