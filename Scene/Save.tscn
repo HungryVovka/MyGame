@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx0n1bqkmta13"]
+[gd_scene load_steps=5 format=3 uid="uid://dx0n1bqkmta13"]
 
 [ext_resource type="PackedScene" uid="uid://clvar3rgp82e6" path="res://Scene/SaveElement.tscn" id="1_fl4ah"]
 [ext_resource type="Script" path="res://Scene/Save.gd" id="1_samw1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4etsr"]
+bg_color = Color(0, 0, 0.25098, 0.0705882)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="Theme" id="Theme_o3vip"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -33,116 +42,139 @@ columns = 3
 
 [node name="El1" parent="GridContainer" instance=ExtResource("1_fl4ah")]
 layout_mode = 2
+default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
 [node name="El2" parent="GridContainer" instance=ExtResource("1_fl4ah")]
 layout_mode = 2
+default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
 [node name="El3" parent="GridContainer" instance=ExtResource("1_fl4ah")]
 layout_mode = 2
+default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
 [node name="El4" parent="GridContainer" instance=ExtResource("1_fl4ah")]
 layout_mode = 2
+default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
 [node name="El5" parent="GridContainer" instance=ExtResource("1_fl4ah")]
 layout_mode = 2
+default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
 [node name="El6" parent="GridContainer" instance=ExtResource("1_fl4ah")]
 layout_mode = 2
+default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
-[node name="Pages" type="HBoxContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.166
-anchor_top = 0.789
-anchor_right = 0.831
-anchor_bottom = 0.853
-offset_left = 0.611984
-offset_top = -0.386037
-offset_right = 0.811986
-offset_bottom = -0.499978
+anchor_left = 0.501
+anchor_top = 0.815
+anchor_right = 0.501
+anchor_bottom = 0.815
+offset_left = -711.918
+offset_top = -49.3101
+offset_right = 709.082
+offset_bottom = 49.6899
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4etsr")
+
+[node name="Pages" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_o3vip")
 theme_override_constants/separation = 38
 alignment = 1
 
-[node name="Back" type="Button" parent="Pages"]
+[node name="Back" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "<"
 flat = true
 
-[node name="Autosaves" type="Button" parent="Pages"]
+[node name="q" type="Button" parent="Panel/Pages"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 34
+text = "Q"
+flat = true
+
+[node name="Autosaves" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "A"
 flat = true
 
-[node name="p1" type="Button" parent="Pages"]
+[node name="p1" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "1"
 flat = true
 
-[node name="p2" type="Button" parent="Pages"]
+[node name="p2" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "2"
 flat = true
 
-[node name="p3" type="Button" parent="Pages"]
+[node name="p3" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "3"
 flat = true
 
-[node name="p4" type="Button" parent="Pages"]
+[node name="p4" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "4"
 flat = true
 
-[node name="p5" type="Button" parent="Pages"]
+[node name="p5" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "5"
 flat = true
 
-[node name="p6" type="Button" parent="Pages"]
+[node name="p6" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "6"
 flat = true
 
-[node name="p7" type="Button" parent="Pages"]
+[node name="p7" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "7"
 flat = true
 
-[node name="p8" type="Button" parent="Pages"]
+[node name="p8" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "8"
 flat = true
 
-[node name="p9" type="Button" parent="Pages"]
+[node name="p9" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
 text = "9"
 flat = true
 
-[node name="Forward" type="Button" parent="Pages"]
+[node name="Forward" type="Button" parent="Panel/Pages"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 34
@@ -155,15 +187,16 @@ flat = true
 [connection signal="clicked" from="GridContainer/El4" to="." method="_on_el_4_clicked"]
 [connection signal="clicked" from="GridContainer/El5" to="." method="_on_el_5_clicked"]
 [connection signal="clicked" from="GridContainer/El6" to="." method="_on_el_6_clicked"]
-[connection signal="pressed" from="Pages/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Pages/Autosaves" to="." method="_on_autosaves_pressed"]
-[connection signal="pressed" from="Pages/p1" to="." method="_on_1_pressed"]
-[connection signal="pressed" from="Pages/p2" to="." method="_on_2_pressed"]
-[connection signal="pressed" from="Pages/p3" to="." method="_on_3_pressed"]
-[connection signal="pressed" from="Pages/p4" to="." method="_on_4_pressed"]
-[connection signal="pressed" from="Pages/p5" to="." method="_on_5_pressed"]
-[connection signal="pressed" from="Pages/p6" to="." method="_on_6_pressed"]
-[connection signal="pressed" from="Pages/p7" to="." method="_on_7_pressed"]
-[connection signal="pressed" from="Pages/p8" to="." method="_on_8_pressed"]
-[connection signal="pressed" from="Pages/p9" to="." method="_on_9_pressed"]
-[connection signal="pressed" from="Pages/Forward" to="." method="_on_forward_pressed"]
+[connection signal="pressed" from="Panel/Pages/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Panel/Pages/q" to="." method="_on_q_pressed"]
+[connection signal="pressed" from="Panel/Pages/Autosaves" to="." method="_on_autosaves_pressed"]
+[connection signal="pressed" from="Panel/Pages/p1" to="." method="_on_1_pressed"]
+[connection signal="pressed" from="Panel/Pages/p2" to="." method="_on_2_pressed"]
+[connection signal="pressed" from="Panel/Pages/p3" to="." method="_on_3_pressed"]
+[connection signal="pressed" from="Panel/Pages/p4" to="." method="_on_4_pressed"]
+[connection signal="pressed" from="Panel/Pages/p5" to="." method="_on_5_pressed"]
+[connection signal="pressed" from="Panel/Pages/p6" to="." method="_on_6_pressed"]
+[connection signal="pressed" from="Panel/Pages/p7" to="." method="_on_7_pressed"]
+[connection signal="pressed" from="Panel/Pages/p8" to="." method="_on_8_pressed"]
+[connection signal="pressed" from="Panel/Pages/p9" to="." method="_on_9_pressed"]
+[connection signal="pressed" from="Panel/Pages/Forward" to="." method="_on_forward_pressed"]

@@ -43,7 +43,6 @@ uniform float slide_speed = 0.05;
 uniform bool slide_reverse = false;
 
 void vertex() {
-
 	if (scale_mode) {
 		float scale = max(min(time * scale_speed + scale_shift, scale_max), scale_min);
 		vec2 scaled = VERTEX * scale;
@@ -114,15 +113,17 @@ vec4 slideY(sampler2D tex, vec4 color, vec2 pos) {
 }
 
 void fragment() {
+	vec2 uv = UV;
+	
 	if (slide_h)
-		COLOR = slideX(TEXTURE, COLOR, UV);
+		COLOR = slideX(TEXTURE, COLOR, uv);
 	if (slide_v)
-		COLOR = slideY(TEXTURE, COLOR, UV);
+		COLOR = slideY(TEXTURE, COLOR, uv);
 	if (blend_mode) {
 		ivec2 ibackSize = textureSize(TEXTURE, 0);
 		ivec2 iBlendSize = textureSize(secondTexture, 0);
 		vec2 diff = vec2(float(ibackSize.x) / float(iBlendSize.x), float(ibackSize.y) / float(iBlendSize.y));
-		COLOR = blend(COLOR, texture(secondTexture, vec2(UV.x * diff.x, UV.y*diff.y)));
+		COLOR = blend(COLOR, texture(secondTexture, vec2(uv.x * diff.x, uv.y*diff.y)));
 		}
 	if (fade_to)
 		COLOR = blend_to(COLOR);

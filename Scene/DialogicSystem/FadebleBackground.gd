@@ -46,6 +46,7 @@ func clear():
 	
 func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}):
 	shader.reset_time()
+	back.visible = has_transition
 	if has_transition:
 		swap_textures()
 		if first.texture == null || !(shader_params.has("blend") && shader_params.blend):

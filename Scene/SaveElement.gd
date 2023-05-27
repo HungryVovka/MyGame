@@ -2,7 +2,7 @@ extends Control
 
 @onready var img = $TextureRect
 @onready var label = $Label
-@export var default_color = Color(0.6, 0.6, 0.6, 1.0)
+@export var default_color = Color(0.6, 0.6, 0.6, 0.7)
 @export var over_color = Color(0.8, 0.8, 0.8, 1.0)
 @export var pressed_color = Color(1.0, 1.0, 0.8, 1.0)
 

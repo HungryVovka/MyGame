@@ -7,9 +7,9 @@ var current_page = ""
 @onready var elements = [$GridContainer/El1, $GridContainer/El2, 
 						$GridContainer/El3, $GridContainer/El4, 
 						$GridContainer/El5, $GridContainer/El6]
-@onready var pageButtons = [$Pages/p1, $Pages/p2, $Pages/p3,
-							$Pages/p4, $Pages/p5, $Pages/p6,
-							$Pages/p7, $Pages/p8, $Pages/p9]
+@onready var pageButtons = [$Panel/Pages/p1, $Panel/Pages/p2, $Panel/Pages/p3,
+							$Panel/Pages/p4, $Panel/Pages/p5, $Panel/Pages/p6,
+							$Panel/Pages/p7, $Panel/Pages/p8, $Panel/Pages/p9]
 
 @export var save_mode = false
 
@@ -69,12 +69,12 @@ func _on_9_pressed():
 	_represent(str(page_shift+9))
 
 func _on_forward_pressed():
-	page_shift += 10
+	page_shift += 9
 	_update_page_buttons()
 
 
 func _on_back_pressed():
-	page_shift = max(page_shift - 10, 0)
+	page_shift = max(page_shift - 9, 0)
 	_update_page_buttons()
 
 func el_clicked(num):
@@ -100,3 +100,7 @@ func _on_el_5_clicked():
 
 func _on_el_6_clicked():
 	el_clicked("6")
+
+
+func _on_q_pressed():
+	_represent("Q")
