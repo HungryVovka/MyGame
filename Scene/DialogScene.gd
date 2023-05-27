@@ -23,6 +23,33 @@ extends Control
 
 var scene_root = ""
 var scene_ready = false
+var scene_src_params = {}
+
+
+var typeD : Dictionary = {
+	"date": "string",
+	"scene": "string",
+	"timeline": "string",
+	"preview": "string",
+	"state": "dict",
+	"current_index": [0],
+	"deep_index": 0
+}
+
+func save():
+	var result = {
+		"date": Time.get_datetime_string_from_system(false, true),
+		"scene": scene_src_params["scene_name"],
+		"timeline": scene_src_params["timeline_name"],
+		"state": DialogState.getState(),
+		"current_index": dialogManager.current_index,
+		"deep_index": dialogManager.deep_index
+	}
+	var img: Image = get_viewport().get_texture().get_image()
+	img.resize(480, 270)
+	var data = img.save_png_to_buffer()
+	result.preview = Marshalls.raw_to_base64(data)
+	return result
 
 func setDialogParams(dict: Dictionary):
 	choicesBlock.visible = false
@@ -32,6 +59,7 @@ func setDialogParams(dict: Dictionary):
 	audioManager.resources = dict.sounds
 	dialogManager.timeline = dict.timeline
 	scene_root = dict.scene_root
+	scene_src_params = dict
 	dialogManager.reset_index()
 	dialogManager.play_next_event()
 
@@ -117,8 +145,8 @@ func _on_dialog_manager_set_background_clickable(value):
 	clickable_background = value
 
 
-func _on_dialog_manager_play_sound(name, channel, loop, bus, volume, fade):
-	audioManager.play(name, channel, loop, bus, volume, fade)
+func _on_dialog_manager_play_sound(_name, channel, loop, bus, volume, fade):
+	audioManager.play(_name, channel, loop, bus, volume, fade)
 
 
 func _on_dialog_manager_stop_sound(channel):

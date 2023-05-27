@@ -290,7 +290,7 @@ func process_script(event):
 	return result
 
 
-func _on_text_area_event_reached(name):
+func _on_text_area_event_reached(_name):
 	if (!current_event.has("script") && !current_event.has("condition")):
 		return
 	var txt = current_event.script if current_event.has("script") else current_event.condition
@@ -302,6 +302,6 @@ func _on_text_area_event_reached(name):
 	var obj = Node.new()
 	obj.set_script(script)
 	add_child(obj)
-	if obj.has_method(name):
-		obj.call(name, self, current_event)
+	if obj.has_method(_name):
+		obj.call(_name, self, current_event)
 	remove_child(obj)

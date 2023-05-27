@@ -17,15 +17,15 @@ func setResources(filename):
 			streams[k] = load(data[k])
 	pass
 
-func play(name, channel, loop = false, bus = "SFX", volume = 1.0, fade_in = 0.0):
-	if (streams.has(name)):
+func play(_name, channel, loop = false, bus = "SFX", volume = 1.0, fade_in = 0.0):
+	if (streams.has(_name)):
 		if players.has(channel):
 			players[channel].stop()
 			players.erase(channel)
 		
 		var player = LoopableAudio.new()
 		player.bus = bus
-		player.stream = streams[name]
+		player.stream = streams[_name]
 		player.loop = loop
 		player.volume_db = linear_to_db(volume)
 		

@@ -23,7 +23,7 @@ func _ready():
 		DownloadManager.downloadScene("scene1")
 	_progress(0.0)
 	
-func _scene_ready(value: String):
+func _scene_ready(value: String, scene_name: String):
 	var cfg = _read_json(value + "config.json");
 	var dict = {
 		"timeline": value + "timelines/" + cfg.start + ".json",
@@ -32,7 +32,9 @@ func _scene_ready(value: String):
 		"sounds": value + "configs/sounds.json",
 		"characters": value + "configs/characters.json",
 		"end": cfg.end,
-		"scene_root": value
+		"scene_root": value,
+		"scene_name": scene_name,
+		"timeline_name": cfg.start
 	}
 	
 	player.stop()
@@ -45,7 +47,7 @@ func _scene_ready(value: String):
 			t.timeout.connect(
 				func():
 					DialogState.setSceneState(dict)
-					get_tree().change_scene_to_file("res://Scene/start.tscn")
+					get_tree().change_scene_to_file(cfg.scene)
 					)
 			add_child(t)
 			t.start(0.05)

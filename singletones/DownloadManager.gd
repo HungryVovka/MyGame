@@ -2,7 +2,7 @@ extends Node
 
 @export var downloadMode = true
 signal progress(value: float)
-signal sceneReady(value: String)
+signal sceneReady(value: String, request_name: String)
 
 var http: HTTPRequest
 var timer: Timer = null
@@ -42,13 +42,13 @@ func _generate_cachefile(headers):
 
 func downloadScene(sceneName: String):
 	if !downloadMode:
-		sceneReady.emit(scenes[sceneName].scene)
+		sceneReady.emit(scenes[sceneName].scene, sceneName)
 		return
 	
 	var scene = scenes[sceneName]
 	var head = HTTPRequest.new()
 	head.request_completed.connect(
-		func (result, _response_code, headers: PackedStringArray, body): 
+		func (result, _response_code, headers: PackedStringArray, _body): 
 			if (result == OK):
 				for h in headers:
 					if h.contains("Content-Length:"):
@@ -58,8 +58,7 @@ func downloadScene(sceneName: String):
 					add_child(http)
 					http.download_file = "user://Scenes/" + scene.filename
 					http.request_completed.connect(
-						func (_result, _response_code, _headers, body):
-							print("READY")
+						func (_result, _response_code, _headers, _body):
 							timer.stop()
 							var t: Timer = Timer.new()
 							add_child(t)
@@ -70,7 +69,7 @@ func downloadScene(sceneName: String):
 									_save_cachefile(scene.filename, headers)
 									var success = ProjectSettings.load_resource_pack("user://Scenes/" + scene.filename)
 									if (success):
-										sceneReady.emit(scene.scene)
+										sceneReady.emit(scene.scene, sceneName)
 									)
 							t.start(2.0)
 							)
@@ -88,7 +87,7 @@ func downloadScene(sceneName: String):
 				else:
 					var success = ProjectSettings.load_resource_pack("user://Scenes/" + scene.filename)
 					if (success):
-						sceneReady.emit(scenes[sceneName].scene)
+						sceneReady.emit(scenes[sceneName].scene, sceneName)
 				)
 	add_child(head)
 	head.request(scene.url, [], HTTPClient.METHOD_HEAD);

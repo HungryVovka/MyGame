@@ -14,6 +14,9 @@ func setState(newD: Dictionary):
 		dialog_state[k] = dict[k]
 	updated.emit(old, dialog_state.duplicate())
 
+func getState():
+	return dialog_state.duplicate()
+
 func s(key, value):
 	var dict = {}
 	dict[key] = value

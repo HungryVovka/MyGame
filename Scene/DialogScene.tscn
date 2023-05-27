@@ -42,7 +42,6 @@ script = ExtResource("2_4caap")
 [node name="FadebleBackground" parent="." instance=ExtResource("2_qreeh")]
 z_index = -1
 layout_mode = 1
-anchors_preset = 8
 mouse_filter = 1
 movable = 30
 
