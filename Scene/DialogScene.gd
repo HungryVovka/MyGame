@@ -42,8 +42,8 @@ func save():
 		"scene": scene_src_params["scene_name"],
 		"timeline": scene_src_params["timeline_name"],
 		"state": DialogState.getState(),
-		"current_index": dialogManager.current_index,
-		"deep_index": dialogManager.deep_index
+		"current_index": dialogManager.last_event.current_index,
+		"deep_index": dialogManager.last_event.deep_index
 	}
 	var img: Image = get_viewport().get_texture().get_image()
 	img.resize(480, 270)

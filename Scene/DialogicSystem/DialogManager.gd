@@ -37,6 +37,8 @@ var event_index_cache: Dictionary = {}
 var current_index = [0]
 var deep_index = 0
 
+var last_event = {}
+
 var current_event = null
 
 var nextEventTimer: Timer = null
@@ -161,6 +163,10 @@ func _read_json(filename):
 	return data
 
 func play_next_event():
+	last_event = {
+		"current_index": current_event,
+		"deep_index": deep_index
+	}
 	var event = get_next_event()
 	current_event = event
 	if nextEventTimer && !nextEventTimer.is_stopped() && event:
