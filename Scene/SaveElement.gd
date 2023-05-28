@@ -20,7 +20,7 @@ func loadSave(data: Dictionary):
 		return
 	
 	label.text = data.date
-	var img_data = Marshalls.base64_to_raw(data.preview)
+	var img_data: PackedByteArray = Marshalls.base64_to_raw(data.preview)
 	var i: Image = Image.new()
 	i.load_png_from_buffer(img_data)
 	img.texture = ImageTexture.create_from_image(i)

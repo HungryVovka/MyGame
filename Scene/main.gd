@@ -20,7 +20,8 @@ var dict = {
 	"sounds": sounds,
 	"characters": characters,
 	"scene_root": "res://Resources/Scene1/",
-	"end": ""
+	"end": "",
+	"clickable_background": false
 }
 
 var cached_save = {}
@@ -56,3 +57,15 @@ func _input(event):
 func _on_game_menu_save_picked(page, num):
 	SaveManager.save(page, num, cached_save)
 	menu.loadSaveRender()
+
+
+func _on_game_menu_load_picked(page, num):
+	var load_data = SaveManager.load(page, num)
+	DialogState.setState({
+		"load_scene_name": load_data["scene"],
+		"load_timeline": load_data["timeline"],
+		"current_index": load_data["current_index"],
+		"deep_index": load_data["deep_index"],
+		"load_clickable": load_data["clickable_background"]
+	})
+	get_tree().change_scene_to_file("res://Scene/Empty.tscn")

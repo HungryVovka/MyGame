@@ -81,7 +81,7 @@ func el_clicked(num):
 	if save_mode:
 		save_clicked.emit(current_page, num)
 	else:
-		save_clicked.emit(current_page, num)
+		load_clicked.emit(current_page, num)
 
 func _on_el_1_clicked():
 	el_clicked("1")

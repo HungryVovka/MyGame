@@ -17,10 +17,14 @@ func _ready():
 	DownloadManager.sceneReady.connect(_scene_ready)
 	DownloadManager.progress.connect(_progress)
 	
-	if (DialogState.gs("_next_scene") != ""):
-		DownloadManager.downloadScene(DialogState.gs("_next_scene"))
-	else:
-		DownloadManager.downloadScene("scene1")
+	var scene_name:String = "scene1"
+	if DialogState.gs("_next_scene") != "":
+		scene_name = DialogState.gs("_next_scene")
+	if DialogState.has("load_scene_name"):
+		scene_name = DialogState.gs("load_scene_name")
+		DialogState.r("load_scene_name")
+	
+	DownloadManager.downloadScene(scene_name)
 	_progress(0.0)
 	
 func _scene_ready(value: String, scene_name: String):
@@ -34,8 +38,21 @@ func _scene_ready(value: String, scene_name: String):
 		"end": cfg.end,
 		"scene_root": value,
 		"scene_name": scene_name,
-		"timeline_name": cfg.start
+		"timeline_name": cfg.start,
+		"clickable_background": false
 	}
+	if DialogState.has("current_index"):
+		dict["current_index"] = DialogState.g("current_index")
+		DialogState.r("current_index")
+		dict["deep_index"] = DialogState.g("deep_index")
+		DialogState.r("deep_index")
+	if DialogState.has("load_timeline"):
+		dict["timeline_name"] = DialogState.gs("load_timeline")
+		dict["timeline"] = value + "timelines/" + DialogState.gs("load_timeline") + ".json"
+		DialogState.r("load_timeline")
+	if DialogState.g("load_clickable"):
+		dict["clickable_background"] = DialogState.g("load_clickable")
+		DialogState.r("load_clickable")
 	
 	player.stop()
 	player.play("appear", -1, -10.0, true)

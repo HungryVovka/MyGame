@@ -27,6 +27,9 @@ func get_page(page: String):
 		return {}
 	else:
 		return save_state[page].duplicate()
+
+func load(page: String, index: String):
+	return get_page(page)[index]
 			
 func _ready():
 	if FileAccess.file_exists(save_file_path):

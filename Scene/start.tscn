@@ -91,4 +91,5 @@ libraries = {
 "": SubResource("AnimationLibrary_1jygb")
 }
 
+[connection signal="loadPicked" from="GameMenu" to="." method="_on_game_menu_load_picked"]
 [connection signal="savePicked" from="GameMenu" to="." method="_on_game_menu_save_picked"]

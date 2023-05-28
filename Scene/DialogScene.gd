@@ -43,24 +43,31 @@ func save():
 		"timeline": scene_src_params["timeline_name"],
 		"state": DialogState.getState(),
 		"current_index": dialogManager.last_event.current_index,
-		"deep_index": dialogManager.last_event.deep_index
+		"deep_index": dialogManager.last_event.deep_index,
+		"clickable_background": clickable_background
 	}
 	var img: Image = get_viewport().get_texture().get_image()
 	img.resize(480, 270)
-	var data = img.save_png_to_buffer()
+	var data : PackedByteArray = img.save_png_to_buffer()
 	result.preview = Marshalls.raw_to_base64(data)
 	return result
 
 func setDialogParams(dict: Dictionary):
+	clickable_background = dict.clickable_background
 	choicesBlock.visible = false
 	dialogManager.videos_list = dict.videos
 	dialogManager.background_list = dict.backgrounds
 	dialogManager.character_list = dict.characters
 	audioManager.resources = dict.sounds
 	dialogManager.timeline = dict.timeline
+	if dict.has("current_index"):
+		dialogManager.current_index = dict["current_index"]
+		dialogManager.deep_index = dict["deep_index"]
+	else:
+		dialogManager.reset_index()
 	scene_root = dict.scene_root
 	scene_src_params = dict
-	dialogManager.reset_index()
+	print("dialog params")
 	dialogManager.play_next_event()
 
 func set_person_source(obj: String, src):
@@ -83,7 +90,6 @@ func person_animation(obj: String, type: String = "dir", animation: String = "RE
 func _ready():
 	choicesBlock.visible = false
 	dialogManager.timeline = fn
-	dialogManager.play_next_event()
 	
 	var timer = Timer.new()
 	timer.one_shot = true
@@ -106,6 +112,7 @@ func _on_dialog_manager_end():
 		choicesBlock.visible = false
 		dialogManager.timeline = scene_root + "timelines/" + DialogState.gs("_next_timeline") + ".json"
 		dialogManager.reset_index()
+		print("end")
 		dialogManager.play_next_event()
 		return
 	if DialogState.gs("_next_scene") != "":
@@ -126,6 +133,7 @@ func _on_text_area_on_next():
 	if !clickable_background && textArea.text == "":
 		return
 	if !choicesBlock.visible:
+		print("textarea")
 		dialogManager.play_next_event()
 
 func _on_dialog_manager_set_background(res, has_background, params):
@@ -139,6 +147,7 @@ func _on_fadeble_background_gui_input(event):
 		&& !choicesBlock.visible \
 		&& event.button_index == MOUSE_BUTTON_LEFT \
 		&& event.pressed == true:
+		print("background")
 		dialogManager.play_next_event()
 
 func _on_dialog_manager_set_background_clickable(value):

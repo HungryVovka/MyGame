@@ -21,6 +21,13 @@ func s(key, value):
 	var dict = {}
 	dict[key] = value
 	setState(dict)
+	
+func r(key):
+	if dialog_state.has(key):
+		dialog_state.erase(key)
+
+func has(key):
+	return dialog_state.has(key)
 
 func gs(k):
 	return str(dialog_state[k]) if dialog_state.has(k) else ""

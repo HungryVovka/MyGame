@@ -76,6 +76,7 @@ func jump_to(id):
 	if event_index_cache.has(id):
 		current_index = [] + event_index_cache[id]
 		deep_index = current_index.size() - 1
+		print("jump")
 		play_next_event()
 	
 func make_choice(_index, text):
@@ -91,6 +92,7 @@ func make_choice(_index, text):
 	current_index.append(found_index)
 	current_index.append(0)
 	deep_index += 2
+	print("choice")
 	play_next_event()
 	
 	
@@ -164,11 +166,12 @@ func _read_json(filename):
 
 func play_next_event():
 	last_event = {
-		"current_index": current_event,
+		"current_index": current_index.duplicate(),
 		"deep_index": deep_index
 	}
 	var event = get_next_event()
 	current_event = event
+	
 	if nextEventTimer && !nextEventTimer.is_stopped() && event:
 		nextEventTimer.stop()
 	if event:
