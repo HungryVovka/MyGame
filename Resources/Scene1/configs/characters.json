@@ -1,5 +1,9 @@
 {
 	"characters": {
+		"new_character": {
+			"name": "new_character",
+			"portrait": "new_character"
+		}
 	},
 	"persons": {
 	}

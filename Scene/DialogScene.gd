@@ -53,6 +53,7 @@ func save():
 	return result
 
 func setDialogParams(dict: Dictionary):
+	fadebleBackground.reset_shaders()
 	clickable_background = dict.clickable_background
 	choicesBlock.visible = false
 	dialogManager.videos_list = dict.videos

@@ -54,7 +54,8 @@ func set_text_animation(text_value: String, time):
 	_update_text(text_value)
 	_textAppearTime = time
 	_textTimer.start(_timerUpdateRate)
-	typingSound.play()
+	if text_value != "":
+		typingSound.play()
 	pass
 
 func _update_text(value: String):

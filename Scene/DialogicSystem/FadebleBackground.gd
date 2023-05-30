@@ -20,6 +20,10 @@ func _ready():
 	add_child(shader)
 	pass
 
+func reset_shaders():
+	shader.reset_time()
+	reset_transition()
+
 func apply_shader(id: String, params: Dictionary, texture = null, where: String = "under"):
 	var mat = Shaders.new_material(id, params)
 	var dest: TextureRect = under if where == "under" else face
