@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scene/DialogicSystem/TextArea.gd" id="1_ecgk3"]
 [ext_resource type="Script" path="res://Scene/DialogicSystem/RichTextLabel.gd" id="1_gqpw2"]
-[ext_resource type="Texture2D" uid="uid://c83sikis8d7bk" path="res://Resources/1Main/GUI/DialogBox.png" id="2_bv873"]
+[ext_resource type="Texture2D" uid="uid://bpl82w5fop0u2" path="res://Resources/1Main/GUI/DialogBox2.png" id="2_5xpre"]
 [ext_resource type="AudioStream" uid="uid://dctemn4koqsfd" path="res://Resources/1Main/Audio/SFX/keyboard_typing.wav" id="4_iyb1c"]
 [ext_resource type="AudioStream" uid="uid://c4ishe4148nlo" path="res://Resources/1Main/Audio/SFX/1.mp3" id="5_aqheg"]
 
@@ -74,8 +74,8 @@ offset_top = 0.02
 offset_right = -0.120026
 offset_bottom = -1.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 30
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -92,7 +92,7 @@ anchor_bottom = 1.0
 offset_top = -0.0499954
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_bv873")
+texture = ExtResource("2_5xpre")
 expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Control/TextureRect"]
@@ -106,20 +106,21 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 45
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 20
 
 [node name="RichLabel" type="RichTextLabel" parent="VBoxContainer/Control/TextureRect/MarginContainer"]
-clip_contents = false
 custom_minimum_size = Vector2(1000, 50)
 layout_direction = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
+theme_override_constants/shadow_outline_size = 4
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
+scroll_active = false
 script = ExtResource("1_gqpw2")
 
 [node name="TypingSound" type="AudioStreamPlayer2D" parent="VBoxContainer/Control/TextureRect/MarginContainer/RichLabel"]

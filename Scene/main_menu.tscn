@@ -54,6 +54,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_jofge")
 text = "START"
 flat = true
 
+[node name="Hover" type="AudioStreamPlayer" parent="VBoxContainer/Start"]
+
+[node name="Click" type="AudioStreamPlayer" parent="VBoxContainer/Start"]
+
 [node name="Load" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -119,6 +123,7 @@ stream = ExtResource("2_opb4d")
 volume_db = -23.372
 autoplay = true
 
+[connection signal="mouse_entered" from="VBoxContainer/Start" to="." method="_on_start_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]

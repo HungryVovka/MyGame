@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dl2hpi2e0a46s"
+path="res://.godot/imported/click reverb echo.mp3-87860cee5b2b3448cb30d48182cea509.mp3str"
+
+[deps]
+
+source_file="res://Resources/1Main/Audio/SFX/click reverb echo.mp3"
+dest_files=["res://.godot/imported/click reverb echo.mp3-87860cee5b2b3448cb30d48182cea509.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

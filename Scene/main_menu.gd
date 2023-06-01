@@ -30,3 +30,7 @@ func _on_credits_pressed():
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+
+func _on_start_mouse_entered():
+	pass # Replace with function body.
