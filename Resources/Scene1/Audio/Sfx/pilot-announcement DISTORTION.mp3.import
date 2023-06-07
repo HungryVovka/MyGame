@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bxbdyekr6mavw"
+path="res://.godot/imported/pilot-announcement DISTORTION.mp3-fb1a7dd7c7ee9d8fb159ecd20d2d0919.mp3str"
+
+[deps]
+
+source_file="res://Resources/Scene1/Audio/Sfx/pilot-announcement DISTORTION.mp3"
+dest_files=["res://.godot/imported/pilot-announcement DISTORTION.mp3-fb1a7dd7c7ee9d8fb159ecd20d2d0919.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
