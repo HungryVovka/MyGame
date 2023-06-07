@@ -1,11 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3xycrlwc280n"]
+[gd_scene load_steps=12 format=3 uid="uid://b3xycrlwc280n"]
 
 [ext_resource type="Script" path="res://Scene/DialogicSystem/ChoicesBlock.gd" id="1_756bu"]
 [ext_resource type="Script" path="res://Scene/DialogicSystem/Button.gd" id="2_fk013"]
 [ext_resource type="Texture2D" uid="uid://cuij02fy8ojrl" path="res://Resources/1Main/GUI/choice bc 2.5.png" id="2_je87g"]
+[ext_resource type="FontFile" uid="uid://dy7m3vcq7d60c" path="res://Resources/1Main/Fonts/montserrat.regular.ttf" id="2_wyni3"]
 [ext_resource type="Texture2D" uid="uid://s00i1bkrpssw" path="res://Resources/1Main/GUI/choice bc 2.5 hover.png" id="3_rqjiv"]
-[ext_resource type="AudioStream" uid="uid://bfpk24gk5eqvg" path="res://Resources/1Main/Audio/SFX/PlasticPress.mp3" id="6_l2qxb"]
-[ext_resource type="AudioStream" uid="uid://c8ddfvaf70dfi" path="res://Resources/1Main/Audio/SFX/ClickSoft.mp3" id="6_t6o72"]
+[ext_resource type="AudioStream" uid="uid://dgut3d2jja6fj" path="res://Resources/1Main/Audio/SFX/PressEcho.mp3" id="6_sn5py"]
+
+[sub_resource type="FontVariation" id="FontVariation_w3lyy"]
+base_font = ExtResource("2_wyni3")
+spacing_top = 1
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_srj2i"]
 content_margin_left = 65.0
@@ -47,26 +51,25 @@ alignment = 1
 custom_minimum_size = Vector2(180, 80)
 layout_mode = 2
 mouse_filter = 1
-theme_override_font_sizes/font_size = 20
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_w3lyy")
+theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxTexture_srj2i")
 theme_override_styles/hover = SubResource("StyleBoxTexture_5ydkb")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_srj2i")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_kog66")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3hu4l")
-text_overrun_behavior = 1
-clip_text = true
 script = ExtResource("2_fk013")
 
 [node name="Hover" type="AudioStreamPlayer" parent="VBoxContainer/Button"]
-stream = ExtResource("6_l2qxb")
-volume_db = -10.0
-pitch_scale = 0.8
+stream = ExtResource("6_sn5py")
+volume_db = -15.0
+pitch_scale = 1.5
 bus = &"SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="VBoxContainer/Button"]
-stream = ExtResource("6_t6o72")
+stream = ExtResource("6_sn5py")
 volume_db = -5.0
-pitch_scale = 0.8
 bus = &"SFX"
 
 [connection signal="mouse_entered" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_mouse_entered"]

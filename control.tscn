@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6xdajyn6vk87"]
+[gd_scene load_steps=5 format=3 uid="uid://b6xdajyn6vk87"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_pdeuu"]
 [ext_resource type="Shader" path="res://shaders/transitions.gdshader" id="2_ajtu4"]
 [ext_resource type="Texture2D" uid="uid://b68vudox7abdg" path="res://Resources/backgrounds/mountains.jpg" id="3_irm2m"]
-[ext_resource type="Texture2D" uid="uid://cutr4g346nbjl" path="res://Resources/Scene1/Art/milf.jpg" id="4_rckr8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rnqbo"]
 shader = ExtResource("2_ajtu4")
@@ -59,7 +58,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_rckr8")
 expand_mode = 1
 stretch_mode = 2
 

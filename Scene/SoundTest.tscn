@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ng0168juuu2k"]
+
+[ext_resource type="AudioStream" uid="uid://bjw6cej5qgntu" path="res://Resources/Scene1/Audio/Sfx/pilot-announcement-during-flight-1.wav" id="1_srwdf"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_srwdf")
+autoplay = true
+bus = &"MusicGigaEffects"

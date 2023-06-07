@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://daf84icc03tyk"]
+[gd_scene load_steps=9 format=3 uid="uid://daf84icc03tyk"]
 
 [ext_resource type="Script" path="res://Scene/DialogicSystem/TextArea.gd" id="1_ecgk3"]
 [ext_resource type="Script" path="res://Scene/DialogicSystem/RichTextLabel.gd" id="1_gqpw2"]
 [ext_resource type="Texture2D" uid="uid://bpl82w5fop0u2" path="res://Resources/1Main/GUI/DialogBox2.png" id="2_5xpre"]
+[ext_resource type="FontFile" uid="uid://dhpr1r7sjuwri" path="res://Resources/1Main/Fonts/GROBOLD.ttf" id="2_q5sa0"]
+[ext_resource type="FontFile" uid="uid://b6bdfh21wpkc7" path="res://Resources/1Main/Fonts/Univers-Black.otf" id="2_vrm31"]
 [ext_resource type="AudioStream" uid="uid://dctemn4koqsfd" path="res://Resources/1Main/Audio/SFX/keyboard_typing.wav" id="4_iyb1c"]
 [ext_resource type="AudioStream" uid="uid://c4ishe4148nlo" path="res://Resources/1Main/Audio/SFX/1.mp3" id="5_aqheg"]
+
+[sub_resource type="FontVariation" id="FontVariation_3v14t"]
+base_font = ExtResource("2_q5sa0")
+spacing_glyph = 3
 
 [node name="TextArea" type="Control"]
 layout_mode = 3
@@ -66,17 +72,15 @@ expand_mode = 1
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.133
+anchor_top = 0.3
 anchor_right = 0.136
-anchor_bottom = 1.0
+anchor_bottom = 1.15
 offset_left = 1.0
-offset_top = 0.02
 offset_right = -0.120026
-offset_bottom = -1.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_3v14t")
 theme_override_font_sizes/font_size = 40
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Control" type="Control" parent="VBoxContainer"]
@@ -117,7 +121,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
-theme_override_constants/shadow_outline_size = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/normal_font = ExtResource("2_vrm31")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 scroll_active = false
@@ -125,7 +131,7 @@ script = ExtResource("1_gqpw2")
 
 [node name="TypingSound" type="AudioStreamPlayer2D" parent="VBoxContainer/Control/TextureRect/MarginContainer/RichLabel"]
 stream = ExtResource("4_iyb1c")
-volume_db = -1.691
+volume_db = -5.83
 bus = &"SFX"
 area_mask = 1114248
 

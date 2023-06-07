@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bpepoyhud3m1f"
+path="res://.godot/imported/Airplane Outside.mp3-0446d249c88bb41fa6e68301327505a2.mp3str"
+
+[deps]
+
+source_file="res://Resources/Scene1/Audio/Sfx/Airplane Outside.mp3"
+dest_files=["res://.godot/imported/Airplane Outside.mp3-0446d249c88bb41fa6e68301327505a2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

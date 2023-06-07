@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://21lwmf7sxpt3"]
 
-[ext_resource type="Texture2D" uid="uid://c7w1qe5pv4dju" path="res://Resources/Scene1/Art/1.png" id="1_l3t3g"]
+[ext_resource type="Texture2D" uid="uid://bgac5gnxy4fpc" path="res://Resources/Scene1/Art/1.png" id="1_l3t3g"]
 [ext_resource type="Script" path="res://ShaderTest.gd" id="1_p4kvm"]
 [ext_resource type="Shader" path="res://shaders/vingette.gdshader" id="2_oqfwx"]
 

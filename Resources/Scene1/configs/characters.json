@@ -1,7 +1,7 @@
 {
 	"characters": {
-		"new_character": {
-			"name": "New Character",
+		"Pilot": {
+			"name": "Pilot",
 			"portrait": "new_character"
 		}
 	},
