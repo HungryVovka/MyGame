@@ -135,7 +135,8 @@ func setCharactersList(filename):
 		portraits_resources.clear()
 		characters_data = _read_json(filename)
 		for k in characters_data.characters.keys():
-			portraits_resources[k] = load(characters_data.characters[k].portrait)
+			if characters_data.characters[k].portrait:
+				portraits_resources[k] = load(characters_data.characters[k].portrait)
 		persons_resources.clear()
 		for k in characters_data.persons.keys():
 			var res = {}
@@ -222,7 +223,8 @@ func process_character(event):
 	var character_name = DialogState.pps(event)
 	if characters_data.characters.has(character_name):
 		var character = characters_data.characters[character_name]
-		updateCharacter.emit(portraits_resources[character_name], 
+		
+		updateCharacter.emit(portraits_resources[character_name] if portraits_resources.has(character_name) else null, 
 			DialogState.pps(character.name))
 	else:
 		resetCharacter.emit()
