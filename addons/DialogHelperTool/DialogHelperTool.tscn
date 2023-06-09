@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbwmdpvenittv"]
+[gd_scene load_steps=6 format=3 uid="uid://kpxck4bb7pjp"]
 
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DialogHelperTool.gd" id="1_eb7vm"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/SceneLineEdit.gd" id="2_vieds"]
-[ext_resource type="Script" path="res://addons/DialogHelperTool/BackgroundsContainer.gd" id="3_n47yj"]
-[ext_resource type="Script" path="res://addons/DialogHelperTool/VideosMarginContainer.gd" id="4_28jyi"]
-[ext_resource type="Script" path="res://addons/DialogHelperTool/AudioMarginContainer.gd" id="5_ock4k"]
+[ext_resource type="Script" path="res://addons/DialogHelperTool/DropValidators/BackgroundsContainer.gd" id="3_e5ldx"]
+[ext_resource type="Script" path="res://addons/DialogHelperTool/DropValidators/VideosMarginContainer.gd" id="4_c6x1x"]
+[ext_resource type="Script" path="res://addons/DialogHelperTool/DropValidators/AudioMarginContainer.gd" id="5_ya255"]
 
 [node name="DialogHelperTool" type="Control"]
 layout_mode = 3
@@ -14,6 +14,7 @@ anchor_bottom = 1.0
 offset_top = 163.08
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.48, 1.48)
 script = ExtResource("1_eb7vm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -27,7 +28,7 @@ layout_mode = 2
 size_flags_vertical = 8
 min_value = 25.0
 max_value = 200.0
-value = 100.0
+value = 148.0
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1920, 1080)
@@ -36,6 +37,7 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 30
 
 [node name="Scene" type="Control" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Scene"]
@@ -89,6 +91,7 @@ text = "Start timeline
 custom_minimum_size = Vector2(2.08165e-12, 45)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
+toggle_mode = false
 item_count = 2
 selected = 1
 popup/item_0/text = "second"
@@ -148,7 +151,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
-script = ExtResource("3_n47yj")
+script = ExtResource("3_e5ldx")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Backgrounds/MarginContainer"]
 layout_mode = 2
@@ -207,7 +210,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
-script = ExtResource("4_28jyi")
+script = ExtResource("4_c6x1x")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Videos/MarginContainer"]
 layout_mode = 2
@@ -266,7 +269,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
-script = ExtResource("5_ock4k")
+script = ExtResource("5_ya255")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Audios/MarginContainer"]
 layout_mode = 2
@@ -309,6 +312,60 @@ theme_override_font_sizes/font_size = 30
 text = "Save"
 
 [node name="Characters" type="Control" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Characters"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Characters/MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Characters/MarginContainer/ScrollContainer"]
+clip_contents = true
+layout_mode = 2
+columns = 6
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/TabContainer/Characters"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -254.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Characters/MarginContainer2"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="AddBackgroundButton" type="Button" parent="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Add "
+
+[node name="RemoveBackgroundButton2" type="Button" parent="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Remove Selected"
+
+[node name="SaveBackgroundsButton" type="Button" parent="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Save"
+
+[node name="Persons" type="Control" parent="VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 
@@ -329,3 +386,6 @@ layout_mode = 2
 [connection signal="pressed" from="VBoxContainer/TabContainer/Audios/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_audios_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Audios/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_audios_button_2_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Audios/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="_on_save_audios_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_characters_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_characters_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="_on_save_characters_button_pressed"]

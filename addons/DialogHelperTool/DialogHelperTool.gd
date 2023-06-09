@@ -20,6 +20,10 @@ var videos_dict: Dictionary
 var audios_children_list = []
 var audios_dict: Dictionary
 
+@onready var characters_grid = $VBoxContainer/TabContainer/Characters/MarginContainer/ScrollContainer/GridContainer
+var characters_children_list = []
+var characters_dict: Dictionary
+
 var _file_dialog
 
 func add_custom_project_setting(name: String, default_value, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = "") -> void:
@@ -35,7 +39,6 @@ func add_custom_project_setting(name: String, default_value, type: int, hint: in
 	ProjectSettings.set_initial_value(name, default_value)
 
 func _ready():
-	#ProjectSettings.set("dialog_edit_tool/scale", 2.0)
 	_on_scene_folder_changed("res://Resources/Scene1/")
 	add_custom_project_setting("dialogsystem/scale", 100.0, TYPE_FLOAT)
 
@@ -82,6 +85,9 @@ func _on_scene_folder_changed(path):
 	clear_audios_objects()
 	render_audios_objects(audios_dict, audios_dict)
 	
+	characters_dict = read_json(path + "configs/characters.json")
+	clear_characters_objects()
+	render_characters_objects(characters_dict, characters_dict)
 	
 	
 func clear_backgrounds_objects():
@@ -122,7 +128,19 @@ func render_audios_objects(dict: Dictionary, source: Dictionary):
 		obj.set_source(source, k)
 		audios_grid.add_child(obj)
 		audios_children_list.push_back(obj)
+
+func clear_characters_objects():
+	for i in characters_children_list:
+		i.queue_free()
+	characters_children_list.clear()
 	
+func render_characters_objects(dict: Dictionary, source: Dictionary):
+	for k in dict.characters.keys():
+		var class_obj = preload("res://addons/DialogHelperTool/CharacterConfigItem/CharacterConfigItem.tscn")
+		var obj = class_obj.instantiate()
+		obj.set_source(source.characters, k)
+		characters_grid.add_child(obj)
+		characters_children_list.push_back(obj)
 
 func _on_scene_entry_changed(path):
 	scene_file.text = path
@@ -228,18 +246,20 @@ func _on_add_background_button_pressed():
 func _on_backgrounds_selected(paths: PackedStringArray):
 	var newDict = {}
 	for p in paths:
-		if !background_dict.has(p.get_file()):
-			background_dict[p.get_file()] = p
-			newDict[p.get_file()] = p
+		var k = p.get_file().replace("." + p.get_extension(), "")
+		if !background_dict.has(k):
+			background_dict[k] = p
+			newDict[k] = p
 	render_background_objects(newDict, background_dict)
 	_file_dialog.queue_free()
 
 func _on_margin_container_dropped_data(paths):
 	var newDict = {}
 	for p in paths:
-		if !background_dict.has(p.get_file()):
-			background_dict[p.get_file()] = p
-			newDict[p.get_file()] = p
+		var k = p.get_file().replace("." + p.get_extension(), "")
+		if !background_dict.has(k):
+			background_dict[k] = p
+			newDict[k] = p
 	render_background_objects(newDict, background_dict)
 
 
@@ -279,9 +299,10 @@ func _on_add_videos_button_pressed():
 func _on_videos_selected(paths: PackedStringArray):
 	var newDict = {}
 	for p in paths:
-		if !videos_dict.has(p.get_file()):
-			videos_dict[p.get_file()] = p
-			newDict[p.get_file()] = p
+		var k = p.get_file().replace("." + p.get_extension(), "")
+		if !videos_dict.has(k):
+			videos_dict[k] = p
+			newDict[k] = p
 	render_videos_objects(newDict, videos_dict)
 	_file_dialog.queue_free()
 
@@ -323,12 +344,45 @@ func _on_add_audios_button_pressed():
 
 func _on_audios_selected(paths: PackedStringArray):
 	var newDict = {}
+	
 	for p in paths:
-		if !audios_dict.has(p.get_file()):
-			audios_dict[p.get_file()] = p
-			newDict[p.get_file()] = p
+		var k = p.get_file().replace("." + p.get_extension(), "")
+		if !audios_dict.has(k):
+			audios_dict[k] = p
+			newDict[k] = p
 	render_audios_objects(newDict, audios_dict)
 	_file_dialog.queue_free()
 
 func _on_save_audios_button_pressed():
 	save_json(scene_folder.text + "configs/sounds.json", audios_dict)
+
+
+	
+func _on_remove_characters_button_2_pressed():
+	var to_remove = []
+	for i in characters_children_list:
+		if i.selected:
+			characters_dict.characters.erase(i.element_id)
+			to_remove.push_back(i)
+	for i in to_remove:
+		characters_children_list.remove_at(characters_children_list.find(i))
+		i.queue_free()
+
+func _on_add_characters_button_pressed():
+	if !characters_dict.characters.has("new character"):
+		characters_dict.characters["new character"] = {
+			"name": "Character Name",
+			"portrait": ""
+		}
+		render_characters_objects({
+			"characters": {
+				"new character": {
+					"name": "Character Name",
+					"portrait": ""
+				}
+			}
+		}, characters_dict)
+	pass
+
+func _on_save_characters_button_pressed():
+	save_json(scene_folder.text + "configs/characters.json", characters_dict)
