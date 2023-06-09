@@ -12,11 +12,46 @@ var timelines_list = {}
 var background_children_list = []
 var background_dict : Dictionary
 
+@onready var videos_grid = $VBoxContainer/TabContainer/Videos/MarginContainer/ScrollContainer/GridContainer
+var videos_children_list = []
+var videos_dict: Dictionary
+
+@onready var audios_grid = $VBoxContainer/TabContainer/Audios/MarginContainer/ScrollContainer/GridContainer
+var audios_children_list = []
+var audios_dict: Dictionary
 
 var _file_dialog
 
+func add_custom_project_setting(name: String, default_value, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = "") -> void:
+	if ProjectSettings.has_setting(name): return
+	var setting_info: Dictionary = {
+		"name": name,
+		"type": type,
+		"hint": hint,
+		"hint_string": hint_string
+	}
+	ProjectSettings.set_setting(name, default_value)
+	ProjectSettings.add_property_info(setting_info)
+	ProjectSettings.set_initial_value(name, default_value)
+
 func _ready():
+	#ProjectSettings.set("dialog_edit_tool/scale", 2.0)
 	_on_scene_folder_changed("res://Resources/Scene1/")
+	add_custom_project_setting("dialogsystem/scale", 100.0, TYPE_FLOAT)
+
+	restore_scale()
+
+func restore_scale():
+	var t = Timer.new()
+	t.one_shot = true
+	add_child(t)
+	t.timeout.connect(func():
+		var value = ProjectSettings.get("dialogsystem/scale")
+		self.scale = Vector2(value * 1.00 / 100.0, value * 1.00 / 100.0)
+		scale_slider.value = value
+		)
+	t.start(0.01)
+	
 	
 func _on_scene_folder_changed(path):
 	var config_path = path + "config.json"
@@ -39,6 +74,16 @@ func _on_scene_folder_changed(path):
 	clear_backgrounds_objects()
 	render_background_objects(background_dict, background_dict)
 	
+	videos_dict = read_json(path + "configs/videos.json")
+	clear_videos_objects()
+	render_videos_objects(videos_dict, videos_dict)
+	
+	audios_dict = read_json(path + "configs/sounds.json")
+	clear_audios_objects()
+	render_audios_objects(audios_dict, audios_dict)
+	
+	
+	
 func clear_backgrounds_objects():
 	for i in background_children_list:
 		i.queue_free()
@@ -51,6 +96,32 @@ func render_background_objects(dict: Dictionary, source: Dictionary):
 		obj.set_source(source, k)
 		background_grid.add_child(obj)
 		background_children_list.push_back(obj)
+		
+func clear_videos_objects():
+	for i in videos_children_list:
+		i.queue_free()
+	videos_children_list.clear()
+	
+func render_videos_objects(dict: Dictionary, source: Dictionary):
+	for k in dict.keys():
+		var class_obj = preload("res://addons/DialogHelperTool/VideoConfigItem/VideoConfigItem.tscn")
+		var obj = class_obj.instantiate()
+		obj.set_source(source, k)
+		videos_grid.add_child(obj)
+		videos_children_list.push_back(obj)
+
+func clear_audios_objects():
+	for i in audios_children_list:
+		i.queue_free()
+	audios_children_list.clear()
+	
+func render_audios_objects(dict: Dictionary, source: Dictionary):
+	for k in dict.keys():
+		var class_obj = preload("res://addons/DialogHelperTool/AudioConfigItem/AudioConfigItem.tscn")
+		var obj = class_obj.instantiate()
+		obj.set_source(source, k)
+		audios_grid.add_child(obj)
+		audios_children_list.push_back(obj)
 	
 
 func _on_scene_entry_changed(path):
@@ -92,6 +163,7 @@ func get_filelist(scan_dir : String, filter_exts : Array = []) -> Array[String]:
 	return my_files
 
 func _on_h_slider_drag_ended(value_changed):
+	ProjectSettings.set("dialogsystem/scale", scale_slider.value)
 	var value = scale_slider.value
 	self.scale = Vector2(value * 1.00 / 100.0, value * 1.00 / 100.0)
 
@@ -141,8 +213,6 @@ func _on_remove_background_button_2_pressed():
 	for i in to_remove:
 		background_children_list.remove_at(background_children_list.find(i))
 		i.queue_free()
-			
-
 
 func _on_add_background_button_pressed():
 	_file_dialog = FileDialog.new()
@@ -175,3 +245,90 @@ func _on_margin_container_dropped_data(paths):
 
 func _on_save_backgrounds_button_pressed():
 	save_json(scene_folder.text + "configs/backgrounds.json", background_dict)
+
+
+func _on_videos_dropped_data(paths):
+	var newDict = {}
+	for p in paths:
+		if !videos_dict.has(p.get_file()):
+			videos_dict[p.get_file()] = p
+			newDict[p.get_file()] = p
+	render_videos_objects(newDict, videos_dict)
+
+func _on_remove_videos_button_2_pressed():
+	var to_remove = []
+	for i in videos_children_list:
+		if i.selected:
+			videos_dict.erase(i.element_id)
+			to_remove.push_back(i)
+	for i in to_remove:
+		videos_children_list.remove_at(videos_children_list.find(i))
+		i.queue_free()
+
+func _on_add_videos_button_pressed():
+	_file_dialog = FileDialog.new()
+	_file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILES
+	_file_dialog.access = FileDialog.ACCESS_RESOURCES
+	_file_dialog.title = "Select videos"
+	_file_dialog.filters = ["*.ogv"]
+	add_child(_file_dialog)
+	
+	_file_dialog.files_selected.connect(_on_videos_selected)
+	_file_dialog.popup_centered(Vector2i(1080, 640))
+
+func _on_videos_selected(paths: PackedStringArray):
+	var newDict = {}
+	for p in paths:
+		if !videos_dict.has(p.get_file()):
+			videos_dict[p.get_file()] = p
+			newDict[p.get_file()] = p
+	render_videos_objects(newDict, videos_dict)
+	_file_dialog.queue_free()
+
+func _on_save_videos_button_pressed():
+	save_json(scene_folder.text + "configs/videos.json", videos_dict)
+
+func _on_reload_button_pressed():
+	_on_scene_folder_changed(scene_folder.text)
+	
+	
+func _on_audios_dropped_data(paths):
+	var newDict = {}
+	for p in paths:
+		if !audios_dict.has(p.get_file()):
+			audios_dict[p.get_file()] = p
+			newDict[p.get_file()] = p
+	render_videos_objects(newDict, audios_dict)
+	
+func _on_remove_audios_button_2_pressed():
+	var to_remove = []
+	for i in audios_children_list:
+		if i.selected:
+			audios_dict.erase(i.element_id)
+			to_remove.push_back(i)
+	for i in to_remove:
+		audios_children_list.remove_at(audios_children_list.find(i))
+		i.queue_free()
+
+func _on_add_audios_button_pressed():
+	_file_dialog = FileDialog.new()
+	_file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILES
+	_file_dialog.access = FileDialog.ACCESS_RESOURCES
+	_file_dialog.title = "Select audios"
+	_file_dialog.filters = ["*.mp3", "*.ogg", "*.wav"]
+	add_child(_file_dialog)
+	
+	_file_dialog.files_selected.connect(_on_audios_selected)
+	_file_dialog.popup_centered(Vector2i(1080, 640))
+
+func _on_audios_selected(paths: PackedStringArray):
+	var newDict = {}
+	for p in paths:
+		if !audios_dict.has(p.get_file()):
+			audios_dict[p.get_file()] = p
+			newDict[p.get_file()] = p
+	render_audios_objects(newDict, audios_dict)
+	_file_dialog.queue_free()
+
+func _on_save_audios_button_pressed():
+	save_json(scene_folder.text + "configs/sounds.json", audios_dict)
