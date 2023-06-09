@@ -7,6 +7,8 @@ extends Control
 @export var source: Dictionary
 @export var element_id: String
 @export var selected: bool = false
+@export var selected_color: Color = Color(1.0, 0.4, 0.4, 1.0)
+@export var default_color: Color = Color(1.0, 1.0, 1.0, 1.0)
 
 var preload_settings: Dictionary
 
@@ -31,15 +33,15 @@ func set_source(dict, key):
 
 func _on_texture_rect_gui_input(event):
 	if event is InputEventMouseButton:
-		if event.pressed:
+		if event.pressed && event.button_index == MOUSE_BUTTON_LEFT:
 			selected = !selected
 			apply_selected()
 			
 func apply_selected():
 	if !selected:
-		modulate = Color.WHITE
+		modulate = default_color
 	else:
-		modulate = Color(1.0, 0.4, 0.4, 1.0)
+		modulate = selected_color
 
 
 func _on_line_edit_text_changed(new_text):

@@ -148,7 +148,7 @@ func _on_add_background_button_pressed():
 	_file_dialog = FileDialog.new()
 	_file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILES
 	_file_dialog.access = FileDialog.ACCESS_RESOURCES
-	_file_dialog.title = "Select starting tscn file"
+	_file_dialog.title = "Select images"
 	_file_dialog.filters = ["*.png", "*.jpg", "*.jpeg", "*.webp"]
 	add_child(_file_dialog)
 	

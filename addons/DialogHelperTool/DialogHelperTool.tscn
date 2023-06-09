@@ -34,7 +34,6 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 30
 
 [node name="Scene" type="Control" parent="VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Scene"]
@@ -68,6 +67,8 @@ text = "Scene Folder"
 [node name="SceneFolder" type="LineEdit" parent="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(600, 2.08165e-12)
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "res://Resources/Scene1/"
 editable = false
 script = ExtResource("2_vieds")
 
@@ -85,6 +86,13 @@ text = "Start timeline
 [node name="TimelineList" type="OptionButton" parent="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 45)
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
+item_count = 2
+selected = 1
+popup/item_0/text = "second"
+popup/item_0/id = 0
+popup/item_1/text = "start"
+popup/item_1/id = 1
 
 [node name="Filler" type="Control" parent="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -98,6 +106,8 @@ text = "Scene
 [node name="SceneFile" type="LineEdit" parent="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(600, 45)
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "res://Scene/start.tscn"
 editable = false
 
 [node name="Button3" type="Button" parent="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer"]
@@ -109,6 +119,7 @@ visible = false
 layout_mode = 2
 
 [node name="Backgrounds" type="Control" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Backgrounds"]

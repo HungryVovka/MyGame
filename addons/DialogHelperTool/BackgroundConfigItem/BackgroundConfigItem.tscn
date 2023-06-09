@@ -12,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fdhu4")
+selected_color = Color(0.329412, 0.658824, 0.890196, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
