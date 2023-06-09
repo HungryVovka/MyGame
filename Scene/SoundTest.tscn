@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://4sb5prnd1f6n"]
 
 [ext_resource type="AudioStream" uid="uid://benx68yxbi3ig" path="res://Resources/Scene1/Audio/Sfx/pilot-announcement.wav" id="1_pdsyc"]
 

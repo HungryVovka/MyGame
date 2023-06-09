@@ -64,7 +64,7 @@ script = ExtResource("2_fk013")
 [node name="Hover" type="AudioStreamPlayer" parent="VBoxContainer/Button"]
 stream = ExtResource("6_sn5py")
 volume_db = -15.0
-pitch_scale = 1.5
+pitch_scale = 1.2
 bus = &"SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="VBoxContainer/Button"]

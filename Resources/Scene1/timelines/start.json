@@ -40,7 +40,6 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"jump_to": "1",
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
@@ -106,7 +105,7 @@
 				"volume": 0.14
 			},
 			"text": "",
-			"timer": 2
+			"timer": 2.1
 		},
 		{
 			"background": {
@@ -118,7 +117,6 @@
 		},
 		{
 			"background": {
-				"clickable": false,
 				"name": "3 (2)",
 				"transition": {
 					"blend": true,
@@ -164,7 +162,7 @@
 				"volume": 0.13
 			},
 			"text": "",
-			"timer": 2
+			"timer": 2.1
 		},
 		{
 			"background": {
@@ -184,10 +182,10 @@
 					"scale_shift": 1,
 					"scale_speed": 0,
 					"shake_h": false,
-					"shake_height": 20,
+					"shake_height": 40,
 					"shake_mode": true,
-					"shake_speed": 80,
-					"shake_time": 0.5,
+					"shake_speed": 30,
+					"shake_time": 0.25,
 					"shake_v": true,
 					"slide_h": false,
 					"slide_reverse": false,
@@ -205,6 +203,7 @@
 					"swipe_speed_v": 0
 				}
 			},
+			"id": "1",
 			"play_sound": {
 				"channel": "SFX1",
 				"fade": 0.7,
@@ -214,7 +213,7 @@
 		},
 		{
 			"background": {
-				"clickable": true,
+				"clickable": false,
 				"name": "3 (3)",
 				"transition": {
 					"blend": true,
@@ -251,17 +250,15 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"id": "1",
 			"play_sound": {
 				"channel": "SFX1",
 				"name": "Pilot Announcement"
 			},
 			"text": "",
-			"timer": 1.5
+			"timer": 2.5
 		},
 		{
 			"background": {
-				"clickable": true,
 				"name": "3 (4)",
 				"transition": {
 					"blend": true,
@@ -298,29 +295,70 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"character": "Pilot",
+			"character": "",
 			"play_sound": {
 				"bus": "SFX",
 				"channel": "SFX2",
-				"fade": 2,
-				"name": "pilot-ladies",
+				"name": "pilot-ladies2",
 				"volume": 0.31
 			},
-			"text": " Ladies and gentlements this is the Captain speaking\n"
+			"text": "",
+			"timer": 1
+		},
+		{
+			"character": "Captain",
+			"text": "Ladies and gentlemen! This is the Captain speaking...\n",
+			"timer": 2.8
+		},
+		{
+			"text": "Ladies and gentlemen! This is the Captain speaking...{>>}We're about an hour out of our destination...",
+			"timer": 0.2
 		},
 		{
 			"background": {
-				"clickable": true,
-				"name": "3 (5)"
+				"name": "3 (4)",
+				"transition": {
+					"blend": false,
+					"blend_mode": false,
+					"blend_speed": 1,
+					"fade_color": "",
+					"fade_from": false,
+					"fade_speed": 0,
+					"fade_to": false,
+					"scale_max": 1,
+					"scale_min": 0,
+					"scale_mode": false,
+					"scale_shift": 1,
+					"scale_speed": 0,
+					"shake_h": true,
+					"shake_height": 20,
+					"shake_mode": true,
+					"shake_speed": 80,
+					"shake_time": 0.2,
+					"shake_v": false,
+					"slide_h": false,
+					"slide_reverse": false,
+					"slide_speed": 0,
+					"slide_v": false,
+					"swipe_max_h": 1920,
+					"swipe_max_v": 1080,
+					"swipe_min_h": -1920,
+					"swipe_min_v": -1080,
+					"swipe_mode_h": false,
+					"swipe_mode_v": false,
+					"swipe_shift_h": 0,
+					"swipe_shift_v": 0,
+					"swipe_speed_h": 0,
+					"swipe_speed_v": 0
+				}
 			},
-			"character": "Pilot",
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
+			"character": "Co-pilot",
+			"play_sound": {
+				"channel": "SFX2",
+				"name": "scratch-record-sound-effect-008881110_nw_prev",
+				"volume": 0.38
+			},
+			"text": "WHAT DID YOU JUST SAY!!!"
 		},
 		{
 			"text": ""
