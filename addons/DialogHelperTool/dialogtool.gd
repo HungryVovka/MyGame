@@ -9,6 +9,8 @@ func _has_main_screen():
 func _make_visible(visible):
 	if dock:
 		dock.visible = visible
+	if (visible):
+		dock.restore_scale()
 func _exit_tree():
 	pass
 

@@ -25,6 +25,10 @@ Shaders="*res://shaders/Shaders.gd"
 DownloadManager="*res://singletones/DownloadManager.gd"
 SaveManager="*res://singletones/SaveManager.gd"
 
+[dialogsystem]
+
+scale=148.0
+
 [display]
 
 window/size/viewport_width=1920

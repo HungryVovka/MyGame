@@ -22,8 +22,36 @@ var audios_dict: Dictionary
 
 var _file_dialog
 
+func add_custom_project_setting(name: String, default_value, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = "") -> void:
+	if ProjectSettings.has_setting(name): return
+	var setting_info: Dictionary = {
+		"name": name,
+		"type": type,
+		"hint": hint,
+		"hint_string": hint_string
+	}
+	ProjectSettings.set_setting(name, default_value)
+	ProjectSettings.add_property_info(setting_info)
+	ProjectSettings.set_initial_value(name, default_value)
+
 func _ready():
+	#ProjectSettings.set("dialog_edit_tool/scale", 2.0)
 	_on_scene_folder_changed("res://Resources/Scene1/")
+	add_custom_project_setting("dialogsystem/scale", 100.0, TYPE_FLOAT)
+
+	restore_scale()
+
+func restore_scale():
+	var t = Timer.new()
+	t.one_shot = true
+	add_child(t)
+	t.timeout.connect(func():
+		var value = ProjectSettings.get("dialogsystem/scale")
+		self.scale = Vector2(value * 1.00 / 100.0, value * 1.00 / 100.0)
+		scale_slider.value = value
+		)
+	t.start(0.01)
+	
 	
 func _on_scene_folder_changed(path):
 	var config_path = path + "config.json"
@@ -135,6 +163,7 @@ func get_filelist(scan_dir : String, filter_exts : Array = []) -> Array[String]:
 	return my_files
 
 func _on_h_slider_drag_ended(value_changed):
+	ProjectSettings.set("dialogsystem/scale", scale_slider.value)
 	var value = scale_slider.value
 	self.scale = Vector2(value * 1.00 / 100.0, value * 1.00 / 100.0)
 
