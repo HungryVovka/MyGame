@@ -1,22 +1,67 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://dmwf5yh5ukerk"]
+[gd_resource type="AudioBusLayout" load_steps=12 format=3 uid="uid://dmwf5yh5ukerk"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_mw6uf"]
 resource_name = "Reverb"
-hipass = 0.62
-dry = 0.25
-wet = 0.71
+room_size = 0.13
+damping = 0.0
+spread = 0.11
+hipass = 0.25
+dry = 0.0
+wet = 0.38
 
 [sub_resource type="AudioEffectChorus" id="AudioEffectChorus_23pk8"]
 resource_name = "Chorus"
 voice_count = 1
-dry = 0.43
-wet = 0.77
+wet = 0.0
+
+[sub_resource type="AudioEffectNotchFilter" id="AudioEffectNotchFilter_bfam0"]
+resource_name = "NotchFilter"
+resonance = 0.52
+gain = 3.0
 
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_ihvks"]
 resource_name = "PitchShift"
+pitch_scale = 0.8
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_u4v8m"]
 resource_name = "Distortion"
+pre_gain = 1.79
+drive = 0.14
+post_gain = -4.14
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_bvkur"]
+resource_name = "EQ"
+band_db/32_hz = 2.7
+band_db/100_hz = -27.4
+band_db/320_hz = 10.6
+band_db/1000_hz = 8.8
+band_db/3200_hz = -47.8
+band_db/10000_hz = 5.6
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j7lx3"]
+resource_name = "Delay"
+tap1_delay_ms = 1500.0
+tap1_level_db = -28.46
+tap1_pan = 0.86
+tap2_delay_ms = 9.0
+tap2_pan = 1.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_m31lq"]
+resource_name = "Compressor"
+ratio = 29.3
+gain = 2.4
+mix = 0.23
+
+[sub_resource type="AudioEffectBandLimitFilter" id="AudioEffectBandLimitFilter_txcro"]
+resource_name = "BandLimitFilter"
+
+[sub_resource type="AudioEffectBandPassFilter" id="AudioEffectBandPassFilter_f1a2y"]
+resource_name = "BandPassFilter"
+
+[sub_resource type="AudioEffectStereoEnhance" id="AudioEffectStereoEnhance_wlx82"]
+resource_name = "StereoEnhance"
+time_pullout_ms = 16.92
+surround = 0.28
 
 [resource]
 bus/1/name = &"SFX"
@@ -29,16 +74,30 @@ bus/2/name = &"MusicGigaEffects"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = 0.0672607
+bus/2/volume_db = 0.0694828
 bus/2/send = &"Master"
 bus/2/effect/0/effect = SubResource("AudioEffectReverb_mw6uf")
-bus/2/effect/0/enabled = false
+bus/2/effect/0/enabled = true
 bus/2/effect/1/effect = SubResource("AudioEffectChorus_23pk8")
-bus/2/effect/1/enabled = false
+bus/2/effect/1/enabled = true
 bus/2/effect/2/effect = SubResource("AudioEffectPitchShift_ihvks")
-bus/2/effect/2/enabled = false
+bus/2/effect/2/enabled = true
 bus/2/effect/3/effect = SubResource("AudioEffectDistortion_u4v8m")
 bus/2/effect/3/enabled = true
+bus/2/effect/4/effect = SubResource("AudioEffectEQ_bvkur")
+bus/2/effect/4/enabled = true
+bus/2/effect/5/effect = SubResource("AudioEffectDelay_j7lx3")
+bus/2/effect/5/enabled = false
+bus/2/effect/6/effect = SubResource("AudioEffectCompressor_m31lq")
+bus/2/effect/6/enabled = true
+bus/2/effect/7/effect = SubResource("AudioEffectBandLimitFilter_txcro")
+bus/2/effect/7/enabled = true
+bus/2/effect/8/effect = SubResource("AudioEffectBandPassFilter_f1a2y")
+bus/2/effect/8/enabled = true
+bus/2/effect/9/effect = SubResource("AudioEffectStereoEnhance_wlx82")
+bus/2/effect/9/enabled = false
+bus/2/effect/10/effect = SubResource("AudioEffectNotchFilter_bfam0")
+bus/2/effect/10/enabled = true
 bus/3/name = &"Music"
 bus/3/solo = false
 bus/3/mute = false

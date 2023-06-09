@@ -1,8 +1,8 @@
 {
 	"characters": {
-		"Pilot": {
-			"name": "Pilot",
-			"portrait": ""
+		"Captain": {
+			"name": "Captain",
+			"portrait": "new_character"
 		}
 	},
 	"persons": {
