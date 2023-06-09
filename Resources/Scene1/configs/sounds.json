@@ -3,9 +3,7 @@
 	"Pilot Announcement": "res://Resources/Scene1/Audio/Sfx/Pilot Announcement.mp3",
 	"Simon And Garfunkel - The Sound Of Silence": "res://Resources/Scene1/Audio/Music/Simon And Garfunkel - The Sound Of Silence.mp3",
 	"Turbulence": "res://Resources/Scene1/Audio/Sfx/Turbulence.mp3",
-	"pilot-announcement": "res://Resources/Scene1/Audio/Sfx/pilot-announcement.wav",
-	"pilot-ladies": "res://Resources/Scene1/Audio/Sfx/pilot-ladies.mp3",
-	"pilot-ladies2": "res://Resources/Scene1/Audio/Sfx/pilot-ladies2.mp3",
+	"pilot-announcementEchoShort": "res://Resources/Scene1/Audio/Sfx/pilot-announcementEchoShort.wav",
 	"samolet-boeing-737-jet-zvuk-iz-salona-26574": "res://Resources/Scene1/Audio/Sfx/samolet-boeing-737-jet-zvuk-iz-salona-26574.mp3",
 	"scratch-record-sound-effect-008881110_nw_prev": "res://Resources/Scene1/Audio/Sfx/scratch-record-sound-effect-008881110_nw_prev.mp3",
 	"звук внутри самолета": "res://Resources/Scene1/Audio/Sfx/звук внутри самолета.mp3"

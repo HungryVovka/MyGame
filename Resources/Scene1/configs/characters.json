@@ -2,11 +2,11 @@
 	"characters": {
 		"Captain": {
 			"name": "Captain",
-			"portrait": "new_character"
+			"portrait": ""
 		},
 		"Co-pilot": {
 			"name": "Co-pilot",
-			"portrait": "new_character"
+			"portrait": ""
 		}
 	},
 	"persons": {

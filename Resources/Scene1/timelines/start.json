@@ -40,6 +40,7 @@
 					"swipe_speed_v": 0
 				}
 			},
+			"jump_to": "1",
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
@@ -113,7 +114,7 @@
 			},
 			"stop_sound": "Music1",
 			"text": "",
-			"timer": 0.1
+			"timer": 0.4
 		},
 		{
 			"background": {
@@ -162,7 +163,7 @@
 				"volume": 0.13
 			},
 			"text": "",
-			"timer": 2.1
+			"timer": 2
 		},
 		{
 			"background": {
@@ -212,50 +213,12 @@
 			"text": ""
 		},
 		{
-			"background": {
-				"clickable": false,
-				"name": "3 (3)",
-				"transition": {
-					"blend": true,
-					"blend_mode": true,
-					"blend_speed": 1,
-					"fade_color": "",
-					"fade_from": false,
-					"fade_speed": 0,
-					"fade_to": false,
-					"scale_max": 1,
-					"scale_min": 0,
-					"scale_mode": false,
-					"scale_shift": 1,
-					"scale_speed": 0,
-					"shake_h": false,
-					"shake_height": 20,
-					"shake_mode": false,
-					"shake_speed": 0,
-					"shake_time": 1,
-					"shake_v": false,
-					"slide_h": false,
-					"slide_reverse": false,
-					"slide_speed": 0,
-					"slide_v": false,
-					"swipe_max_h": 1920,
-					"swipe_max_v": 1080,
-					"swipe_min_h": -1920,
-					"swipe_min_v": -1080,
-					"swipe_mode_h": false,
-					"swipe_mode_v": false,
-					"swipe_shift_h": 0,
-					"swipe_shift_v": 0,
-					"swipe_speed_h": 0,
-					"swipe_speed_v": 0
-				}
-			},
 			"play_sound": {
 				"channel": "SFX1",
 				"name": "Pilot Announcement"
 			},
 			"text": "",
-			"timer": 2.5
+			"timer": 2
 		},
 		{
 			"background": {
@@ -299,8 +262,8 @@
 			"play_sound": {
 				"bus": "SFX",
 				"channel": "SFX2",
-				"name": "pilot-ladies2",
-				"volume": 0.31
+				"name": "pilot-announcementEchoShort",
+				"volume": 0.81
 			},
 			"text": "",
 			"timer": 1
@@ -308,57 +271,15 @@
 		{
 			"character": "Captain",
 			"text": "Ladies and gentlemen! This is the Captain speaking...\n",
-			"timer": 2.8
+			"timer": 2
 		},
 		{
 			"text": "Ladies and gentlemen! This is the Captain speaking...{>>}We're about an hour out of our destination...",
-			"timer": 0.2
+			"timer": 3
 		},
 		{
-			"background": {
-				"name": "3 (4)",
-				"transition": {
-					"blend": false,
-					"blend_mode": false,
-					"blend_speed": 1,
-					"fade_color": "",
-					"fade_from": false,
-					"fade_speed": 0,
-					"fade_to": false,
-					"scale_max": 1,
-					"scale_min": 0,
-					"scale_mode": false,
-					"scale_shift": 1,
-					"scale_speed": 0,
-					"shake_h": true,
-					"shake_height": 20,
-					"shake_mode": true,
-					"shake_speed": 80,
-					"shake_time": 0.2,
-					"shake_v": false,
-					"slide_h": false,
-					"slide_reverse": false,
-					"slide_speed": 0,
-					"slide_v": false,
-					"swipe_max_h": 1920,
-					"swipe_max_v": 1080,
-					"swipe_min_h": -1920,
-					"swipe_min_v": -1080,
-					"swipe_mode_h": false,
-					"swipe_mode_v": false,
-					"swipe_shift_h": 0,
-					"swipe_shift_v": 0,
-					"swipe_speed_h": 0,
-					"swipe_speed_v": 0
-				}
-			},
-			"character": "Co-pilot",
-			"play_sound": {
-				"channel": "SFX2",
-				"name": "scratch-record-sound-effect-008881110_nw_prev",
-				"volume": 0.38
-			},
-			"text": "WHAT DID YOU JUST SAY!!!"
+			"character": "Captain",
+			"text": "Looks like "
 		},
 		{
 			"text": ""
