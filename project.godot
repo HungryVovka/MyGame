@@ -27,16 +27,16 @@ SaveManager="*res://singletones/SaveManager.gd"
 
 [dialogsystem]
 
-scale=148.0
+scale=61.0
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+window/vsync/vsync_mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/vsync/vsync_mode=2
 
 [editor_plugins]
 
