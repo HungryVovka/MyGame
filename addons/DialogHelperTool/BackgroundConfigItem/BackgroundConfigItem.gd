@@ -12,24 +12,21 @@ extends Control
 
 var preload_settings: Dictionary
 
+var _is_ready: bool = false
+
 signal on_changed()
 
 func _ready():
-	load_settings()
-	
-func load_settings():
-	source = preload_settings.dict
-	element_id = preload_settings.key
-	
-	if source.has(element_id) && source[element_id] != "":
-		tex.texture = load(source[element_id])
-	line.text = element_id
+	_is_ready = true
 
-func set_source(dict, key):
-	preload_settings.dict = dict
-	preload_settings.key = key
-	if tex && line:
-		load_settings()
+func set_source(dict, key, store):
+	if !_is_ready:
+		await self.ready
+	source = dict
+	element_id = key
+	if source.has(element_id) && source[element_id] != "":
+		tex.texture = store[element_id]
+	line.text = element_id
 
 func _on_texture_rect_gui_input(event):
 	if event is InputEventMouseButton:

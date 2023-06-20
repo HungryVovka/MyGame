@@ -11,6 +11,7 @@ var timelines_list = {}
 @onready var background_grid = $VBoxContainer/TabContainer/Backgrounds/MarginContainer/ScrollContainer/GridContainer
 var background_children_list = []
 var background_dict : Dictionary
+var background_store: Dictionary
 
 @onready var videos_grid = $VBoxContainer/TabContainer/Videos/MarginContainer/ScrollContainer/GridContainer
 var videos_children_list = []
@@ -23,6 +24,12 @@ var audios_dict: Dictionary
 @onready var characters_grid = $VBoxContainer/TabContainer/Characters/MarginContainer/ScrollContainer/GridContainer
 var characters_children_list = []
 var characters_dict: Dictionary
+
+@onready var timeline_box = $VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer/TimeLine
+@onready var timeline_list_combobox = $VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/TimelinesList
+var timeline_children_list = []
+var current_timeline: Dictionary = {}
+var current_timeline_filename: String = ""
 
 var _file_dialog
 
@@ -63,6 +70,7 @@ func _on_scene_folder_changed(path):
 		_on_scene_folder_changed(path)
 	timelines_list = {}
 	timelines_combobox.clear()
+	timeline_list_combobox.clear()
 	scene_config_data = read_json(config_path)
 	scene_folder.text = path
 	
@@ -70,6 +78,7 @@ func _on_scene_folder_changed(path):
 	for k in timelines:
 		timelines_list[k.get_file().get_basename()] = k
 		timelines_combobox.add_item(k.get_file().get_basename())
+		timeline_list_combobox.add_item(k.get_file().get_basename())
 	timelines_combobox.selected = timelines_list.keys().find(scene_config_data.start)
 	scene_file.text = scene_config_data.scene
 	
@@ -94,12 +103,14 @@ func clear_backgrounds_objects():
 	for i in background_children_list:
 		i.queue_free()
 	background_children_list.clear()
+	background_store.clear()
 	
 func render_background_objects(dict: Dictionary, source: Dictionary):
 	for k in dict.keys():
+		background_store[k] = load(dict[k])
 		var class_obj = preload("res://addons/DialogHelperTool/BackgroundConfigItem/BackgroundConfigItem.tscn")
 		var obj = class_obj.instantiate()
-		obj.set_source(source, k)
+		obj.set_source(source, k, background_store)
 		background_grid.add_child(obj)
 		background_children_list.push_back(obj)
 		
@@ -386,3 +397,26 @@ func _on_add_characters_button_pressed():
 
 func _on_save_characters_button_pressed():
 	save_json(scene_folder.text + "configs/characters.json", characters_dict)
+
+
+func _on_load_timeline_button_pressed():
+	current_timeline_filename = timelines_list[timeline_list_combobox.text]
+	current_timeline = read_json(current_timeline_filename)
+	for c in timeline_children_list:
+		timeline_box.remove_child(c)
+		c.queue_free()
+	timeline_children_list.clear()
+	var context: Dictionary = {"ids": [], "characters": []}
+	for e in current_timeline.events:
+		if e.has("id") && !context.ids.has(e.id):
+			context.ids.push_back(e.id)
+		if e.has("character") && !context.characters.has(e.character):
+			context.characters.push_back(e.character)
+	for e in current_timeline.events:
+		var class_obj = preload("res://addons/DialogHelperTool/TimelineItem/TimelineItem.tscn")
+		var obj = class_obj.instantiate()
+		obj.context = context
+		obj.data = e
+		obj.backgrounds = background_store
+		timeline_box.add_child(obj)
+		timeline_children_list.push_back(obj)

@@ -1,17 +1,17 @@
 {
-    "characters": {
-        "Captain": {
-            "name": "Captain",
-            "portrait": ""
-        },
-        "Co-pilot": {
-            "name": "Co-pilot",
-            "portrait": ""
-        }
-    },
-    "persons": {
-        "new person": {
-            "newMood": ""
-        }
-    }
+	"characters": {
+		"Captain": {
+			"name": "Captain",
+			"portrait": ""
+		},
+		"Co-pilot": {
+			"name": "Co-pilot",
+			"portrait": ""
+		}
+	},
+	"persons": {
+		"new person": {
+			"newMood": ""
+		}
+	}
 }
