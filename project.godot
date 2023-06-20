@@ -33,13 +33,10 @@ scale=61.0
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-<<<<<<< HEAD
-=======
 window/size/mode=3
-window/vsync/vsync_mode=2
->>>>>>> 448a522b2caf814895ea9e0821cf0ee914745c05
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/vsync/vsync_mode=2
 
 [editor_plugins]
 
