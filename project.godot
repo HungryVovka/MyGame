@@ -27,7 +27,7 @@ SaveManager="*res://singletones/SaveManager.gd"
 
 [dialogsystem]
 
-scale=100.0
+scale=25.0
 
 [display]
 
