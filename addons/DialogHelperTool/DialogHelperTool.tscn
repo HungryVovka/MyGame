@@ -17,13 +17,17 @@ anchor_bottom = 1.0
 offset_top = 163.08
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.48, 1.48)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_eb7vm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer"]
 custom_minimum_size = Vector2(600, 8)
@@ -31,12 +35,12 @@ layout_mode = 2
 size_flags_vertical = 8
 min_value = 25.0
 max_value = 200.0
-value = 148.0
+value = 166.0
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 
 [node name="Scene" type="Control" parent="VBoxContainer/TabContainer"]
@@ -45,12 +49,9 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Scene"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.18
-anchor_right = 0.459
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 185.4
-offset_right = 0.719959
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 16
@@ -138,11 +139,11 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Timeline"]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.001
-anchor_bottom = 0.997
-offset_right = 0.0799103
-offset_bottom = 0.0899602
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
 

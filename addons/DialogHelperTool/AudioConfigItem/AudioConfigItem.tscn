@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ggshnyn3datc"]
 
 [ext_resource type="Script" path="res://addons/DialogHelperTool/AudioConfigItem/AudioConfigItem.gd" id="1_0weba"]
-[ext_resource type="Texture2D" uid="uid://bbpp4xtap2dxg" path="res://addons/DialogHelperTool/AudioConfigItem/res/audio.png" id="1_cuggg"]
+[ext_resource type="Texture2D" uid="uid://bbpp4xtap2dxg" path="res://addons/DialogHelperTool/AudioConfigItem/res/audio.png" id="2_i0r64"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsor8"]
 bg_color = Color(0, 0, 1, 0.0156863)
@@ -28,7 +28,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fsor8")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer"]
 layout_mode = 2
-texture = ExtResource("1_cuggg")
+texture = ExtResource("2_i0r64")
 expand_mode = 1
 stretch_mode = 5
 

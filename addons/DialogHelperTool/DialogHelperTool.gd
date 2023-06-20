@@ -412,6 +412,9 @@ func _on_load_timeline_button_pressed():
 			context.ids.push_back(e.id)
 		if e.has("character") && !context.characters.has(e.character):
 			context.characters.push_back(e.character)
+	for c in characters_dict.characters:
+		if !context.characters.has(c):
+			context.characters.push_back(c)
 	for e in current_timeline.events:
 		var class_obj = preload("res://addons/DialogHelperTool/TimelineItem/TimelineItem.tscn")
 		var obj = class_obj.instantiate()

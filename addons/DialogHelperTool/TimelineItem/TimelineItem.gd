@@ -127,7 +127,7 @@ func _on_panel_container_gui_input(event):
 				tex.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			tex.texture = backgrounds[data.background.name]
 			tex.position = event.position
-	if event is InputEventMouseButton && event.pressed:
+	if event is InputEventMouseButton && event.pressed && event.button_index == MOUSE_BUTTON_LEFT:
 		selected = !selected
 		if selected:
 			was_selected.emit(self)
