@@ -30,6 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_6g2kw")
+inactive_color = Color(0.329412, 0.337255, 0.380392, 0.941176)
 items = Array[String](["hehE", "hoho", "huhu", "hEhesh", "Helga", "lgahe"])
 
 [node name="OptionButton" type="OptionButton" parent="."]
@@ -50,7 +51,20 @@ theme_override_colors/font_disabled_color = Color(0, 0, 0, 0)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_dru2x")
+item_count = 6
 selected = 0
+popup/item_0/text = "hehE"
+popup/item_0/id = 0
+popup/item_1/text = "hoho"
+popup/item_1/id = 1
+popup/item_2/text = "huhu"
+popup/item_2/id = 2
+popup/item_3/text = "hEhesh"
+popup/item_3/id = 3
+popup/item_4/text = "Helga"
+popup/item_4/id = 4
+popup/item_5/text = "lgahe"
+popup/item_5/id = 5
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 1

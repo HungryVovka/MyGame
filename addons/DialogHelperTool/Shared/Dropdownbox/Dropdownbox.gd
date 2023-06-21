@@ -1,6 +1,7 @@
 @tool
 extends Control
 
+@export var inactive_color: Color = Color(0.4,0.4,0.4, 1.0)
 @export var items: Array[String] = [] : set = setItems
 @export var enabled: bool = true: set = setEnabled
 @export var text: String = "": set = setText, get = getText
@@ -40,7 +41,7 @@ func setEnabled(enabled: bool):
 	else:
 		state.stylebox = optionButton.get_theme_stylebox("normal").duplicate()
 		var stylebox: StyleBoxFlat = optionButton.get_theme_stylebox("normal").duplicate()
-		stylebox.shadow_color = Color(0.4,0.4,0.4, 1.0)
+		stylebox.shadow_color = inactive_color
 		optionButton.add_theme_stylebox_override("normal", stylebox)
 		optionButton.mouse_filter = MOUSE_FILTER_IGNORE
 		line.mouse_filter = MOUSE_FILTER_IGNORE
