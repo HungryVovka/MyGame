@@ -16,7 +16,7 @@ func _exit_tree():
 
 func _enter_tree():
 	dock = preload("res://addons/DialogHelperTool/DialogHelperTool.tscn").instantiate()
-	dock.scale = Vector2(0.1, 0.1)
+	dock.interface_scale = get_editor_interface().get_editor_scale()
 	get_editor_interface().get_editor_main_screen().add_child(dock)
 	_make_visible(false)
 

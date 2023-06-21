@@ -1,6 +1,8 @@
 @tool
 extends Control
 
+@export var interface_scale: float = 1.0
+
 var scene_config_data = {}
 var timelines_list = {}
 @onready var scene_folder = $VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFolder
@@ -423,3 +425,5 @@ func _on_load_timeline_button_pressed():
 		obj.backgrounds = background_store
 		timeline_box.add_child(obj)
 		timeline_children_list.push_back(obj)
+		obj.custom_minimum_size = obj.custom_minimum_size * interface_scale
+		obj.rescale_fonts(interface_scale)
