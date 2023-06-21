@@ -20,6 +20,7 @@ content_margin_bottom = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_otqtx"]
 shader = ExtResource("2_0fie5")
+shader_parameter/is_active = false
 
 [node name="Dropdownbox" type="Control"]
 layout_mode = 3
@@ -30,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_6g2kw")
-inactive_color = Color(0.329412, 0.337255, 0.380392, 0.941176)
+inactive_color = Color(0.298039, 0.298039, 0.380392, 0.941176)
 items = Array[String](["hehE", "hoho", "huhu", "hEhesh", "Helga", "lgahe"])
 
 [node name="OptionButton" type="OptionButton" parent="."]

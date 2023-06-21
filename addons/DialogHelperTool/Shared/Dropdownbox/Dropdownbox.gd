@@ -8,6 +8,7 @@ extends Control
 
 @onready var optionButton = $OptionButton
 @onready var line = $LineEdit
+@onready var tex = $TextureRect
 var is_ready: bool = false
 
 var suggest_data: Array[String] = []
@@ -38,13 +39,16 @@ func setEnabled(enabled: bool):
 		line.mouse_filter = MOUSE_FILTER_STOP
 		if line.text != "":
 			item_selected.emit(line.text)
+		tex.material.set_shader_parameter("is_active",true)
 	else:
 		state.stylebox = optionButton.get_theme_stylebox("normal").duplicate()
 		var stylebox: StyleBoxFlat = optionButton.get_theme_stylebox("normal").duplicate()
 		stylebox.shadow_color = inactive_color
+		stylebox.shadow_size = 1
 		optionButton.add_theme_stylebox_override("normal", stylebox)
 		optionButton.mouse_filter = MOUSE_FILTER_IGNORE
 		line.mouse_filter = MOUSE_FILTER_IGNORE
+		tex.material.set_shader_parameter("is_active",false)
 
 func setItems(data: Array[String]):
 	if !is_ready:
