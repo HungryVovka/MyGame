@@ -2,11 +2,11 @@
 extends Control
 
 @onready var event_id = $PanelContainer/HBoxContainer/EventId
-@onready var jump_to = $PanelContainer/HBoxContainer/CenterContainer/JumpDropdown
-@onready var jump_to_opt = $PanelContainer/HBoxContainer/CenterContainer/JumpDropdown/OptionButton
+@onready var jump_to = $PanelContainer/HBoxContainer/JumpDropdown
+@onready var jump_to_opt = $PanelContainer/HBoxContainer/JumpDropdown/OptionButton
 
-@onready var character = $PanelContainer/HBoxContainer/CenterContainer2/CharacterDropdown
-@onready var character_opt = $PanelContainer/HBoxContainer/CenterContainer2/CharacterDropdown/OptionButton
+@onready var character = $PanelContainer/HBoxContainer/CharacterDropdown
+@onready var character_opt = $PanelContainer/HBoxContainer/CharacterDropdown/OptionButton
 @onready var character_checkbox = $PanelContainer/HBoxContainer/CharacterCheckbox
 
 @onready var timer_spinbox = $PanelContainer/HBoxContainer/CenterContainer3/TimerSpinbox
