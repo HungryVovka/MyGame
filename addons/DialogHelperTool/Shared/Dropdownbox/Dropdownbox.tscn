@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjcwj2co4fkg1"]
+[gd_scene load_steps=8 format=3 uid="uid://cjcwj2co4fkg1"]
 
 [ext_resource type="Script" path="res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.gd" id="1_6g2kw"]
 [ext_resource type="Shader" path="res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.gdshader" id="2_0fie5"]
@@ -16,17 +16,19 @@ shadow_size = 5
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qmxdn"]
 content_margin_bottom = 1.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gj3qv"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_otqtx"]
 shader = ExtResource("2_0fie5")
 
 [node name="Dropdownbox" type="Control"]
-custom_minimum_size = Vector2(100, 2.08165e-12)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
 script = ExtResource("1_6g2kw")
 items = Array[String](["hehE", "hoho", "huhu", "hEhesh", "Helga", "lgahe"])
 
@@ -48,20 +50,7 @@ theme_override_colors/font_disabled_color = Color(0, 0, 0, 0)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_dru2x")
-item_count = 6
 selected = 0
-popup/item_0/text = "hehE"
-popup/item_0/id = 0
-popup/item_1/text = "hoho"
-popup/item_1/id = 1
-popup/item_2/text = "huhu"
-popup/item_2/id = 2
-popup/item_3/text = "hEhesh"
-popup/item_3/id = 3
-popup/item_4/text = "Helga"
-popup/item_4/id = 4
-popup/item_5/text = "lgahe"
-popup/item_5/id = 5
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 1
@@ -73,6 +62,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_qmxdn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gj3qv")
 alignment = 1
 flat = true
 
