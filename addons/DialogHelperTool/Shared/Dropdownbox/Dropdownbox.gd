@@ -21,10 +21,21 @@ var state: Dictionary = {
 	"text" = ""
 }
 
+var active_shader: ShaderMaterial
+var inactive_shader: ShaderMaterial
+
+
 signal item_selected(text)
 
 func _ready():
 	is_ready = true
+	
+	active_shader = ShaderMaterial.new()
+	active_shader.shader = preload("res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.gdshader")
+	
+	inactive_shader = ShaderMaterial.new()
+	inactive_shader.shader = preload("res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.gdshader")
+	inactive_shader.set_shader_parameter("is_active", false)
 	
 func setText(v):
 	_on_line_edit_text_changed(v, true)
@@ -39,7 +50,7 @@ func setEnabled(enabled: bool):
 		line.mouse_filter = MOUSE_FILTER_STOP
 		if line.text != "":
 			item_selected.emit(line.text)
-		tex.material.set_shader_parameter("is_active",true)
+		tex.material = active_shader
 	else:
 		state.stylebox = optionButton.get_theme_stylebox("normal").duplicate()
 		var stylebox: StyleBoxFlat = optionButton.get_theme_stylebox("normal").duplicate()
@@ -48,7 +59,7 @@ func setEnabled(enabled: bool):
 		optionButton.add_theme_stylebox_override("normal", stylebox)
 		optionButton.mouse_filter = MOUSE_FILTER_IGNORE
 		line.mouse_filter = MOUSE_FILTER_IGNORE
-		tex.material.set_shader_parameter("is_active",false)
+		tex.material = inactive_shader
 
 func setItems(data: Array[String]):
 	if !is_ready:

@@ -8,8 +8,6 @@ extends Control
 
 var appeared = false
 	
-
-
 func _ready():
 	
 	RenderingServer.set_default_clear_color(Color.BLACK)
