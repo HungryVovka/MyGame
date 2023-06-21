@@ -37,11 +37,12 @@ script = ExtResource("1_mmygc")
 control_color_active = Color(0.14902, 0.388235, 0.768627, 0.796078)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(2.08165e-12, 40)
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_do1v3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
@@ -63,8 +64,7 @@ vertical_alignment = 3
 custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.5
+size_flags_stretch_ratio = 0.33
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_0mmfv")
 alignment = 1
@@ -75,10 +75,9 @@ text = "JUMP:"
 label_settings = SubResource("LabelSettings_b5bax")
 
 [node name="JumpDropdown" parent="PanelContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
-custom_minimum_size = Vector2(60, 30)
+custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.5
+size_flags_stretch_ratio = 0.33
 
 [node name="TimerCheckbox" type="CheckBox" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
@@ -118,8 +117,7 @@ vertical_alignment = 3
 [node name="CharacterDropdown" parent="PanelContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
 custom_minimum_size = Vector2(60, 30)
 layout_mode = 2
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.5
+size_flags_stretch_ratio = 0.4
 
 [node name="TextPreview" type="Label" parent="PanelContainer/HBoxContainer"]
 clip_contents = true

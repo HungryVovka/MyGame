@@ -26,6 +26,7 @@ extends Control
 
 @export var context: Dictionary = {"ids": [], "characters": []}: set = setContext
 
+
 var texHideTimer: Timer
 var tex: TextureRect
 
@@ -40,6 +41,25 @@ func _ready():
 	texHideTimer.wait_time = 0.1
 	texHideTimer.one_shot = true
 	texHideTimer.timeout.connect(func(): if tex && tex.visible: tex.visible = false)
+	
+func rescale_fonts(coef: float):
+	if !_is_ready:
+		await self.ready
+	var settings : LabelSettings = $PanelContainer/HBoxContainer/LeftSpace/Label3.label_settings.duplicate()
+	settings.font_size *= coef
+	$PanelContainer/HBoxContainer/MarginContainer2/Label2.label_settings = settings
+	$PanelContainer/HBoxContainer/LeftSpace/Label3.label_settings = settings
+	$PanelContainer/HBoxContainer/MarginContainer/Label2.label_settings = settings
+	$PanelContainer/HBoxContainer/Label.label_settings = settings
+	var v = int($PanelContainer/HBoxContainer/EventId.get_theme_font_size("font_size") * 2.0)
+	$PanelContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
+	$PanelContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
+	$PanelContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
+
+	var preview_s : LabelSettings = $PanelContainer/HBoxContainer/TextPreview.label_settings.duplicate()
+	preview_s.font_size *= coef
+	$PanelContainer/HBoxContainer/TextPreview.label_settings = preview_s
+	
 	
 func setText(v):
 	text_control.text = v
