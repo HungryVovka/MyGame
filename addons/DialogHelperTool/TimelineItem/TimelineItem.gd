@@ -1,18 +1,18 @@
 @tool
 extends Control
 
-@onready var event_id = $PanelContainer/HBoxContainer/EventId
-@onready var jump_to = $PanelContainer/HBoxContainer/JumpDropdown
-@onready var jump_to_opt = $PanelContainer/HBoxContainer/JumpDropdown/OptionButton
+@onready var event_id = $PanelContainer/MarginContainer/HBoxContainer/EventId
+@onready var jump_to = $PanelContainer/MarginContainer/HBoxContainer/JumpDropdown
+@onready var jump_to_opt = $PanelContainer/MarginContainer/HBoxContainer/JumpDropdown/OptionButton
 
-@onready var character = $PanelContainer/HBoxContainer/CharacterDropdown
-@onready var character_opt = $PanelContainer/HBoxContainer/CharacterDropdown/OptionButton
-@onready var character_checkbox = $PanelContainer/HBoxContainer/CharacterCheckbox
+@onready var character = $PanelContainer/MarginContainer/HBoxContainer/CharacterDropdown
+@onready var character_opt = $PanelContainer/MarginContainer/HBoxContainer/CharacterDropdown/OptionButton
+@onready var character_checkbox = $PanelContainer/MarginContainer/HBoxContainer/CharacterCheckbox
 
-@onready var timer_spinbox = $PanelContainer/HBoxContainer/CenterContainer3/TimerSpinbox
-@onready var timer_checkbox = $PanelContainer/HBoxContainer/TimerCheckbox
+@onready var timer_spinbox = $PanelContainer/MarginContainer/HBoxContainer/CenterContainer3/TimerSpinbox
+@onready var timer_checkbox = $PanelContainer/MarginContainer/HBoxContainer/TimerCheckbox
 
-@onready var text_control = $PanelContainer/HBoxContainer/TextPreview
+@onready var text_control = $PanelContainer/MarginContainer/HBoxContainer/TextPreview
 @export var text: String = "": set = setText
 
 @export var control_color_inactive: Color = Color("000030ef")
@@ -25,6 +25,7 @@ extends Control
 @onready var panel = $PanelContainer
 
 @export var context: Dictionary = {"ids": [], "characters": []}: set = setContext
+var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
 
 
 var texHideTimer: Timer
@@ -34,6 +35,7 @@ signal was_selected(obj)
 
 
 var _is_ready = false
+var _data_ready = false
 func _ready():
 	_is_ready = true
 	
@@ -45,20 +47,20 @@ func _ready():
 func rescale_fonts(coef: float):
 	if !_is_ready:
 		await self.ready
-	var settings : LabelSettings = $PanelContainer/HBoxContainer/LeftSpace/Label3.label_settings.duplicate()
+	var settings : LabelSettings = $PanelContainer/MarginContainer/HBoxContainer/LeftSpace/Label3.label_settings.duplicate()
 	settings.font_size *= coef
-	$PanelContainer/HBoxContainer/MarginContainer2/Label2.label_settings = settings
-	$PanelContainer/HBoxContainer/LeftSpace/Label3.label_settings = settings
-	$PanelContainer/HBoxContainer/MarginContainer/Label2.label_settings = settings
-	$PanelContainer/HBoxContainer/Label.label_settings = settings
-	var v = int($PanelContainer/HBoxContainer/EventId.get_theme_font_size("font_size") * coef)
-	$PanelContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
-	$PanelContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
-	$PanelContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
+	$PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/Label2.label_settings = settings
+	$PanelContainer/MarginContainer/HBoxContainer/LeftSpace/Label3.label_settings = settings
+	$PanelContainer/MarginContainer/HBoxContainer/MarginContainer/Label2.label_settings = settings
+	$PanelContainer/MarginContainer/HBoxContainer/Label.label_settings = settings
+	var v = int($PanelContainer/MarginContainer/HBoxContainer/EventId.get_theme_font_size("font_size") * coef)
+	$PanelContainer/MarginContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
+	$PanelContainer/MarginContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
+	$PanelContainer/MarginContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
 
-	var preview_s : LabelSettings = $PanelContainer/HBoxContainer/TextPreview.label_settings.duplicate()
+	var preview_s : LabelSettings = $PanelContainer/MarginContainer/HBoxContainer/TextPreview.label_settings.duplicate()
 	preview_s.font_size *= coef
-	$PanelContainer/HBoxContainer/TextPreview.label_settings = preview_s
+	$PanelContainer/MarginContainer/HBoxContainer/TextPreview.label_settings = preview_s
 	
 	
 func setText(v):
@@ -84,6 +86,7 @@ func setData(src: Dictionary):
 	if !_is_ready:
 		await self.ready
 	data = src
+	
 	if src.has("id"):
 		event_id.text = src.id
 		switch_control_style(event_id, true)
@@ -102,6 +105,7 @@ func setData(src: Dictionary):
 	timer_checkbox.button_pressed = src.has("timer")
 	if src.has("text"):
 		text_control.text = src.text
+	_data_ready = true
 
 func switch_control_style(control, is_active):
 	if (!control): 
@@ -112,26 +116,53 @@ func switch_control_style(control, is_active):
 
 func _on_event_id_text_changed(new_text: String):
 	switch_control_style(event_id, new_text != "")
+	if !_data_ready:
+		return
+	if new_text != "":
+		data["id"] = new_text
+	else:
+		data.erase("id")
 
 func _on_dropdownbox_item_selected(text):
 	switch_control_style(jump_to_opt, text != "")
+	if !_data_ready:
+		return
+	if text != "":
+		data["jump_to"] = text
+	else:
+		data.erase("jump_to")
 
 
 func _on_character_dropdown_item_selected(text):
 	switch_control_style(character_opt, text != "")
+	if !_data_ready:
+		return
+	data["character"] = text
 
 
 func _on_character_checkbox_toggled(button_pressed):
 	character.enabled = button_pressed
+	if !_data_ready:
+		return
+	if button_pressed:
+		data["character"] = character.text
+	else:
+		data.erase("character")
 
 
 func _on_timer_checkbox_toggled(button_pressed):
-	pass # Replace with function body.
+	if !_data_ready:
+		return
+	if button_pressed:
+		data["timer"] = timer_spinbox.value
+	else:
+		data.erase("timer")
 
 
 func _on_timer_spinbox_value_changed(value):
-	pass # Replace with function body.
-
+	if !_data_ready:
+		return
+	data["timer"] = value
 
 func _on_panel_container_gui_input(event):
 	if event is InputEventMouseMotion:

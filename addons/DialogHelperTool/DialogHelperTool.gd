@@ -34,6 +34,9 @@ var current_timeline: Dictionary = {}
 var current_timeline_filename: String = ""
 
 var _file_dialog
+var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
+
+signal event_selected(data: Dictionary)
 
 func add_custom_project_setting(name: String, default_value, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = "") -> void:
 	if ProjectSettings.has_setting(name): return
@@ -68,12 +71,12 @@ func restore_scale():
 func _on_scene_folder_changed(path):
 	var config_path = path + "config.json"
 	if !FileAccess.file_exists(config_path):
-		save_json(config_path, {})
+		JSONHelper.save_json(config_path, {})
 		_on_scene_folder_changed(path)
 	timelines_list = {}
 	timelines_combobox.clear()
 	timeline_list_combobox.clear()
-	scene_config_data = read_json(config_path)
+	scene_config_data = JSONHelper.read_json(config_path)
 	scene_folder.text = path
 	
 	var timelines: Array[String] = get_filelist(path + "timelines", ["json"])
@@ -84,19 +87,19 @@ func _on_scene_folder_changed(path):
 	timelines_combobox.selected = timelines_list.keys().find(scene_config_data.start)
 	scene_file.text = scene_config_data.scene
 	
-	background_dict = read_json(path + "configs/backgrounds.json")
+	background_dict = JSONHelper.read_json(path + "configs/backgrounds.json")
 	clear_backgrounds_objects()
 	render_background_objects(background_dict, background_dict)
 	
-	videos_dict = read_json(path + "configs/videos.json")
+	videos_dict = JSONHelper.read_json(path + "configs/videos.json")
 	clear_videos_objects()
 	render_videos_objects(videos_dict, videos_dict)
 	
-	audios_dict = read_json(path + "configs/sounds.json")
+	audios_dict = JSONHelper.read_json(path + "configs/sounds.json")
 	clear_audios_objects()
 	render_audios_objects(audios_dict, audios_dict)
 	
-	characters_dict = read_json(path + "configs/characters.json")
+	characters_dict = JSONHelper.read_json(path + "configs/characters.json")
 	clear_characters_objects()
 	render_characters_objects(characters_dict, characters_dict)
 	
@@ -157,21 +160,6 @@ func render_characters_objects(dict: Dictionary, source: Dictionary):
 
 func _on_scene_entry_changed(path):
 	scene_file.text = path
-	
-
-func read_json(filename):
-	var file = FileAccess.open(filename, FileAccess.READ)
-	var txt = file.get_as_text()
-	var data = JSON.parse_string(txt)
-	file.close()
-	return data
-	
-func save_json(filename, dict):
-	var txt = JSON.stringify(dict)
-	var file = FileAccess.open(filename, FileAccess.WRITE)
-	file.store_string(txt)
-	file.flush()
-	file.close()
 
 func get_filelist(scan_dir : String, filter_exts : Array = []) -> Array[String]:
 	var my_files : Array[String] = []
@@ -277,7 +265,7 @@ func _on_margin_container_dropped_data(paths):
 
 
 func _on_save_backgrounds_button_pressed():
-	save_json(scene_folder.text + "configs/backgrounds.json", background_dict)
+	JSONHelper.save_json(scene_folder.text + "configs/backgrounds.json", background_dict)
 
 
 func _on_videos_dropped_data(paths):
@@ -320,7 +308,7 @@ func _on_videos_selected(paths: PackedStringArray):
 	_file_dialog.queue_free()
 
 func _on_save_videos_button_pressed():
-	save_json(scene_folder.text + "configs/videos.json", videos_dict)
+	JSONHelper.save_json(scene_folder.text + "configs/videos.json", videos_dict)
 
 func _on_reload_button_pressed():
 	_on_scene_folder_changed(scene_folder.text)
@@ -367,7 +355,7 @@ func _on_audios_selected(paths: PackedStringArray):
 	_file_dialog.queue_free()
 
 func _on_save_audios_button_pressed():
-	save_json(scene_folder.text + "configs/sounds.json", audios_dict)
+	JSONHelper.save_json(scene_folder.text + "configs/sounds.json", audios_dict)
 
 
 	
@@ -398,12 +386,12 @@ func _on_add_characters_button_pressed():
 	pass
 
 func _on_save_characters_button_pressed():
-	save_json(scene_folder.text + "configs/characters.json", characters_dict)
+	JSONHelper.save_json(scene_folder.text + "configs/characters.json", characters_dict)
 
 
 func _on_load_timeline_button_pressed():
 	current_timeline_filename = timelines_list[timeline_list_combobox.text]
-	current_timeline = read_json(current_timeline_filename)
+	current_timeline = JSONHelper.read_json(current_timeline_filename)
 	for c in timeline_children_list:
 		timeline_box.remove_child(c)
 		c.queue_free()
@@ -423,7 +411,15 @@ func _on_load_timeline_button_pressed():
 		obj.context = context
 		obj.data = e
 		obj.backgrounds = background_store
+		obj.connect("was_selected", _on_timeline_item_selected)
 		timeline_box.add_child(obj)
 		timeline_children_list.push_back(obj)
 		obj.custom_minimum_size = obj.custom_minimum_size * interface_scale
 		obj.rescale_fonts(interface_scale)
+
+
+func _on_save_timeline_button_pressed():
+	JSONHelper.save_json(current_timeline_filename, current_timeline)
+	
+func _on_timeline_item_selected(obj):
+	event_selected.emit(obj.data)

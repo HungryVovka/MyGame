@@ -173,6 +173,10 @@ popup/item_1/id = 1
 layout_mode = 2
 text = "RELOAD"
 
+[node name="SaveTimelineButton" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "SAVE"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 500)
 layout_mode = 2
@@ -427,6 +431,7 @@ layout_mode = 2
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/Button3" to="." method="_on_scene_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/LoadTimelineButton" to="." method="_on_load_timeline_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/SaveTimelineButton" to="." method="_on_save_timeline_button_pressed"]
 [connection signal="dropped_data" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer" to="." method="_on_margin_container_dropped_data"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_background_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_background_button_2_pressed"]

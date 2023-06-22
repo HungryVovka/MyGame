@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://csyp3bt8u6ngh"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/TimelineDock/TimelineDock.gd" id="1_vxr8l"]
+[ext_resource type="PackedScene" uid="uid://cjcwj2co4fkg1" path="res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.tscn" id="2_emd8k"]
+[ext_resource type="Texture2D" uid="uid://bgac5gnxy4fpc" path="res://Resources/Scene1/Art/1.png" id="3_jnnt7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3as3s"]
+bg_color = Color(0.105882, 0.105882, 0.14902, 0.788235)
+
+[node name="Timeline" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_vxr8l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3as3s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Background"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mode:"
+
+[node name="BackgroundMode" type="OptionButton" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Ignore"
+popup/item_0/id = 0
+popup/item_1/text = "Show"
+popup/item_1/id = 1
+popup/item_2/text = "Hide"
+popup/item_2/id = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+
+[node name="BackgroundList" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer" instance=ExtResource("2_emd8k")]
+custom_minimum_size = Vector2(384, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(384, 216)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_jnnt7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BackgroundPreview" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2

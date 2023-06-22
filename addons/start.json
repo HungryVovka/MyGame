@@ -40,7 +40,6 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"character": "",
 			"jump_to": "1",
 			"play_sound": {
 				"bus": "Music",

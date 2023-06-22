@@ -37,7 +37,7 @@ func _ready():
 	inactive_shader.shader = preload("res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.gdshader")
 	inactive_shader.set_shader_parameter("is_active", false)
 	
-func setText(v):
+func setText(v: String):
 	_on_line_edit_text_changed(v, true)
 func getText() -> String:
 	return line.text
@@ -75,14 +75,16 @@ func _on_option_button_item_selected(index):
 	item_selected.emit(items[index])
 
 
-func _on_line_edit_text_changed(new_text, override_block_suggest = false):
+func _on_line_edit_text_changed(new_text: String, override_block_suggest = false):
 	suggest_data = suggest(new_text)
 	suggest_ix = 0
 	if override_block_suggest:
 		line.text = new_text
+		
 	if suggest_data.size() > 0 && !block_suggest && !override_block_suggest:
 		_select_suggest()
 	item_selected.emit(line.text)
+	return 
 	_update_option_item(line.text)
 
 func _select_suggest():
