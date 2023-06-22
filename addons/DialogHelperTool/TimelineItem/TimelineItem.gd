@@ -51,7 +51,7 @@ func rescale_fonts(coef: float):
 	$PanelContainer/HBoxContainer/LeftSpace/Label3.label_settings = settings
 	$PanelContainer/HBoxContainer/MarginContainer/Label2.label_settings = settings
 	$PanelContainer/HBoxContainer/Label.label_settings = settings
-	var v = int($PanelContainer/HBoxContainer/EventId.get_theme_font_size("font_size") * 2.0)
+	var v = int($PanelContainer/HBoxContainer/EventId.get_theme_font_size("font_size") * coef)
 	$PanelContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
 	$PanelContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
 	$PanelContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
