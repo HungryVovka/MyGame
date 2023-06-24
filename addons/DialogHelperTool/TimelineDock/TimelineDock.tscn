@@ -77,9 +77,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(384, 216)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource("3_jnnt7")
 expand_mode = 1
 stretch_mode = 5

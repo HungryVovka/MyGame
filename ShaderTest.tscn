@@ -1,17 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://s045gv263adr"]
+[gd_scene load_steps=7 format=3 uid="uid://s045gv263adr"]
 
 [ext_resource type="Texture2D" uid="uid://bgac5gnxy4fpc" path="res://Resources/Scene1/Art/1.png" id="1_l3t3g"]
 [ext_resource type="Script" path="res://ShaderTest.gd" id="1_p4kvm"]
-[ext_resource type="Shader" path="res://shaders/vingette.gdshader" id="2_oqfwx"]
+[ext_resource type="Shader" path="res://shaders/transitions.gdshader" id="3_hw6wq"]
+[ext_resource type="Texture2D" uid="uid://b68vudox7abdg" path="res://Resources/backgrounds/mountains.jpg" id="4_h4gey"]
+[ext_resource type="Texture2D" uid="uid://jjkhdjinp3tv" path="res://Resources/Scene1/Art/3 (15).png" id="4_nnom1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vwkim"]
-shader = ExtResource("2_oqfwx")
-shader_parameter/speed = 4.0
-shader_parameter/time = 1.0
-shader_parameter/coef_x = 5.0
-shader_parameter/coef_y = 3.0
-shader_parameter/power = 2.0
-shader_parameter/fade_out_speed = 2.0
+shader = ExtResource("3_hw6wq")
+shader_parameter/time = 0.5
+shader_parameter/swipe_mode_h = false
+shader_parameter/swipe_mode_v = false
+shader_parameter/swipe_speed_h = 1.0
+shader_parameter/swipe_speed_v = 1.0
+shader_parameter/swipe_min_h = -1920.0
+shader_parameter/swipe_max_h = 1920.0
+shader_parameter/swipe_min_v = -1080.0
+shader_parameter/swipe_max_v = 1080.0
+shader_parameter/swipe_shift_h = 0.0
+shader_parameter/swipe_shift_v = 0.0
+shader_parameter/scale_mode = false
+shader_parameter/scale_speed = 1.0
+shader_parameter/scale_min = 0.0
+shader_parameter/scale_max = 1.0
+shader_parameter/scale_shift = 0.0
+shader_parameter/shake_mode = false
+shader_parameter/shake_v = false
+shader_parameter/shake_h = false
+shader_parameter/shake_speed = 10.0
+shader_parameter/shake_height = 20.0
+shader_parameter/shake_time = 100.0
+shader_parameter/blend_mode = false
+shader_parameter/blend_speed = 1.0
+shader_parameter/fade_color = Color(0, 1, 0, 1)
+shader_parameter/fade_to = false
+shader_parameter/fade_from = false
+shader_parameter/fade_speed = 1.0
+shader_parameter/slide_h = true
+shader_parameter/slide_v = false
+shader_parameter/slide_speed = 0.05
+shader_parameter/slide_reverse = false
+shader_parameter/curtain_speed_h = 0.15
+shader_parameter/curtain_speed_v = 0.1
+shader_parameter/curtain_h = true
+shader_parameter/curtain_v = true
+shader_parameter/curtain_reverse_h = true
+shader_parameter/curtain_reverse_v = true
+shader_parameter/secondTexture = ExtResource("4_h4gey")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -36,6 +71,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_l3t3g")
+texture = ExtResource("4_nnom1")
 expand_mode = 1
 stretch_mode = 6

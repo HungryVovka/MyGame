@@ -73,42 +73,11 @@ func set_background(res, has_transition: bool = false, shader_params: Dictionary
 
 		
 func reset_transition():
-	first.material.set_shader_parameter("swipe_mode_h", null)
-	first.material.set_shader_parameter("swipe_mode_v", null)
-	first.material.set_shader_parameter("swipe_speed_h", null)
-	first.material.set_shader_parameter("swipe_speed_v", null)
-	first.material.set_shader_parameter("swipe_min_h", null)
-	first.material.set_shader_parameter("swipe_max_h", null)
-	first.material.set_shader_parameter("swipe_min_v", null)
-	first.material.set_shader_parameter("swipe_max_v", null)
-	first.material.set_shader_parameter("swipe_shift_h", null)
-	first.material.set_shader_parameter("swipe_shift_v", null)
-	
-	first.material.set_shader_parameter("scale_mode", null)
-	first.material.set_shader_parameter("scale_speed", null)
-	first.material.set_shader_parameter("scale_min", null)
-	first.material.set_shader_parameter("scale_max", null)
-	first.material.set_shader_parameter("scale_shift", null)
-	
-	first.material.set_shader_parameter("shade_mode", null)
-	first.material.set_shader_parameter("shake_v", null)
-	first.material.set_shader_parameter("shake_h", null)
-	first.material.set_shader_parameter("shake_speed", null)
-	first.material.set_shader_parameter("shake_height", null)
-	first.material.set_shader_parameter("shake_time", null)
-	
-	first.material.set_shader_parameter("blend_mode", null)
-	first.material.set_shader_parameter("blend_speed", null)
-	
-	first.material.set_shader_parameter("fade_color", null)
-	first.material.set_shader_parameter("fade_to", null)
-	first.material.set_shader_parameter("fade_from", null)
-	first.material.set_shader_parameter("fade_speed", null)
-	
-	first.material.set_shader_parameter("slide_h", null)
-	first.material.set_shader_parameter("slide_v", null)
-	first.material.set_shader_parameter("slide_speed", null)
-	first.material.set_shader_parameter("slide_reverse", null)
+	var params_list: Array = first.material.get_shader().get_shader_uniform_list()
+	params_list.remove_at(0);
+	params_list.remove_at(params_list.size() - 1)
+	for p in params_list:
+		first.material.set_shader_parameter(p["name"], null)
 
 func swap_textures():
 	var tex = first.texture

@@ -42,6 +42,13 @@ uniform bool slide_v = false;
 uniform float slide_speed = 0.05;
 uniform bool slide_reverse = false;
 
+uniform float curtain_speed_h = 0.0;
+uniform float curtain_speed_v = 0.0;
+uniform bool curtain_h = false;
+uniform bool curtain_v = false;
+uniform bool curtain_reverse_h = false;
+uniform bool curtain_reverse_v = false;
+
 void vertex() {
 	if (scale_mode) {
 		float scale = max(min(time * scale_speed + scale_shift, scale_max), scale_min);
@@ -80,7 +87,7 @@ vec4 blend_from(vec4 color){
 	return fade_color * (1.0 - blend_pos) + color * blend_pos;
 }
 
-vec4 slideX(sampler2D tex, vec4 color, vec2 pos) {
+vec4 slideX(sampler2D tex, vec2 pos) {
 	float slide_pos = min(max(slide_speed * time, 0.0), 1.0);
 	if (slide_reverse)
 		slide_pos = 1.0 - slide_pos;
@@ -96,7 +103,7 @@ vec4 slideX(sampler2D tex, vec4 color, vec2 pos) {
 			return texture(secondTexture, vec2(1.0 - slide_pos, 0.0) + pos);
 }
 
-vec4 slideY(sampler2D tex, vec4 color, vec2 pos) {
+vec4 slideY(sampler2D tex, vec2 pos) {
 	float slide_pos = min(max(slide_speed * time, 0.0), 1.0);
 	if (slide_reverse)
 		slide_pos = 1.0 - slide_pos;
@@ -112,13 +119,61 @@ vec4 slideY(sampler2D tex, vec4 color, vec2 pos) {
 			return texture(secondTexture, vec2(0.0, 1.0 - slide_pos) + pos);
 }
 
+bool curtainCheckX(vec2 pos) {
+	float curtain_pos = min(max(curtain_speed_h * time, 0.0), 1.0);
+	if (curtain_reverse_h)
+		curtain_pos = 1.0 - curtain_pos;
+	if (pos.x <= curtain_pos)
+		if (curtain_reverse_h)
+			return false;
+		else
+			return true;
+	else
+		if (curtain_reverse_h)
+			return true;
+		else
+			return false;
+}
+
+bool curtainCheckY(vec2 pos) {
+	float curtain_pos = min(max(curtain_speed_v * time, 0.0), 1.0);
+	if (curtain_reverse_v)
+		curtain_pos = 1.0 - curtain_pos;
+	if (pos.y <= curtain_pos)
+		if (curtain_reverse_v)
+			return false;
+		else
+			return true;
+	else
+		if (curtain_reverse_v)
+			return true;
+		else
+			return false;
+}
+
+vec4 curtain(bool checkX, bool checkY, sampler2D tex, vec2 pos) {
+	bool x = false;
+	bool y = false;
+	if (checkX)
+		x = curtainCheckX(pos);
+	if (checkY)
+		y = curtainCheckY(pos);
+	bool checkResult = x || y;
+	if (checkResult)
+		return texture(secondTexture, pos);
+	else
+		return texture(tex, pos);	
+}
+
+
 void fragment() {
 	vec2 uv = UV;
 	
 	if (slide_h)
-		COLOR = slideX(TEXTURE, COLOR, uv);
+		COLOR = slideX(TEXTURE, uv);
 	if (slide_v)
-		COLOR = slideY(TEXTURE, COLOR, uv);
+		COLOR = slideY(TEXTURE, uv);
+	COLOR = curtain(curtain_h, curtain_v, TEXTURE, uv);
 	if (blend_mode) {
 		ivec2 ibackSize = textureSize(TEXTURE, 0);
 		ivec2 iBlendSize = textureSize(secondTexture, 0);
