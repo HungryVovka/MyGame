@@ -48,12 +48,22 @@ func remove_shader(where: String = "under"):
 func clear():
 	first.texture = null
 	
+func dict_bool(dict: Dictionary, key: String):
+	return dict.has(key) && dict[key]
+func should_update_texture(shader_params: Dictionary):
+	var key_list = ["blend", "curtain_h", "curtain_v"]
+	for k in key_list:
+		if dict_bool(shader_params, k):
+			return false
+	return true
+		
+	
 func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}):
 	shader.reset_time()
 	back.visible = has_transition
 	if has_transition:
 		swap_textures()
-		if first.texture == null || !(shader_params.has("blend") && shader_params.blend):
+		if first.texture == null || should_update_texture(shader_params):
 			first.texture = res
 		first.material.set_shader_parameter("secondTexture", res)
 	else:
