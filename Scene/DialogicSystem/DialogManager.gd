@@ -111,6 +111,7 @@ func setTimeline(filename):
 		text_data = _read_json(filename)
 		reset_index()
 		create_event_index(text_data)
+	
 		
 
 func create_event_index(e, prev: Array = []):

@@ -1,6 +1,6 @@
 extends Node
 
-@export var downloadMode = true
+@export var downloadMode = false
 signal progress(value: float)
 signal sceneReady(value: String, request_name: String)
 

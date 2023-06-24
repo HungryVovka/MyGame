@@ -37,6 +37,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=2
 
+[editor]
+
+movie_writer/movie_file="/Users/nother/Desktop/video.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/DialogHelperTool/plugin.cfg")

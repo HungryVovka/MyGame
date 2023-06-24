@@ -21,7 +21,9 @@
 	"3 (7)": "res://Resources/Scene1/Art/3 (7).png",
 	"3 (8)": "res://Resources/Scene1/Art/3 (8).png",
 	"3 (9)": "res://Resources/Scene1/Art/3 (9).png",
+	"Plane_transparent": "res://Resources/Scene1/Art/Plane_transparent.png",
 	"black": "res://Resources/Scene1/Art/black.webp",
 	"blackcredits": "res://Resources/Scene1/Art/blackcredits.webp",
-	"blackcredits2": "res://Resources/Scene1/Art/blackcredits2.webp"
+	"blackcredits2": "res://Resources/Scene1/Art/blackcredits2.webp",
+	"dice": "res://Resources/backgrounds/dice.png"
 }

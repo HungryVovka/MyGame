@@ -28,7 +28,7 @@ func apply_shader(id: String, params: Dictionary, texture = null, where: String 
 	var mat = Shaders.new_material(id, params)
 	var dest: TextureRect = under if where == "under" else face
 	if id != "":
-		dest.texture = load(texture) if texture else load("res://Resources/1Main/GUI/Menus/game_menu.png")
+		dest.texture = load(texture) if texture else NoiseTexture2D.new()
 	else:
 		dest.texture = null
 	dest.material = mat if mat else null
@@ -98,7 +98,8 @@ func swap_textures():
 	first.material.set_shader_parameter("secondTexture", tex)
 		
 func _input(event):
-	scale = Vector2(1.0 + 0.1*movable/40, 1.0 + 0.1*movable/40)
+	if movable > 0 && scale != Vector2(1.0, 1.0):
+		scale = Vector2(1.0 + 0.1*movable/40, 1.0 + 0.1*movable/40)
 	if event is InputEventMouseMotion:
 		var x = min(max((event.position.x*1.0 - 1920/2.0)/960.0, -1.0), 1.0)
 		var y = min(max((event.position.y*1.0 - 1080/2.0)/540.0, -1.0), 1.0)
