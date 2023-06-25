@@ -1,8 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://crcc7xn6r8ys5"]
+[gd_scene load_steps=16 format=3 uid="uid://crcc7xn6r8ys5"]
 
 [ext_resource type="Script" path="res://addons/DialogHelperTool/TimelineItem/TimelineItem.gd" id="1_mmygc"]
 [ext_resource type="PackedScene" uid="uid://cjcwj2co4fkg1" path="res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.tscn" id="2_mio6r"]
 [ext_resource type="FontFile" uid="uid://s5r7anan68q0" path="res://addons/DialogHelperTool/Res/Fonts/Lato-Bold.ttf" id="2_q13ku"]
+[ext_resource type="PackedScene" uid="uid://dsxhvxpevjney" path="res://addons/DialogHelperTool/TimelineItem/TimelineItemButton/TimelineItemButton.tscn" id="4_6f708"]
+[ext_resource type="Texture2D" uid="uid://blithjl2sriun" path="res://addons/DialogHelperTool/Res/dialog.svg" id="5_amxjm"]
+[ext_resource type="Texture2D" uid="uid://bgn30tt2gc58b" path="res://addons/DialogHelperTool/Res/background_icon.svg" id="5_fkr4x"]
+[ext_resource type="Texture2D" uid="uid://uggoc0p11pbx" path="res://addons/DialogHelperTool/Res/script.svg" id="6_8djyk"]
+[ext_resource type="Texture2D" uid="uid://ctkjex5827hs4" path="res://addons/DialogHelperTool/Res/stats.svg" id="7_01dba"]
+[ext_resource type="Texture2D" uid="uid://dnby00873clae" path="res://addons/DialogHelperTool/Res/sound_1.svg" id="7_atciv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_do1v3"]
 bg_color = Color(0, 0, 0.0117647, 0.305882)
@@ -24,6 +30,27 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 shadow_color = Color(0, 0, 0.188235, 0.937255)
 shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knae5"]
+bg_color = Color(0.490196, 0.462745, 1, 0.0705882)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.168627, 0, 0.247059, 0.866667)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt6a1"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_color = Color(0.145098, 0.00392157, 0.231373, 0.839216)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yyrft"]
 
 [node name="TimelineItem" type="Control"]
 custom_minimum_size = Vector2(1080, 40)
@@ -50,22 +77,26 @@ layout_mode = 2
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 8
 
-[node name="LeftSpace" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="LeftSpace" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 
-[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/LeftSpace"]
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LeftSpace"]
 layout_mode = 2
 text = "ID:"
 label_settings = SubResource("LabelSettings_b5bax")
 horizontal_alignment = 1
 vertical_alignment = 3
 
-[node name="EventId" type="LineEdit" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="EventId" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -74,71 +105,125 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_0mmfv")
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "JUMP:"
 label_settings = SubResource("LabelSettings_b5bax")
 
-[node name="JumpDropdown" parent="PanelContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
+[node name="JumpDropdown" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
 custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
 size_flags_stretch_ratio = 0.33
 
-[node name="TimerCheckbox" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="TimerCheckbox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = -8
 
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2"]
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 text = "TIMER:"
 label_settings = SubResource("LabelSettings_b5bax")
 
-[node name="CenterContainer3" type="CenterContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="CenterContainer3" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="TimerSpinbox" type="SpinBox" parent="PanelContainer/MarginContainer/HBoxContainer/CenterContainer3"]
+[node name="TimerSpinbox" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer3"]
 layout_mode = 2
 min_value = 0.01
 step = 0.01
 value = 1.0
 
-[node name="CharacterCheckbox" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="CharacterCheckbox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = -8
 
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer"]
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 text = "CHARACTER:"
 label_settings = SubResource("LabelSettings_b5bax")
 horizontal_alignment = 1
 vertical_alignment = 3
 
-[node name="CharacterDropdown" parent="PanelContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
+[node name="CharacterDropdown" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
 custom_minimum_size = Vector2(60, 30)
 layout_mode = 2
 size_flags_stretch_ratio = 0.4
 
-[node name="TextPreview" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
-clip_contents = true
+[node name="TextButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
+layout_mode = 2
+tooltip = "Edit event's text"
+icon = ExtResource("5_amxjm")
+
+[node name="BackgroundButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
+layout_mode = 2
+tooltip = "Edit event's background and transition"
+icon = ExtResource("5_fkr4x")
+
+[node name="SoundsButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
+layout_mode = 2
+tooltip = "Play or mute sound"
+icon = ExtResource("7_atciv")
+
+[node name="ScriptButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
+layout_mode = 2
+tooltip = "Edit event's script"
+icon = ExtResource("6_8djyk")
+
+[node name="StatsButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
+layout_mode = 2
+tooltip = "Edit event's stats"
+icon = ExtResource("7_01dba")
+
+[node name="TextField" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(2.08165e-12, 80)
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/TextField"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_knae5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TextField/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer"]
+layout_mode = 2
+text = "  Text:"
+vertical_alignment = 1
+
+[node name="Text" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-label_settings = SubResource("LabelSettings_b5bax")
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_styles/normal = SubResource("StyleBoxFlat_lt6a1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yyrft")
+placeholder_text = "Text"
+wrap_mode = 1
 
 [connection signal="gui_input" from="PanelContainer" to="." method="_on_panel_container_gui_input"]
 [connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer" to="." method="_on_panel_container_mouse_exited"]
-[connection signal="text_changed" from="PanelContainer/MarginContainer/HBoxContainer/EventId" to="." method="_on_event_id_text_changed"]
-[connection signal="item_selected" from="PanelContainer/MarginContainer/HBoxContainer/JumpDropdown" to="." method="_on_dropdownbox_item_selected"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/TimerCheckbox" to="." method="_on_timer_checkbox_toggled"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/CenterContainer3/TimerSpinbox" to="." method="_on_timer_spinbox_value_changed"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/CharacterCheckbox" to="." method="_on_character_checkbox_toggled"]
-[connection signal="item_selected" from="PanelContainer/MarginContainer/HBoxContainer/CharacterDropdown" to="." method="_on_character_dropdown_item_selected"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId" to="." method="_on_event_id_text_changed"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JumpDropdown" to="." method="_on_dropdownbox_item_selected"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TimerCheckbox" to="." method="_on_timer_checkbox_toggled"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer3/TimerSpinbox" to="." method="_on_timer_spinbox_value_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterCheckbox" to="." method="_on_character_checkbox_toggled"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown" to="." method="_on_character_dropdown_item_selected"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextButton" to="." method="_on_text_button_toggled"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer/Text" to="." method="_on_text_text_changed"]

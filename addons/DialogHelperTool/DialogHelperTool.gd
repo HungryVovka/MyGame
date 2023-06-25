@@ -37,6 +37,8 @@ var _file_dialog
 var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
 
 signal event_selected(data: Dictionary)
+signal reimport(filename)
+
 
 func add_custom_project_setting(name: String, default_value, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = "") -> void:
 	if ProjectSettings.has_setting(name): return
@@ -54,7 +56,11 @@ func _ready():
 	_on_scene_folder_changed("res://Resources/Scene1/")
 	add_custom_project_setting("dialogsystem/scale", 100.0, TYPE_FLOAT)
 
-	restore_scale()
+	restore_scale()	
+	JSONHelper.connect("reimport", reimport_slot)
+	
+func reimport_slot(filename):
+	reimport.emit(filename)
 
 func restore_scale():
 	var t = Timer.new()
@@ -419,6 +425,7 @@ func _on_load_timeline_button_pressed():
 
 
 func _on_save_timeline_button_pressed():
+	print(current_timeline.events[0])
 	JSONHelper.save_json(current_timeline_filename, current_timeline)
 	
 func _on_timeline_item_selected(obj):

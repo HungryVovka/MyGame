@@ -1,19 +1,16 @@
 @tool
 extends Control
 
-@onready var event_id = $PanelContainer/MarginContainer/HBoxContainer/EventId
-@onready var jump_to = $PanelContainer/MarginContainer/HBoxContainer/JumpDropdown
-@onready var jump_to_opt = $PanelContainer/MarginContainer/HBoxContainer/JumpDropdown/OptionButton
+@onready var event_id = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId
+@onready var jump_to = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JumpDropdown
+@onready var jump_to_opt = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JumpDropdown/OptionButton
 
-@onready var character = $PanelContainer/MarginContainer/HBoxContainer/CharacterDropdown
-@onready var character_opt = $PanelContainer/MarginContainer/HBoxContainer/CharacterDropdown/OptionButton
-@onready var character_checkbox = $PanelContainer/MarginContainer/HBoxContainer/CharacterCheckbox
+@onready var character = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown
+@onready var character_opt = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown/OptionButton
+@onready var character_checkbox = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterCheckbox
 
-@onready var timer_spinbox = $PanelContainer/MarginContainer/HBoxContainer/CenterContainer3/TimerSpinbox
-@onready var timer_checkbox = $PanelContainer/MarginContainer/HBoxContainer/TimerCheckbox
-
-@onready var text_control = $PanelContainer/MarginContainer/HBoxContainer/TextPreview
-@export var text: String = "": set = setText
+@onready var timer_spinbox = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer3/TimerSpinbox
+@onready var timer_checkbox = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TimerCheckbox
 
 @export var control_color_inactive: Color = Color("000030ef")
 @export var control_color_active: Color = Color(0.4, 1.0, 0.4, 0.7)
@@ -27,9 +24,18 @@ extends Control
 @export var context: Dictionary = {"ids": [], "characters": []}: set = setContext
 var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
 
+@onready var textButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextButton
+@onready var backgroundsButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BackgroundButton
+@onready var soundsButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SoundsButton
+@onready var scriptButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ScriptButton
+@onready var statsButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsButton
+
+@onready var textField = $PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer/Text
+
 
 var texHideTimer: Timer
 var tex: TextureRect
+var scale_coef: float = 1.0
 
 signal was_selected(obj)
 
@@ -47,24 +53,26 @@ func _ready():
 func rescale_fonts(coef: float):
 	if !_is_ready:
 		await self.ready
-	var settings : LabelSettings = $PanelContainer/MarginContainer/HBoxContainer/LeftSpace/Label3.label_settings.duplicate()
+	var settings : LabelSettings = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LeftSpace/Label3.label_settings.duplicate()
 	settings.font_size *= coef
-	$PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/Label2.label_settings = settings
-	$PanelContainer/MarginContainer/HBoxContainer/LeftSpace/Label3.label_settings = settings
-	$PanelContainer/MarginContainer/HBoxContainer/MarginContainer/Label2.label_settings = settings
-	$PanelContainer/MarginContainer/HBoxContainer/Label.label_settings = settings
-	var v = int($PanelContainer/MarginContainer/HBoxContainer/EventId.get_theme_font_size("font_size") * coef)
-	$PanelContainer/MarginContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
-	$PanelContainer/MarginContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
-	$PanelContainer/MarginContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/Label2.label_settings = settings
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LeftSpace/Label3.label_settings = settings
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/Label2.label_settings = settings
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label.label_settings = settings
+	var v = int($PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId.get_theme_font_size("font_size") * coef)
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
 
-	var preview_s : LabelSettings = $PanelContainer/MarginContainer/HBoxContainer/TextPreview.label_settings.duplicate()
-	preview_s.font_size *= coef
-	$PanelContainer/MarginContainer/HBoxContainer/TextPreview.label_settings = preview_s
+	textButton.setScale(coef)
+	backgroundsButton.setScale(coef)
+	scriptButton.setScale(coef)
+	statsButton.setScale(coef)
+	soundsButton.setScale(coef)
 	
-	
-func setText(v):
-	text_control.text = v
+	var oldSize: Vector2 = $PanelContainer/MarginContainer/VBoxContainer/TextField.custom_minimum_size
+	$PanelContainer/MarginContainer/VBoxContainer/TextField.custom_minimum_size = Vector2(oldSize.x, oldSize.y * coef)
+	scale_coef = coef
 
 func setContext(data):
 	if !_is_ready:
@@ -103,9 +111,18 @@ func setData(src: Dictionary):
 	else:
 		timer_spinbox.value = 1.0
 	timer_checkbox.button_pressed = src.has("timer")
-	if src.has("text"):
-		text_control.text = src.text
+	textField.text = src.text
+	
+	updateButtons()
+	
 	_data_ready = true
+	
+func updateButtons():	
+	textButton.setActive(data.text != "")
+	backgroundsButton.setActive(data.has("background"))
+	soundsButton.setActive(data.has("play_sound") || data.has("stop_sound"))
+	scriptButton.setActive(data.has("script"))
+	statsButton.setActive(data.has("stats"))
 
 func switch_control_style(control, is_active):
 	if (!control): 
@@ -197,3 +214,14 @@ func fixTypes(data: Array = []) -> Array[String]:
 	var result: Array[String] = []
 	result.assign(data)
 	return result
+
+
+func _on_text_button_toggled(pressed):
+	var height = 80*scale_coef + 8
+	custom_minimum_size += Vector2(0, height if pressed else -height)
+	$PanelContainer/MarginContainer/VBoxContainer/TextField.visible = pressed
+
+
+func _on_text_text_changed():
+	data["text"] = textField.text
+	updateButtons()

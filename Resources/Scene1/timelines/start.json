@@ -2,13 +2,16 @@
 	"display_name": "StartTimeline",
 	"events": [
 		{
+			"text": "hehl.llll\n\nSwine monsta xxx10"
+		},
+		{
 			"background": {
 				"fade": 7,
 				"name": "Plane_transparent",
 				"transition": {
 					"blend": true,
 					"blend_mode": true,
-					"blend_speed": 1,
+					"blend_speed": 0.1,
 					"curtain_h": false,
 					"curtain_reverse_h": false,
 					"curtain_reverse_v": false,
@@ -1147,7 +1150,7 @@
 					"curtain_h": true,
 					"curtain_reverse_h": false,
 					"curtain_reverse_v": false,
-					"curtain_speed_h": 0.10000000149011612,
+					"curtain_speed_h": 0.100000001490116,
 					"curtain_speed_v": 0,
 					"curtain_v": false,
 					"fade_color": "",
