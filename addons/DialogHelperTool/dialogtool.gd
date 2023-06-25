@@ -6,14 +6,16 @@ var side_dock
 
 var is_scanning
 
+var bus_list: Array[String] = []
+
 func _has_main_screen():
 	return true
 	
 func _make_visible(visible):
 	if dock:
 		dock.visible = visible
-	if (visible):
-		dock.restore_scale()
+	get_editor_interface().get_editor_settings().set_setting("run/auto_save/save_before_running", !visible)
+
 func _exit_tree():
 	remove_control_from_docks(side_dock)
 	
@@ -29,6 +31,15 @@ func _enter_tree():
 	get_editor_interface().get_editor_main_screen().add_child(dock)
 	dock.connect("event_selected", _activate_side_dock)
 	dock.connect("reimport", rescan_fs)
+	
+	var bus_resource = load("res://default_bus_layout.tres")
+	for i in range(0, 999):
+		var iBus = bus_resource.get("bus/" + str(i) + "/name")
+		if iBus:
+			bus_list.push_back(iBus)
+		else:
+			break
+	dock.bus_list = bus_list
 	
 	_make_visible(false)
 

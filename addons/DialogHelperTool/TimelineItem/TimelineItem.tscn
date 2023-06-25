@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://crcc7xn6r8ys5"]
+[gd_scene load_steps=17 format=3 uid="uid://crcc7xn6r8ys5"]
 
 [ext_resource type="Script" path="res://addons/DialogHelperTool/TimelineItem/TimelineItem.gd" id="1_mmygc"]
 [ext_resource type="PackedScene" uid="uid://cjcwj2co4fkg1" path="res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.tscn" id="2_mio6r"]
@@ -52,6 +52,11 @@ border_color = Color(0.145098, 0.00392157, 0.231373, 0.839216)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yyrft"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgwo2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_color = Color(0.145098, 0.00392157, 0.231373, 0.839216)
+
 [node name="TimelineItem" type="Control"]
 custom_minimum_size = Vector2(1080, 40)
 layout_mode = 3
@@ -97,7 +102,7 @@ horizontal_alignment = 1
 vertical_alignment = 3
 
 [node name="EventId" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 2.08165e-12)
+custom_minimum_size = Vector2(30, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.33
@@ -111,7 +116,7 @@ text = "JUMP:"
 label_settings = SubResource("LabelSettings_b5bax")
 
 [node name="JumpDropdown" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
-custom_minimum_size = Vector2(50, 30)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_stretch_ratio = 0.33
 
@@ -151,7 +156,7 @@ horizontal_alignment = 1
 vertical_alignment = 3
 
 [node name="CharacterDropdown" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
-custom_minimum_size = Vector2(60, 30)
+custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
 size_flags_stretch_ratio = 0.4
 
@@ -203,6 +208,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(114, 2.08165e-12)
 layout_mode = 2
 text = "  Text:"
 vertical_alignment = 1
@@ -216,6 +222,111 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_yyrft")
 placeholder_text = "Text"
 wrap_mode = 1
 
+[node name="AudioField" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(2.08165e-12, 100)
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_knae5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(100, 2.08165e-12)
+layout_mode = 2
+text = "  Audio:"
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_bgwo2")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlaySound" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlaySoundCheckbox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
+layout_mode = 2
+text = "Play"
+
+[node name="SoundCombobox" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound" instance=ExtResource("2_mio6r")]
+custom_minimum_size = Vector2(100, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
+layout_mode = 2
+text = "  to channel:  "
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.33
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
+layout_mode = 2
+text = " on bus:  "
+
+[node name="SoundBusCombobox" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound" instance=ExtResource("2_mio6r")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
+layout_mode = 2
+text = "  Volume: "
+
+[node name="SoundVolume" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
+layout_mode = 2
+text = "  Fade: "
+
+[node name="SoundFade" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
+layout_mode = 2
+size_flags_vertical = 4
+step = 0.01
+
+[node name="StopSound" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StopSoundCheckbox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/StopSound"]
+layout_mode = 2
+text = "Stop"
+
+[node name="StopChannel" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/StopSound"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 4
+
 [connection signal="gui_input" from="PanelContainer" to="." method="_on_panel_container_gui_input"]
 [connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer" to="." method="_on_panel_container_mouse_exited"]
@@ -226,4 +337,5 @@ wrap_mode = 1
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterCheckbox" to="." method="_on_character_checkbox_toggled"]
 [connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown" to="." method="_on_character_dropdown_item_selected"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextButton" to="." method="_on_text_button_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SoundsButton" to="." method="_on_sounds_button_toggled"]
 [connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer/Text" to="." method="_on_text_text_changed"]

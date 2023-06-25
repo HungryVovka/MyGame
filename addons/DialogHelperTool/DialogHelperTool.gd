@@ -2,13 +2,13 @@
 extends Control
 
 @export var interface_scale: float = 1.0
+@export var bus_list: Array[String] = []
 
 var scene_config_data = {}
 var timelines_list = {}
 @onready var scene_folder = $VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFolder
 @onready var scene_file = $VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFile
 @onready var timelines_combobox = $VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/TimelineList
-@onready var scale_slider = $VBoxContainer/HSlider
 
 @onready var background_grid = $VBoxContainer/TabContainer/Backgrounds/MarginContainer/ScrollContainer/GridContainer
 var background_children_list = []
@@ -36,6 +36,8 @@ var current_timeline_filename: String = ""
 var _file_dialog
 var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
 
+
+
 signal event_selected(data: Dictionary)
 signal reimport(filename)
 
@@ -54,24 +56,11 @@ func add_custom_project_setting(name: String, default_value, type: int, hint: in
 
 func _ready():
 	_on_scene_folder_changed("res://Resources/Scene1/")
-	add_custom_project_setting("dialogsystem/scale", 100.0, TYPE_FLOAT)
 
-	restore_scale()	
 	JSONHelper.connect("reimport", reimport_slot)
 	
 func reimport_slot(filename):
 	reimport.emit(filename)
-
-func restore_scale():
-	var t = Timer.new()
-	t.one_shot = true
-	add_child(t)
-	t.timeout.connect(func():
-		var value = ProjectSettings.get("dialogsystem/scale")
-		self.scale = Vector2(value * 1.00 / 100.0, value * 1.00 / 100.0)
-		scale_slider.value = value
-		)
-	t.start(0.01)
 	
 	
 func _on_scene_folder_changed(path):
@@ -186,12 +175,6 @@ func get_filelist(scan_dir : String, filter_exts : Array = []) -> Array[String]:
 						my_files.append(dir.get_current_dir() + "/" + file_name)
 		file_name = dir.get_next()
 	return my_files
-
-func _on_h_slider_drag_ended(value_changed):
-	ProjectSettings.set("dialogsystem/scale", scale_slider.value)
-	var value = scale_slider.value
-	self.scale = Vector2(value * 1.00 / 100.0, value * 1.00 / 100.0)
-
 
 func _on_folder_picked_pressed():
 	if _file_dialog:
@@ -418,6 +401,7 @@ func _on_load_timeline_button_pressed():
 		obj.data = e
 		obj.backgrounds = background_store
 		obj.connect("was_selected", _on_timeline_item_selected)
+		obj.bus_list = bus_list
 		timeline_box.add_child(obj)
 		timeline_children_list.push_back(obj)
 		obj.custom_minimum_size = obj.custom_minimum_size * interface_scale

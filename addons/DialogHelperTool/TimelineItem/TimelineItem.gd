@@ -17,6 +17,7 @@ extends Control
 
 @export var data: Dictionary = {}: set = setData
 @export var backgrounds: Dictionary = {}: set = setBackgrounds
+@export var bus_list: Array[String] = []
 
 @export var selected: bool = false: set = setSelected
 @onready var panel = $PanelContainer
@@ -31,7 +32,10 @@ var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").n
 @onready var statsButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsButton
 
 @onready var textField = $PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer/Text
+@onready var audioField = $PanelContainer/MarginContainer/VBoxContainer/AudioField
 
+@onready var soundCombobox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox
+@onready var soundBusCombobox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundBusCombobox
 
 var texHideTimer: Timer
 var tex: TextureRect
@@ -63,7 +67,8 @@ func rescale_fonts(coef: float):
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
-
+	$PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox/LineEdit.add_theme_font_size_override("font_size", v)
+	
 	textButton.setScale(coef)
 	backgroundsButton.setScale(coef)
 	scriptButton.setScale(coef)
@@ -72,6 +77,13 @@ func rescale_fonts(coef: float):
 	
 	var oldSize: Vector2 = $PanelContainer/MarginContainer/VBoxContainer/TextField.custom_minimum_size
 	$PanelContainer/MarginContainer/VBoxContainer/TextField.custom_minimum_size = Vector2(oldSize.x, oldSize.y * coef)
+	
+	oldSize = $PanelContainer/MarginContainer/VBoxContainer/AudioField.custom_minimum_size
+	$PanelContainer/MarginContainer/VBoxContainer/AudioField.custom_minimum_size = Vector2(oldSize.x, oldSize.y * coef)
+	
+	soundCombobox.setScale(coef)
+	soundBusCombobox.setScale(coef)
+	
 	scale_coef = coef
 
 func setContext(data):
@@ -225,3 +237,9 @@ func _on_text_button_toggled(pressed):
 func _on_text_text_changed():
 	data["text"] = textField.text
 	updateButtons()
+
+
+func _on_sounds_button_toggled(pressed):
+	var height = 100*scale_coef + 8
+	custom_minimum_size += Vector2(0, height if pressed else -height)
+	$PanelContainer/MarginContainer/VBoxContainer/AudioField.visible = pressed

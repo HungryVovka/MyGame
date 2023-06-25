@@ -42,6 +42,12 @@ func setText(v: String):
 func getText() -> String:
 	return line.text
 	
+func setScale(coef: float):
+	
+	var v = int($LineEdit.get_theme_font_size("font_size") * coef)
+	add_theme_font_size_override("font_size", v)
+	custom_minimum_size = Vector2(custom_minimum_size.x, 25 * coef)
+	
 func setEnabled(enabled: bool):
 	if enabled:
 		if state.stylebox:

@@ -29,14 +29,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer"]
-custom_minimum_size = Vector2(600, 8)
-layout_mode = 2
-size_flags_vertical = 8
-min_value = 25.0
-max_value = 200.0
-value = 101.0
-
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -425,7 +417,6 @@ text = "Save"
 visible = false
 layout_mode = 2
 
-[connection signal="drag_ended" from="VBoxContainer/HSlider" to="." method="_on_h_slider_drag_ended"]
 [connection signal="scene_folder_changed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFolder" to="." method="_on_scene_folder_changed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/Button" to="." method="_on_folder_picked_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/Button3" to="." method="_on_scene_start_pressed"]
