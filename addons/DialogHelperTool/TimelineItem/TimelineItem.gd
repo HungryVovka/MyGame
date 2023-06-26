@@ -16,7 +16,10 @@ extends Control
 @export var control_color_active: Color = Color(0.4, 1.0, 0.4, 0.7)
 
 @export var data: Dictionary = {}: set = setData
-@export var backgrounds: Dictionary = {}: set = setBackgrounds
+@export var backgrounds: Dictionary = {}
+@export var sounds: Dictionary = {}
+@export var videos: Dictionary = {}
+
 @export var bus_list: Array[String] = []
 
 @export var selected: bool = false: set = setSelected
@@ -36,6 +39,12 @@ var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").n
 
 @onready var soundCombobox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox
 @onready var soundBusCombobox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundBusCombobox
+@onready var playSoundChannel = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/PlaySoundChannel
+@onready var soundVolume = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundVolume
+@onready var soundFade = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundFade
+@onready var stopSoundChannel = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/StopSound/StopChannel
+@onready var playSoundCheckbox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/PlaySoundCheckbox
+@onready var stopSoundCheckbox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/StopSound/StopSoundCheckbox
 
 var texHideTimer: Timer
 var tex: TextureRect
@@ -67,7 +76,10 @@ func rescale_fonts(coef: float):
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
+	v = int($PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox/LineEdit.get_theme_font_size("font_size") * coef)
+	
 	$PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox/LineEdit.add_theme_font_size_override("font_size", v)
+	$PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundBusCombobox/LineEdit.add_theme_font_size_override("font_size", v)
 	
 	textButton.setScale(coef)
 	backgroundsButton.setScale(coef)
@@ -92,9 +104,6 @@ func setContext(data):
 	context = data
 	jump_to.items = fixTypes(data.ids)
 	character.items = fixTypes(data.characters)
-	
-func setBackgrounds(d):
-	backgrounds = d
 	
 func setSelected(v):
 	var stylebox: StyleBoxFlat = panel.get_theme_stylebox("panel").duplicate()
@@ -125,9 +134,25 @@ func setData(src: Dictionary):
 	timer_checkbox.button_pressed = src.has("timer")
 	textField.text = src.text
 	
+	soundCombobox.items = fixTypes([""] + sounds.keys())
+	soundBusCombobox.items = fixTypes([""] + bus_list)
+	
+	renderAudio()
 	updateButtons()
 	
 	_data_ready = true
+	
+func renderAudio():
+	playSoundCheckbox.button_pressed = data.has("play_sound")
+	stopSoundCheckbox.button_pressed = data.has("stop_sound")
+	if data.has("play_sound"):
+		soundCombobox.text = data.play_sound.name
+		playSoundChannel.text = data.play_sound.channel
+		soundBusCombobox.text = data.play_sound.bus if data.play_sound.has("bus") else ""
+		soundVolume.value = data.play_sound.volume if data.play_sound.has("volume") else 1.0
+		soundFade.value = data.play_sound.fade if data.play_sound.has("fade") else 0.0
+	if data.has("stop_sound"):
+		stopSoundChannel.text = data.stop_sound
 	
 func updateButtons():	
 	textButton.setActive(data.text != "")
@@ -243,3 +268,74 @@ func _on_sounds_button_toggled(pressed):
 	var height = 100*scale_coef + 8
 	custom_minimum_size += Vector2(0, height if pressed else -height)
 	$PanelContainer/MarginContainer/VBoxContainer/AudioField.visible = pressed
+
+
+func _on_sound_combobox_item_selected(text):
+	if data.has("play_sound"):
+		if text != "":
+			data.play_sound["name"] = text
+		else:
+			data.play_sound.erase("name")
+	updateButtons()
+
+func _on_play_sound_channel_text_changed(new_text):
+	if data.has("play_sound"):
+		data.play_sound["channel"] = new_text
+	updateButtons()
+
+func _on_sound_bus_combobox_item_selected(text):
+	if data.has("play_sound"):
+		if text != "":
+			data.play_sound["bus"] = text
+		else:
+			data.play_sound.erase("bus")
+	updateButtons()
+
+func _on_sound_volume_value_changed(value):
+	if data.has("play_sound"):
+		if value != 1.0:
+			data.play_sound["volume"] = value
+		else:
+			data.play_sound.erase("volume")
+	updateButtons()
+
+
+func _on_sound_fade_value_changed(value):
+	if data.has("play_sound"):
+		if value != 0.0:
+			data.play_sound["fade"] = value
+		else:
+			data.play_sound.erase("fade")
+	updateButtons()
+
+
+func _on_play_sound_checkbox_toggled(button_pressed):
+	if !_data_ready:
+		return
+	if button_pressed:
+		if !data.has("play_sound"):
+			data.play_sound = {}
+		_on_sound_combobox_item_selected(soundCombobox.text)
+		_on_play_sound_channel_text_changed(playSoundChannel.text)
+		_on_sound_bus_combobox_item_selected(soundBusCombobox.text)
+		_on_sound_volume_value_changed(soundVolume.value)
+		_on_sound_fade_value_changed(soundFade.value)
+	else:
+		data.erase("play_sound")
+	updateButtons()
+
+func _on_stop_channel_text_changed(new_text):
+	if new_text != "":
+		data["stop_channel"] = new_text
+	else:
+		data.erase("stop_channel")
+	updateButtons()
+
+func _on_stop_sound_checkbox_toggled(button_pressed):
+	if !_data_ready:
+		return
+	if button_pressed:
+		_on_stop_channel_text_changed(stopSoundChannel.text)
+	else:
+		data.erase("stop_sound")
+	updateButtons()

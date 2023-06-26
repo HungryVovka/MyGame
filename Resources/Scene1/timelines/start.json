@@ -53,10 +53,10 @@
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
-				"fade": 2,
+				"fade": 2.5,
 				"loop": true,
 				"name": "Airplane Outside",
-				"volume": 0.05
+				"volume": 0.0800000000166532
 			},
 			"script": "func start(dialog, _event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"clouds\", {})\n\tdialog.get_parent().fadebleBackground.apply_shader(\"god_light\", {}, null, \"face\")\n\tdialog.get_parent().fadebleBackground.movable = 0\n\tdialog.get_parent().fadebleBackground.pivot_offset = dialog.get_parent().fadebleBackground.size/2\n\tdialog.get_parent().fadebleBackground.scale = Vector2(2.0, 2.0)\n\n\tvar timer = Timer.new()\n\ttimer.wait_time = 0.016\n\tdialog.add_child(timer)\n\ttimer.connect(\"timeout\", func(): dialog.get_parent().fadebleBackground.rotation += 0.002)\n\tDialogState.s(\"my_timer\", timer)\n\ttimer.start()\n\t\nfunc condition(_dialog, _event):\n\treturn true",
 			"text": ""
@@ -118,7 +118,7 @@
 				"fade": 2,
 				"loop": true,
 				"name": "звук внутри самолета",
-				"volume": 0.14
+				"volume": 0.140000000029143
 			},
 			"text": "",
 			"timer": 2.1
@@ -181,7 +181,7 @@
 				"fade": 1.5,
 				"loop": true,
 				"name": "samolet-boeing-737-jet-zvuk-iz-salona-26574",
-				"volume": 0.13
+				"volume": 0.130000000027061
 			},
 			"text": "",
 			"timer": 2
@@ -295,7 +295,7 @@
 				"bus": "SFX",
 				"channel": "SFX2",
 				"name": "pilot-announcementEchoShort",
-				"volume": 0.81
+				"volume": 0.810000000168613
 			},
 			"text": "",
 			"timer": 1
@@ -307,7 +307,7 @@
 				"channel": "Music1",
 				"loop": true,
 				"name": "samolet-boeing-737-jet-zvuk-iz-salona-26574",
-				"volume": 0.1
+				"volume": 0.100000000020816
 			},
 			"text": "Ladies and Gentlemen! This is the Captain speaking.",
 			"timer": 2
@@ -375,7 +375,7 @@
 				"bus": "SFX",
 				"channel": "SFX2",
 				"name": "scratch-record-sound-effect-008881110_nw_prev",
-				"volume": 0.56
+				"volume": 0.560000000116572
 			},
 			"text": "[i][font_size={35}]Wait!!{>>} You can’t say that!!![/font_size]"
 		},
@@ -888,7 +888,7 @@
 				"channel": "Music1",
 				"fade": 1,
 				"name": "Simon And Garfunkel - The Sound Of Silence",
-				"volume": 0.64
+				"volume": 0.640000000133225
 			},
 			"text": "",
 			"timer": 4

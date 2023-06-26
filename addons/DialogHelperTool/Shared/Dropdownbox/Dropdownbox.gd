@@ -43,7 +43,6 @@ func getText() -> String:
 	return line.text
 	
 func setScale(coef: float):
-	
 	var v = int($LineEdit.get_theme_font_size("font_size") * coef)
 	add_theme_font_size_override("font_size", v)
 	custom_minimum_size = Vector2(custom_minimum_size.x, 25 * coef)
@@ -90,7 +89,6 @@ func _on_line_edit_text_changed(new_text: String, override_block_suggest = false
 	if suggest_data.size() > 0 && !block_suggest && !override_block_suggest:
 		_select_suggest()
 	item_selected.emit(line.text)
-	return 
 	_update_option_item(line.text)
 
 func _select_suggest():

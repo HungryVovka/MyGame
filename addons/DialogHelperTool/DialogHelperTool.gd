@@ -400,6 +400,8 @@ func _on_load_timeline_button_pressed():
 		obj.context = context
 		obj.data = e
 		obj.backgrounds = background_store
+		obj.sounds = audios_dict
+		obj.videos = videos_dict
 		obj.connect("was_selected", _on_timeline_item_selected)
 		obj.bus_list = bus_list
 		timeline_box.add_child(obj)

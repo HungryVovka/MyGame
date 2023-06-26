@@ -277,16 +277,17 @@ text = "Play"
 custom_minimum_size = Vector2(100, 2.08165e-12)
 layout_mode = 2
 size_flags_vertical = 4
+items = Array[String](["hEhesh", "Helga", "lgahe"])
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
 layout_mode = 2
 text = "  to channel:  "
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
+[node name="PlaySoundChannel" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-size_flags_stretch_ratio = 0.33
+size_flags_stretch_ratio = 0.83
 
 [node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
 layout_mode = 2
@@ -304,6 +305,9 @@ text = "  Volume: "
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
 layout_mode = 2
@@ -312,6 +316,7 @@ text = "  Fade: "
 [node name="SoundFade" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound"]
 layout_mode = 2
 size_flags_vertical = 4
+max_value = 1000.0
 step = 0.01
 
 [node name="StopSound" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
@@ -339,3 +344,11 @@ size_flags_vertical = 4
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextButton" to="." method="_on_text_button_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SoundsButton" to="." method="_on_sounds_button_toggled"]
 [connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer/Text" to="." method="_on_text_text_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/PlaySoundCheckbox" to="." method="_on_play_sound_checkbox_toggled"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox" to="." method="_on_sound_combobox_item_selected"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/PlaySoundChannel" to="." method="_on_play_sound_channel_text_changed"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundBusCombobox" to="." method="_on_sound_bus_combobox_item_selected"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundVolume" to="." method="_on_sound_volume_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundFade" to="." method="_on_sound_fade_value_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/StopSound/StopSoundCheckbox" to="." method="_on_stop_sound_checkbox_toggled"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/StopSound/StopChannel" to="." method="_on_stop_channel_text_changed"]
