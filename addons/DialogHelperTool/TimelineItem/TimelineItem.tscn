@@ -343,6 +343,7 @@ size_flags_vertical = 4
 [connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown" to="." method="_on_character_dropdown_item_selected"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextButton" to="." method="_on_text_button_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SoundsButton" to="." method="_on_sounds_button_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ScriptButton" to="." method="_on_script_button_toggled"]
 [connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer/Text" to="." method="_on_text_text_changed"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/PlaySoundCheckbox" to="." method="_on_play_sound_checkbox_toggled"]
 [connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox" to="." method="_on_sound_combobox_item_selected"]

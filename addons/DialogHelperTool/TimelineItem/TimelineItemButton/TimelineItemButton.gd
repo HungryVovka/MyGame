@@ -4,6 +4,7 @@ extends Control
 @export var text: String = "T": set = setText
 @export var tooltip: String = "": set = setTooltip
 @export var icon: Texture2D: set = setIcon
+@export var pressed: bool = false: set = setPressed, get = getPressed
 
 @onready var button = $Button
 @onready var iconObj = $MarginContainer/Icon
@@ -24,6 +25,12 @@ func _ready():
 func _on_ready():
 	if !_is_ready:
 		await self.ready
+		
+func setPressed(is_pressed):
+	button.button_pressed = is_pressed
+	
+func getPressed():
+	return button.button_pressed
 
 func setText(s: String):
 	await _on_ready()

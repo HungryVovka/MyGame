@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn4l3i0dt2p8t"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/TimelineItem/ScriptWindow/ScriptWindow.gd" id="1_g7rkl"]
+[ext_resource type="PackedScene" uid="uid://bu4a8l87atnp7" path="res://addons/DialogHelperTool/TimelineItem/ScriptWindow/Editor/Editor.tscn" id="1_ot8x5"]
+
+[node name="ScriptWindow" type="Popup"]
+visible = true
+script = ExtResource("1_g7rkl")
+
+[node name="Editor" parent="." instance=ExtResource("1_ot8x5")]
+
+[connection signal="textSaved" from="Editor" to="." method="_on_editor_text_saved"]

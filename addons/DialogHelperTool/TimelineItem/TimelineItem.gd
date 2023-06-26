@@ -52,6 +52,8 @@ var scale_coef: float = 1.0
 
 signal was_selected(obj)
 
+signal show_script(sender, text)
+
 
 var _is_ready = false
 var _data_ready = false
@@ -338,4 +340,23 @@ func _on_stop_sound_checkbox_toggled(button_pressed):
 		_on_stop_channel_text_changed(stopSoundChannel.text)
 	else:
 		data.erase("stop_sound")
+	updateButtons()
+
+func _on_script_button_toggled(pressed):
+	if pressed:
+		show_script.emit(self, data["script"] if data.has("script") else "func start(dialog, _event):
+	pass
+	
+func condition(_dialog, _event):
+	return true")
+
+func scriptPopupHidden():
+	scriptButton.pressed = false
+	updateButtons()
+	
+func updateScriptText(text):
+	if text != "":
+		data["script"] = text
+	else:
+		data.erase("script")
 	updateButtons()

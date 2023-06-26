@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://kpxck4bb7pjp"]
+[gd_scene load_steps=8 format=3 uid="uid://kpxck4bb7pjp"]
 
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DialogHelperTool.gd" id="1_eb7vm"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/SceneLineEdit.gd" id="2_vieds"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DropValidators/BackgroundsContainer.gd" id="3_e5ldx"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DropValidators/VideosMarginContainer.gd" id="4_c6x1x"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DropValidators/AudioMarginContainer.gd" id="5_ya255"]
+[ext_resource type="PackedScene" uid="uid://bn4l3i0dt2p8t" path="res://addons/DialogHelperTool/TimelineItem/ScriptWindow/ScriptWindow.tscn" id="6_cijc3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p81f4"]
 font_size = 20
@@ -417,6 +418,10 @@ text = "Save"
 visible = false
 layout_mode = 2
 
+[node name="ScriptWindow" parent="." instance=ExtResource("6_cijc3")]
+visible = false
+text = ""
+
 [connection signal="scene_folder_changed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFolder" to="." method="_on_scene_folder_changed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/Button" to="." method="_on_folder_picked_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/Button3" to="." method="_on_scene_start_pressed"]
@@ -438,3 +443,5 @@ layout_mode = 2
 [connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_characters_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_characters_button_2_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="_on_save_characters_button_pressed"]
+[connection signal="popup_hide" from="ScriptWindow" to="." method="_on_script_window_popup_hide"]
+[connection signal="textSaved" from="ScriptWindow" to="." method="_on_script_window_text_saved"]

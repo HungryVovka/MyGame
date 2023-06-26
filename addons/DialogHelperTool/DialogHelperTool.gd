@@ -10,6 +10,8 @@ var timelines_list = {}
 @onready var scene_file = $VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFile
 @onready var timelines_combobox = $VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/TimelineList
 
+@onready var scriptWindow = $ScriptWindow
+
 @onready var background_grid = $VBoxContainer/TabContainer/Backgrounds/MarginContainer/ScrollContainer/GridContainer
 var background_children_list = []
 var background_dict : Dictionary
@@ -403,6 +405,7 @@ func _on_load_timeline_button_pressed():
 		obj.sounds = audios_dict
 		obj.videos = videos_dict
 		obj.connect("was_selected", _on_timeline_item_selected)
+		obj.connect("show_script", showScriptWindow)
 		obj.bus_list = bus_list
 		timeline_box.add_child(obj)
 		timeline_children_list.push_back(obj)
@@ -416,3 +419,14 @@ func _on_save_timeline_button_pressed():
 	
 func _on_timeline_item_selected(obj):
 	event_selected.emit(obj.data)
+	
+func showScriptWindow(sender, text):
+	scriptWindow.sender = sender
+	scriptWindow.text = text
+	scriptWindow.popup_centered_ratio(0.5)
+
+func _on_script_window_text_saved(text):
+	scriptWindow.sender.updateScriptText(text)
+
+func _on_script_window_popup_hide():
+	scriptWindow.sender.scriptPopupHidden()
