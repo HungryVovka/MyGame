@@ -5,7 +5,7 @@ extends Control
 @onready var face = $Face
 @onready var back = $Back
 
-@export var movable = 40
+@export var movable = 40: set = setMovable
 
 var tween
 var is_first = true
@@ -13,6 +13,12 @@ var is_first = true
 var shader_animations = []
 
 var shader = preload("res://shaders/AnimatedShader.gd").new()
+
+func setMovable(value):
+	movable = value
+	if movable == 0:
+		position = Vector2(0,0)
+		scale = Vector2(1.0, 1.0)
 
 func _ready():
 	shader.set_material(first.material, "time")
@@ -98,7 +104,7 @@ func swap_textures():
 	first.material.set_shader_parameter("secondTexture", tex)
 		
 func _input(event):
-	if movable > 0 && scale != Vector2(1.0, 1.0):
+	if movable > 0 && scale == Vector2(1.0, 1.0):
 		scale = Vector2(1.0 + 0.1*movable/40, 1.0 + 0.1*movable/40)
 	if event is InputEventMouseMotion:
 		var x = min(max((event.position.x*1.0 - 1920/2.0)/960.0, -1.0), 1.0)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxmor4kwak7su"
-path="res://.godot/imported/black.webp-73f0117daeeb0aeb7479cea0459e8747.ctex"
+uid="uid://c61wu2tdregf"
+path="res://.godot/imported/BlackScreenCredits2.png-968ffa3ae1cabb2b2ea27e66c85a4702.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Scene1/Art/black.webp"
-dest_files=["res://.godot/imported/black.webp-73f0117daeeb0aeb7479cea0459e8747.ctex"]
+source_file="res://Resources/Scene1/Art/BlackScreenCredits2.png"
+dest_files=["res://.godot/imported/BlackScreenCredits2.png-968ffa3ae1cabb2b2ea27e66c85a4702.ctex"]
 
 [params]
 

@@ -420,7 +420,6 @@ layout_mode = 2
 
 [node name="ScriptWindow" parent="." instance=ExtResource("6_cijc3")]
 visible = false
-text = ""
 
 [connection signal="scene_folder_changed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFolder" to="." method="_on_scene_folder_changed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/Button" to="." method="_on_folder_picked_pressed"]

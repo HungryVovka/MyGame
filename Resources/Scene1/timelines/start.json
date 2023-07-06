@@ -2,16 +2,13 @@
 	"display_name": "StartTimeline",
 	"events": [
 		{
-			"text": "Helloa"
-		},
-		{
 			"background": {
 				"fade": 7,
-				"name": "Plane_transparent",
+				"name": "1.png",
 				"transition": {
-					"blend": true,
-					"blend_mode": true,
-					"blend_speed": 0.1,
+					"blend": false,
+					"blend_mode": false,
+					"blend_speed": 100,
 					"curtain_h": false,
 					"curtain_reverse_h": false,
 					"curtain_reverse_v": false,
@@ -19,7 +16,7 @@
 					"curtain_speed_v": 0,
 					"curtain_v": false,
 					"fade_color": "#000000ff",
-					"fade_from": false,
+					"fade_from": true,
 					"fade_speed": 0.15,
 					"fade_to": false,
 					"scale_max": 1,
@@ -28,11 +25,11 @@
 					"scale_shift": 1,
 					"scale_speed": 0,
 					"shake_h": false,
-					"shake_height": 10,
-					"shake_mode": true,
-					"shake_speed": 1.2,
-					"shake_time": 1000,
-					"shake_v": true,
+					"shake_height": 20,
+					"shake_mode": false,
+					"shake_speed": 0,
+					"shake_time": 1,
+					"shake_v": false,
 					"slide_h": false,
 					"slide_reverse": false,
 					"slide_speed": 0,
@@ -49,17 +46,17 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"character": "",
+			"jump_to": "1",
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
-				"fade": 2.5,
+				"fade": 2,
 				"loop": true,
 				"name": "Airplane Outside",
-				"volume": 0.08
+				"volume": 0.05
 			},
-			"script": "func start(dialog, _event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"clouds\", {})\n\tdialog.get_parent().fadebleBackground.apply_shader(\"god_light\", {}, null, \"face\")\n\tdialog.get_parent().fadebleBackground.movable = 0\n\tdialog.get_parent().fadebleBackground.pivot_offset = dialog.get_parent().fadebleBackground.size/2\n\tdialog.get_parent().fadebleBackground.scale = Vector2(2.0, 2.0)\n\n\tvar timer = Timer.new()\n\ttimer.wait_time = 0.016\n\tdialog.add_child(timer)\n\ttimer.connect(\"timeout\", func(): dialog.get_parent().fadebleBackground.rotation += 0.002)\n\tDialogState.s(\"my_timer\", timer)\n\ttimer.start()\n\t\nfunc condition(_dialog, _event):\n\treturn true",
-			"text": ""
+			"text": "",
+			"timer": 8
 		},
 		{
 			"background": {
@@ -853,6 +850,7 @@
 					"swipe_speed_v": 0
 				}
 			},
+			"id": "1",
 			"text": "I can't afford to lose it. \n"
 		},
 		{
@@ -1036,7 +1034,7 @@
 		},
 		{
 			"background": {
-				"name": "3 (20)",
+				"name": "3 (21)",
 				"transition": {
 					"blend": true,
 					"blend_mode": true,
@@ -1078,7 +1076,7 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"script": "func start(dialog, event):\n dialog.get_parent().fadebleBackground.apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n return true",
+			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
 			"text": "",
 			"timer": 3
 		},
@@ -1088,7 +1086,7 @@
 				"transition": {
 					"blend": true,
 					"blend_mode": true,
-					"blend_speed": 1,
+					"blend_speed": 2,
 					"curtain_h": false,
 					"curtain_reverse_h": false,
 					"curtain_reverse_v": false,
@@ -1130,27 +1128,31 @@
 			"timer": 0.1
 		},
 		{
-			"text": ""
-		},
-		{
 			"background": {
-				"clickable": true,
-				"name": "black"
+				"name": "BlackScreen"
 			},
-			"id": "1",
-			"text": ""
+			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.remove_shader(\"face\")\n\tdialog.get_parent().fadebleBackground.movable = 0\nfunc condition(dialog, event):\n\treturn true",
+			"text": "",
+			"timer": 3
 		},
 		{
 			"background": {
-				"name": "blackcredits",
+				"name": "BlackScreen"
+			},
+			"text": "",
+			"timer": 0.1
+		},
+		{
+			"background": {
+				"name": "BlackScreenCredits2",
 				"transition": {
-					"blend": false,
-					"blend_mode": false,
+					"blend": true,
+					"blend_mode": true,
 					"blend_speed": 1,
 					"curtain_h": true,
 					"curtain_reverse_h": false,
 					"curtain_reverse_v": false,
-					"curtain_speed_h": 0.100000001490116,
+					"curtain_speed_h": 0.5,
 					"curtain_speed_v": 0,
 					"curtain_v": false,
 					"fade_color": "",
@@ -1184,11 +1186,12 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"text": ""
+			"text": "",
+			"timer": 3
 		},
 		{
 			"background": {
-				"name": "blackcredits2",
+				"name": "BlackScreenCredits3",
 				"transition": {
 					"blend": false,
 					"blend_mode": false,
@@ -1196,12 +1199,113 @@
 					"curtain_h": true,
 					"curtain_reverse_h": false,
 					"curtain_reverse_v": false,
-					"curtain_speed_h": 1,
+					"curtain_speed_h": 0.25,
 					"curtain_speed_v": 0,
 					"curtain_v": false,
 					"fade_color": "",
 					"fade_from": false,
 					"fade_speed": 0,
+					"fade_to": false,
+					"scale_max": 1,
+					"scale_min": 0,
+					"scale_mode": false,
+					"scale_shift": 1,
+					"scale_speed": 0,
+					"shake_h": false,
+					"shake_height": 20,
+					"shake_mode": false,
+					"shake_speed": 0,
+					"shake_time": 1,
+					"shake_v": false,
+					"slide_h": false,
+					"slide_reverse": false,
+					"slide_speed": 0,
+					"slide_v": false,
+					"swipe_max_h": 1920,
+					"swipe_max_v": 1080,
+					"swipe_min_h": -1920,
+					"swipe_min_v": -1080,
+					"swipe_mode_h": false,
+					"swipe_mode_v": false,
+					"swipe_shift_h": 0,
+					"swipe_shift_v": 0,
+					"swipe_speed_h": 0,
+					"swipe_speed_v": 0
+				}
+			},
+			"text": "",
+			"timer": 3
+		},
+		{
+			"background": {
+				"name": "BlackScreenCredits3"
+			},
+			"text": "",
+			"timer": 5
+		},
+		{
+			"background": {
+				"name": "BlackScreenCredits3",
+				"transition": {
+					"blend": false,
+					"blend_mode": false,
+					"blend_speed": 1,
+					"curtain_h": false,
+					"curtain_reverse_h": false,
+					"curtain_reverse_v": false,
+					"curtain_speed_h": 0,
+					"curtain_speed_v": 0,
+					"curtain_v": false,
+					"fade_color": "#eeeeeeff",
+					"fade_from": false,
+					"fade_speed": 0.5,
+					"fade_to": true,
+					"scale_max": 1,
+					"scale_min": 0,
+					"scale_mode": false,
+					"scale_shift": 1,
+					"scale_speed": 0,
+					"shake_h": false,
+					"shake_height": 20,
+					"shake_mode": false,
+					"shake_speed": 0,
+					"shake_time": 1,
+					"shake_v": false,
+					"slide_h": false,
+					"slide_reverse": false,
+					"slide_speed": 0,
+					"slide_v": false,
+					"swipe_max_h": 1920,
+					"swipe_max_v": 1080,
+					"swipe_min_h": -1920,
+					"swipe_min_v": -1080,
+					"swipe_mode_h": false,
+					"swipe_mode_v": false,
+					"swipe_shift_h": 0,
+					"swipe_shift_v": 0,
+					"swipe_speed_h": 0,
+					"swipe_speed_v": 0
+				}
+			},
+			"text": "",
+			"timer": 1.5
+		},
+		{
+			"background": {
+				"name": "4",
+				"transition": {
+					"blend": false,
+					"blend_mode": false,
+					"blend_speed": 0.5,
+					"curtain_h": false,
+					"curtain_reverse_h": false,
+					"curtain_reverse_v": false,
+					"curtain_speed_h": 0,
+					"curtain_speed_v": 0,
+					"curtain_v": false,
+					"fade_color": "#eeeeeeff",
+					"fade_from": true,
+					"fade_speed": 0.5,
 					"fade_to": false,
 					"scale_max": 1,
 					"scale_min": 0,
