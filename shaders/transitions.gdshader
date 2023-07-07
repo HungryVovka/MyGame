@@ -32,7 +32,6 @@ uniform bool blend_mode = false;
 uniform float blend_speed = 1.0;
 
 uniform vec4 fade_color: source_color = vec4(0.0, 1.0, 0.0, 1.0);
-
 uniform bool fade_to = false;
 uniform bool fade_from = false;
 uniform float fade_speed = 1.0; 

@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://kpxck4bb7pjp"]
+[gd_scene load_steps=10 format=3 uid="uid://kpxck4bb7pjp"]
 
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DialogHelperTool.gd" id="1_eb7vm"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/SceneLineEdit.gd" id="2_vieds"]
+[ext_resource type="PackedScene" uid="uid://cjcwj2co4fkg1" path="res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.tscn" id="3_16ib8"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DropValidators/BackgroundsContainer.gd" id="3_e5ldx"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DropValidators/VideosMarginContainer.gd" id="4_c6x1x"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DropValidators/AudioMarginContainer.gd" id="5_ya255"]
-[ext_resource type="PackedScene" uid="uid://bn4l3i0dt2p8t" path="res://addons/DialogHelperTool/TimelineItem/ScriptWindow/ScriptWindow.tscn" id="6_cijc3"]
+[ext_resource type="PackedScene" uid="uid://b3o5x2qfahd2f" path="res://addons/DialogHelperTool/TimelineItem/ScriptModal/ScriptModal.tscn" id="7_fla53"]
+[ext_resource type="PackedScene" uid="uid://dgh0ovmttvlnj" path="res://addons/DialogHelperTool/TimelineItem/TransitionsModal/TransitionsModal.tscn" id="8_lv4u6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p81f4"]
 font_size = 20
@@ -169,6 +171,29 @@ text = "RELOAD"
 [node name="SaveTimelineButton" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "SAVE"
+
+[node name="SaveTimelineButton2" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "ADD ITEM"
+
+[node name="SaveTimelineButton3" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "REMOVE ITEM "
+
+[node name="SaveTimelineButton4" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "/\\"
+
+[node name="SaveTimelineButton5" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "\\/"
+
+[node name="Dropdownbox" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_16ib8")]
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 500)
@@ -418,8 +443,13 @@ text = "Save"
 visible = false
 layout_mode = 2
 
-[node name="ScriptWindow" parent="." instance=ExtResource("6_cijc3")]
+[node name="ScriptModal" parent="." instance=ExtResource("7_fla53")]
 visible = false
+layout_mode = 1
+
+[node name="TransitionsModal" parent="." instance=ExtResource("8_lv4u6")]
+visible = false
+layout_mode = 1
 
 [connection signal="scene_folder_changed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFolder" to="." method="_on_scene_folder_changed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/Button" to="." method="_on_folder_picked_pressed"]
@@ -427,6 +457,10 @@ visible = false
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/LoadTimelineButton" to="." method="_on_load_timeline_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/SaveTimelineButton" to="." method="_on_save_timeline_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/SaveTimelineButton2" to="." method="_on_save_timeline_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/SaveTimelineButton3" to="." method="_on_save_timeline_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/SaveTimelineButton4" to="." method="_on_save_timeline_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/SaveTimelineButton5" to="." method="_on_save_timeline_button_pressed"]
 [connection signal="dropped_data" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer" to="." method="_on_margin_container_dropped_data"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_background_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_background_button_2_pressed"]
@@ -442,5 +476,6 @@ visible = false
 [connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_characters_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_characters_button_2_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="_on_save_characters_button_pressed"]
-[connection signal="popup_hide" from="ScriptWindow" to="." method="_on_script_window_popup_hide"]
-[connection signal="textSaved" from="ScriptWindow" to="." method="_on_script_window_text_saved"]
+[connection signal="back_clicked" from="ScriptModal" to="." method="_on_script_window_popup_hide"]
+[connection signal="success" from="ScriptModal" to="." method="_on_script_window_text_saved"]
+[connection signal="back_clicked" from="TransitionsModal" to="." method="_on_transitions_modal_back_clicked"]

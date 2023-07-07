@@ -28,3 +28,9 @@ func gs(dict: Dictionary, key):
 			dict[key] = ""
 		return result
 	return ""
+	
+func gb(dict: Dictionary, keys = []):
+	for k in keys:
+		if dict.has(k) && dict[k]:
+			return true
+	return false

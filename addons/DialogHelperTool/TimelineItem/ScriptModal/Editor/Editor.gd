@@ -5,6 +5,7 @@ extends Control
 @onready var code = $Panel/MarginContainer/VBoxContainer/CodeEdit
 
 signal textSaved(text)
+signal success(data)
 
 func _on_code_edit_text_changed():
 	pass
@@ -16,4 +17,6 @@ func getText():
 	return code.text
 
 func _on_button_pressed():
+	print("on_button_pressed", text)
 	textSaved.emit(text)
+	success.emit({"script": text})

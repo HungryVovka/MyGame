@@ -10,7 +10,8 @@ var timelines_list = {}
 @onready var scene_file = $VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFile
 @onready var timelines_combobox = $VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/TimelineList
 
-@onready var scriptWindow = $ScriptWindow
+@onready var transitionsModal = $TransitionsModal
+@onready var scriptModal = $ScriptModal
 
 @onready var background_grid = $VBoxContainer/TabContainer/Backgrounds/MarginContainer/ScrollContainer/GridContainer
 var background_children_list = []
@@ -58,7 +59,6 @@ func add_custom_project_setting(name: String, default_value, type: int, hint: in
 
 func _ready():
 	_on_scene_folder_changed("res://Resources/Scene1/")
-
 	JSONHelper.connect("reimport", reimport_slot)
 	
 func reimport_slot(filename):
@@ -387,7 +387,15 @@ func _on_load_timeline_button_pressed():
 		timeline_box.remove_child(c)
 		c.queue_free()
 	timeline_children_list.clear()
-	var context: Dictionary = {"ids": [], "characters": []}
+	if !current_timeline.has("roots"):
+		current_timeline["roots"] = {}
+	var context: Dictionary = update_context()
+	load_root(context)
+	
+func update_context(context: Dictionary = {"ids": [], "characters": [], "roots": [""]}) -> Dictionary:
+	context.ids.clear()
+	context.characters.clear()
+	context.roots.clear()
 	for e in current_timeline.events:
 		if e.has("id") && !context.ids.has(e.id):
 			context.ids.push_back(e.id)
@@ -396,6 +404,16 @@ func _on_load_timeline_button_pressed():
 	for c in characters_dict.characters:
 		if !context.characters.has(c):
 			context.characters.push_back(c)
+	if current_timeline.has("roots"):
+		for r in current_timeline.roots.keys():
+			context.roots.push_back(r)
+	return context
+		
+func load_root(context: Dictionary, name: String = "", ):
+	if name != "" && (!current_timeline.has("roots") || !current_timeline.roots.has(name)):
+		print("no such root: ", name)
+		return
+	var path = current_timeline if name == "" else current_timeline.roots[name]
 	for e in current_timeline.events:
 		var class_obj = preload("res://addons/DialogHelperTool/TimelineItem/TimelineItem.tscn")
 		var obj = class_obj.instantiate()
@@ -406,6 +424,7 @@ func _on_load_timeline_button_pressed():
 		obj.videos = videos_dict
 		obj.connect("was_selected", _on_timeline_item_selected)
 		obj.connect("show_script", showScriptWindow)
+		obj.connect("show_transitions", showTransitionsWindow)
 		obj.bus_list = bus_list
 		timeline_box.add_child(obj)
 		timeline_children_list.push_back(obj)
@@ -414,19 +433,29 @@ func _on_load_timeline_button_pressed():
 
 
 func _on_save_timeline_button_pressed():
-	print(current_timeline.events[0])
 	JSONHelper.save_json(current_timeline_filename, current_timeline)
 	
 func _on_timeline_item_selected(obj):
 	event_selected.emit(obj.data)
 	
 func showScriptWindow(sender, text):
-	scriptWindow.sender = sender
-	scriptWindow.text = text
-	scriptWindow.popup_centered_ratio(0.5)
+	scriptModal.sender = sender
+	scriptModal.text = text
+	scriptModal.popup_size = Vector2(0.8, 0.8)
+	scriptModal.show_modal()
+	
+func showTransitionsWindow(sender, data):
+	transitionsModal.sender = sender
+	transitionsModal.src = data
+	transitionsModal.popup_size = Vector2(0.7, 0.8)
+	transitionsModal.show_modal()
 
-func _on_script_window_text_saved(text):
-	scriptWindow.sender.updateScriptText(text)
+func _on_script_window_text_saved(data: Dictionary):
+	scriptModal.sender.updateScriptText(data.script)
+	scriptModal.sender.scriptPopupHidden()
 
 func _on_script_window_popup_hide():
-	scriptWindow.sender.scriptPopupHidden()
+	scriptModal.sender.scriptPopupHidden()
+
+func _on_transitions_modal_back_clicked():
+	transitionsModal.sender.transitionsPopupHidden()
