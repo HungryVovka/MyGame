@@ -31,7 +31,7 @@ var characters_children_list = []
 var characters_dict: Dictionary
 
 @onready var timeline_box = $VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer/TimeLine
-@onready var timeline_list_combobox = $VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/HBoxContainer/TimelinesList
+@onready var timeline_list_combobox = $VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/TimelinesList
 var timeline_children_list = []
 var current_timeline: Dictionary = {}
 var current_timeline_filename: String = ""

@@ -19,6 +19,8 @@ func setMovable(value):
 	if movable == 0:
 		position = Vector2(0,0)
 		scale = Vector2(1.0, 1.0)
+	else: 
+		scale = Vector2(1.0 + 0.1*movable/40, 1.0 + 0.1*movable/40)
 
 func _ready():
 	shader.set_material(first.material, "time")
