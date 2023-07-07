@@ -21,9 +21,8 @@
 	"3 (7)": "res://Resources/Scene1/Art/3 (7).png",
 	"3 (8)": "res://Resources/Scene1/Art/3 (8).png",
 	"3 (9)": "res://Resources/Scene1/Art/3 (9).png",
-	"Plane_transparent": "res://Resources/Scene1/Art/Plane_transparent.png",
-	"black": "res://Resources/Scene1/Art/black.webp",
-	"blackcredits": "res://Resources/Scene1/Art/blackcredits.webp",
-	"blackcredits2": "res://Resources/Scene1/Art/blackcredits2.webp",
-	"dice": "res://Resources/backgrounds/dice.png"
+	"4": "res://Resources/Scene1/Art/4.png",
+	"BlackScreen": "res://Resources/Scene1/Art/BlackScreen.png",
+	"BlackScreenCredits2": "res://Resources/Scene1/Art/BlackScreenCredits2.png",
+	"BlackScreenCredits3": "res://Resources/Scene1/Art/BlackScreenCredits3.png"
 }

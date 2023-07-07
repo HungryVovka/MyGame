@@ -16,6 +16,8 @@ bg_color = Color(0, 0, 0.0117647, 0.305882)
 [sub_resource type="LabelSettings" id="LabelSettings_b5bax"]
 line_spacing = 2.08165e-12
 font = ExtResource("2_q13ku")
+font_size = 18
+font_color = Color(1, 1, 1, 0.756863)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 shadow_color = Color(0, 0, 1, 0)
@@ -29,7 +31,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 shadow_color = Color(0, 0, 0.188235, 0.937255)
-shadow_size = 4
+shadow_size = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knae5"]
 bg_color = Color(0.490196, 0.462745, 1, 0.0705882)
@@ -155,6 +157,7 @@ alignment = 1
 layout_mode = 2
 text = "JUMP:"
 label_settings = SubResource("LabelSettings_b5bax")
+vertical_alignment = 1
 
 [node name="JumpDropdown" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
 custom_minimum_size = Vector2(20, 30)
@@ -191,25 +194,26 @@ theme_override_constants/margin_left = -8
 
 [node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 1
 text = "CHARACTER:"
 label_settings = SubResource("LabelSettings_b5bax")
 horizontal_alignment = 1
-vertical_alignment = 3
+vertical_alignment = 1
 
 [node name="CharacterDropdown" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_mio6r")]
-custom_minimum_size = Vector2(40, 30)
+custom_minimum_size = Vector2(40, 20)
 layout_mode = 2
 size_flags_stretch_ratio = 0.4
-
-[node name="TextButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
-layout_mode = 2
-tooltip = "Edit event's text"
-icon = ExtResource("5_amxjm")
 
 [node name="BackgroundButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
 layout_mode = 2
 tooltip = "Edit event's background and transition"
 icon = ExtResource("5_fkr4x")
+
+[node name="TextButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
+layout_mode = 2
+tooltip = "Edit event's text"
+icon = ExtResource("5_amxjm")
 
 [node name="SoundsButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
 layout_mode = 2

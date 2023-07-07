@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgrn3absn5b0o"
-path="res://.godot/imported/blackcredits2.webp-daa4c6b2711b09db17ff8f60c5beb233.ctex"
+uid="uid://jiu2xsp8pe2p"
+path="res://.godot/imported/BlackScreenCredits3.png-ba4502f37d3e4a08aeaedad65ad8e7bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Scene1/Art/blackcredits2.webp"
-dest_files=["res://.godot/imported/blackcredits2.webp-daa4c6b2711b09db17ff8f60c5beb233.ctex"]
+source_file="res://Resources/Scene1/Art/BlackScreenCredits3.png"
+dest_files=["res://.godot/imported/BlackScreenCredits3.png-ba4502f37d3e4a08aeaedad65ad8e7bf.ctex"]
 
 [params]
 

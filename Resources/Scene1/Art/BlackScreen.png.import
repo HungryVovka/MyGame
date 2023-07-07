@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn3btye0jq0ti"
-path="res://.godot/imported/Plane_transparent.png-a45338c9a9d5830059c9b1ed6090944f.ctex"
+uid="uid://bmldnpty0r1vt"
+path="res://.godot/imported/BlackScreen.png-0dce316ccd056f2343f53e67cee2d2d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Scene1/Art/Plane_transparent.png"
-dest_files=["res://.godot/imported/Plane_transparent.png-a45338c9a9d5830059c9b1ed6090944f.ctex"]
+source_file="res://Resources/Scene1/Art/BlackScreen.png"
+dest_files=["res://.godot/imported/BlackScreen.png-0dce316ccd056f2343f53e67cee2d2d5.ctex"]
 
 [params]
 
