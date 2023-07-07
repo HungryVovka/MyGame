@@ -2,61 +2,63 @@
 	"display_name": "StartTimeline",
 	"events": [
 		{
+			"jump_to": "2",
 			"text": "Helloa"
 		},
 		{
 			"background": {
 				"fade": 7,
-				"name": "Plane_transparent",
+				"name": "3 (18)",
 				"transition": {
-					"blend": true,
 					"blend_mode": true,
-					"blend_speed": 0.1,
-					"curtain_h": false,
-					"curtain_reverse_h": false,
-					"curtain_reverse_v": false,
-					"curtain_speed_h": 0,
-					"curtain_speed_v": 0,
-					"curtain_v": false,
-					"fade_color": "#000000ff",
-					"fade_from": false,
-					"fade_speed": 0.15,
-					"fade_to": false,
-					"scale_max": 1,
-					"scale_min": 0,
-					"scale_mode": false,
-					"scale_shift": 1,
-					"scale_speed": 0,
-					"shake_h": false,
-					"shake_height": 10,
-					"shake_mode": true,
-					"shake_speed": 1.2,
-					"shake_time": 1000,
-					"shake_v": true,
-					"slide_h": false,
-					"slide_reverse": false,
-					"slide_speed": 0,
-					"slide_v": false,
-					"swipe_max_h": 1920,
-					"swipe_max_v": 1080,
-					"swipe_min_h": -1920,
-					"swipe_min_v": -1080,
-					"swipe_mode_h": false,
-					"swipe_mode_v": false,
-					"swipe_shift_h": 0,
-					"swipe_shift_v": 0,
-					"swipe_speed_h": 0,
-					"swipe_speed_v": 0
+					"blend_speed": 0.130000000000021,
+					"slide_h": true,
+					"slide_reverse": true,
+					"slide_speed": 0.300000000000021,
+					"slide_v": false
 				}
 			},
-			"character": "",
+			"choices": [
+				{
+					"events": [
+						{
+							"text": ""
+						},
+						{
+							"text": ""
+						},
+						{
+							"text": ""
+						},
+						{
+							"text": ""
+						},
+						{
+							"text": ""
+						},
+						{
+							"text": ""
+						},
+						{
+							"text": ""
+						},
+						{
+							"text": ""
+						},
+						{
+							"text": ""
+						}
+					],
+					"text": "ljlkjlkl"
+				}
+			],
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
 				"fade": 2.5,
 				"loop": true,
 				"name": "Airplane Outside",
-				"volume": 0.08
+				"volume": 0.12
 			},
 			"script": "func start(dialog, _event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"clouds\", {})\n\tdialog.get_parent().fadebleBackground.apply_shader(\"god_light\", {}, null, \"face\")\n\tdialog.get_parent().fadebleBackground.movable = 0\n\tdialog.get_parent().fadebleBackground.pivot_offset = dialog.get_parent().fadebleBackground.size/2\n\tdialog.get_parent().fadebleBackground.scale = Vector2(2.0, 2.0)\n\n\tvar timer = Timer.new()\n\ttimer.wait_time = 0.016\n\tdialog.add_child(timer)\n\ttimer.connect(\"timeout\", func(): dialog.get_parent().fadebleBackground.rotation += 0.002)\n\tDialogState.s(\"my_timer\", timer)\n\ttimer.start()\n\t\nfunc condition(_dialog, _event):\n\treturn true",
 			"text": ""
@@ -127,6 +129,7 @@
 			"background": {
 				"name": "2"
 			},
+			"id": "opt",
 			"stop_sound": "Music1",
 			"text": "",
 			"timer": 0.4
@@ -135,44 +138,8 @@
 			"background": {
 				"name": "3 (2)",
 				"transition": {
-					"blend": true,
 					"blend_mode": true,
-					"blend_speed": 0.8,
-					"curtain_h": false,
-					"curtain_reverse_h": false,
-					"curtain_reverse_v": false,
-					"curtain_speed_h": 0,
-					"curtain_speed_v": 0,
-					"curtain_v": false,
-					"fade_color": "",
-					"fade_from": false,
-					"fade_speed": 0,
-					"fade_to": false,
-					"scale_max": 1,
-					"scale_min": 0,
-					"scale_mode": false,
-					"scale_shift": 1,
-					"scale_speed": 0,
-					"shake_h": false,
-					"shake_height": 20,
-					"shake_mode": false,
-					"shake_speed": 0,
-					"shake_time": 1,
-					"shake_v": false,
-					"slide_h": false,
-					"slide_reverse": false,
-					"slide_speed": 0,
-					"slide_v": false,
-					"swipe_max_h": 1920,
-					"swipe_max_v": 1080,
-					"swipe_min_h": -1920,
-					"swipe_min_v": -1080,
-					"swipe_mode_h": false,
-					"swipe_mode_v": false,
-					"swipe_shift_h": 0,
-					"swipe_shift_v": 0,
-					"swipe_speed_h": 0,
-					"swipe_speed_v": 0
+					"blend_speed": 0.800000000000021
 				}
 			},
 			"play_sound": {
@@ -183,6 +150,7 @@
 				"name": "samolet-boeing-737-jet-zvuk-iz-salona-26574",
 				"volume": 0.13
 			},
+			"script": "func start(dialog, _event):\n\tpass\n\t\nfunc condition(_dialog, _event):\n\treturn true",
 			"text": "",
 			"timer": 2
 		},
@@ -231,6 +199,7 @@
 					"swipe_speed_v": 0
 				}
 			},
+			"id": "2",
 			"play_sound": {
 				"channel": "SFX1",
 				"fade": 0.7,
@@ -1233,5 +1202,8 @@
 			"text": ""
 		}
 	],
+	"roots": {
+
+	},
 	"unique_name": "StartTimeline"
 }

@@ -36,6 +36,7 @@ var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").n
 
 @onready var textField = $PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer/Text
 @onready var audioField = $PanelContainer/MarginContainer/VBoxContainer/AudioField
+@onready var backgroundField = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField
 
 @onready var soundCombobox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox
 @onready var soundBusCombobox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundBusCombobox
@@ -46,6 +47,15 @@ var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").n
 @onready var playSoundCheckbox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/PlaySoundCheckbox
 @onready var stopSoundCheckbox = $PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/StopSound/StopSoundCheckbox
 
+@onready var backgroundCheckbox = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/BackgroundCheckbox
+@onready var backgroundName = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/BackgroundName
+@onready var backgroundVideoName = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/VideoName
+@onready var backgroundClickable = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/Clickable
+@onready var backgroundTransitionButton = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TransitionButton
+@onready var backgroundPreview = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/HBoxContainer/Preview
+@onready var backgroundBlock = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/PanelContainer/MarginContainer/MarginContainer
+
+
 var texHideTimer: Timer
 var tex: TextureRect
 var scale_coef: float = 1.0
@@ -53,6 +63,8 @@ var scale_coef: float = 1.0
 signal was_selected(obj)
 
 signal show_script(sender, text)
+
+signal show_transitions(sender, data)
 
 
 var _is_ready = false
@@ -78,11 +90,8 @@ func rescale_fonts(coef: float):
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
-	v = int($PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox/LineEdit.get_theme_font_size("font_size") * coef)
-	
-	$PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundCombobox/LineEdit.add_theme_font_size_override("font_size", v)
-	$PanelContainer/MarginContainer/VBoxContainer/AudioField/Panel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlaySound/SoundBusCombobox/LineEdit.add_theme_font_size_override("font_size", v)
-	
+
+
 	textButton.setScale(coef)
 	backgroundsButton.setScale(coef)
 	scriptButton.setScale(coef)
@@ -95,8 +104,15 @@ func rescale_fonts(coef: float):
 	oldSize = $PanelContainer/MarginContainer/VBoxContainer/AudioField.custom_minimum_size
 	$PanelContainer/MarginContainer/VBoxContainer/AudioField.custom_minimum_size = Vector2(oldSize.x, oldSize.y * coef)
 	
+	oldSize = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField.custom_minimum_size
+	$PanelContainer/MarginContainer/VBoxContainer/BackgroundField.custom_minimum_size = Vector2(oldSize.x, oldSize.y * coef)
+	
 	soundCombobox.setScale(coef)
 	soundBusCombobox.setScale(coef)
+	
+	backgroundName.setScale(coef)
+	backgroundVideoName.setScale(coef)
+	backgroundClickable.setScale(coef)
 	
 	scale_coef = coef
 
@@ -140,6 +156,7 @@ func setData(src: Dictionary):
 	soundBusCombobox.items = fixTypes([""] + bus_list)
 	
 	renderAudio()
+	renderBackground()
 	updateButtons()
 	
 	_data_ready = true
@@ -155,13 +172,38 @@ func renderAudio():
 		soundFade.value = data.play_sound.fade if data.play_sound.has("fade") else 0.0
 	if data.has("stop_sound"):
 		stopSoundChannel.text = data.stop_sound
-	
+		
+func renderBackground():
+	backgroundName.items = fixTypes(["", "Ignore"] + backgrounds.keys())
+	backgroundVideoName.items = fixTypes(["", "Ignore"] + videos.keys())
+	backgroundClickable.items = fixTypes(["", "True", "False"])
+	backgroundCheckbox.button_pressed = data.has("background")
+	_on_background_checkbox_toggled(data.has("background"))
+	if data.has("background"):
+		backgroundName.text = data.background.name if data.background.has("name") else "Ignore"
+		backgroundVideoName.text = data.background.video if data.background.has("video") else "Ignore"
+		if data.background.has("clickable"):
+			backgroundClickable.text = "True" if data.background.clickable else "False"
+		else:
+			backgroundClickable.text = ""
+		backgroundPreview.texture = backgrounds[data.background.name] if data.background.has("name") && backgrounds.has(data.background.name) else null
+		backgroundTransitionButton.button_pressed = data.background.has("transition")
+		if data.background.has("transition"):
+			backgroundTransitionButton.text = "TRANSITION\n" + transition_to_text(data.background.transition)
+		
+		
 func updateButtons():	
 	textButton.setActive(data.text != "")
 	backgroundsButton.setActive(data.has("background"))
 	soundsButton.setActive(data.has("play_sound") || data.has("stop_sound"))
 	scriptButton.setActive(data.has("script"))
 	statsButton.setActive(data.has("stats"))
+	if data.has("background") && data.background.has("transition"):
+		backgroundTransitionButton.text = "TRANSITION\n" + transition_to_text(data.background.transition)
+		backgroundTransitionButton.button_pressed = data.background.has("transition")
+	else:
+		backgroundTransitionButton.text = "TRANSITION"
+		backgroundTransitionButton.button_pressed = false
 
 func switch_control_style(control, is_active):
 	if (!control): 
@@ -270,7 +312,11 @@ func _on_sounds_button_toggled(pressed):
 	var height = 100*scale_coef + 8
 	custom_minimum_size += Vector2(0, height if pressed else -height)
 	$PanelContainer/MarginContainer/VBoxContainer/AudioField.visible = pressed
-
+	
+func _on_background_button_toggled(pressed):
+	var height = 110*scale_coef + 8
+	custom_minimum_size += Vector2(0, height if pressed else -height)
+	$PanelContainer/MarginContainer/VBoxContainer/BackgroundField.visible = pressed
 
 func _on_sound_combobox_item_selected(text):
 	if data.has("play_sound"):
@@ -344,7 +390,7 @@ func _on_stop_sound_checkbox_toggled(button_pressed):
 
 func _on_script_button_toggled(pressed):
 	if pressed:
-		show_script.emit(self, data["script"] if data.has("script") else "func start(dialog, _event):
+		show_script.emit(self, data["script"] if data.has("script") else "func start(_dialog, _event):
 	pass
 	
 func condition(_dialog, _event):
@@ -354,9 +400,72 @@ func scriptPopupHidden():
 	scriptButton.pressed = false
 	updateButtons()
 	
+func transitionsPopupHidden():
+	updateButtons()
+	
 func updateScriptText(text):
 	if text != "":
 		data["script"] = text
 	else:
 		data.erase("script")
 	updateButtons()
+
+func _on_transition_button_pressed():
+	if data.has("background"):
+		show_transitions.emit(self, data.background)
+
+func _on_background_checkbox_toggled(button_pressed):
+	if !button_pressed:
+		data.erase("background")
+	else:
+		if _data_ready:
+			data["background"] = {}
+			if backgroundName.text != "Ignore":
+				data.background.name = backgroundName.text
+			if backgroundVideoName.text != "Ignore":
+				data.background.video = backgroundVideoName.text
+			if backgroundClickable.text != "":
+				data.background.clickable = backgroundClickable.text
+			#load data from transition
+	backgroundBlock.visible = !button_pressed
+	updateButtons()
+
+func _on_background_name_item_selected(text):
+	if _data_ready:
+		if text == "Ignore":
+			data.background.erase("name")
+		else:
+			data.background.name = text
+		backgroundPreview.texture = backgrounds[data.background.name] if data.background.has("name") && backgrounds.has(data.background.name) else null
+
+func _on_video_name_item_selected(text):
+	if _data_ready:
+		if text == "Ignore":
+			data.background.erase("video")
+		else:
+			data.background.video = text
+
+func _on_clickable_item_selected(text):
+	if _data_ready:
+		if text == "":
+			data.background.erase("clickable")
+		else:
+			data.background.clickable = true if text == "True" else false
+			
+func transition_to_text(transition: Dictionary) -> String:
+	var result = "[ "
+	if JSONHelper.gb(transition, ["swipe_mode_h", "swipe_mode_v"]):
+		result += "swipe "
+	if JSONHelper.gb(transition, ["scale_mode"]):
+		result += "scale "
+	if JSONHelper.gb(transition, ["shake_mode"]):
+		result += "shake "
+	if JSONHelper.gb(transition, ["blend_mode"]):
+		result += "blend "
+	if JSONHelper.gb(transition, ["fade_to", "fade_from"]):
+		result += "fade "
+	if JSONHelper.gb(transition, ["slide_h", "slide_v"]):
+		result += "slide "
+	if JSONHelper.gb(transition, ["curtain_h", "curtain_v"]):
+		result += "curtain "
+	return result + "]"
