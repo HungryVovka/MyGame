@@ -445,6 +445,7 @@ func move_down():
 	for t in timeline_children_list:
 		if t.selected:
 			selected_list.push_front(t)
+	selected_list.sort_custom(func(a, b): return a.get_index() > b.get_index())
 	var events = get_current_root_events()
 	for t in selected_list:
 		var ix = t.get_index()
@@ -459,6 +460,7 @@ func move_up():
 	for t in timeline_children_list:
 		if t.selected:
 			selected_list.push_back(t)
+	selected_list.sort_custom(func(a, b): return a.get_index() < b.get_index())
 	var events = get_current_root_events()
 	for t in selected_list:
 		var ix = t.get_index()
