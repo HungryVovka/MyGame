@@ -38,6 +38,7 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 
 [node name="Scene" type="Control" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Scene"]
@@ -128,7 +129,6 @@ text = "Reload Scene"
 layout_mode = 2
 
 [node name="Timeline" type="Control" parent="VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Timeline"]
@@ -181,20 +181,20 @@ text = "RELOAD"
 layout_mode = 2
 text = "SAVE"
 
-[node name="SaveTimelineButton2" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
+[node name="AddTimelineItemButton" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
 layout_mode = 2
 text = "ADD ITEM"
 
-[node name="SaveTimelineButton3" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
+[node name="RemoveTimelineItemButton" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
 layout_mode = 2
 text = "REMOVE ITEM "
 
-[node name="SaveTimelineButton4" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
+[node name="MoveUpTimelineItemButton" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "/\\"
 
-[node name="SaveTimelineButton5" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
+[node name="MoveDownTimelineItemButton" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "\\/"
@@ -464,10 +464,10 @@ layout_mode = 1
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/LoadTimelineButton" to="." method="_on_load_timeline_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/SaveTimelineButton" to="." method="_on_save_timeline_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/SaveTimelineButton2" to="." method="_on_save_timeline_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/SaveTimelineButton3" to="." method="_on_save_timeline_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/SaveTimelineButton4" to="." method="_on_save_timeline_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/SaveTimelineButton5" to="." method="_on_save_timeline_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/AddTimelineItemButton" to="." method="add_new_event"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/RemoveTimelineItemButton" to="." method="remove_selected"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/MoveUpTimelineItemButton" to="." method="move_up"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/MoveDownTimelineItemButton" to="." method="_on_move_down_timeline_item_button_pressed"]
 [connection signal="dropped_data" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer" to="." method="_on_margin_container_dropped_data"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_background_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_background_button_2_pressed"]

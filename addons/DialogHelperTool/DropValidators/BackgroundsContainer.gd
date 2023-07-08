@@ -16,4 +16,3 @@ func validate(array):
 		
 func _drop_data(_at_position, data):
 	dropped_data.emit(data.files)
-	

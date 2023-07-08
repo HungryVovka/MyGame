@@ -280,6 +280,11 @@ func _on_panel_container_gui_input(event):
 		selected = !selected
 		if selected:
 			was_selected.emit(self)
+	if event is InputEventMouseButton && event.pressed && event.button_index == MOUSE_BUTTON_RIGHT:
+		move_up()
+			
+func move_up():
+	get_parent().move_child(self, get_index() - 1)
 
 
 func _on_panel_container_mouse_exited():
