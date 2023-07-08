@@ -40,14 +40,8 @@
 					"swipe_speed_v": 0
 				}
 			},
+			"id": "1",
 			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.remove_shader(\"face\")\n\tpass\nfunc condition(dialog, event):\n\treturn true",
-			"text": ""
-		},
-		{
-			"background": {
-				"fade": 1,
-				"name": "11"
-			},
 			"text": ""
 		},
 		{
@@ -55,15 +49,20 @@
 				"fade": 1,
 				"name": "12"
 			},
+			"id": "3",
 			"text": ""
 		},
 		{
-			"background": {
-				"fade": 1,
-				"name": "13"
-			},
+			"id": "4",
+			"text": ""
+		},
+		{
+			"id": "7",
 			"text": ""
 		}
 	],
+	"roots": {
+
+	},
 	"unique_name": "StartTimeline"
 }

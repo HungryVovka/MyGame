@@ -10,7 +10,7 @@
 					"fade_speed": 0.26
 				}
 			},
-			"jump_to": "q",
+			"jump_to": "qqq",
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
@@ -813,7 +813,9 @@
 			"timer": 1
 		},
 		{
+			"id": "qqq",
 			"play_sound": {
+				"bus": "MusicGigaEffects",
 				"channel": "Music1",
 				"fade": 1,
 				"name": "Simon And Garfunkel - The Sound Of Silence",

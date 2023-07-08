@@ -38,6 +38,8 @@ var current_timeline_filename: String = ""
 
 var _file_dialog
 var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
+var current_root: String = ""
+var state_context: Dictionary = {}
 
 
 
@@ -395,6 +397,7 @@ func update_context(context: Dictionary = {"ids": [], "characters": [], "roots":
 	if current_timeline.has("roots"):
 		for r in current_timeline.roots.keys():
 			context.roots.push_back(r)
+	state_context = context
 	return context
 		
 func load_root(context: Dictionary, name: String = "", ):
@@ -402,22 +405,27 @@ func load_root(context: Dictionary, name: String = "", ):
 		print("no such root: ", name)
 		return
 	var path = current_timeline if name == "" else current_timeline.roots[name]
-	for e in current_timeline.events:
-		var class_obj = preload("res://addons/DialogHelperTool/TimelineItem/TimelineItem.tscn")
-		var obj = class_obj.instantiate()
-		obj.context = context
-		obj.data = e
-		obj.backgrounds = background_store
-		obj.sounds = audios_dict
-		obj.videos = videos_dict
-		obj.connect("was_selected", _on_timeline_item_selected)
-		obj.connect("show_script", showScriptWindow)
-		obj.connect("show_transitions", showTransitionsWindow)
-		obj.bus_list = bus_list
-		timeline_box.add_child(obj)
-		timeline_children_list.push_back(obj)
-		obj.custom_minimum_size = obj.custom_minimum_size * interface_scale
-		obj.rescale_fonts(interface_scale)
+	for e in path.events:
+		create_timeline_event(e, context)
+
+func create_timeline_event(e: Dictionary, context: Dictionary):
+	var class_obj = preload("res://addons/DialogHelperTool/TimelineItem/TimelineItem.tscn")
+	var obj = class_obj.instantiate()
+	obj.context = context
+	obj.data = e
+	obj.backgrounds = background_store
+	obj.sounds = audios_dict
+	obj.videos = videos_dict
+	obj.connect("was_selected", _on_timeline_item_selected)
+	obj.connect("show_script", showScriptWindow)
+	obj.connect("show_transitions", showTransitionsWindow)
+	obj.bus_list = bus_list
+	timeline_box.add_child(obj)
+	timeline_children_list.push_back(obj)
+	obj.custom_minimum_size = obj.custom_minimum_size * interface_scale
+	obj.rescale_fonts(interface_scale)
+	return obj
+
 
 
 func _on_save_timeline_button_pressed():
@@ -425,6 +433,77 @@ func _on_save_timeline_button_pressed():
 	
 func _on_timeline_item_selected(obj):
 	event_selected.emit(obj.data)
+	
+func get_current_root_events():
+	if current_root == "":
+		return current_timeline.events
+	else:
+		return current_timeline.roots[current_root].events
+	
+func move_down():
+	var selected_list: Array[Node] = []
+	for t in timeline_children_list:
+		if t.selected:
+			selected_list.push_front(t)
+	var events = get_current_root_events()
+	for t in selected_list:
+		var ix = t.get_index()
+		if ix < timeline_children_list.size() - 1:
+			t.get_parent().move_child(t, t.get_index() + 1)
+			var next = events[ix + 1]
+			events[ix + 1] = events[ix]
+			events[ix] = next
+			
+func move_up():
+	var selected_list: Array[Node] = []
+	for t in timeline_children_list:
+		if t.selected:
+			selected_list.push_back(t)
+	var events = get_current_root_events()
+	for t in selected_list:
+		var ix = t.get_index()
+		if ix > 0:
+			t.get_parent().move_child(t, t.get_index() - 1)
+			var prev = events[ix - 1]
+			events[ix - 1] = events[ix]
+			events[ix] = prev
+			
+func add_new_event():
+	var max_index: int = -1
+	for t in timeline_children_list:
+		if t.selected:
+			max_index = max(max_index, t.get_index())
+	var event: Dictionary = {"text": ""}
+	var list: Array = get_current_root_events()
+	var should_insert: bool = max_index > -1 && max_index < timeline_children_list.size() - 1
+	
+	if should_insert:
+		list.insert(max_index + 1, event)
+	else:
+		list.push_back(event)
+	var obj = create_timeline_event(event, state_context)
+	if should_insert:
+		obj.get_parent().move_child(obj, max_index + 1)
+
+func remove_selected():
+	var indexes: Array = []
+	for t in timeline_children_list:
+		if t.selected:
+			indexes.push_back(t.get_index())
+	var new_t: Array = timeline_children_list.filter(func(t): return !t.selected)
+	for t in timeline_children_list:
+		if t.selected:
+			t.get_parent().remove_child(t)
+			t.queue_free()
+	timeline_children_list = new_t
+	
+	indexes.sort()
+	indexes.reverse()
+	
+	var list: Array = get_current_root_events()
+	for ix in indexes:
+		list.remove_at(ix)
+	
 	
 func showScriptWindow(sender, text):
 	scriptModal.sender = sender
@@ -447,3 +526,7 @@ func _on_script_window_popup_hide():
 
 func _on_transitions_modal_back_clicked():
 	transitionsModal.sender.transitionsPopupHidden()
+
+
+func _on_move_down_timeline_item_button_pressed():
+	move_down()
