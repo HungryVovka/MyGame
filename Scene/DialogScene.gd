@@ -101,8 +101,6 @@ func _ready():
 	add_child(timer)
 	timer.start(1)
 	
-	
-	
 func _process(_delta):
 	pass
 
@@ -134,7 +132,6 @@ func _on_text_area_on_next():
 	if !clickable_background && textArea.text == "":
 		return
 	if !choicesBlock.visible:
-		print("textarea")
 		dialogManager.play_next_event()
 
 func _on_dialog_manager_set_background(res, has_background, params):
@@ -148,32 +145,25 @@ func _on_fadeble_background_gui_input(event):
 		&& !choicesBlock.visible \
 		&& event.button_index == MOUSE_BUTTON_LEFT \
 		&& event.pressed == true:
-		print("background")
 		dialogManager.play_next_event()
 
 func _on_dialog_manager_set_background_clickable(value):
 	clickable_background = value
 
-
 func _on_dialog_manager_play_sound(_name, channel, loop, bus, volume, fade):
 	audioManager.play(_name, channel, loop, bus, volume, fade)
 
-
 func _on_dialog_manager_stop_sound(channel):
 	audioManager.stop(channel)
-
 
 func _on_dialog_manager_show_choices(data):
 	choicesBlock.set_choices(data)
 	choicesBlock.visible = true
 
-
 func _on_choices_block_choice_clicked(id, text):
 	dialogManager.make_choice(id, text)
 	if !dialogManager.is_choice:
 		choicesBlock.visible = false
-
-
 
 func _on_dialog_manager_play_video(res):
 	videoPanel.visible = true
@@ -181,7 +171,6 @@ func _on_dialog_manager_play_video(res):
 	videoPlayer.reset_image()
 	videoPlayer.stream = res
 	videoPlayer.play()
-
 
 func _on_dialog_manager_stop_video():
 	videoPanel.visible = false

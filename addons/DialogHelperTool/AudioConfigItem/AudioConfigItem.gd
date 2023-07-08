@@ -17,9 +17,10 @@ func _ready():
 	load_settings()
 	
 func load_settings():
-	source = preload_settings.dict
-	element_id = preload_settings.key
-	line.text = element_id
+	if preload_settings.has("dict") || preload_settings.has("key"):
+		source = preload_settings.dict
+		element_id = preload_settings.key
+		line.text = element_id
 
 func set_source(dict, key):
 	preload_settings.dict = dict

@@ -26,7 +26,7 @@ func _ready():
 	shader.set_material(first.material, "time")
 	shader.reset_time()
 	add_child(shader)
-	pass
+	follow_cursor(get_viewport().get_mouse_position())
 
 func reset_shaders():
 	shader.reset_time()
@@ -58,13 +58,13 @@ func clear():
 	
 func dict_bool(dict: Dictionary, key: String):
 	return dict.has(key) && dict[key]
+	
 func should_update_texture(shader_params: Dictionary):
 	var key_list = ["blend", "curtain_h", "curtain_v"]
 	for k in key_list:
 		if dict_bool(shader_params, k):
 			return false
-	return true
-		
+	return true	
 	
 func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}):
 	shader.reset_time()
@@ -109,6 +109,9 @@ func _input(event):
 	if movable > 0 && scale == Vector2(1.0, 1.0):
 		scale = Vector2(1.0 + 0.1*movable/40, 1.0 + 0.1*movable/40)
 	if event is InputEventMouseMotion:
-		var x = min(max((event.position.x*1.0 - 1920/2.0)/960.0, -1.0), 1.0)
-		var y = min(max((event.position.y*1.0 - 1080/2.0)/540.0, -1.0), 1.0)
-		position = Vector2(-movable - x*movable, -movable - y*movable)
+		follow_cursor(event.position)
+
+func follow_cursor(pos: Vector2):
+	var x = min(max((pos.x*1.0 - 1920/2.0)/960.0, -1.0), 1.0)
+	var y = min(max((pos.y*1.0 - 1080/2.0)/540.0, -1.0), 1.0)
+	position = Vector2(-movable - x*movable, -movable - y*movable)
