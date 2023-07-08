@@ -145,7 +145,7 @@ theme_override_constants/margin_top = 8
 layout_mode = 2
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 0
 horizontal_scroll_mode = 3

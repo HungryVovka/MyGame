@@ -44,22 +44,10 @@ var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").n
 signal event_selected(data: Dictionary)
 signal reimport(filename)
 
-
-func add_custom_project_setting(name: String, default_value, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = "") -> void:
-	if ProjectSettings.has_setting(name): return
-	var setting_info: Dictionary = {
-		"name": name,
-		"type": type,
-		"hint": hint,
-		"hint_string": hint_string
-	}
-	ProjectSettings.set_setting(name, default_value)
-	ProjectSettings.add_property_info(setting_info)
-	ProjectSettings.set_initial_value(name, default_value)
-
 func _ready():
 	_on_scene_folder_changed("res://Resources/Scene1/")
 	JSONHelper.connect("reimport", reimport_slot)
+	$VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2.custom_minimum_size = Vector2i(0, 30.0 * interface_scale)
 	
 func reimport_slot(filename):
 	reimport.emit(filename)

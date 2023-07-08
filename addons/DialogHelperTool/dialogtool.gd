@@ -2,7 +2,6 @@
 extends EditorPlugin
 
 var dock
-var side_dock
 
 var is_scanning
 
@@ -17,7 +16,7 @@ func _make_visible(visible):
 	get_editor_interface().get_editor_settings().set_setting("run/auto_save/save_before_running", !visible)
 
 func _exit_tree():
-	remove_control_from_docks(side_dock)
+	pass
 	
 func _process(_delta):
 	var sc = get_editor_interface().get_resource_filesystem().is_scanning()
@@ -29,7 +28,6 @@ func _enter_tree():
 	dock = preload("res://addons/DialogHelperTool/DialogHelperTool.tscn").instantiate()
 	dock.interface_scale = get_editor_interface().get_editor_scale()
 	get_editor_interface().get_editor_main_screen().add_child(dock)
-	dock.connect("event_selected", _activate_side_dock)
 	dock.connect("reimport", rescan_fs)
 	
 	var bus_resource = load("res://default_bus_layout.tres")
@@ -48,10 +46,5 @@ func _get_plugin_name():
 	
 func rescan_fs(filename):
 	print("rescan: ", filename)
-	get_editor_interface().get_resource_filesystem().update_file(filename)
-	get_editor_interface().get_resource_filesystem().reimport_files([filename])
 	get_editor_interface().get_resource_filesystem().scan()
 	get_editor_interface().get_resource_filesystem().scan_sources()
-
-func _activate_side_dock(data):
-	side_dock.activate(data)

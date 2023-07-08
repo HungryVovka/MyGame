@@ -3,50 +3,14 @@
 	"events": [
 		{
 			"background": {
-				"fade": 7,
 				"name": "1.png",
 				"transition": {
-					"blend": false,
-					"blend_mode": false,
-					"blend_speed": 100,
-					"curtain_h": false,
-					"curtain_reverse_h": false,
-					"curtain_reverse_v": false,
-					"curtain_speed_h": 0,
-					"curtain_speed_v": 0,
-					"curtain_v": false,
 					"fade_color": "#000000ff",
 					"fade_from": true,
-					"fade_speed": 0.15,
-					"fade_to": false,
-					"scale_max": 1,
-					"scale_min": 0,
-					"scale_mode": false,
-					"scale_shift": 1,
-					"scale_speed": 0,
-					"shake_h": false,
-					"shake_height": 20,
-					"shake_mode": false,
-					"shake_speed": 0,
-					"shake_time": 1,
-					"shake_v": false,
-					"slide_h": false,
-					"slide_reverse": false,
-					"slide_speed": 0,
-					"slide_v": false,
-					"swipe_max_h": 1920,
-					"swipe_max_v": 1080,
-					"swipe_min_h": -1920,
-					"swipe_min_v": -1080,
-					"swipe_mode_h": false,
-					"swipe_mode_v": false,
-					"swipe_shift_h": 0,
-					"swipe_shift_v": 0,
-					"swipe_speed_h": 0,
-					"swipe_speed_v": 0
+					"fade_speed": 0.26
 				}
 			},
-			"jump_to": "1",
+			"jump_to": "q",
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
@@ -290,7 +254,7 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"character": "",
+			"character": "Captain",
 			"play_sound": {
 				"bus": "SFX",
 				"channel": "SFX2",
@@ -938,6 +902,7 @@
 					"swipe_speed_v": 0
 				}
 			},
+			"id": "q",
 			"text": "",
 			"timer": 6
 		},
@@ -1142,6 +1107,7 @@
 			"background": {
 				"name": "BlackScreen"
 			},
+			"id": "3",
 			"text": "",
 			"timer": 0.1
 		},
@@ -1337,6 +1303,7 @@
 					"swipe_speed_v": 0
 				}
 			},
+			"id": "5",
 			"text": "",
 			"timer": 2
 		},
