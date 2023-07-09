@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scene/DialogScene.gd" id="1_y2kxs"]
 [ext_resource type="Script" path="res://Scene/VideoStreamPlayer.gd" id="2_4caap"]
-[ext_resource type="PackedScene" uid="uid://cmpf87dqel58o" path="res://Scene/DialogicSystem/FadebleBackground.tscn" id="2_qreeh"]
 [ext_resource type="PackedScene" uid="uid://daf84icc03tyk" path="res://Scene/DialogicSystem/TextArea.tscn" id="3_4v5x7"]
+[ext_resource type="PackedScene" uid="uid://dre5coms5pnx5" path="res://addons/DialogHelperTool/Game/Background/Background.tscn" id="5_ctygb"]
 [ext_resource type="PackedScene" uid="uid://b4jnsyyw1ce7o" path="res://Scene/DialogicSystem/DialogManager.tscn" id="5_hx7hm"]
 [ext_resource type="PackedScene" uid="uid://cpac1623kedeg" path="res://Scene/DialogicSystem/Person.tscn" id="5_jcndp"]
 [ext_resource type="PackedScene" uid="uid://bxg7ilqhk1qw" path="res://Scene/DialogicSystem/AudioManager.tscn" id="7_dp16l"]
@@ -48,7 +48,7 @@ mouse_filter = 1
 expand = true
 script = ExtResource("2_4caap")
 
-[node name="FadebleBackground" parent="." instance=ExtResource("2_qreeh")]
+[node name="Background" parent="." instance=ExtResource("5_ctygb")]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -60,8 +60,6 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
-mouse_filter = 1
-movable = 30
 
 [node name="PersonLeft" parent="." instance=ExtResource("5_jcndp")]
 layout_mode = 1
@@ -144,7 +142,7 @@ offset_bottom = 0.239929
 [connection signal="updateCharacter" from="DialogManager" to="." method="_on_dialog_manager_update_character"]
 [connection signal="updateText" from="DialogManager" to="." method="_on_dialog_manager_update_text"]
 [connection signal="finished" from="PanelContainer/VideoStreamPlayer" to="PanelContainer/VideoStreamPlayer" method="_on_finished"]
-[connection signal="gui_input" from="FadebleBackground" to="." method="_on_fadeble_background_gui_input"]
+[connection signal="gui_input" from="Background" to="." method="_on_background_gui_input"]
 [connection signal="event_reached" from="MarginContainer/TextArea" to="DialogManager" method="_on_text_area_event_reached"]
 [connection signal="on_next" from="MarginContainer/TextArea" to="." method="_on_text_area_on_next"]
 [connection signal="choiceClicked" from="ChoisesBlock" to="." method="_on_choices_block_choice_clicked"]

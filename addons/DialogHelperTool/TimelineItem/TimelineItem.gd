@@ -268,13 +268,13 @@ func _on_panel_container_gui_input(event):
 			if !tex:
 				tex = TextureRect.new()
 				add_child(tex)
-				tex.set_size(Vector2(1920.0/8.0, 1080.0/8.0))
+				tex.set_size(Vector2(1920.0/6.0*scale_coef, 1080.0/6.0*scale_coef))
 				tex.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 				tex.stretch_mode = TextureRect.STRETCH_SCALE
 				tex.clip_contents = true
 				tex.z_index = 10
 				tex.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			tex.texture = backgrounds[data.background.name]
+				tex.texture = backgrounds[data.background.name]
 			tex.position = event.position
 	if event is InputEventMouseButton && event.pressed && event.button_index == MOUSE_BUTTON_LEFT:
 		selected = !selected

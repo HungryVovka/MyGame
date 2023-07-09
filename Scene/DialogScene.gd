@@ -3,7 +3,7 @@ extends Control
 @onready var textArea = $MarginContainer/TextArea
 @onready var dialogManager = $DialogManager
 @onready var audioManager = $AudioManager
-@onready var fadebleBackground = $FadebleBackground
+@onready var background = $Background
 @onready var choicesBlock = $ChoisesBlock
 @onready var videoPlayer = $PanelContainer/VideoStreamPlayer
 @onready var videoPanel = $PanelContainer
@@ -53,7 +53,7 @@ func save():
 	return result
 
 func setDialogParams(dict: Dictionary):
-	fadebleBackground.reset_shaders()
+	background.reset_shaders()
 	clickable_background = dict.clickable_background
 	choicesBlock.visible = false
 	dialogManager.videos_list = dict.videos
@@ -135,9 +135,9 @@ func _on_text_area_on_next():
 		dialogManager.play_next_event()
 
 func _on_dialog_manager_set_background(res, has_background, params):
-	fadebleBackground.set_background(res, has_background, params)
+	background.set_background(res, has_background, params)
 
-func _on_fadeble_background_gui_input(event):
+func _on_background_gui_input(event):
 	if !scene_ready:
 		return
 	if event is InputEventMouseButton \

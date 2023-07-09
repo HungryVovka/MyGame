@@ -10,7 +10,7 @@
 					"fade_speed": 0.26
 				}
 			},
-			"jump_to": "qqq",
+			"jump_to": "5",
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
@@ -109,7 +109,6 @@
 				"name": "samolet-boeing-737-jet-zvuk-iz-salona-26574",
 				"volume": 0.13
 			},
-			"script": "func start(dialog, _event):\n\tpass\n\t\nfunc condition(_dialog, _event):\n\treturn true",
 			"text": "",
 			"timer": 2
 		},
@@ -1010,7 +1009,7 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
+			"script": "func start(dialog, event):\n\tdialog.get_parent().background.apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
 			"text": "",
 			"timer": 3
 		},
@@ -1065,7 +1064,7 @@
 			"background": {
 				"name": "BlackScreen"
 			},
-			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.remove_shader(\"face\")\n\tdialog.get_parent().fadebleBackground.movable = 0\nfunc condition(dialog, event):\n\treturn true",
+			"script": "func start(dialog, event):\n\tdialog.get_parent().background.remove_shader(\"face\")\n\tdialog.get_parent().background.movable = 0\nfunc condition(dialog, event):\n\treturn true",
 			"text": "",
 			"timer": 3
 		},
