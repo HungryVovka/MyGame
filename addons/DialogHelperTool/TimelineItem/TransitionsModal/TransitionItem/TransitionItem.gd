@@ -156,7 +156,7 @@ func setSource(s: Dictionary):
 			shake_speed.value = 1.0
 			shake_time.value = 1.0
 			shake_height.value = 0.0
-		if JSONHelper.gb(t, ["blend_mode"]):
+		if JSONHelper.gb(t, ["blend_mode", "blend"]):
 			_on_blend_button_toggled(true)
 			blend_button.button_pressed = true
 			blend_enabled.button_pressed = true
@@ -437,9 +437,11 @@ func _on_blend_enabled_toggled(button_pressed):
 		return
 	var t: Dictionary = src.transition
 	if button_pressed:
+		t.blend = true
 		t.blend_mode = true
 		t.blend_speed = blend_speed.value
 	else:
+		t.erase("blend")
 		t.erase("blend_mode")
 		t.erase("blend_speed")
 

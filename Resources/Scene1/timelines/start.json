@@ -3,11 +3,47 @@
 	"events": [
 		{
 			"background": {
+				"fade": 7,
 				"name": "1.png",
 				"transition": {
+					"blend": false,
+					"blend_mode": false,
+					"blend_speed": 100,
+					"curtain_h": false,
+					"curtain_reverse_h": false,
+					"curtain_reverse_v": false,
+					"curtain_speed_h": 0,
+					"curtain_speed_v": 0,
+					"curtain_v": false,
 					"fade_color": "#000000ff",
 					"fade_from": true,
-					"fade_speed": 0.26
+					"fade_speed": 0.15,
+					"fade_to": false,
+					"scale_max": 1,
+					"scale_min": 0,
+					"scale_mode": false,
+					"scale_shift": 1,
+					"scale_speed": 0,
+					"shake_h": false,
+					"shake_height": 20,
+					"shake_mode": false,
+					"shake_speed": 0,
+					"shake_time": 1,
+					"shake_v": false,
+					"slide_h": false,
+					"slide_reverse": false,
+					"slide_speed": 0,
+					"slide_v": false,
+					"swipe_max_h": 1920,
+					"swipe_max_v": 1080,
+					"swipe_min_h": -1920,
+					"swipe_min_v": -1080,
+					"swipe_mode_h": false,
+					"swipe_mode_v": false,
+					"swipe_shift_h": 0,
+					"swipe_shift_v": 0,
+					"swipe_speed_h": 0,
+					"swipe_speed_v": 0
 				}
 			},
 			"jump_to": "5",
@@ -88,7 +124,6 @@
 			"background": {
 				"name": "2"
 			},
-			"id": "opt",
 			"stop_sound": "Music1",
 			"text": "",
 			"timer": 0.4
@@ -97,8 +132,44 @@
 			"background": {
 				"name": "3 (2)",
 				"transition": {
+					"blend": true,
 					"blend_mode": true,
-					"blend_speed": 0.800000000000021
+					"blend_speed": 0.8,
+					"curtain_h": false,
+					"curtain_reverse_h": false,
+					"curtain_reverse_v": false,
+					"curtain_speed_h": 0,
+					"curtain_speed_v": 0,
+					"curtain_v": false,
+					"fade_color": "",
+					"fade_from": false,
+					"fade_speed": 0,
+					"fade_to": false,
+					"scale_max": 1,
+					"scale_min": 0,
+					"scale_mode": false,
+					"scale_shift": 1,
+					"scale_speed": 0,
+					"shake_h": false,
+					"shake_height": 20,
+					"shake_mode": false,
+					"shake_speed": 0,
+					"shake_time": 1,
+					"shake_v": false,
+					"slide_h": false,
+					"slide_reverse": false,
+					"slide_speed": 0,
+					"slide_v": false,
+					"swipe_max_h": 1920,
+					"swipe_max_v": 1080,
+					"swipe_min_h": -1920,
+					"swipe_min_v": -1080,
+					"swipe_mode_h": false,
+					"swipe_mode_v": false,
+					"swipe_shift_h": 0,
+					"swipe_shift_v": 0,
+					"swipe_speed_h": 0,
+					"swipe_speed_v": 0
 				}
 			},
 			"play_sound": {
@@ -157,7 +228,6 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"id": "2",
 			"play_sound": {
 				"channel": "SFX1",
 				"fade": 0.7,
@@ -217,7 +287,7 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"character": "Captain",
+			"character": "",
 			"play_sound": {
 				"bus": "SFX",
 				"channel": "SFX2",
@@ -780,7 +850,6 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"id": "1",
 			"text": "I can't afford to lose it. \n"
 		},
 		{
@@ -812,9 +881,7 @@
 			"timer": 1
 		},
 		{
-			"id": "qqq",
 			"play_sound": {
-				"bus": "MusicGigaEffects",
 				"channel": "Music1",
 				"fade": 1,
 				"name": "Simon And Garfunkel - The Sound Of Silence",
@@ -867,7 +934,6 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"id": "q",
 			"text": "",
 			"timer": 6
 		},
@@ -1072,7 +1138,6 @@
 			"background": {
 				"name": "BlackScreen"
 			},
-			"id": "3",
 			"text": "",
 			"timer": 0.1
 		},
@@ -1221,11 +1286,13 @@
 					"swipe_speed_v": 0
 				}
 			},
+			"id": "1",
 			"text": "",
 			"timer": 6.5
 		},
 		{
 			"background": {
+				"clickable": true,
 				"name": "4",
 				"transition": {
 					"blend": false,
@@ -1268,46 +1335,44 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"id": "5",
-			"text": "",
-			"timer": 2
+			"text": ""
 		},
 		{
 			"background": {
 				"name": "4 (1)",
 				"transition": {
-					"blend": false,
-					"blend_mode": false,
-					"blend_speed": 1,
-					"curtain_h": true,
+					"blend": true,
+					"blend_mode": true,
+					"blend_speed": 0.5,
+					"curtain_h": false,
 					"curtain_reverse_h": false,
 					"curtain_reverse_v": false,
-					"curtain_speed_h": 0.5,
+					"curtain_speed_h": 0,
 					"curtain_speed_v": 0,
 					"curtain_v": false,
 					"fade_color": "",
 					"fade_from": false,
 					"fade_speed": 0,
 					"fade_to": false,
-					"scale_max": 1,
+					"scale_max": 0,
 					"scale_min": 0,
 					"scale_mode": false,
-					"scale_shift": 1,
+					"scale_shift": 0,
 					"scale_speed": 0,
 					"shake_h": false,
-					"shake_height": 20,
+					"shake_height": 0,
 					"shake_mode": false,
 					"shake_speed": 0,
-					"shake_time": 1,
+					"shake_time": 0,
 					"shake_v": false,
 					"slide_h": false,
 					"slide_reverse": false,
 					"slide_speed": 0,
 					"slide_v": false,
-					"swipe_max_h": 1920,
-					"swipe_max_v": 1080,
-					"swipe_min_h": -1920,
-					"swipe_min_v": -1080,
+					"swipe_max_h": 0,
+					"swipe_max_v": 0,
+					"swipe_min_h": 0,
+					"swipe_min_v": 0,
 					"swipe_mode_h": false,
 					"swipe_mode_v": false,
 					"swipe_shift_h": 0,
@@ -1319,42 +1384,32 @@
 			"text": ""
 		},
 		{
+			"background": {
+				"name": "4 (3)",
+				"transition": {
+					"blend": true,
+					"blend_mode": true,
+					"blend_speed": 0.5
+				}
+			},
 			"text": ""
 		},
 		{
+			"background": {
+				"name": "4 (4)"
+			},
 			"text": ""
 		},
 		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
-			"text": ""
-		},
-		{
+			"background": {
+				"name": "1.png",
+				"transition": {
+					"blend": true,
+					"blend_mode": true,
+					"blend_speed": 0.5
+				},
+				"video": ""
+			},
 			"text": ""
 		}
 	],

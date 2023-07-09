@@ -49,7 +49,8 @@ signal reimport(filename)
 func _ready():
 	_on_scene_folder_changed("res://Resources/Scene1/")
 	JSONHelper.connect("reimport", reimport_slot)
-	$VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2.custom_minimum_size = Vector2i(0, 30.0 * interface_scale)
+	if interface_scale > 1:
+		$VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2.custom_minimum_size = Vector2i(0, 40.0 * interface_scale)
 	
 func reimport_slot(filename):
 	reimport.emit(filename)

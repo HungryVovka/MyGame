@@ -4,7 +4,7 @@
 
 [node name="BackgroundConfigItem" type="Control"]
 clip_contents = true
-custom_minimum_size = Vector2(384, 216)
+custom_minimum_size = Vector2(274, 154)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
