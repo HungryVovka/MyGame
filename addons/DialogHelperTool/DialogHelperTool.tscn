@@ -224,7 +224,6 @@ custom_minimum_size = Vector2(120, 25)
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 500)
 layout_mode = 2
 size_flags_vertical = 3
 
