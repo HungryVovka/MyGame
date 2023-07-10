@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtgugtwdswpti"]
 
-[ext_resource type="Script" path="res://Scene/main.gd" id="1_p01xs"]
+[ext_resource type="Script" path="res://Scene/start.gd" id="1_8ofs0"]
 [ext_resource type="PackedScene" uid="uid://oisg30whygac" path="res://Scene/DialogScene.tscn" id="2_ha61f"]
 [ext_resource type="PackedScene" uid="uid://yj2uuvm0wbny" path="res://Scene/game_menu.tscn" id="3_vthq3"]
 
@@ -56,7 +56,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_p01xs")
+script = ExtResource("1_8ofs0")
 backgrounds = "res://Resources/Scene1/configs/backgrounds.json"
 timeline = "res://Resources/Scene1/timelines/start.json"
 videos = "res://Resources/Scene1/configs/videos.json"

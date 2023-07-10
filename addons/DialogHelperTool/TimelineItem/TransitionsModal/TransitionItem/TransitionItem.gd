@@ -167,8 +167,8 @@ func setSource(s: Dictionary):
 		if JSONHelper.gb(t, ["fade_to", "fade_from"]):
 			_on_fade_button_toggled(true)
 			fade_button.button_pressed = true
-			fade_to.button_pressed = t.fade_to
-			fade_from.button_pressed = t.fade_from
+			fade_to.button_pressed = JSONHelper.gb(t, ["fade_to"])
+			fade_from.button_pressed = JSONHelper.gb(t, ["fade_from"])
 			fade_speed.value = t.fade_speed
 			fade_color.color = Color.from_string(t.fade_color, Color.BLACK)
 		else:
@@ -179,8 +179,8 @@ func setSource(s: Dictionary):
 		if JSONHelper.gb(t, ["slide_h", "slide_v"]):
 			_on_slide_button_toggled(true)
 			slide_button.button_pressed = true
-			slide_h.button_pressed = t.slide_h
-			slide_v.button_pressed = t.slide_v
+			slide_h.button_pressed = JSONHelper.gb(t, ["slide_h"])
+			slide_v.button_pressed = JSONHelper.gb(t, ["slide_v"])
 			slide_speed.value = t.slide_speed
 			slide_reverse.button_pressed = t.slide_reverse
 		else:
@@ -191,8 +191,8 @@ func setSource(s: Dictionary):
 		if JSONHelper.gb(t, ["curtain_h", "curtain_v"]):
 			_on_curtain_button_toggled(true)
 			curtain_button.button_pressed = true
-			curtain_h.button_pressed = t.curtain_h
-			curtain_v.button_pressed = t.curtain_v
+			curtain_h.button_pressed = JSONHelper.gb(t, ["curtain_h"])
+			curtain_v.button_pressed = JSONHelper.gb(t, ["curtain_v"])
 			curtain_h_speed.value = t.curtain_speed_h
 			curtain_v_speed.value = t.curtain_speed_v
 			curtain_h_reverse.button_pressed = t.curtain_reverse_h
@@ -337,10 +337,8 @@ func _on_swipe_offset_v_value_changed(value):
 
 
 func _on_scale_checkbox_toggled(button_pressed):
-	print("on scale ", button_pressed)
 	if !_data_ready:
 		return
-	print("on scale ", button_pressed)
 	var t: Dictionary = src.transition
 	if button_pressed:
 		t.scale_mode = true

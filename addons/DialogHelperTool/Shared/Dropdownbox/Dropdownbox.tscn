@@ -18,9 +18,9 @@ content_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gj3qv"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_otqtx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_te8kn"]
 shader = ExtResource("2_0fie5")
-shader_parameter/is_active = false
+shader_parameter/is_active = true
 
 [node name="Dropdownbox" type="Control"]
 layout_mode = 3
@@ -83,7 +83,7 @@ alignment = 1
 flat = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_otqtx")
+material = SubResource("ShaderMaterial_te8kn")
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

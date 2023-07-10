@@ -26,7 +26,11 @@ func _ready():
 	shader.set_material(first.material, "time")
 	shader.reset_time()
 	add_child(shader)
+	
+	if movable != 0:
+		setMovable(movable)
 	follow_cursor(get_viewport().get_mouse_position())
+	
 
 func reset_shaders():
 	shader.reset_time()

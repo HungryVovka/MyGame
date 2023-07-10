@@ -2,6 +2,8 @@ extends Node
 
 var save_file_path: String = "user://saves.data"
 
+var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
+
 var typeD : Dictionary = {
 	"date": "string",
 	"scene": "string",
@@ -19,8 +21,8 @@ func save(page: String, slot: String, data: Dictionary):
 	if !save_state.has(page):
 		save_state[page] = {}
 	save_state[page][slot] = data.duplicate()
-	save_json(save_file_path, save_state)
-	save_state = read_json(save_file_path)
+	JSONHelper.save_json(save_file_path, save_state)
+	save_state = JSONHelper.read_json(save_file_path)
 	
 func get_page(page: String):
 	if !save_state.has(page):
@@ -29,24 +31,10 @@ func get_page(page: String):
 		return save_state[page].duplicate()
 
 func load(page: String, index: String):
-	return get_page(page)[index]
+	return JSONHelper.deep_duplicate(get_page(page)[index])
 			
 func _ready():
 	if FileAccess.file_exists(save_file_path):
-		save_state = read_json(save_file_path)
+		save_state = JSONHelper.read_json(save_file_path)
 	else:
-		save_json(save_file_path, save_state)
-
-func read_json(filename):
-	var file = FileAccess.open(filename, FileAccess.READ)
-	var txt = file.get_as_text()
-	var data = JSON.parse_string(txt)
-	file.close()
-	return data
-	
-func save_json(filename, dict):
-	var txt = JSON.stringify(dict)
-	var file = FileAccess.open(filename, FileAccess.WRITE)
-	file.store_string(txt)
-	file.flush()
-	file.close()
+		JSONHelper.save_json(save_file_path, save_state)

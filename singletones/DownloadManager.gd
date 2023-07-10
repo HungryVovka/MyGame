@@ -65,7 +65,6 @@ func downloadScene(sceneName: String):
 							t.one_shot = true
 							t.timeout.connect(
 								func():
-									print("jumping...")
 									_save_cachefile(scene.filename, headers)
 									var success = ProjectSettings.load_resource_pack("user://Scenes/" + scene.filename)
 									if (success):

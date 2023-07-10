@@ -17,12 +17,6 @@ func _make_visible(visible):
 
 func _exit_tree():
 	pass
-	
-func _process(_delta):
-	var sc = get_editor_interface().get_resource_filesystem().is_scanning()
-	if is_scanning != sc:
-		print(get_editor_interface().get_resource_filesystem().is_scanning())
-		is_scanning = sc
 
 func _enter_tree():
 	dock = preload("res://addons/DialogHelperTool/DialogHelperTool.tscn").instantiate()
@@ -45,6 +39,5 @@ func _get_plugin_name():
 	return "Dialog Helper Tool"
 	
 func rescan_fs(filename):
-	print("rescan: ", filename)
 	get_editor_interface().get_resource_filesystem().scan()
 	get_editor_interface().get_resource_filesystem().scan_sources()

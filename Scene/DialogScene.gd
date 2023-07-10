@@ -68,7 +68,6 @@ func setDialogParams(dict: Dictionary):
 		dialogManager.reset_index()
 	scene_root = dict.scene_root
 	scene_src_params = dict
-	print("dialog params")
 	dialogManager.play_next_event()
 
 func set_person_source(obj: String, src):

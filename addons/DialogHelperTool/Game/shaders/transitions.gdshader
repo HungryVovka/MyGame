@@ -167,7 +167,7 @@ vec4 curtain(bool checkX, bool checkY, sampler2D tex, vec2 pos) {
 
 void fragment() {
 	vec2 uv = UV;
-	
+
 	if (slide_h)
 		COLOR = slideX(TEXTURE, uv);
 	if (slide_v)
@@ -177,8 +177,8 @@ void fragment() {
 		ivec2 ibackSize = textureSize(TEXTURE, 0);
 		ivec2 iBlendSize = textureSize(secondTexture, 0);
 		vec2 diff = vec2(float(ibackSize.x) / float(iBlendSize.x), float(ibackSize.y) / float(iBlendSize.y));
-		COLOR = blend(COLOR, texture(secondTexture, vec2(uv.x * diff.x, uv.y*diff.y)));
-		}
+		COLOR = blend(COLOR, texture(secondTexture, vec2(uv.x * diff.x, uv.y * diff.y)));
+	}
 	if (fade_to)
 		COLOR = blend_to(COLOR);
 	if (fade_from)

@@ -17,6 +17,5 @@ func getText():
 	return code.text
 
 func _on_button_pressed():
-	print("on_button_pressed", text)
 	textSaved.emit(text)
 	success.emit({"script": text})

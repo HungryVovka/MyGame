@@ -37,6 +37,11 @@ func _ready():
 	inactive_shader.shader = preload("res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.gdshader")
 	inactive_shader.set_shader_parameter("is_active", false)
 	
+	var pp: PopupMenu = optionButton.get_popup()
+	pp.max_size = get_viewport_rect().size/2.0
+	
+	setEnabled(true)
+	
 func setText(v: String):
 	_on_line_edit_text_changed(v, true)
 func getText() -> String:
@@ -46,6 +51,8 @@ func setScale(coef: float):
 	var v = int($LineEdit.get_theme_font_size("font_size") * coef)
 	$LineEdit.add_theme_font_size_override("font_size", v)
 	custom_minimum_size = Vector2(custom_minimum_size.x, 25 * coef)
+	tex.set_size(Vector2(12, 12) * coef)
+	tex.position -= Vector2(20, 9) * (coef - 1)
 	
 func setEnabled(enabled: bool):
 	if enabled:
@@ -124,9 +131,18 @@ func fixTypes(data: Array = []) -> Array[String]:
 func _on_line_edit_gui_input(event):
 	if event is InputEventKey && event.pressed:
 		block_suggest = event.keycode == KEY_BACKSPACE
-		if (event.keycode == KEY_DOWN || event.keycode == KEY_UP) && suggest_data.size() > 0:
-			suggest_ix = (suggest_ix + (1 if event.keycode == KEY_DOWN else -1)) % suggest_data.size()
-			_select_suggest()
-			item_selected.emit(line.text)
-		if event.as_text().length() == 1: #check if symbol is text
+		if (event.keycode == KEY_DOWN || event.keycode == KEY_UP):
+			var dir = (1 if event.keycode == KEY_DOWN else -1)
+			if suggest_data.size() > 0:
+				suggest_ix = (suggest_ix + dir) % suggest_data.size()
+				_select_suggest()
+				item_selected.emit(line.text)
+			else:
+				var ix = items.find(line.text)
+				if ix >= 0:
+					line.text = items[(ix + dir)%items.size()]
+					_update_option_item(line.text)
+					item_selected.emit(line.text)
+		
+		if event.as_text().length() == 1: #check if symbol is a text
 			typed_len = line.text.length() + 1

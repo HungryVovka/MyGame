@@ -12,6 +12,7 @@ var timelines_list = {}
 
 @onready var transitionsModal = $TransitionsModal
 @onready var scriptModal = $ScriptModal
+@onready var rootsModal = $RootsEditorModal
 
 @onready var background_grid = $VBoxContainer/TabContainer/Backgrounds/MarginContainer/ScrollContainer/GridContainer
 var background_children_list = []
@@ -36,6 +37,8 @@ var timeline_children_list = []
 var current_timeline: Dictionary = {}
 var current_timeline_filename: String = ""
 
+@onready var root_list = $VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/RootList
+
 var _file_dialog
 var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
 var current_root: String = ""
@@ -51,6 +54,7 @@ func _ready():
 	JSONHelper.connect("reimport", reimport_slot)
 	if interface_scale > 1:
 		$VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2.custom_minimum_size = Vector2i(0, 40.0 * interface_scale)
+	root_list.setScale(interface_scale)
 	
 func reimport_slot(filename):
 	reimport.emit(filename)
@@ -73,6 +77,7 @@ func _on_scene_folder_changed(path):
 		timelines_combobox.add_item(k.get_file().get_basename())
 		timeline_list_combobox.add_item(k.get_file().get_basename())
 	timelines_combobox.selected = timelines_list.keys().find(scene_config_data.start)
+	timeline_list_combobox.selected = timelines_list.keys().find(scene_config_data.start)
 	scene_file.text = scene_config_data.scene
 	
 	background_dict = JSONHelper.read_json(path + "configs/backgrounds.json")
@@ -374,20 +379,27 @@ func _on_save_characters_button_pressed():
 func _on_load_timeline_button_pressed():
 	current_timeline_filename = timelines_list[timeline_list_combobox.text]
 	current_timeline = JSONHelper.read_json(current_timeline_filename)
+	load_root("")
+	
+	root_list.items = root_list.fixTypes([""] + current_timeline.roots.keys())
+	root_list.text = ""
+
+func load_root(root_name): 
 	for c in timeline_children_list:
 		timeline_box.remove_child(c)
 		c.queue_free()
 	timeline_children_list.clear()
+	current_root = root_name
 	if !current_timeline.has("roots"):
 		current_timeline["roots"] = {}
 	var context: Dictionary = update_context()
-	load_root(context)
+	load_root_contents(context, root_name)
 	
 func update_context(context: Dictionary = {"ids": [], "characters": [], "roots": [""]}) -> Dictionary:
 	context.ids.clear()
 	context.characters.clear()
 	context.roots.clear()
-	for e in current_timeline.events:
+	for e in get_current_root_events():
 		if e.has("id") && !context.ids.has(e.id):
 			context.ids.push_back(e.id)
 		if e.has("character") && !context.characters.has(e.character):
@@ -400,8 +412,13 @@ func update_context(context: Dictionary = {"ids": [], "characters": [], "roots":
 			context.roots.push_back(r)
 	state_context = context
 	return context
+	
+func reup_context():
+	update_context(state_context)
+	for t in timeline_children_list:
+		t.setContext(state_context)
 		
-func load_root(context: Dictionary, name: String = "", ):
+func load_root_contents(context: Dictionary, name: String = ""):
 	if name != "" && (!current_timeline.has("roots") || !current_timeline.roots.has(name)):
 		print("no such root: ", name)
 		return
@@ -420,6 +437,7 @@ func create_timeline_event(e: Dictionary, context: Dictionary):
 	obj.connect("was_selected", _on_timeline_item_selected)
 	obj.connect("show_script", showScriptWindow)
 	obj.connect("show_transitions", showTransitionsWindow)
+	obj.connect("id_created", reup_context)
 	obj.bus_list = bus_list
 	timeline_box.add_child(obj)
 	timeline_children_list.push_back(obj)
@@ -533,3 +551,35 @@ func _on_transitions_modal_back_clicked():
 
 func _on_move_down_timeline_item_button_pressed():
 	move_down()
+
+
+func _on_roots_editor_modal_back_clicked():
+	var roots: Array[String] = root_list.fixTypes([""] + current_timeline.roots.keys())
+	root_list.items = roots
+	root_list.text = current_root if roots.has(current_root) else ""
+	reup_context()
+
+
+func _on_roots_editor_button_pressed():
+	rootsModal.src = current_timeline
+	rootsModal.popup_size = Vector2(0.4, 0.6)
+	rootsModal.show_modal()
+
+
+func _on_root_list_item_selected(text):
+	if (text == "" || current_timeline.roots.has(text)) && current_root != text:
+		load_root(text)
+		reup_context()
+
+
+func _on_roots_editor_modal_root_name_changed(old, new):
+	var oldItems : Array[String] = root_list.items
+	oldItems[oldItems.find(old)] = new
+	root_list.items = oldItems
+	if current_root == old:
+		root_list.text = old 
+	if current_root == new:
+		root_list.text = new
+		current_root = new
+		
+	reup_context()

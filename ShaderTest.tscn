@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://s045gv263adr"]
+[gd_scene load_steps=6 format=3 uid="uid://s045gv263adr"]
 
 [ext_resource type="Texture2D" uid="uid://bgac5gnxy4fpc" path="res://Resources/Scene1/Art/1.png" id="1_l3t3g"]
 [ext_resource type="Script" path="res://ShaderTest.gd" id="1_p4kvm"]
 [ext_resource type="Shader" path="res://shaders/сlouds.gdshader" id="3_e3kdx"]
-[ext_resource type="Texture2D" uid="uid://b68vudox7abdg" path="res://Resources/backgrounds/mountains.jpg" id="3_vbn15"]
-[ext_resource type="PackedScene" uid="uid://cmpf87dqel58o" path="res://Scene/DialogicSystem/FadebleBackground.tscn" id="5_ifuby"]
+[ext_resource type="Texture2D" uid="uid://b1mbgxwob0yi3" path="res://Resources/Scene1/Art/3 (19).png" id="4_oh8b1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oa0d8"]
 shader = ExtResource("3_e3kdx")
@@ -44,11 +43,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_vbn15")
+texture = ExtResource("4_oh8b1")
 expand_mode = 1
 stretch_mode = 6
-
-[node name="FadebleBackground" parent="." instance=ExtResource("5_ifuby")]
-layout_mode = 1
-
-[connection signal="gui_input" from="FadebleBackground" to="." method="_on_fadeble_background_gui_input"]

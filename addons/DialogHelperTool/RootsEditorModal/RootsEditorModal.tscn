@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2ygcuhvy26ae"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/RootsEditorModal/RootsEditorModal.gd" id="1_lndxu"]
+[ext_resource type="PackedScene" uid="uid://baplo5xewiulv" path="res://addons/DialogHelperTool/Shared/Modal/Modal.tscn" id="2_wsl7a"]
+
+[node name="RootsEditorModal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lndxu")
+
+[node name="Modal" parent="." node_paths=PackedStringArray("child") instance=ExtResource("2_wsl7a")]
+layout_mode = 1
+child = NodePath("Panel/MarginContainer/PanelContainer/RootsEditor")
+popup_time = 0.33
+
+[connection signal="back_clicked" from="Modal" to="." method="close_window_no_data"]
+[connection signal="was_hidden" from="Modal" to="." method="_on_modal_was_hidden"]

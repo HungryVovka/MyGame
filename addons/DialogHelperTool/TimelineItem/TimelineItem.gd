@@ -61,10 +61,9 @@ var tex: TextureRect
 var scale_coef: float = 1.0
 
 signal was_selected(obj)
-
 signal show_script(sender, text)
-
 signal show_transitions(sender, data)
+signal id_created()
 
 
 var _is_ready = false
@@ -88,9 +87,9 @@ func rescale_fonts(coef: float):
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label.label_settings = settings
 	var v = int($PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId.get_theme_font_size("font_size") * coef)
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
-	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JumpDropdown/LineEdit.add_theme_font_size_override("font_size", v)
-	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown/LineEdit.add_theme_font_size_override("font_size", v)
-
+	
+	character.setScale(coef)
+	jump_to.setScale(coef)
 
 	textButton.setScale(coef)
 	backgroundsButton.setScale(coef)
@@ -120,12 +119,15 @@ func setContext(data):
 	if !_is_ready:
 		await self.ready
 	context = data
-	jump_to.items = fixTypes(data.ids)
+	var jump_to_data: Array[String] = fixTypes([""] + data.ids + ["/"] + data.roots)
+	jump_to.items = jump_to_data
+	if !jump_to_data.has(jump_to.text) && jump_to.text.begins_with("/"):
+		jump_to.text = ""
 	character.items = fixTypes(data.characters)
 	
 func setSelected(v):
 	var stylebox: StyleBoxFlat = panel.get_theme_stylebox("panel").duplicate()
-	stylebox.bg_color = Color("0000034e") if !v else Color("0044ff80")
+	stylebox.bg_color = Color("0000034e") if !v else Color("4488ff40")
 	panel.add_theme_stylebox_override("panel", stylebox)
 	selected = v
 
@@ -218,8 +220,10 @@ func _on_event_id_text_changed(new_text: String):
 		return
 	if new_text != "":
 		data["id"] = new_text
+		id_created.emit()
 	else:
 		data.erase("id")
+		id_created.emit()
 
 func _on_dropdownbox_item_selected(text):
 	switch_control_style(jump_to_opt, text != "")
