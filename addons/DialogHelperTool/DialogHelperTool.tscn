@@ -200,14 +200,14 @@ size_flags_stretch_ratio = 0.2
 text = "   REMOVE   "
 
 [node name="MoveUpTimelineItemButton" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(30, 0)
+custom_minimum_size = Vector2(20, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
 text = "  /\\  "
 
 [node name="MoveDownTimelineItemButton" type="Button" parent="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(30, 0)
+custom_minimum_size = Vector2(20, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
