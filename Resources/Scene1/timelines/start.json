@@ -3,12 +3,92 @@
 	"events": [
 		{
 			"background": {
-				"clickable": false,
-				"name": "2",
+				"clickable": true,
+				"fade": 7,
+				"name": "1.png",
 				"transition": {
 					"fade_color": "#000000ff",
 					"fade_from": true,
-					"fade_speed": 0.8
+					"fade_speed": 0.15,
+					"fade_to": false,
+					"scale_max": 1.19999999999709,
+					"scale_min": 0,
+					"scale_mode": true,
+					"scale_shift": 1.19999999999709,
+					"scale_speed": 0,
+					"shake_h": true,
+					"shake_height": 10,
+					"shake_mode": true,
+					"shake_speed": 1,
+					"shake_time": 99999,
+					"shake_v": false,
+					"swipe_max_h": 300,
+					"swipe_max_v": 60,
+					"swipe_min_h": -1920,
+					"swipe_min_v": -1080,
+					"swipe_mode_h": true,
+					"swipe_mode_v": true,
+					"swipe_shift_h": -300,
+					"swipe_shift_v": 0,
+					"swipe_speed_h": 20,
+					"swipe_speed_v": 4
+				}
+			},
+			"jump_to": "1",
+			"play_sound": {
+				"bus": "Music",
+				"channel": "Music1",
+				"fade": 2,
+				"loop": true,
+				"name": "Airplane Outside",
+				"volume": 0.05
+			},
+			"script": "func start(_dialog, _event):\n\tDialogState.s(\"telka\", \"Mom\")\n\t\nfunc condition(_dialog, _event):\n\treturn true",
+			"text": ""
+		},
+		{
+			"background": {
+				"clickable": false,
+				"name": "2",
+				"transition": {
+					"blend": true,
+					"blend_mode": true,
+					"blend_speed": 0.8,
+					"curtain_h": false,
+					"curtain_reverse_h": false,
+					"curtain_reverse_v": false,
+					"curtain_speed_h": 0,
+					"curtain_speed_v": 0,
+					"curtain_v": false,
+					"fade_color": "",
+					"fade_from": false,
+					"fade_speed": 0,
+					"fade_to": false,
+					"scale_max": 1,
+					"scale_min": 0,
+					"scale_mode": false,
+					"scale_shift": 1,
+					"scale_speed": 0,
+					"shake_h": false,
+					"shake_height": 20,
+					"shake_mode": false,
+					"shake_speed": 0,
+					"shake_time": 1,
+					"shake_v": false,
+					"slide_h": false,
+					"slide_reverse": false,
+					"slide_speed": 0,
+					"slide_v": false,
+					"swipe_max_h": 1920,
+					"swipe_max_v": 1080,
+					"swipe_min_h": -1920,
+					"swipe_min_v": -1080,
+					"swipe_mode_h": false,
+					"swipe_mode_v": false,
+					"swipe_shift_h": 0,
+					"swipe_shift_v": 0,
+					"swipe_speed_h": 0,
+					"swipe_speed_v": 0
 				}
 			},
 			"play_sound": {
@@ -16,10 +96,9 @@
 				"fade": 2,
 				"loop": true,
 				"name": "звук внутри самолета",
-				"volume": 0.21
+				"volume": 0.14
 			},
-			"text": "",
-			"timer": 8
+			"text": "$(telka)"
 		},
 		{
 			"background": {
@@ -976,7 +1055,7 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"script": "func start(dialog, event):\n\tdialog.get_parent().background.apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
+			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
 			"text": "",
 			"timer": 3
 		},
@@ -1031,7 +1110,7 @@
 			"background": {
 				"name": "BlackScreen"
 			},
-			"script": "func start(dialog, event):\n\tdialog.get_parent().background.remove_shader(\"face\")\n\tdialog.get_parent().background.movable = 0\nfunc condition(dialog, event):\n\treturn true",
+			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.remove_shader(\"face\")\n\tdialog.get_parent().fadebleBackground.movable = 0\nfunc condition(dialog, event):\n\treturn true",
 			"text": "",
 			"timer": 3
 		},
@@ -1193,7 +1272,6 @@
 		},
 		{
 			"background": {
-				"clickable": true,
 				"name": "4",
 				"transition": {
 					"blend": false,
@@ -1236,44 +1314,42 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"text": ""
+			"text": "",
+			"timer": 2
 		},
 		{
 			"background": {
 				"name": "4 (1)",
 				"transition": {
-					"blend": true,
-					"blend_mode": true,
-					"blend_speed": 0.5,
-					"curtain_h": false,
+					"curtain_h": true,
 					"curtain_reverse_h": false,
 					"curtain_reverse_v": false,
-					"curtain_speed_h": 0,
+					"curtain_speed_h": 1,
 					"curtain_speed_v": 0,
 					"curtain_v": false,
 					"fade_color": "",
 					"fade_from": false,
 					"fade_speed": 0,
 					"fade_to": false,
-					"scale_max": 0,
+					"scale_max": 1,
 					"scale_min": 0,
 					"scale_mode": false,
-					"scale_shift": 0,
+					"scale_shift": 1,
 					"scale_speed": 0,
 					"shake_h": false,
-					"shake_height": 0,
+					"shake_height": 20,
 					"shake_mode": false,
 					"shake_speed": 0,
-					"shake_time": 0,
+					"shake_time": 1,
 					"shake_v": false,
 					"slide_h": false,
 					"slide_reverse": false,
 					"slide_speed": 0,
 					"slide_v": false,
-					"swipe_max_h": 0,
-					"swipe_max_v": 0,
-					"swipe_min_h": 0,
-					"swipe_min_v": 0,
+					"swipe_max_h": 1920,
+					"swipe_max_v": 1080,
+					"swipe_min_h": -1920,
+					"swipe_min_v": -1080,
 					"swipe_mode_h": false,
 					"swipe_mode_v": false,
 					"swipe_shift_h": 0,
@@ -1282,28 +1358,111 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"text": ""
+			"text": "",
+			"timer": 2
 		},
 		{
 			"background": {
-				"name": "4 (3)",
+				"name": "4 (22)",
 				"transition": {
 					"blend": true,
 					"blend_mode": true,
 					"blend_speed": 0.5
-				}
+				},
+				"video": ""
+			},
+			"text": "",
+			"timer": 2
+		},
+		{
+			"background": {
+				"name": "4 (2)",
+				"transition": {
+					"curtain_h": true,
+					"curtain_reverse_h": false,
+					"curtain_speed_h": 0
+				},
+				"video": ""
+			},
+			"text": "",
+			"timer": 1
+		},
+		{
+			"background": {
+				"name": "4 (5)",
+				"transition": {
+					"blend": true,
+					"blend_mode": true,
+					"blend_speed": 1
+				},
+				"video": ""
 			},
 			"text": ""
 		},
 		{
 			"background": {
-				"name": "4 (4)",
+				"name": "4 (6)",
 				"transition": {
 					"blend": true,
 					"blend_mode": true,
-					"blend_speed": 0.800000000000021
-				}
+					"blend_speed": 1
+				},
+				"video": ""
 			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "4 (7)",
+				"transition": {
+					"blend": true,
+					"blend_mode": true,
+					"blend_speed": 1
+				},
+				"video": ""
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "4 (8)",
+				"transition": {
+					"blend": true,
+					"blend_mode": true,
+					"blend_speed": 1
+				},
+				"video": ""
+			},
+			"text": ""
+		},
+		{
+			"background": {
+				"name": "maxresdefault2",
+				"transition": {
+					"blend": true,
+					"blend_mode": true,
+					"blend_speed": 1
+				},
+				"video": ""
+			},
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
 			"text": ""
 		}
 	],

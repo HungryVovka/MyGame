@@ -188,21 +188,26 @@ func setSource(s: Dictionary):
 			slide_v.button_pressed = false
 			slide_speed.value = 0.05
 			slide_reverse.button_pressed = false
-		if JSONHelper.gb(t, ["curtain_h", "curtain_v"]):
+
+		if JSONHelper.gb(t, ["curtain_h"]):
 			_on_curtain_button_toggled(true)
 			curtain_button.button_pressed = true
 			curtain_h.button_pressed = JSONHelper.gb(t, ["curtain_h"])
-			curtain_v.button_pressed = JSONHelper.gb(t, ["curtain_v"])
 			curtain_h_speed.value = t.curtain_speed_h
-			curtain_v_speed.value = t.curtain_speed_v
 			curtain_h_reverse.button_pressed = t.curtain_reverse_h
-			curtain_v_reverse.button_pressed = t.curtain_reverse_v
 		else:
 			curtain_h.button_pressed = false
-			curtain_v.button_pressed = false
 			curtain_h_speed.value = 0.0
-			curtain_v_speed.value = 0.0
 			curtain_h_reverse.button_pressed = false
+		if JSONHelper.gb(t, ["curtain_v"]):
+			_on_curtain_button_toggled(true)
+			curtain_button.button_pressed = true
+			curtain_v.button_pressed = JSONHelper.gb(t, ["curtain_v"])
+			curtain_v_speed.value = t.curtain_speed_v
+			curtain_v_reverse.button_pressed = t.curtain_reverse_v
+		else:
+			curtain_v.button_pressed = false
+			curtain_v_speed.value = 0.0
 			curtain_v_reverse.button_pressed = false
 	_data_ready = true
 			
