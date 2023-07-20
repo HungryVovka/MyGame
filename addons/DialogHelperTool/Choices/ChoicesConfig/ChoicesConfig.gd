@@ -60,7 +60,6 @@ signal create_root(name)
 signal open_root(name)
 
 func setSource(data: Dictionary):
-	print("src data: ", data)
 	if !is_node_ready():
 		return
 	src = data
@@ -101,7 +100,6 @@ func render(create_empty: bool = false):
 		new_choice.visible = true
 		new_choice.text = c.text
 		new_choice.src = c
-		print("add choice: ", c)
 		children_items.push_back(new_choice)
 		choice_container.add_child(new_choice)
 	root_list.items = roots
@@ -224,6 +222,7 @@ func _on_remove_choice_pressed():
 	
 
 func _on_choice_scene_text_changed(new_text):
+	print("c", new_text)
 	if src.has("choices") && new_text != "":
 		src.choices.scene = new_text
 	else:

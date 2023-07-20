@@ -68,12 +68,10 @@ func get_next_event():
 func jump_to(id):
 	if event_index_cache[current_pos.root].has(id):
 		current_pos = JSONHelper.deep_duplicate(event_index_cache[current_pos.root][id])
-		print("jump")
 		play_next_event()
 	elif text_data.roots.keys().has(id):
 		call_stack.push_back(JSONHelper.deep_duplicate(current_pos))
 		current_pos = {"index": 0, "root": id}
-		print("jump to root", id)
 		play_next_event()
 	
 func make_choice(_index, text):
@@ -86,8 +84,6 @@ func make_choice(_index, text):
 			break
 	if found_item:
 		jump_to(found_item.root)
-	print("choice")
-	
 	
 func setTimeline(filename):
 	event_index_cache.clear()
@@ -232,10 +228,15 @@ func process_sound(event):
 		playSound.emit(_name, _channel, loop, bus, volume, fade)
 
 func process_choices(event):
-	var data = []
+	var data = {
+		"id": event.id,
+		"choices": []
+	}
+	if event.has("scene"):
+		data.scene = event.scene
 	for choice in event.choices:
 		if (choice.has("script") && process_script(choice)) or !choice.has("script"):
-			data.append(DialogState.pps(choice))
+			data.choices.append(DialogState.pps(choice))
 	showChoices.emit(data)
 	
 func process_state(event):

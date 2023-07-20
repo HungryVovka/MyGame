@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://oisg30whygac"]
 
-[ext_resource type="Script" path="res://Scene/DialogScene.gd" id="1_y2kxs"]
-[ext_resource type="Script" path="res://Scene/VideoStreamPlayer.gd" id="2_4caap"]
-[ext_resource type="PackedScene" uid="uid://ck7xxiv43xgkh" path="res://addons/DialogHelperTool/Game/DialogManager/DialogManager.tscn" id="2_72cbb"]
-[ext_resource type="PackedScene" uid="uid://daf84icc03tyk" path="res://Scene/DialogicSystem/TextArea.tscn" id="3_4v5x7"]
-[ext_resource type="PackedScene" uid="uid://cd1g7ya5qstgb" path="res://addons/DialogHelperTool/Game/AudioManager/AudioManager.tscn" id="3_mba4u"]
-[ext_resource type="PackedScene" uid="uid://dre5coms5pnx5" path="res://addons/DialogHelperTool/Game/Background/Background.tscn" id="5_ctygb"]
-[ext_resource type="PackedScene" uid="uid://cpac1623kedeg" path="res://Scene/DialogicSystem/Person.tscn" id="5_jcndp"]
-[ext_resource type="PackedScene" uid="uid://b3xycrlwc280n" path="res://Scene/DialogicSystem/ChoicesBlock.tscn" id="8_w8dfg"]
+[ext_resource type="Script" path="res://Game/DialogScene.gd" id="1_r31am"]
+[ext_resource type="PackedScene" uid="uid://ck7xxiv43xgkh" path="res://addons/DialogHelperTool/Game/DialogManager/DialogManager.tscn" id="2_8uqoj"]
+[ext_resource type="PackedScene" uid="uid://cd1g7ya5qstgb" path="res://addons/DialogHelperTool/Game/AudioManager/AudioManager.tscn" id="3_s7or7"]
+[ext_resource type="Script" path="res://Game/VideoStreamPlayer.gd" id="4_5lqcu"]
+[ext_resource type="PackedScene" uid="uid://dre5coms5pnx5" path="res://addons/DialogHelperTool/Game/Background/Background.tscn" id="5_vewry"]
+[ext_resource type="PackedScene" uid="uid://cpac1623kedeg" path="res://Game/DialogicSystem/Person.tscn" id="6_txgi8"]
+[ext_resource type="PackedScene" uid="uid://daf84icc03tyk" path="res://Game/DialogicSystem/TextArea.tscn" id="7_hvgg1"]
+[ext_resource type="PackedScene" uid="uid://b3xycrlwc280n" path="res://Game/DialogicSystem/ChoicesBlock.tscn" id="8_blb7k"]
 
 [node name="Control" type="Control"]
 layout_direction = 1
@@ -17,12 +17,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_y2kxs")
+script = ExtResource("1_r31am")
 fn = "res://Resources/Scene1/timelines/start.json"
 
-[node name="DialogManager" parent="." instance=ExtResource("2_72cbb")]
+[node name="DialogManager" parent="." instance=ExtResource("2_8uqoj")]
 
-[node name="AudioManager" parent="." instance=ExtResource("3_mba4u")]
+[node name="AudioManager" parent="." instance=ExtResource("3_s7or7")]
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 z_index = -1
@@ -41,9 +41,9 @@ layout_mode = 2
 layout_mode = 2
 mouse_filter = 1
 expand = true
-script = ExtResource("2_4caap")
+script = ExtResource("4_5lqcu")
 
-[node name="Background" parent="." instance=ExtResource("5_ctygb")]
+[node name="Background" parent="." instance=ExtResource("5_vewry")]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -56,33 +56,42 @@ offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="PersonLeft" parent="." instance=ExtResource("5_jcndp")]
+[node name="PersonLeft" parent="." instance=ExtResource("6_txgi8")]
 layout_mode = 1
 offset_right = -1407.0
 mouse_filter = 2
 
-[node name="PersonMiddleLeft" parent="." instance=ExtResource("5_jcndp")]
+[node name="PersonMiddleLeft" parent="." instance=ExtResource("6_txgi8")]
 layout_mode = 1
 offset_left = 384.0
 offset_right = -959.0
 mouse_filter = 2
 
-[node name="PersonMiddle" parent="." instance=ExtResource("5_jcndp")]
+[node name="PersonMiddle" parent="." instance=ExtResource("6_txgi8")]
 layout_mode = 1
 offset_left = 768.0
 offset_right = 768.0
 mouse_filter = 2
 
-[node name="PersonMiddleRight" parent="." instance=ExtResource("5_jcndp")]
+[node name="PersonMiddleRight" parent="." instance=ExtResource("6_txgi8")]
 layout_mode = 1
 offset_left = 1152.0
 offset_right = 1152.0
 mouse_filter = 2
 
-[node name="PersonRight" parent="." instance=ExtResource("5_jcndp")]
+[node name="PersonRight" parent="." instance=ExtResource("6_txgi8")]
 layout_mode = 1
 offset_left = 1536.0
 offset_right = 1536.0
+mouse_filter = 2
+
+[node name="CustomChoiceSceneContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -103,7 +112,7 @@ theme_override_constants/margin_left = 250
 theme_override_constants/margin_right = 250
 theme_override_constants/margin_bottom = 30
 
-[node name="TextArea" parent="MarginContainer" instance=ExtResource("3_4v5x7")]
+[node name="TextArea" parent="MarginContainer" instance=ExtResource("7_hvgg1")]
 clip_contents = true
 custom_minimum_size = Vector2(1200, 250)
 layout_mode = 2
@@ -112,7 +121,7 @@ size_flags_vertical = 8
 mouse_filter = 1
 charactersPerSecond = 100
 
-[node name="ChoisesBlock" parent="." instance=ExtResource("8_w8dfg")]
+[node name="ChoisesBlock" parent="." instance=ExtResource("8_blb7k")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.735

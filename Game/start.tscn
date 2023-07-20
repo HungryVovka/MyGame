@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtgugtwdswpti"]
 
-[ext_resource type="Script" path="res://Scene/start.gd" id="1_8ofs0"]
-[ext_resource type="PackedScene" uid="uid://oisg30whygac" path="res://Scene/DialogScene.tscn" id="2_ha61f"]
-[ext_resource type="PackedScene" uid="uid://yj2uuvm0wbny" path="res://Scene/game_menu.tscn" id="3_vthq3"]
+[ext_resource type="Script" path="res://Game/start.gd" id="1_8ofs0"]
+[ext_resource type="PackedScene" uid="uid://oisg30whygac" path="res://Game/DialogScene.tscn" id="2_ha61f"]
+[ext_resource type="PackedScene" uid="uid://yj2uuvm0wbny" path="res://Game/game_menu.tscn" id="3_vthq3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sqnp8"]
 line_spacing = 30.0

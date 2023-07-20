@@ -7,10 +7,13 @@ extends Control
 @onready var choicesBlock = $ChoisesBlock
 @onready var videoPlayer = $PanelContainer/VideoStreamPlayer
 @onready var videoPanel = $PanelContainer
+@onready var choiceSceneContainer = $CustomChoiceSceneContainer
 
 @export var clickable_background = false
 
 @export_file("*.json") var fn: String
+
+var choiceSceneChild: Node
 
 
 @onready var persons: Dictionary = {
@@ -130,7 +133,7 @@ func _on_text_area_on_next():
 		return
 	if !clickable_background && textArea.text == "":
 		return
-	if !choicesBlock.visible:
+	if !choice_mode():
 		dialogManager.play_next_event()
 
 func _on_dialog_manager_set_background(res, has_background, params):
@@ -141,7 +144,7 @@ func _on_background_gui_input(event):
 		return
 	if event is InputEventMouseButton \
 		&& clickable_background \
-		&& !choicesBlock.visible \
+		&& !choice_mode() \
 		&& event.button_index == MOUSE_BUTTON_LEFT \
 		&& event.pressed == true:
 		dialogManager.play_next_event()
@@ -156,8 +159,29 @@ func _on_dialog_manager_stop_sound(channel):
 	audioManager.stop(channel)
 
 func _on_dialog_manager_show_choices(data):
-	choicesBlock.set_choices(data)
-	choicesBlock.visible = true
+	if !data.has("scene"):
+		choicesBlock.set_choices(data.choices)
+		choicesBlock.visible = true
+	else:
+		if choiceSceneChild:
+			choiceSceneChild.get_parent().remove_child(choiceSceneChild)
+			choiceSceneChild.queue_free()
+			choiceSceneChild = null
+		choiceSceneChild = load(data.scene).instantiate()
+		choiceSceneContainer.add_child(choiceSceneChild)
+		choiceSceneChild.choices = data
+		choiceSceneChild.connect("make_choice", scene_make_choice)
+		
+func scene_make_choice(id: String):
+	dialogManager.make_choice(id, id)
+	if !dialogManager.is_choice:
+		choicesBlock.visible = false
+		choiceSceneChild.get_parent().remove_child(choiceSceneChild)
+		choiceSceneChild.queue_free()
+		choiceSceneChild = null
+		
+func choice_mode():
+	return choicesBlock.visible || choiceSceneChild
 
 func _on_choices_block_choice_clicked(id, text):
 	dialogManager.make_choice(id, text)

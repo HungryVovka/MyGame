@@ -6,3 +6,4 @@ func _can_drop_data(at_position, data):
 	
 func _drop_data(at_position, data):
 	text = data.files[0]
+	text_changed.emit(text)

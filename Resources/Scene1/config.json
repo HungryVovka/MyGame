@@ -1,5 +1,5 @@
 {
 	"start": "start",
 	"end": "",
-	"scene": "res://Scene/start.tscn"
+	"scene": "res://Game/start.tscn"
 }

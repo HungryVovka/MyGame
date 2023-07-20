@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=3 uid="uid://dsgh8ak1mpouo"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Game/ChoiceControl/ChoiceSceneContainer.gd" id="1_x27o2"]
+[ext_resource type="PackedScene" uid="uid://c1dfish0ow7cu" path="res://addons/DialogHelperTool/Game/ChoiceControl/ChoiceControl.tscn" id="3_0un8s"]
+[ext_resource type="Texture2D" uid="uid://n8ka7rloboaw" path="res://Resources/1Main/Random/16888441522410.jpg" id="4_hgddr"]
+[ext_resource type="Shader" path="res://shaders/GodLight.gdshader" id="5_obbep"]
+[ext_resource type="Texture2D" uid="uid://d0ev7lf3l5i6v" path="res://Resources/1Main/Random/F06ygGBWYAA2vFb.jpg" id="7_jqm12"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jceot"]
+shader = ExtResource("5_obbep")
+shader_parameter/angle = 0.15
+shader_parameter/position = 0.1
+shader_parameter/spread = 0.435
+shader_parameter/cutoff = 0.117
+shader_parameter/falloff = 0.341
+shader_parameter/edge_fade = 0.447
+shader_parameter/speed = 4.0
+shader_parameter/ray1_density = 4.0
+shader_parameter/ray2_density = 30.0
+shader_parameter/ray2_intensity = 0.23
+shader_parameter/color = Color(0.768627, 0.431373, 0.635294, 0.505882)
+shader_parameter/hdr = false
+shader_parameter/seed = 5.0
+
+[sub_resource type="Gradient" id="Gradient_vwcnh"]
+offsets = PackedFloat32Array(0, 0.302115, 0.675227, 1)
+colors = PackedColorArray(1, 0, 0.701961, 1, 1, 1, 0.027451, 1, 0.0745098, 1, 0.0745098, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_17f5j"]
+gradient = SubResource("Gradient_vwcnh")
+
+[sub_resource type="LabelSettings" id="LabelSettings_dw8g4"]
+font_color = Color(0.909804, 0.54902, 0.854902, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t1rpi"]
+font_color = Color(0.909804, 0.54902, 0.854902, 1)
+
+[node name="TestScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x27o2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChoiceItem" parent="." instance=ExtResource("3_0un8s")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055
+anchor_top = 0.034
+anchor_right = 0.325
+anchor_bottom = 0.904
+offset_left = -0.600007
+offset_top = 0.279998
+offset_right = -3.43323e-05
+offset_bottom = -0.320047
+choice_id = "daddy"
+hover_color = Color(0.980392, 0.509804, 0.847059, 1)
+pressed_color = Color(0.8, 0.360784, 0.435294, 1)
+
+[node name="TextureRect" type="TextureRect" parent="ChoiceItem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_hgddr")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureRect2" type="TextureRect" parent="ChoiceItem"]
+material = SubResource("ShaderMaterial_jceot")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_17f5j")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="PanelContainer" type="PanelContainer" parent="ChoiceItem"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 58.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ChoiceItem/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="ChoiceItem/PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "УЙТИ С ПАПОЧКОЙ"
+label_settings = SubResource("LabelSettings_dw8g4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChoiceItem2" parent="." instance=ExtResource("3_0un8s")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.063
+anchor_right = 0.98
+anchor_bottom = 0.869
+offset_top = -0.0400011
+offset_right = -0.600037
+offset_bottom = 0.479981
+choice_id = "refuse"
+hover_color = Color(0.647059, 0, 0.141176, 1)
+
+[node name="TextureRect" type="TextureRect" parent="ChoiceItem2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_jqm12")
+expand_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="ChoiceItem2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 58.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ChoiceItem2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="ChoiceItem2/PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "ОТКАЗАТЬСЯ!"
+label_settings = SubResource("LabelSettings_t1rpi")
+horizontal_alignment = 1
+vertical_alignment = 1

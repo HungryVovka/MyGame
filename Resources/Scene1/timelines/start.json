@@ -37,22 +37,19 @@
 			"choices": {
 				"choices": [
 					{
-						"id": "1432432_23_аввы",
-						"root": "2",
-						"text": "1432432 23 аввы"
+						"id": "daddy",
+						"root": "/my_choice/yes",
+						"text": "daddy"
 					},
 					{
-						"id": "2",
-						"root": "/my_choice/2",
-						"text": "2"
-					},
-					{
-						"id": "454",
+						"id": "refuse",
 						"root": "/my_choice/454",
-						"text": ""
+						"script": "func condition(_d, _e):\n\treturn true",
+						"text": "refuse"
 					}
 				],
-				"id": "my_choice"
+				"id": "my_choice",
+				"scene": "res://Game/ChoicesScenes/TestScene.tscn"
 			},
 			"play_sound": {
 				"bus": "Music",
@@ -861,6 +858,7 @@
 				"clickable": false,
 				"name": "3 (14)"
 			},
+			"id": "q",
 			"play_sound": {
 				"bus": "SFX",
 				"channel": "SFX1",
@@ -934,6 +932,7 @@
 					"swipe_speed_v": 0
 				}
 			},
+			"jump_to": "3",
 			"text": "",
 			"timer": 6
 		},
@@ -1075,7 +1074,7 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
+			"script": "func start(dialog, event):\n\tdialog.get_parent().background.apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
 			"text": "",
 			"timer": 3
 		},
@@ -1130,7 +1129,7 @@
 			"background": {
 				"name": "BlackScreen"
 			},
-			"script": "func start(dialog, event):\n\tdialog.get_parent().fadebleBackground.remove_shader(\"face\")\n\tdialog.get_parent().fadebleBackground.movable = 0\nfunc condition(dialog, event):\n\treturn true",
+			"script": "func start(dialog, event):\n\tdialog.get_parent().background.remove_shader(\"face\")\n\tdialog.get_parent().background.movable = 0\nfunc condition(dialog, event):\n\treturn true",
 			"text": "",
 			"timer": 3
 		},
@@ -1388,21 +1387,20 @@
 					"blend": true,
 					"blend_mode": true,
 					"blend_speed": 0.5
-				},
-				"video": ""
+				}
 			},
 			"text": "",
 			"timer": 2
 		},
 		{
 			"background": {
+				"clickable": true,
 				"name": "4 (2)",
 				"transition": {
 					"curtain_h": true,
 					"curtain_reverse_h": false,
 					"curtain_speed_h": 0
-				},
-				"video": ""
+				}
 			},
 			"text": "",
 			"timer": 1
@@ -1414,8 +1412,7 @@
 					"blend": true,
 					"blend_mode": true,
 					"blend_speed": 1
-				},
-				"video": ""
+				}
 			},
 			"text": ""
 		},
@@ -1426,8 +1423,7 @@
 					"blend": true,
 					"blend_mode": true,
 					"blend_speed": 1
-				},
-				"video": ""
+				}
 			},
 			"text": ""
 		},
@@ -1438,32 +1434,26 @@
 					"blend": true,
 					"blend_mode": true,
 					"blend_speed": 1
-				},
-				"video": ""
+				}
 			},
 			"text": ""
 		},
 		{
 			"background": {
+				"clickable": true,
 				"name": "4 (8)",
 				"transition": {
 					"blend": true,
 					"blend_mode": true,
 					"blend_speed": 1
-				},
-				"video": ""
+				}
 			},
+			"id": "3",
 			"text": ""
 		},
 		{
 			"background": {
-				"name": "maxresdefault2",
-				"transition": {
-					"blend": true,
-					"blend_mode": true,
-					"blend_speed": 1
-				},
-				"video": ""
+				"name": ""
 			},
 			"text": ""
 		},
@@ -1503,7 +1493,40 @@
 		"/my_choice/yes": {
 			"events": [
 				{
+					"background": {
+						"name": "BlackScreenCredits2",
+						"video": ""
+					},
 					"text": "YESSS"
+				},
+				{
+					"choices": {
+						"choices": [
+							{
+								"id": "yes_mdam",
+								"root": "/my_choice/yes/playq/yes_mdam",
+								"text": "Yes mdam"
+							},
+							{
+								"id": "fuck_you!",
+								"root": "/my_choice/no",
+								"text": "fuck you!"
+							}
+						],
+						"id": "my_choice"
+					},
+					"text": "Should i play with ya?"
+				}
+			]
+		},
+		"/my_choice/yes/playq/yes_mdam": {
+			"events": [
+				{
+					"background": {
+						"name": "",
+						"video": "kiss"
+					},
+					"text": ""
 				}
 			]
 		},

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dx0n1bqkmta13"]
 
-[ext_resource type="PackedScene" uid="uid://clvar3rgp82e6" path="res://Scene/SaveElement.tscn" id="1_fl4ah"]
-[ext_resource type="Script" path="res://Scene/Save.gd" id="1_samw1"]
+[ext_resource type="Script" path="res://Game/Save.gd" id="1_8m2ml"]
+[ext_resource type="PackedScene" uid="uid://clvar3rgp82e6" path="res://Game/SaveElement.tscn" id="2_iprrp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4etsr"]
 bg_color = Color(0, 0, 0.25098, 0.0705882)
@@ -21,7 +21,7 @@ offset_right = -2.0
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_samw1")
+script = ExtResource("1_8m2ml")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
@@ -40,27 +40,27 @@ theme_override_constants/h_separation = 33
 theme_override_constants/v_separation = 44
 columns = 3
 
-[node name="El1" parent="GridContainer" instance=ExtResource("1_fl4ah")]
+[node name="El1" parent="GridContainer" instance=ExtResource("2_iprrp")]
 layout_mode = 2
 default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
-[node name="El2" parent="GridContainer" instance=ExtResource("1_fl4ah")]
+[node name="El2" parent="GridContainer" instance=ExtResource("2_iprrp")]
 layout_mode = 2
 default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
-[node name="El3" parent="GridContainer" instance=ExtResource("1_fl4ah")]
+[node name="El3" parent="GridContainer" instance=ExtResource("2_iprrp")]
 layout_mode = 2
 default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
-[node name="El4" parent="GridContainer" instance=ExtResource("1_fl4ah")]
+[node name="El4" parent="GridContainer" instance=ExtResource("2_iprrp")]
 layout_mode = 2
 default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
-[node name="El5" parent="GridContainer" instance=ExtResource("1_fl4ah")]
+[node name="El5" parent="GridContainer" instance=ExtResource("2_iprrp")]
 layout_mode = 2
 default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 
-[node name="El6" parent="GridContainer" instance=ExtResource("1_fl4ah")]
+[node name="El6" parent="GridContainer" instance=ExtResource("2_iprrp")]
 layout_mode = 2
 default_color = Color(0.658824, 0.654902, 0.654902, 0.945098)
 

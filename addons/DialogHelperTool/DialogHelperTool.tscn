@@ -111,7 +111,7 @@ text = "Scene
 custom_minimum_size = Vector2(600, 45)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "res://Scene/start.tscn"
+text = "res://Game/start.tscn"
 editable = false
 
 [node name="Button3" type="Button" parent="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer"]

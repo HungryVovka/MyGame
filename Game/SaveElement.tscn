@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://clvar3rgp82e6"]
 
-[ext_resource type="Script" path="res://Scene/SaveElement.gd" id="1_x6358"]
-[ext_resource type="Texture2D" uid="uid://c10lrki8cii23" path="res://Resources/1Main/GUI/empty_slot.png" id="2_6en77"]
+[ext_resource type="Script" path="res://Game/SaveElement.gd" id="1_tll0l"]
+[ext_resource type="Texture2D" uid="uid://c10lrki8cii23" path="res://Resources/1Main/GUI/empty_slot.png" id="2_y64un"]
 
 [node name="SaveElement" type="Control"]
 clip_contents = true
@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_x6358")
+script = ExtResource("1_tll0l")
 default_color = Color(0.658824, 0.654902, 0.654902, 1)
 pressed_color = Color(1, 0.756863, 0.760784, 1)
 
@@ -23,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_6en77")
+texture = ExtResource("2_y64un")
 expand_mode = 3
 
 [node name="Label" type="Label" parent="."]
