@@ -37,14 +37,19 @@
 			"choices": {
 				"choices": [
 					{
-						"id": "yes",
-						"root": "/my_choice/yes",
-						"text": "yes"
+						"id": "1432432_23_аввы",
+						"root": "2",
+						"text": "1432432 23 аввы"
 					},
 					{
-						"id": "no",
-						"root": "/my_choice/no",
-						"text": "no"
+						"id": "2",
+						"root": "/my_choice/2",
+						"text": "2"
+					},
+					{
+						"id": "454",
+						"root": "/my_choice/454",
+						"text": ""
 					}
 				],
 				"id": "my_choice"
@@ -304,6 +309,7 @@
 			"timer": 2
 		},
 		{
+			"id": "2",
 			"text": "Ladies and Gentlemen! This is the Captain speaking. {>>} We're about an hour out of our destination...",
 			"timer": 3.5
 		},
@@ -1481,6 +1487,12 @@
 		}
 	],
 	"roots": {
+		"/my_choice/": {
+			"events": []
+		},
+		"/my_choice/454": {
+			"events": []
+		},
 		"/my_choice/no": {
 			"events": [
 				{
