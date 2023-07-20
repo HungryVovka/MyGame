@@ -18,9 +18,9 @@ func addChoices(data: Array):
 	var ix = 0
 	for choice in data:
 		var new_button = button.duplicate()
-		new_button.text = choice
+		new_button.text = choice.text
 		new_button.visible = true
-		new_button.choice_id = ix
+		new_button.choice_id = choice.id
 		new_button.connect("onPressedId", onChoiceClicked)
 		vbox.add_child(new_button)
 		choices[ix] = new_button
@@ -32,5 +32,5 @@ func clearChoices():
 	choices.clear()
 
 func onChoiceClicked(id, text):
-	choiceClicked.emit(id, text)
+	choiceClicked.emit(id, id)
 

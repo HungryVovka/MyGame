@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cjcwj2co4fkg1" path="res://addons/DialogHelperTool/Shared/Dropdownbox/Dropdownbox.tscn" id="2_mio6r"]
 [ext_resource type="FontFile" uid="uid://s5r7anan68q0" path="res://addons/DialogHelperTool/Res/Fonts/Lato-Bold.ttf" id="2_q13ku"]
 [ext_resource type="PackedScene" uid="uid://dsxhvxpevjney" path="res://addons/DialogHelperTool/TimelineItem/TimelineItemButton/TimelineItemButton.tscn" id="4_6f708"]
-[ext_resource type="Texture2D" uid="uid://blithjl2sriun" path="res://addons/DialogHelperTool/Res/dialog.svg" id="5_amxjm"]
+[ext_resource type="PackedScene" uid="uid://b7lehdfqex04l" path="res://addons/DialogHelperTool/TimelineItem/TextButton/TextButton.tscn" id="4_v3rfy"]
 [ext_resource type="Texture2D" uid="uid://bgn30tt2gc58b" path="res://addons/DialogHelperTool/Res/background_icon.svg" id="5_fkr4x"]
 [ext_resource type="Texture2D" uid="uid://uggoc0p11pbx" path="res://addons/DialogHelperTool/Res/script.svg" id="6_8djyk"]
 [ext_resource type="Texture2D" uid="uid://ctkjex5827hs4" path="res://addons/DialogHelperTool/Res/stats.svg" id="7_01dba"]
@@ -36,7 +36,7 @@ shadow_color = Color(0, 0, 0.188235, 0.937255)
 shadow_size = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_iw8g7"]
-font_size = 24
+font_size = 12
 font_color = Color(1, 1, 1, 0.760784)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
@@ -117,7 +117,7 @@ border_width_right = 4
 border_color = Color(0.168627, 0, 0.247059, 0.866667)
 
 [node name="TimelineItem" type="Control"]
-custom_minimum_size = Vector2(1080, 40)
+custom_minimum_size = Vector2(900, 40)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -190,7 +190,7 @@ theme_override_constants/margin_left = -8
 [node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "CHARACTER:"
+text = "CHAR:"
 label_settings = SubResource("LabelSettings_b5bax")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -200,15 +200,15 @@ custom_minimum_size = Vector2(40, 20)
 layout_mode = 2
 size_flags_stretch_ratio = 0.4
 
+[node name="TextLabelButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_v3rfy")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
 [node name="BackgroundButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
 layout_mode = 2
 tooltip = "Edit event's background and transition"
 icon = ExtResource("5_fkr4x")
-
-[node name="TextButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
-layout_mode = 2
-tooltip = "Edit event's text"
-icon = ExtResource("5_amxjm")
 
 [node name="SoundsButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_6f708")]
 layout_mode = 2
@@ -563,8 +563,11 @@ value = 1.0
 [connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JumpDropdown" to="." method="_on_dropdownbox_item_selected"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterCheckbox" to="." method="_on_character_checkbox_toggled"]
 [connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown" to="." method="_on_character_dropdown_item_selected"]
+[connection signal="motion_pass" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextLabelButton" to="." method="_on_panel_container_gui_input"]
+[connection signal="on_mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextLabelButton" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="on_mouse_left" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextLabelButton" to="." method="_on_panel_container_mouse_exited"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextLabelButton" to="." method="_on_text_button_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BackgroundButton" to="." method="_on_background_button_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextButton" to="." method="_on_text_button_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SoundsButton" to="." method="_on_sounds_button_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TimerButton" to="." method="_on_timer_button_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ScriptButton" to="." method="_on_script_button_toggled"]

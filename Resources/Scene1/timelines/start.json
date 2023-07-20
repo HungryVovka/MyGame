@@ -34,7 +34,21 @@
 					"swipe_speed_v": 4
 				}
 			},
-			"jump_to": "1",
+			"choices": {
+				"choices": [
+					{
+						"id": "yes",
+						"root": "/my_choice/yes",
+						"text": "yes"
+					},
+					{
+						"id": "no",
+						"root": "/my_choice/no",
+						"text": "no"
+					}
+				],
+				"id": "my_choice"
+			},
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
@@ -1468,10 +1482,18 @@
 	],
 	"roots": {
 		"/my_choice/no": {
-			"events": []
+			"events": [
+				{
+					"text": "NOOOOOOO"
+				}
+			]
 		},
 		"/my_choice/yes": {
-			"events": []
+			"events": [
+				{
+					"text": "YESSS"
+				}
+			]
 		},
 		"/new_root": {
 			"events": []

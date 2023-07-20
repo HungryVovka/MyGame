@@ -28,7 +28,6 @@ extends Control
 @export var context: Dictionary = {"ids": [], "characters": []}: set = setContext
 var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
 
-@onready var textButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextButton
 @onready var backgroundsButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BackgroundButton
 @onready var soundsButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SoundsButton
 @onready var scriptButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ScriptButton
@@ -57,6 +56,7 @@ var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").n
 @onready var backgroundTransitionButton = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TransitionButton
 @onready var backgroundPreview = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/HBoxContainer/Preview
 @onready var backgroundBlock = $PanelContainer/MarginContainer/VBoxContainer/BackgroundField/Panel/HBoxContainer/PanelContainer/MarginContainer/MarginContainer
+@onready var labelButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextLabelButton
 
 
 var texHideTimer: Timer
@@ -92,10 +92,13 @@ func rescale_fonts(coef: float):
 	var v = int($PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId.get_theme_font_size("font_size") * coef)
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventId.add_theme_font_size_override("font_size", v)
 	
+	settings = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TimerButton/MarginContainer2/Label.label_settings.duplicate()
+	settings.font_size *= coef
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TimerButton/MarginContainer2/Label.label_settings = settings
+	
 	character.setScale(coef)
 	jump_to.setScale(coef)
 
-	textButton.setScale(coef)
 	backgroundsButton.setScale(coef)
 	scriptButton.setScale(coef)
 	statsButton.setScale(coef)
@@ -207,7 +210,6 @@ func renderBackground():
 		
 		
 func updateButtons():	
-	textButton.setActive(data.text != "")
 	backgroundsButton.setActive(data.has("background"))
 	soundsButton.setActive(data.has("play_sound") || data.has("stop_sound"))
 	scriptButton.setActive(data.has("script"))
@@ -225,6 +227,8 @@ func updateButtons():
 		timerLabel.text = str(data.timer)
 	else:
 		timerLabel.text = ""
+		
+	labelButton.text = data.text
 
 func switch_control_style(control, is_active):
 	if (!control): 
@@ -288,7 +292,7 @@ func _on_timer_spinbox_value_changed(value):
 	data["timer"] = value
 	timerLabel.text = str(value)
 	updateButtons()
-
+	
 func _on_panel_container_gui_input(event):
 	if event is InputEventMouseMotion:
 		if data.has("background") && data.background.has("name") && backgrounds.has(data.background.name):
@@ -436,8 +440,8 @@ func transitionsPopupHidden():
 	updateButtons()
 
 func choicesPopupHidden():
-	choicesButton.pressed = false
 	updateButtons()
+	choicesButton.pressed = false
 	
 func updateScriptText(text):
 	if text != "":
@@ -512,7 +516,8 @@ func _on_stats_button_toggled(pressed):
 
 
 func _on_choices_button_toggled(pressed):
-	show_choices.emit(self, data)
+	if pressed:
+		show_choices.emit(self, data)
 
 
 func _on_timer_button_toggled(pressed):
