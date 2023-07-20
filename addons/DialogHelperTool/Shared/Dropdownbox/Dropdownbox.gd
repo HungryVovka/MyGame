@@ -54,8 +54,10 @@ func setScale(coef: float):
 	tex.set_size(Vector2(12, 12) * coef)
 	tex.position -= Vector2(20, 9) * (coef - 1)
 	
-func setEnabled(enabled: bool):
-	if enabled:
+func setEnabled(_enabled: bool):
+	if _enabled == enabled:
+		return
+	if _enabled:
 		if state.stylebox:
 			optionButton.add_theme_stylebox_override("normal", state.stylebox)
 		optionButton.mouse_filter = MOUSE_FILTER_STOP
@@ -72,6 +74,7 @@ func setEnabled(enabled: bool):
 		optionButton.mouse_filter = MOUSE_FILTER_IGNORE
 		line.mouse_filter = MOUSE_FILTER_IGNORE
 		tex.material = inactive_shader
+	enabled = _enabled
 
 func setItems(data: Array[String]):
 	if !is_ready:
@@ -80,6 +83,8 @@ func setItems(data: Array[String]):
 	items = data.duplicate()
 	for i in range(0, data.size()):
 		optionButton.add_item(data[i], i)
+	if items.has(line.text):
+		optionButton.select(items.find(line.text))
 
 
 func _on_option_button_item_selected(index):

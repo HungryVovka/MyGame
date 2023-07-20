@@ -1,10 +1,11 @@
 extends Node
 
-const LoopableAudio = preload("res://Scene/DialogicSystem/LoopableAudio.gd")
-
+const LoopableAudio = preload("res://addons/DialogHelperTool/Game/AudioManager/LoopableAudio.gd")
+var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
 var streams: Dictionary = {}
 var players: Dictionary = {}
 var tweens: Dictionary = {}
+var cache: Dictionary = {}
 
 @export_file("*.json") var resources: set = setResources
 
@@ -12,13 +13,37 @@ func setResources(filename):
 	if filename:
 		players.clear()
 		streams.clear()
-		var data = _read_json(filename)
+		var data = JSONHelper.read_json(filename, false)
 		for k in data.keys():
 			streams[k] = load(data[k])
-	pass
+
+func toJson() -> Array:
+	var result = []
+	for ch in players.keys():
+		var player: LoopableAudio = players[ch]
+		if player.playing:
+			result.push_back({
+				"request": JSONHelper.deep_duplicate(cache[ch]),
+				"position": player.get_playback_position()
+			})
+	return result
+
+func loadFromJson(data: Array):
+	clear()
+	for i in data:
+		play(i.request.name, i.request.channel, i.request.loop, i.request.bus, i.request.volume, i.request.fade_in)
+		players[i.request.channel].seek(i.position)
 
 func play(_name, channel, loop = false, bus = "SFX", volume = 1.0, fade_in = 0.0):
 	if (streams.has(_name)):
+		cache[channel] = {
+			"name": _name,
+			"channel": channel,
+			"loop": loop,
+			"bus": bus,
+			"volume": volume,
+			"fade_in": fade_in
+		}
 		if players.has(channel):
 			players[channel].stop()
 			players.erase(channel)
@@ -48,10 +73,11 @@ func stop(channel):
 			tweens[channel].kill()
 			tweens.erase(channel)
 		players.erase(channel)
+		cache.erase(channel)
 
-func _read_json(filename):
-	var file = FileAccess.open(filename, FileAccess.READ)
-	var txt = file.get_as_text()
-	var data = JSON.parse_string(txt)
-	file.close()
-	return data
+func clear():
+	for ch in players.keys():
+		stop(ch)
+	players.clear()
+	tweens.clear()
+	cache.clear()

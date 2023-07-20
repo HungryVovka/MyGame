@@ -26,6 +26,7 @@ signal personVisible(name, isVisible)
 signal personSource(name, src)
 signal personAnimation(obj, type, animation, time, backwards)
 
+var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
 var text_data : Dictionary = {}
 var characters_data : Dictionary = {}
 var portraits_resources: Dictionary = {}
@@ -34,37 +35,29 @@ var videos_resources: Dictionary = {}
 var background_resources: Dictionary = {}
 var event_index_cache: Dictionary = {}
 
-var current_index = [0]
-var deep_index = 0
-
 var last_event = {}
-
 var current_event = null
-
 var nextEventTimer: Timer = null
 
-
+var call_stack = []
+var current_pos: Dictionary = {"index": 0, "root": ""}
 
 func reset_index():
-	current_index = [0]
-	deep_index = 0
+	current_pos = {"index": 0, "root": ""}
+	call_stack.clear()
+	
 	if nextEventTimer:
 		nextEventTimer.queue_free()
 		nextEventTimer = null
 	
 func get_next_event():
-	var evs = text_data
-	var d = 0
-	while d < deep_index:
-		evs = evs.events[current_index[d]].choices[current_index[d+1]]
-		d += 2
-	var index = current_index[deep_index]
+	var evs = text_data.roots[current_pos.root] if current_pos.root != "" else text_data
+	var index = current_pos.index
 	if index >= evs.events.size():
-		if deep_index > 0:
-			current_index.remove_at(deep_index-1)
-			current_index.remove_at(deep_index-1)
-			deep_index -= 2
-			current_index[deep_index] += 1
+		if !call_stack.is_empty():
+			var prev = call_stack.pop_back()
+			current_pos = JSONHelper.deep_duplicate(prev)
+			current_pos.index += 1
 			return get_next_event()
 		else:
 			print("END()")
@@ -73,27 +66,27 @@ func get_next_event():
 	return evs.events[index]
 	
 func jump_to(id):
-	if event_index_cache.has(id):
-		current_index = [] + event_index_cache[id]
-		deep_index = current_index.size() - 1
+	if event_index_cache[current_pos.root].has(id):
+		current_pos = JSONHelper.deep_duplicate(event_index_cache[current_pos.root][id])
 		print("jump")
+		play_next_event()
+	elif text_data.roots.keys().has(id):
+		call_stack.push_back(JSONHelper.deep_duplicate(current_pos))
+		current_pos = {"index": 0, "root": id}
+		print("jump to root", id)
 		play_next_event()
 	
 func make_choice(_index, text):
-	var found_index = 0
-	var ci = 0
+	var found_item = null
 	if current_event == null:
 		current_event = get_next_event()
-	for c in current_event.choices:
-		if c.text == text:
-			found_index = ci
+	for c in current_event.choices.choices:
+		if c.id == text:
+			found_item = c
 			break
-		ci += 1
-	current_index.append(found_index)
-	current_index.append(0)
-	deep_index += 2
+	if found_item:
+		jump_to(found_item.root)
 	print("choice")
-	play_next_event()
 	
 	
 func setTimeline(filename):
@@ -102,39 +95,31 @@ func setTimeline(filename):
 		remove_child(nextEventTimer)
 		nextEventTimer.stop()
 		nextEventTimer.queue_free()
-		
-	current_index = [0]
-	deep_index = 0
-	current_event = null
 	
+	current_event = null
 	if filename:
-		text_data = _read_json(filename)
+		text_data = JSONHelper.read_json(filename, false)
 		reset_index()
 		create_event_index(text_data)
-	
-		
 
 func create_event_index(e, prev: Array = []):
 	var index = 0
+	event_index_cache[""] = {}
 	for event in e.events:
 		if event.has("id"):
-			var new_array = prev.duplicate()
-			new_array.append(index)
-			event_index_cache[event.id] = new_array
-		if event.has("choices"):
-			var cx = 0
-			for choice in event.choices:
-				var new_array = prev.duplicate()
-				new_array.append(index)
-				new_array.append(cx)
-				create_event_index(choice, new_array)
-				cx += 1
+			event_index_cache[""][event.id] = {"index": index, "root": ""}
 		index += 1
+	for root in e.roots.keys():
+		event_index_cache[root] = {}
+		for ix in range(e.roots[root].events.size()):
+			var event = e.roots[root].events[ix]
+			if event.has("id"):
+				event_index_cache[root][event.id] = {"index": ix, "root": root}
 
 func setCharactersList(filename):
 	if filename:
 		portraits_resources.clear()
-		characters_data = _read_json(filename)
+		characters_data = JSONHelper.read_json(filename, false)
 		for k in characters_data.characters.keys():
 			if characters_data.characters[k].portrait:
 				portraits_resources[k] = load(characters_data.characters[k].portrait)
@@ -148,29 +133,19 @@ func setCharactersList(filename):
 func setBackgroundsList(filename):
 	if filename: 
 		background_resources.clear()
-		var data = _read_json(filename)
+		var data = JSONHelper.read_json(filename, false)
 		for k in data.keys():
 			background_resources[k] = load(data[k])
 
 func setVideosList(filename):
 	if filename: 
 		videos_resources.clear()
-		var data = _read_json(filename)
+		var data = JSONHelper.read_json(filename, false)
 		for k in data.keys():
 			videos_resources[k] = load(data[k])
 
-func _read_json(filename):
-	var file = FileAccess.open(filename, FileAccess.READ)
-	var txt = file.get_as_text()
-	var data = JSON.parse_string(txt)
-	file.close()
-	return data
-
 func play_next_event():
-	last_event = {
-		"current_index": current_index.duplicate(),
-		"deep_index": deep_index
-	}
+	last_event = JSONHelper.deep_duplicate(current_pos)
 	var event = get_next_event()
 	current_event = event
 	
@@ -180,7 +155,7 @@ func play_next_event():
 		if event.has("script"):
 			if !process_script(event):
 				is_choice = false
-				current_index[deep_index] += 1
+				current_pos.index += 1
 				play_next_event()
 				return
 		if event.has("state"):
@@ -214,7 +189,7 @@ func play_next_event():
 			process_choices(event.choices)
 			is_choice = true
 		else:
-			current_index[deep_index] += 1
+			current_pos.index += 1
 			is_choice = false
 
 func _ready():
@@ -258,9 +233,9 @@ func process_sound(event):
 
 func process_choices(event):
 	var data = []
-	for choice in event:
-		if (choice.has("condition") && process_script(choice).condition) or !choice.has("condition"):
-			data.append(DialogState.pps(choice.text))
+	for choice in event.choices:
+		if (choice.has("script") && process_script(choice)) or !choice.has("script"):
+			data.append(DialogState.pps(choice))
 	showChoices.emit(data)
 	
 func process_state(event):

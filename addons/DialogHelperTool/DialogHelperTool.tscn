@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kpxck4bb7pjp"]
+[gd_scene load_steps=12 format=3 uid="uid://kpxck4bb7pjp"]
 
 [ext_resource type="Script" path="res://addons/DialogHelperTool/DialogHelperTool.gd" id="1_eb7vm"]
 [ext_resource type="Script" path="res://addons/DialogHelperTool/SceneLineEdit.gd" id="2_vieds"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b3o5x2qfahd2f" path="res://addons/DialogHelperTool/TimelineItem/ScriptModal/ScriptModal.tscn" id="7_fla53"]
 [ext_resource type="PackedScene" uid="uid://dgh0ovmttvlnj" path="res://addons/DialogHelperTool/TimelineItem/TransitionsModal/TransitionsModal.tscn" id="8_lv4u6"]
 [ext_resource type="PackedScene" uid="uid://c2ygcuhvy26ae" path="res://addons/DialogHelperTool/RootsEditorModal/RootsEditorModal.tscn" id="9_ragul"]
+[ext_resource type="PackedScene" uid="uid://o172w0xp1fs4" path="res://addons/DialogHelperTool/Choices/ChoicesModal.tscn" id="10_h41c2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p81f4"]
 font_size = 20
@@ -481,6 +482,10 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="ChoicesModal" parent="." instance=ExtResource("10_h41c2")]
+visible = false
+layout_mode = 1
+
 [connection signal="scene_folder_changed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFolder" to="." method="_on_scene_folder_changed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/Button" to="." method="_on_folder_picked_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/Button3" to="." method="_on_scene_start_pressed"]
@@ -513,3 +518,6 @@ layout_mode = 1
 [connection signal="back_clicked" from="TransitionsModal" to="." method="_on_transitions_modal_back_clicked"]
 [connection signal="back_clicked" from="RootsEditorModal" to="." method="_on_roots_editor_modal_back_clicked"]
 [connection signal="root_name_changed" from="RootsEditorModal" to="." method="_on_roots_editor_modal_root_name_changed"]
+[connection signal="back_clicked" from="ChoicesModal" to="." method="_on_choices_modal_back_clicked"]
+[connection signal="create_root" from="ChoicesModal" to="." method="create_root"]
+[connection signal="open_root" from="ChoicesModal" to="." method="_on_root_list_item_selected"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd1g7ya5qstgb"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Game/AudioManager/AudioManager.gd" id="1_vaumx"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_vaumx")

@@ -7,6 +7,8 @@ var is_scanning
 
 var bus_list: Array[String] = []
 
+var dialogToolState = preload("res://addons/DialogHelperTool/Shared/DialogToolState.gd").new()
+
 func _has_main_screen():
 	return true
 	
@@ -16,9 +18,11 @@ func _make_visible(visible):
 	get_editor_interface().get_editor_settings().set_setting("run/auto_save/save_before_running", !visible)
 
 func _exit_tree():
-	pass
+	get_editor_interface().get_editor_main_screen().remove_child(dock)
+	dock.queue_free()
 
 func _enter_tree():
+	dialogToolState.state.scale = get_editor_interface().get_editor_scale()
 	dock = preload("res://addons/DialogHelperTool/DialogHelperTool.tscn").instantiate()
 	dock.interface_scale = get_editor_interface().get_editor_scale()
 	get_editor_interface().get_editor_main_screen().add_child(dock)
@@ -31,8 +35,7 @@ func _enter_tree():
 			bus_list.push_back(iBus)
 		else:
 			break
-	dock.bus_list = bus_list
-	
+	dock.bus_list = bus_list	
 	_make_visible(false)
 
 func _get_plugin_name():

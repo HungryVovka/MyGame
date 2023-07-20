@@ -19,6 +19,17 @@ func save_json(filename, dict, globalize = true):
 	file.flush()
 	file.close()
 	reimport.emit(path)
+	
+func delay(callback: Callable, time = 1.0):
+	var timer = Timer.new()
+	timer.one_shot = true
+	add_child(timer)
+	timer.connect("timeout", callback)
+	timer.connect("timeout", func (): timer.queue_free())
+	timer.start(time)
+	
+func later(callback: Callable):
+	delay(callback, 0.01)
 
 func deep_duplicate(dict: Dictionary):
 	var data = JSON.stringify(dict)

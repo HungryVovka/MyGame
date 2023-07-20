@@ -199,10 +199,6 @@
 			"timer": 1
 		},
 		{
-			"background": {
-				"name": "",
-				"video": ""
-			},
 			"character": "Captain",
 			"play_sound": {
 				"bus": "Music",
@@ -1312,7 +1308,30 @@
 		}
 	],
 	"roots": {
-
+		"/my_choice/no": {
+			"events": []
+		},
+		"/my_choice/yes": {
+			"events": []
+		},
+		"/new_root": {
+			"events": []
+		},
+		"/new_root1": {
+			"events": []
+		},
+		"/new_root2": {
+			"events": []
+		},
+		"/new_root3": {
+			"events": []
+		},
+		"/new_root4": {
+			"events": []
+		},
+		"/new_root5": {
+			"events": []
+		}
 	},
 	"unique_name": "StartTimeline"
 }

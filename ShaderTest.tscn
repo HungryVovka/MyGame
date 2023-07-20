@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://s045gv263adr"]
+[gd_scene load_steps=7 format=3 uid="uid://s045gv263adr"]
 
 [ext_resource type="Texture2D" uid="uid://bgac5gnxy4fpc" path="res://Resources/Scene1/Art/1.png" id="1_l3t3g"]
 [ext_resource type="Script" path="res://ShaderTest.gd" id="1_p4kvm"]
 [ext_resource type="Shader" path="res://shaders/сlouds.gdshader" id="3_e3kdx"]
 [ext_resource type="Texture2D" uid="uid://b1mbgxwob0yi3" path="res://Resources/Scene1/Art/3 (19).png" id="4_oh8b1"]
+[ext_resource type="AudioStream" uid="uid://bj84fce6bhsck" path="res://Resources/Scene1/Audio/Music/Simon And Garfunkel - The Sound Of Silence.mp3" id="5_05517"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oa0d8"]
 shader = ExtResource("3_e3kdx")
@@ -46,3 +47,16 @@ grow_vertical = 2
 texture = ExtResource("4_oh8b1")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_05517")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

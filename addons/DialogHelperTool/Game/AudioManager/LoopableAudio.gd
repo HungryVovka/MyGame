@@ -5,4 +5,4 @@ func _ready():
 	self.connect("finished", _on_finished)
 func _on_finished():
 	if loop:
-		play();
+		play()

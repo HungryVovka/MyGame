@@ -13,6 +13,7 @@ var timelines_list = {}
 @onready var transitionsModal = $TransitionsModal
 @onready var scriptModal = $ScriptModal
 @onready var rootsModal = $RootsEditorModal
+@onready var choicesModal = $ChoicesModal
 
 @onready var background_grid = $VBoxContainer/TabContainer/Backgrounds/MarginContainer/ScrollContainer/GridContainer
 var background_children_list = []
@@ -437,6 +438,7 @@ func create_timeline_event(e: Dictionary, context: Dictionary):
 	obj.connect("was_selected", _on_timeline_item_selected)
 	obj.connect("show_script", showScriptWindow)
 	obj.connect("show_transitions", showTransitionsWindow)
+	obj.connect("show_choices", showChoicesWindow)
 	obj.connect("id_created", reup_context)
 	obj.bus_list = bus_list
 	timeline_box.add_child(obj)
@@ -538,6 +540,14 @@ func showTransitionsWindow(sender, data):
 	transitionsModal.popup_size = Vector2(0.7, 0.8)
 	transitionsModal.show_modal()
 
+func showChoicesWindow(sender, data):
+	choicesModal.sender = sender
+	choicesModal.setRoot(current_root)
+	choicesModal.setRootList(root_list.fixTypes([""] + state_context.ids + current_timeline.roots.keys()))
+	choicesModal.src = data
+	choicesModal.popup_size = Vector2(0.7, 0.8)
+	choicesModal.show_modal()
+
 func _on_script_window_text_saved(data: Dictionary):
 	scriptModal.sender.updateScriptText(data.script)
 	scriptModal.sender.scriptPopupHidden()
@@ -567,6 +577,8 @@ func _on_roots_editor_button_pressed():
 
 
 func _on_root_list_item_selected(text):
+	if root_list.text != text:
+		root_list.text = text
 	if (text == "" || current_timeline.roots.has(text)) && current_root != text:
 		load_root(text)
 		reup_context()
@@ -581,5 +593,16 @@ func _on_roots_editor_modal_root_name_changed(old, new):
 	if current_root == new:
 		root_list.text = new
 		current_root = new
-		
+	reup_context()
+
+func _on_choices_modal_back_clicked():
+	choicesModal.sender.choicesPopupHidden()
+	
+func create_root(_name: String):
+	if !current_timeline.roots.has(_name):
+		current_timeline.roots[_name] = {"events": []}
+	
+	var roots: Array[String] = root_list.fixTypes([""] + current_timeline.roots.keys())
+	root_list.items = roots
+	root_list.text = current_root if roots.has(current_root) else ""
 	reup_context()

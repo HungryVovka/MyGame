@@ -9,8 +9,8 @@ extends Control
 @onready var character_opt = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterDropdown/OptionButton
 @onready var character_checkbox = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CharacterCheckbox
 
-@onready var timer_spinbox = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer3/TimerSpinbox
-@onready var timer_checkbox = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TimerCheckbox
+@onready var timer_spinbox = $PanelContainer/MarginContainer/VBoxContainer/TimerField/Panel/HBoxContainer/CenterContainer3/TimerSpinbox
+@onready var timer_checkbox = $PanelContainer/MarginContainer/VBoxContainer/TimerField/Panel/HBoxContainer/TimerCheckbox
 
 @export var control_color_inactive: Color = Color("000030ef")
 @export var control_color_active: Color = Color(0.4, 1.0, 0.4, 0.7)
@@ -33,6 +33,9 @@ var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").n
 @onready var soundsButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SoundsButton
 @onready var scriptButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ScriptButton
 @onready var statsButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsButton
+@onready var choicesButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ChoicesButton
+@onready var timerButton = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TimerButton
+@onready var timerLabel = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TimerButton/MarginContainer2/Label
 
 @onready var textField = $PanelContainer/MarginContainer/VBoxContainer/TextField/Panel/HBoxContainer/Text
 @onready var audioField = $PanelContainer/MarginContainer/VBoxContainer/AudioField
@@ -63,6 +66,7 @@ var scale_coef: float = 1.0
 signal was_selected(obj)
 signal show_script(sender, text)
 signal show_transitions(sender, data)
+signal show_choices(sender, data)
 signal id_created()
 
 
@@ -81,7 +85,7 @@ func rescale_fonts(coef: float):
 		await self.ready
 	var settings : LabelSettings = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LeftSpace/Label3.label_settings.duplicate()
 	settings.font_size *= coef
-	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/Label2.label_settings = settings
+	$PanelContainer/MarginContainer/VBoxContainer/TimerField/Panel/HBoxContainer/MarginContainer2/Label2.label_settings = settings
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LeftSpace/Label3.label_settings = settings
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/Label2.label_settings = settings
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label.label_settings = settings
@@ -96,9 +100,14 @@ func rescale_fonts(coef: float):
 	scriptButton.setScale(coef)
 	statsButton.setScale(coef)
 	soundsButton.setScale(coef)
+	choicesButton.setScale(coef)
+	timerButton.setScale(coef)
 	
 	var oldSize: Vector2 = $PanelContainer/MarginContainer/VBoxContainer/TextField.custom_minimum_size
 	$PanelContainer/MarginContainer/VBoxContainer/TextField.custom_minimum_size = Vector2(oldSize.x, oldSize.y * coef)
+	
+	oldSize = $PanelContainer/MarginContainer/VBoxContainer/TimerField.custom_minimum_size
+	$PanelContainer/MarginContainer/VBoxContainer/TimerField.custom_minimum_size = Vector2(oldSize.x, oldSize.y * coef)
 	
 	oldSize = $PanelContainer/MarginContainer/VBoxContainer/AudioField.custom_minimum_size
 	$PanelContainer/MarginContainer/VBoxContainer/AudioField.custom_minimum_size = Vector2(oldSize.x, oldSize.y * coef)
@@ -149,8 +158,11 @@ func setData(src: Dictionary):
 		jump_to.text = ""
 	if src.has("timer"):
 		timer_spinbox.value = src.timer
+		timerLabel.text = str(src.timer)
 	else:
 		timer_spinbox.value = 1.0
+		timerLabel.text = ""
+		
 	timer_checkbox.button_pressed = src.has("timer")
 	textField.text = src.text
 	
@@ -206,6 +218,13 @@ func updateButtons():
 	else:
 		backgroundTransitionButton.text = "TRANSITION"
 		backgroundTransitionButton.button_pressed = false
+	choicesButton.setActive(data.has("choices"))
+	
+	timerButton.setActive(data.has("timer"))
+	if data.has("timer"):
+		timerLabel.text = str(data.timer)
+	else:
+		timerLabel.text = ""
 
 func switch_control_style(control, is_active):
 	if (!control): 
@@ -257,14 +276,18 @@ func _on_timer_checkbox_toggled(button_pressed):
 		return
 	if button_pressed:
 		data["timer"] = timer_spinbox.value
+		timerLabel.text = str(timer_spinbox.value)
 	else:
 		data.erase("timer")
+		timerLabel.text = ""
 
 
 func _on_timer_spinbox_value_changed(value):
 	if !_data_ready:
 		return
 	data["timer"] = value
+	timerLabel.text = str(value)
+	updateButtons()
 
 func _on_panel_container_gui_input(event):
 	if event is InputEventMouseMotion:
@@ -411,6 +434,10 @@ func scriptPopupHidden():
 	
 func transitionsPopupHidden():
 	updateButtons()
+
+func choicesPopupHidden():
+	choicesButton.pressed = false
+	updateButtons()
 	
 func updateScriptText(text):
 	if text != "":
@@ -478,3 +505,17 @@ func transition_to_text(transition: Dictionary) -> String:
 	if JSONHelper.gb(transition, ["curtain_h", "curtain_v"]):
 		result += "curtain "
 	return result + "]"
+
+
+func _on_stats_button_toggled(pressed):
+	pass
+
+
+func _on_choices_button_toggled(pressed):
+	show_choices.emit(self, data)
+
+
+func _on_timer_button_toggled(pressed):
+	var height = 80*scale_coef + 8
+	custom_minimum_size += Vector2(0, height if pressed else -height)
+	$PanelContainer/MarginContainer/VBoxContainer/TimerField.visible = pressed
