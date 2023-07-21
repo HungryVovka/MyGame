@@ -19,21 +19,21 @@ func getState():
 
 func s(key, value):
 	var dict = {}
-	dict[key] = value
+	dict[pps(key)] = pps(value)
 	setState(dict)
 	
 func r(key):
-	if dialog_state.has(key):
-		dialog_state.erase(key)
+	if dialog_state.has(pps(key)):
+		dialog_state.erase(pps(key))
 
 func has(key):
-	return dialog_state.has(key)
+	return dialog_state.has(pps(key))
 
 func gs(k):
-	return str(dialog_state[k]) if dialog_state.has(k) else ""
+	return str(dialog_state[pps(k)]) if dialog_state.has(pps(k)) else ""
 
 func g(k):
-	return dialog_state[k] if dialog_state.has(k) else null
+	return dialog_state[pps(k)] if dialog_state.has(pps(k)) else null
 
 func all():
 	return dialog_state

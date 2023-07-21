@@ -1,6 +1,62 @@
-[gd_scene load_steps=2 format=3 uid="uid://dybt4e2hlyymo"]
+[gd_scene load_steps=9 format=3 uid="uid://dybt4e2hlyymo"]
 
 [ext_resource type="Script" path="res://addons/DialogHelperTool/TimelineItem/ScriptModal/Editor/Editor.gd" id="1_xvuw6"]
+[ext_resource type="PackedScene" uid="uid://cua7jcrmycdvx" path="res://addons/DialogHelperTool/TimelineItem/ScriptModal/Editor/StatsItem/Item.tscn" id="2_tyg3r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuxnw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.117647, 0.105882, 0.258824, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.0235294, 0, 0.678431, 0.0509804)
+shadow_size = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_auv1d"]
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40ce3"]
+bg_color = Color(0.0823529, 0.0196078, 0.14902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0980392, 0.12549, 0.392157, 0.839216)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o6rb"]
+bg_color = Color(0.0392157, 0.0666667, 0.227451, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.584314, 0.780392, 0.0470588, 0.580392)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6j4v"]
+bg_color = Color(0.0823529, 0.0196078, 0.14902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.235294, 0.741176, 0.176471, 0.839216)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_olthj"]
 
 [node name="Editor" type="Control"]
 layout_mode = 3
@@ -36,11 +92,74 @@ theme_override_constants/margin_bottom = 16
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="CodeEdit" type="CodeEdit" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CodeEdit" type="CodeEdit" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/background_color = Color(0, 0.133333, 0.219608, 0.537255)
 theme_override_colors/font_color = Color(0.8, 0.870588, 0.0509804, 0.847059)
+
+[node name="StatsContainer" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.66
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxnw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+label_settings = SubResource("LabelSettings_auv1d")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="StatsItem" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_tyg3r")]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="AddButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_40ce3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2o6rb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l6j4v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_olthj")
+text = "ADD "
+
+[node name="RemoveButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_40ce3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2o6rb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l6j4v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_olthj")
+text = "REMOVE"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 80)
@@ -60,5 +179,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "   SAVE   "
 
-[connection signal="text_changed" from="Panel/MarginContainer/VBoxContainer/CodeEdit" to="." method="_on_code_edit_text_changed"]
+[connection signal="text_changed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/CodeEdit" to="." method="_on_code_edit_text_changed"]
+[connection signal="selected" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer/ScrollContainer/VBoxContainer/StatsItem" to="." method="_on_stats_item_selected"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer/HBoxContainer/AddButton" to="." method="_on_add_stat_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/StatsContainer/VBoxContainer/HBoxContainer/RemoveButton" to="." method="_on_remove_stat_button_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]

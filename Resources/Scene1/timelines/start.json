@@ -12,10 +12,10 @@
 					"fade_speed": 0.15,
 					"fade_to": false,
 					"scale_max": 1.20000000000208,
-					"scale_min": 0.00000000000208166817117217,
+					"scale_min": 0.00000000000208166,
 					"scale_mode": true,
 					"scale_shift": 1.20000000000208,
-					"scale_speed": 0.0000000000000208166817117217,
+					"scale_speed": 0.00000000000002081,
 					"shake_h": true,
 					"shake_height": 10,
 					"shake_mode": true,
@@ -42,7 +42,13 @@
 				"name": "Airplane Outside",
 				"volume": 0.05
 			},
-			"script": "func start(_dialog, _event):\n\tDialogState.s(\"telka\", \"Mom\")\n\t\nfunc condition(_dialog, _event):\n\treturn true",
+			"script": "func start(_dialog, _event):\n\tpass\n\t\nfunc condition(_dialog, _event):\n\treturn true",
+			"state": {
+				"telka": "Mom"
+			},
+			"stats": {
+				"telka": "Mom"
+			},
 			"text": ""
 		},
 		{

@@ -64,7 +64,7 @@ var tex: TextureRect
 var scale_coef: float = 1.0
 
 signal was_selected(obj)
-signal show_script(sender, text)
+signal show_script(sender, text, data)
 signal show_transitions(sender, data)
 signal show_choices(sender, data)
 signal id_created()
@@ -212,8 +212,7 @@ func renderBackground():
 func updateButtons():	
 	backgroundsButton.setActive(data.has("background"))
 	soundsButton.setActive(data.has("play_sound") || data.has("stop_sound"))
-	scriptButton.setActive(data.has("script"))
-	statsButton.setActive(data.has("stats"))
+	scriptButton.setActive(data.has("script") || data.has("state"))
 	if data.has("background") && data.background.has("transition"):
 		backgroundTransitionButton.text = "TRANSITION\n" + transition_to_text(data.background.transition)
 		backgroundTransitionButton.button_pressed = data.background.has("transition")
@@ -430,7 +429,7 @@ func _on_script_button_toggled(pressed):
 	pass
 	
 func condition(_dialog, _event):
-	return true")
+	return true", data)
 
 func scriptPopupHidden():
 	scriptButton.pressed = false

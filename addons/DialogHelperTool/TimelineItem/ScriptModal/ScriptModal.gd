@@ -5,6 +5,7 @@ var child: Node
 @onready var modal = $Modal
 @export var sender: Node
 @export var text: String: set = setText, get = getText
+@export var src: Dictionary = {}: set = setSource
 @export var popup_size: Vector2: set = setPopupSize, get = getPopupSize
 
 signal success(data: Dictionary)
@@ -17,6 +18,11 @@ func _ready():
 	child = editor_class.instantiate()
 	modal.child = child
 	_is_ready = true
+	
+func setSource(data: Dictionary):
+	if !_is_ready:
+		await self.ready
+	child.src = data
 	
 func close_window_no_data():
 	hide_modal()

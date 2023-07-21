@@ -16,7 +16,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iqu6f")
-skip_blend_time = null
 
 [node name="Under" type="TextureRect" parent="."]
 layout_mode = 1

@@ -528,9 +528,10 @@ func remove_selected():
 		list.remove_at(ix)
 	
 	
-func showScriptWindow(sender, text):
+func showScriptWindow(sender, text, data):
 	scriptModal.sender = sender
 	scriptModal.text = text
+	scriptModal.src = data
 	scriptModal.popup_size = Vector2(0.8, 0.8)
 	scriptModal.show_modal()
 	
