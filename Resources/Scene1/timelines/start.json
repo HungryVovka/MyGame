@@ -11,15 +11,15 @@
 					"fade_from": true,
 					"fade_speed": 0.15,
 					"fade_to": false,
-					"scale_max": 1.19999999999709,
-					"scale_min": 0,
+					"scale_max": 1.20000000000208,
+					"scale_min": 0.00000000000208166817117217,
 					"scale_mode": true,
-					"scale_shift": 1.19999999999709,
-					"scale_speed": 0,
+					"scale_shift": 1.20000000000208,
+					"scale_speed": 0.0000000000000208166817117217,
 					"shake_h": true,
 					"shake_height": 10,
 					"shake_mode": true,
-					"shake_speed": 1,
+					"shake_speed": 1.00000000000002,
 					"shake_time": 99999,
 					"shake_v": false,
 					"swipe_max_h": 300,
@@ -31,25 +31,8 @@
 					"swipe_shift_h": -300,
 					"swipe_shift_v": 0,
 					"swipe_speed_h": 20,
-					"swipe_speed_v": 4
+					"swipe_speed_v": 4.00000000000002
 				}
-			},
-			"choices": {
-				"choices": [
-					{
-						"id": "daddy",
-						"root": "/my_choice/yes",
-						"text": "daddy"
-					},
-					{
-						"id": "refuse",
-						"root": "/my_choice/454",
-						"script": "func condition(_d, _e):\n\treturn true",
-						"text": "refuse"
-					}
-				],
-				"id": "my_choice",
-				"scene": "res://Game/ChoicesScenes/TestScene.tscn"
 			},
 			"play_sound": {
 				"bus": "Music",
@@ -306,7 +289,6 @@
 			"timer": 2
 		},
 		{
-			"id": "2",
 			"text": "Ladies and Gentlemen! This is the Captain speaking. {>>} We're about an hour out of our destination...",
 			"timer": 3.5
 		},
@@ -365,6 +347,7 @@
 		},
 		{
 			"character": "Co-pilot",
+			"id": "t",
 			"play_sound": {
 				"bus": "SFX",
 				"channel": "SFX2",
@@ -424,6 +407,7 @@
 				}
 			},
 			"character": "Captain",
+			"id": "5",
 			"text": "Oh, stop this nonsense! "
 		},
 		{
@@ -855,7 +839,6 @@
 		},
 		{
 			"background": {
-				"clickable": false,
 				"name": "3 (14)"
 			},
 			"id": "q",
@@ -932,7 +915,6 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"jump_to": "3",
 			"text": "",
 			"timer": 6
 		},
@@ -1129,16 +1111,10 @@
 			"background": {
 				"name": "BlackScreen"
 			},
+			"id": "qq",
 			"script": "func start(dialog, event):\n\tdialog.get_parent().background.remove_shader(\"face\")\n\tdialog.get_parent().background.movable = 0\nfunc condition(dialog, event):\n\treturn true",
 			"text": "",
 			"timer": 3
-		},
-		{
-			"background": {
-				"name": "BlackScreen"
-			},
-			"text": "",
-			"timer": 0.1
 		},
 		{
 			"background": {
@@ -1333,8 +1309,7 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"text": "",
-			"timer": 2
+			"text": ""
 		},
 		{
 			"background": {
@@ -1377,8 +1352,7 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"text": "",
-			"timer": 2
+			"text": ""
 		},
 		{
 			"background": {
@@ -1389,8 +1363,7 @@
 					"blend_speed": 0.5
 				}
 			},
-			"text": "",
-			"timer": 2
+			"text": ""
 		},
 		{
 			"background": {
@@ -1402,8 +1375,7 @@
 					"curtain_speed_h": 0
 				}
 			},
-			"text": "",
-			"timer": 1
+			"text": ""
 		},
 		{
 			"background": {
@@ -1474,6 +1446,9 @@
 		},
 		{
 			"text": ""
+		},
+		{
+			"text": ""
 		}
 	],
 	"roots": {
@@ -1503,7 +1478,7 @@
 					"choices": {
 						"choices": [
 							{
-								"id": "yes_mdam",
+								"id": "playqq",
 								"root": "/my_choice/yes/playq/yes_mdam",
 								"text": "Yes mdam"
 							},
@@ -1529,24 +1504,6 @@
 					"text": ""
 				}
 			]
-		},
-		"/new_root": {
-			"events": []
-		},
-		"/new_root1": {
-			"events": []
-		},
-		"/new_root2": {
-			"events": []
-		},
-		"/new_root3": {
-			"events": []
-		},
-		"/new_root4": {
-			"events": []
-		},
-		"/new_root5": {
-			"events": []
 		}
 	},
 	"unique_name": "StartTimeline"

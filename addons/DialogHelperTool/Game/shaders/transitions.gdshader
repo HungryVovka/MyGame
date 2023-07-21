@@ -72,9 +72,9 @@ void vertex() {
 	}
 }
 
-vec4 blend(vec4 color, vec4 blend){
+vec4 blend(vec4 color){
 	float blend_pos = min(max(time * blend_speed, 0.0), 1.0);
-	return color * (1.0 - blend_pos) + blend * blend_pos;
+	return vec4(color.rgb, blend_pos);
 }
 vec4 blend_to(vec4 color){
 	float blend_pos = min(max(time * fade_speed, 0.0), 1.0);
@@ -174,10 +174,7 @@ void fragment() {
 		COLOR = slideY(TEXTURE, uv);
 	COLOR = curtain(curtain_h, curtain_v, TEXTURE, uv);
 	if (blend_mode) {
-		ivec2 ibackSize = textureSize(TEXTURE, 0);
-		ivec2 iBlendSize = textureSize(secondTexture, 0);
-		vec2 diff = vec2(float(ibackSize.x) / float(iBlendSize.x), float(ibackSize.y) / float(iBlendSize.y));
-		COLOR = blend(COLOR, texture(secondTexture, vec2(uv.x * diff.x, uv.y * diff.y)));
+		COLOR = blend(COLOR);
 	}
 	if (fade_to)
 		COLOR = blend_to(COLOR);

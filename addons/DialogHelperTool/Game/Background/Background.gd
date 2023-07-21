@@ -1,16 +1,10 @@
 extends Control
 
 @onready var first = $First
-@onready var under = $Under
-@onready var face = $Face
 @onready var back = $Back
 
 @export var movable = 40: set = setMovable
-
-var tween
 var is_first = true
-
-var shader_animations = []
 
 var shader = preload("res://addons/DialogHelperTool/Game/shaders/AnimatedShader.gd").new()
 
@@ -23,6 +17,8 @@ func setMovable(value):
 		scale = Vector2(1.0 + 0.1*movable/40, 1.0 + 0.1*movable/40)
 
 func _ready():
+	first.material = ShaderMaterial.new()
+	first.material.shader = load("res://addons/DialogHelperTool/Game/shaders/transitions.gdshader")
 	shader.set_material(first.material, "time")
 	shader.reset_time()
 	add_child(shader)
@@ -36,51 +32,25 @@ func reset_shaders():
 	shader.reset_time()
 	reset_transition()
 
-func apply_shader(id: String, params: Dictionary, texture = null, where: String = "under"):
-	var mat = Shaders.new_material(id, params)
-	var dest: TextureRect = under if where == "under" else face
-	if id != "":
-		dest.texture = load(texture) if texture else NoiseTexture2D.new()
-	else:
-		dest.texture = null
-	dest.material = mat if mat else null
-	
-	if (id != ""): 
-		var a_class = preload("res://addons/DialogHelperTool/Game/shaders/AnimatedShader.gd")
-		var a = a_class.new()
-		a.set_material(dest.material, "time")
-		shader_animations.push_back(a)
-		add_child(a)
-		
-func remove_shader(where: String = "under"):
-	var dest: TextureRect = under if where == "under" else face
-	dest.material = null
-	dest.texture = null
-
 func clear():
 	first.texture = null
 	
-func dict_bool(dict: Dictionary, key: String):
-	return dict.has(key) && dict[key]
+func get_texture():
+	if !first.material.get_shader_parameter("secondTexture"):
+		return first.texture
+	else:
+		return first.material.get_shader_parameter("secondTexture")
 	
-func should_update_texture(shader_params: Dictionary):
-	var key_list = ["blend", "curtain_h", "curtain_v"]
-	for k in key_list:
-		if dict_bool(shader_params, k):
-			return false
-	return true	
-	
-func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}):
+func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}, secondTexture = null):
 	shader.reset_time()
 	back.visible = has_transition
-	if has_transition:
-		swap_textures()
-		if first.texture == null || should_update_texture(shader_params):
-			first.texture = res
-		first.material.set_shader_parameter("secondTexture", res)
+	if secondTexture:
+		first.texture = res
+		first.material.set_shader_parameter("secondTexture", secondTexture)
 	else:
 		first.texture = res
 		first.material.set_shader_parameter("secondTexture", null)
+		
 	if has_transition:
 		reset_transition()
 		for k in shader_params:
@@ -100,14 +70,6 @@ func reset_transition():
 	params_list.remove_at(params_list.size() - 1)
 	for p in params_list:
 		first.material.set_shader_parameter(p["name"], null)
-
-func swap_textures():
-	var tex = first.texture
-	var sec = first.material.get_shader_parameter("secondTexture")
-	if sec:
-		first.texture = sec
-		back.texture = first.texture
-	first.material.set_shader_parameter("secondTexture", tex)
 		
 func _input(event):
 	if movable > 0 && scale == Vector2(1.0, 1.0):
