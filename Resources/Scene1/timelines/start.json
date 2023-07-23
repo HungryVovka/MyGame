@@ -9,8 +9,8 @@
 				"transition": {
 					"fade_color": "#000000ff",
 					"fade_from": true,
-					"fade_speed": 0.15,
-					"fade_to": false,
+					"fade_speed": 1.00000000000002,
+					"fade_to": true,
 					"scale_max": 1.20000000000208,
 					"scale_min": 0.00000000000208166,
 					"scale_mode": true,
@@ -53,7 +53,7 @@
 		},
 		{
 			"background": {
-				"clickable": false,
+				"clickable": true,
 				"name": "2",
 				"transition": {
 					"blend": true,

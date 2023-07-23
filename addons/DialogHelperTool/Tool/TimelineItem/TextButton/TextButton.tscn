@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7lehdfqex04l"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Tool/TimelineItem/TextButton/TextButton.gd" id="1_q5w4l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsml6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0470588, 0.0431373, 0.101961, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8q2u1"]
+bg_color = Color(0.45098, 0.454902, 0.6, 0.109804)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 3
+border_width_bottom = 2
+border_color = Color(0.980392, 0.741176, 0.294118, 0.792157)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c458"]
+bg_color = Color(0.917647, 0.968627, 0.678431, 0.188235)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.980392, 0.741176, 0.294118, 0.792157)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_07381"]
+
+[node name="TextButton" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q5w4l")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_wsml6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8q2u1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2c458")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_07381")
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

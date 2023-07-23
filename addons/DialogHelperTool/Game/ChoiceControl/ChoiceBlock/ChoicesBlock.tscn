@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://civ12v0wc52bt"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Game/ChoiceControl/ChoiceBlock/ChoicesBlock.gd" id="1_g5a64"]
+[ext_resource type="FontFile" uid="uid://dy7m3vcq7d60c" path="res://Resources/1Main/Fonts/montserrat.regular.ttf" id="2_727of"]
+[ext_resource type="Texture2D" uid="uid://cuij02fy8ojrl" path="res://Resources/1Main/GUI/choice bc 2.5.png" id="3_xf7al"]
+[ext_resource type="Texture2D" uid="uid://s00i1bkrpssw" path="res://Resources/1Main/GUI/choice bc 2.5 hover.png" id="4_2d6be"]
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Game/ChoiceControl/ChoiceBlock/Button.gd" id="5_kovnj"]
+[ext_resource type="AudioStream" uid="uid://dgut3d2jja6fj" path="res://Resources/1Main/Audio/SFX/PressEcho.mp3" id="6_ivbj0"]
+
+[sub_resource type="FontVariation" id="FontVariation_w3lyy"]
+base_font = ExtResource("2_727of")
+spacing_top = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_srj2i"]
+content_margin_left = 65.0
+content_margin_right = 9.0
+content_margin_bottom = 2.0
+texture = ExtResource("3_xf7al")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5ydkb"]
+content_margin_left = 65.0
+content_margin_right = 9.0
+content_margin_bottom = 2.0
+texture = ExtResource("4_2d6be")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kog66"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3hu4l"]
+
+[node name="ChoicesBlock" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_g5a64")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(180, 80)
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_w3lyy")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxTexture_srj2i")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5ydkb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_srj2i")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kog66")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3hu4l")
+script = ExtResource("5_kovnj")
+
+[node name="Hover" type="AudioStreamPlayer" parent="VBoxContainer/Button"]
+stream = ExtResource("6_ivbj0")
+volume_db = -15.0
+pitch_scale = 1.2
+bus = &"SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="VBoxContainer/Button"]
+stream = ExtResource("6_ivbj0")
+volume_db = -5.0
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_pressed"]

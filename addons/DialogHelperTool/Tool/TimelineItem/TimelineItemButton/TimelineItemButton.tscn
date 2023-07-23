@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://dsxhvxpevjney"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Tool/TimelineItem/TimelineItemButton/TimelineItemButton.gd" id="1_a1bbf"]
+[ext_resource type="FontFile" uid="uid://byfmxvgyuiraf" path="res://Resources/1Main/Fonts/Lato-Bold.ttf" id="2_0ohof"]
+[ext_resource type="StyleBox" uid="uid://c4ltx5fihl6qv" path="res://addons/DialogHelperTool/Tool/TimelineItem/TimelineItemButton/styles/button_style_normal.tres" id="3_i45cp"]
+[ext_resource type="StyleBox" uid="uid://bjw4r21ip0yb2" path="res://addons/DialogHelperTool/Tool/TimelineItem/TimelineItemButton/styles/button_style_hover.tres" id="4_i1d5b"]
+[ext_resource type="StyleBox" uid="uid://d1kp1mcx3m567" path="res://addons/DialogHelperTool/Tool/TimelineItem/TimelineItemButton/styles/button_style_active.tres" id="5_ssmqr"]
+[ext_resource type="StyleBox" uid="uid://dckyq0m222yk0" path="res://addons/DialogHelperTool/Tool/TimelineItem/TimelineItemButton/styles/button_style_disable.tres" id="6_0wew2"]
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Tool/TimelineItem/TimelineItemButton/Button.gd" id="7_g4wxw"]
+[ext_resource type="Shader" path="res://addons/DialogHelperTool/Tool/TimelineItem/TimelineItemButton/highlight_icon.gdshader" id="8_sy1g4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eqtq7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qjy7"]
+shader = ExtResource("8_sy1g4")
+shader_parameter/is_active = true
+shader_parameter/active_color = Color(0.8, 0.7, 0.3, 0.77)
+shader_parameter/inactive_color = Color(0.4, 0.4, 0.4, 0.4)
+
+[node name="TimelineItemButton" type="Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a1bbf")
+text = ""
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.734782, 0.734125, 0.0799946, 1)
+theme_override_colors/font_pressed_color = Color(0.733333, 1, 0.0784314, 0.819608)
+theme_override_colors/font_hover_color = Color(0.976816, 0.516473, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.08, 0.202667, 1, 0.819608)
+theme_override_fonts/font = ExtResource("2_0ohof")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = ExtResource("3_i45cp")
+theme_override_styles/hover = ExtResource("4_i1d5b")
+theme_override_styles/pressed = ExtResource("5_ssmqr")
+theme_override_styles/disabled = ExtResource("6_0wew2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eqtq7")
+toggle_mode = true
+script = ExtResource("7_g4wxw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Icon" type="TextureRect" parent="MarginContainer"]
+material = SubResource("ShaderMaterial_1qjy7")
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

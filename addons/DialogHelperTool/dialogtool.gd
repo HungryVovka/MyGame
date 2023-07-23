@@ -25,13 +25,12 @@ func _exit_tree():
 
 func _enter_tree():
 	dialogToolState.state.scale = get_editor_interface().get_editor_scale()
-	dock = preload("res://addons/DialogHelperTool/DialogHelperTool.tscn").instantiate()
+	dock = preload("res://addons/DialogHelperTool/Tool/DialogHelperTool.tscn").instantiate()
 	dock.interface_scale = get_editor_interface().get_editor_scale()
 	get_editor_interface().get_editor_main_screen().add_child(dock)
 	dock.connect("reimport", rescan_fs)
 	
 	add_custom_type("ChoiceControlContainer", "Control", load("res://addons/DialogHelperTool/Game/ChoiceControl/ChoiceSceneContainer.gd"), null)
-	
 	var bus_resource = load("res://default_bus_layout.tres")
 	for i in range(0, 999):
 		var iBus = bus_resource.get("bus/" + str(i) + "/name")

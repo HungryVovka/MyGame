@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbc601gn4hcf6"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Tool/BackgroundConfigItem/BackgroundConfigItem.gd" id="1_fdhu4"]
+
+[node name="BackgroundConfigItem" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(274, 154)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fdhu4")
+selected_color = Color(0.329412, 0.658824, 0.890196, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+layout_mode = 2
+expand_mode = 3
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Background Id"
+alignment = 1
+
+[connection signal="gui_input" from="PanelContainer/TextureRect" to="." method="_on_texture_rect_gui_input"]
+[connection signal="text_changed" from="PanelContainer/LineEdit" to="." method="_on_line_edit_text_changed"]

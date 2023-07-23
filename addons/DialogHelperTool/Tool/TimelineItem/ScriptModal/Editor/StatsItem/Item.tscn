@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cua7jcrmycdvx"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Tool/TimelineItem/ScriptModal/Editor/StatsItem/Item.gd" id="1_tn63t"]
+
+[node name="StatsItem" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = -8
+script = ExtResource("1_tn63t")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VarName" type="LineEdit" parent="PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+placeholder_text = "Variable name"
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VarValue" type="LineEdit" parent="PanelContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+placeholder_text = "Value"
+
+[connection signal="focus_entered" from="PanelContainer/HBoxContainer/PanelContainer/VarName" to="." method="_on_var_name_focus_entered"]
+[connection signal="text_changed" from="PanelContainer/HBoxContainer/PanelContainer/VarName" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_changed" from="PanelContainer/HBoxContainer/PanelContainer2/VarValue" to="." method="_on_var_value_text_changed"]

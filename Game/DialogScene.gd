@@ -1,13 +1,13 @@
 extends Control
 
-@onready var textArea = $MarginContainer/TextArea
+@onready var textArea = $TextAreaContainer/TextArea
 @onready var dialogManager = $DialogManager
 @onready var audioManager = $AudioManager
 @onready var background = $Background
-@onready var choicesBlock = $ChoisesBlock
-@onready var videoPlayer = $PanelContainer/VideoStreamPlayer
-@onready var videoPanel = $PanelContainer
+@onready var choicesBlock = $ChoicesBlock
+@onready var videoPlayer = $VideoPlayer
 @onready var choiceSceneContainer = $CustomChoiceSceneContainer
+@onready var persons = $PersonLayout
 
 @export var clickable_background = false
 
@@ -15,19 +15,9 @@ extends Control
 
 var choiceSceneChild: Node
 
-
-@onready var persons: Dictionary = {
-	"left": $PersonLeft,
-	"middle-left": $PersonMiddleLeft,
-	"middle": $PersonMiddle,
-	"middle-right": $PersonMiddleRight,
-	"right": $PersonRight
-}
-
 var scene_root = ""
 var scene_ready = false
 var scene_src_params = {}
-
 
 var typeD : Dictionary = {
 	"date": "string",
@@ -45,8 +35,6 @@ func save():
 		"scene": scene_src_params["scene_name"],
 		"timeline": scene_src_params["timeline_name"],
 		"state": DialogState.getState(),
-		"current_index": dialogManager.last_event.current_index,
-		"deep_index": dialogManager.last_event.deep_index,
 		"clickable_background": clickable_background
 	}
 	var img: Image = get_viewport().get_texture().get_image()
@@ -74,21 +62,13 @@ func setDialogParams(dict: Dictionary):
 	dialogManager.play_next_event()
 
 func set_person_source(obj: String, src):
-	if persons.has(obj):
-		persons[obj].setSource(src)
+	persons.set_person_source(obj, src)
 
 func set_person_visible(obj: String, v: bool):
-	if persons.has(obj):
-		persons[obj].setVisible(v)
+	persons.set_person_visible(obj, v)
 		
 func person_animation(obj: String, type: String = "dir", animation: String = "RESET", time: float = 1.0, backwards: bool = false):
-	if persons.has(obj):
-		match type:
-			"dir":
-				persons[obj].play_dir(animation, time, backwards)
-			"fade":
-				persons[obj].play_fade(time, backwards)
-	pass
+	persons.person_animation(obj, type, animation, time, backwards)
 
 func _ready():
 	choicesBlock.visible = false
@@ -147,6 +127,8 @@ func _on_background_gui_input(event):
 		&& !choice_mode() \
 		&& event.button_index == MOUSE_BUTTON_LEFT \
 		&& event.pressed == true:
+			
+		print("bc clicked")
 		dialogManager.play_next_event()
 
 func _on_dialog_manager_set_background_clickable(value):
@@ -189,13 +171,13 @@ func _on_choices_block_choice_clicked(id, text):
 		choicesBlock.visible = false
 
 func _on_dialog_manager_play_video(res):
-	videoPanel.visible = true
-	videoPlayer.stop()
-	videoPlayer.reset_image()
-	videoPlayer.stream = res
-	videoPlayer.play()
+	videoPlayer.visible = true
+	videoPlayer.player.stop()
+	videoPlayer.player.reset_image()
+	videoPlayer.player.stream = res
+	videoPlayer.player.play()
 
 func _on_dialog_manager_stop_video():
-	videoPanel.visible = false
-	videoPlayer.stop()
-	videoPlayer.reset_image()
+	videoPlayer.visible = false
+	videoPlayer.player.stop()
+	videoPlayer.player.reset_image()
