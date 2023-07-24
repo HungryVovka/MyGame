@@ -1,8 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://oisg30whygac"]
+[gd_scene load_steps=7 format=3 uid="uid://oisg30whygac"]
 
 [ext_resource type="Script" path="res://Game/DialogScene.gd" id="1_r31am"]
-[ext_resource type="PackedScene" uid="uid://ck7xxiv43xgkh" path="res://addons/DialogHelperTool/Game/DialogManager/DialogManager.tscn" id="2_8uqoj"]
-[ext_resource type="PackedScene" uid="uid://cd1g7ya5qstgb" path="res://addons/DialogHelperTool/Game/AudioManager/AudioManager.tscn" id="3_s7or7"]
 [ext_resource type="PackedScene" uid="uid://dr1yr87qslefe" path="res://addons/DialogHelperTool/Game/VideoPlayer/VideoPlayer.tscn" id="4_xlldn"]
 [ext_resource type="PackedScene" uid="uid://brwri52cvrt25" path="res://addons/DialogHelperTool/Game/Background/BackgroundCompose.tscn" id="5_q40dq"]
 [ext_resource type="PackedScene" uid="uid://bqvgut40x8oo3" path="res://addons/DialogHelperTool/Game/Person/PersonLayout.tscn" id="6_dia5w"]
@@ -19,10 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r31am")
 fn = "res://Resources/Scene1/timelines/start.json"
-
-[node name="DialogManager" parent="." instance=ExtResource("2_8uqoj")]
-
-[node name="AudioManager" parent="." instance=ExtResource("3_s7or7")]
 
 [node name="VideoPlayer" parent="." instance=ExtResource("4_xlldn")]
 layout_mode = 1
@@ -74,20 +68,6 @@ offset_top = -0.120001
 offset_right = 0.600014
 offset_bottom = 0.399982
 
-[connection signal="end" from="DialogManager" to="." method="_on_dialog_manager_end"]
-[connection signal="personAnimation" from="DialogManager" to="." method="person_animation"]
-[connection signal="personSource" from="DialogManager" to="." method="set_person_source"]
-[connection signal="personVisible" from="DialogManager" to="." method="set_person_visible"]
-[connection signal="playSound" from="DialogManager" to="." method="_on_dialog_manager_play_sound"]
-[connection signal="playVideo" from="DialogManager" to="." method="_on_dialog_manager_play_video"]
-[connection signal="resetCharacter" from="DialogManager" to="." method="_on_dialog_manager_reset_character"]
-[connection signal="setBackground" from="DialogManager" to="." method="_on_dialog_manager_set_background"]
-[connection signal="setBackgroundClickable" from="DialogManager" to="." method="_on_dialog_manager_set_background_clickable"]
-[connection signal="showChoices" from="DialogManager" to="." method="_on_dialog_manager_show_choices"]
-[connection signal="stopSound" from="DialogManager" to="." method="_on_dialog_manager_stop_sound"]
-[connection signal="stopVideo" from="DialogManager" to="." method="_on_dialog_manager_stop_video"]
-[connection signal="updateCharacter" from="DialogManager" to="." method="_on_dialog_manager_update_character"]
-[connection signal="updateText" from="DialogManager" to="." method="_on_dialog_manager_update_text"]
 [connection signal="gui_input" from="Background" to="." method="_on_background_gui_input"]
 [connection signal="on_next" from="TextAreaContainer/TextArea" to="." method="_on_text_area_on_next"]
 [connection signal="choiceClicked" from="ChoicesBlock" to="." method="_on_choices_block_choice_clicked"]

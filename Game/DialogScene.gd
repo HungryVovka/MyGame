@@ -1,8 +1,8 @@
 extends Control
 
 @onready var textArea = $TextAreaContainer/TextArea
-@onready var dialogManager = $DialogManager
-@onready var audioManager = $AudioManager
+@onready var dialogManager
+@onready var audioManager
 @onready var background = $Background
 @onready var choicesBlock = $ChoicesBlock
 @onready var videoPlayer = $VideoPlayer
@@ -28,6 +28,43 @@ var typeD : Dictionary = {
 	"current_index": [0],
 	"deep_index": 0
 }
+
+
+
+func _ready():
+	choicesBlock.visible = false
+	
+	dialogManager = preload("res://addons/DialogHelperTool/Game/DialogManager/DialogManager.tscn").instantiate()
+	add_child(dialogManager)
+	dialogManager.connect("end", _on_dialog_manager_end)
+	dialogManager.connect("personAnimation", person_animation)
+	dialogManager.connect("personSource", set_person_source)
+	dialogManager.connect("personVisible", set_person_visible)
+	dialogManager.connect("playSound", _on_dialog_manager_play_sound)
+	dialogManager.connect("playVideo", _on_dialog_manager_play_video)
+	dialogManager.connect("resetCharacter", _on_dialog_manager_reset_character)
+	dialogManager.connect("setBackground", _on_dialog_manager_set_background)
+	dialogManager.connect("setBackgroundClickable", _on_dialog_manager_set_background_clickable)
+	dialogManager.connect("showChoices", _on_dialog_manager_show_choices)
+	dialogManager.connect("stopSound", _on_dialog_manager_stop_sound)
+	dialogManager.connect("stopVideo", _on_dialog_manager_stop_video)
+	dialogManager.connect("updateCharacter", _on_dialog_manager_update_character)
+	dialogManager.connect("updateText", _on_dialog_manager_update_text)
+	dialogManager.timeline = fn
+	
+	audioManager = preload("res://addons/DialogHelperTool/Game/AudioManager/AudioManager.tscn").instantiate()
+	add_child(audioManager)
+	
+	var timer = Timer.new()
+	timer.one_shot = true
+	timer.timeout.connect(
+		func():
+			scene_ready = true
+			)
+	add_child(timer)
+	timer.start(1)
+
+	
 
 func save():
 	var result = {
@@ -70,18 +107,6 @@ func set_person_visible(obj: String, v: bool):
 func person_animation(obj: String, type: String = "dir", animation: String = "RESET", time: float = 1.0, backwards: bool = false):
 	persons.person_animation(obj, type, animation, time, backwards)
 
-func _ready():
-	choicesBlock.visible = false
-	dialogManager.timeline = fn
-	
-	var timer = Timer.new()
-	timer.one_shot = true
-	timer.timeout.connect(
-		func():
-			scene_ready = true
-			)
-	add_child(timer)
-	timer.start(1)
 	
 func _process(_delta):
 	pass
