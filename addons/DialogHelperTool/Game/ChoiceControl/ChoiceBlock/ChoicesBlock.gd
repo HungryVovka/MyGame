@@ -5,6 +5,7 @@ extends Control
 var choices: Dictionary = {}
 signal choiceClicked(id, text)
 
+var dialog_tool_type: String = "CHOICES_BLOCK"
 
 func _ready():
 	button.visible = false

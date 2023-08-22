@@ -7,6 +7,7 @@ extends Control
 	"middle-right": $PersonMiddleRight,
 	"right": $PersonRight
 }
+var dialog_tool_type: String = "PERSON_LAYOUT"
 
 func set_person_source(obj: String, src):
 	if persons.has(obj):

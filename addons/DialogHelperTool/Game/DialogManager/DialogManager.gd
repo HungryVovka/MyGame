@@ -12,6 +12,7 @@ signal updateCharacter(portrait, name)
 signal resetCharacter()
 signal end()
 signal setBackground(res, has_trasnsition, transition_params)
+signal setCustomBackground(src)
 signal setBackgroundClickable(value)
 
 signal playSound(name, channel, loop, bus, volume, fade)
@@ -112,10 +113,10 @@ func create_event_index(e, prev: Array = []):
 			if event.has("id"):
 				event_index_cache[root][event.id] = {"index": ix, "root": root}
 
-func setCharactersList(filename):
-	if filename:
+func setCharactersList(data: Dictionary):
+	if data:
 		portraits_resources.clear()
-		characters_data = JSONHelper.read_json(filename, false)
+		characters_data = data.duplicate()
 		for k in characters_data.characters.keys():
 			if characters_data.characters[k].portrait:
 				portraits_resources[k] = load(characters_data.characters[k].portrait)
@@ -126,17 +127,17 @@ func setCharactersList(filename):
 				res[mood] = load(characters_data.persons[k][mood])
 			persons_resources[k] = res
 
-func setBackgroundsList(filename):
-	if filename: 
+func setBackgroundsList(src: Dictionary):
+	if src: 
 		background_resources.clear()
-		var data = JSONHelper.read_json(filename, false)
+		var data = src.duplicate()
 		for k in data.keys():
 			background_resources[k] = load(data[k])
 
-func setVideosList(filename):
-	if filename: 
+func setVideosList(src: Dictionary):
+	if src: 
 		videos_resources.clear()
-		var data = JSONHelper.read_json(filename, false)
+		var data = src.duplicate()
 		for k in data.keys():
 			videos_resources[k] = load(data[k])
 
@@ -204,12 +205,15 @@ func process_character(event):
 func process_background(event):
 	var has_transition = event.has("transition")
 	var params = event.transition if has_transition else {}
-	var bg_name = event.name if event.has("name") else ""
-	bg_name = DialogState.pps(bg_name)
-	if background_resources.has(bg_name):
-		setBackground.emit(background_resources[bg_name], has_transition, params)
-	else:
-		setBackground.emit(null, has_transition, params)
+	var bg_name: String = DialogState.pps(event.name) if event.has("name") else null
+	if bg_name != null:
+		if background_resources.has(bg_name):
+			setBackground.emit(background_resources[bg_name], has_transition, params)
+		else:
+			if bg_name.to_lower().begins_with("res://"):
+				setCustomBackground.emit(bg_name)
+			else:
+				setBackground.emit(null, has_transition, params)
 	if event.has("clickable"):
 		setBackgroundClickable.emit(event.clickable)
 	if event.has("video") && videos_resources.has(DialogState.pps(event.video)):

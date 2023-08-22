@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1gjq0evx1m7p"]
+
+[ext_resource type="PackedScene" uid="uid://bq2f4e2r1fo51" path="res://Game/CustomBackgrounds/FlyingPlane/Background.tscn" id="1_5lmhq"]
+[ext_resource type="Script" path="res://Game/CustomBackgrounds/FlyingPlane/main.gd" id="1_e1gtv"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_e1gtv")
+
+[node name="Background" parent="." instance=ExtResource("1_5lmhq")]

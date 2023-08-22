@@ -11,6 +11,12 @@ func read_json(filename, globalize = true):
 	file.close()
 	return data
 	
+func serialize(dict):
+	return JSON.stringify(dict, "\t")
+	
+func diff(old: Dictionary, new: Dictionary):
+	pass 
+
 func save_json(filename, dict, globalize = true):
 	var path = filename if !globalize else ProjectSettings.globalize_path(filename)
 	var txt = JSON.stringify(dict,"\t")

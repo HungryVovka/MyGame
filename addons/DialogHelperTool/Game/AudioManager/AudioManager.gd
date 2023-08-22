@@ -9,11 +9,11 @@ var cache: Dictionary = {}
 
 @export_file("*.json") var resources: set = setResources
 
-func setResources(filename):
-	if filename:
+func setResources(src: Dictionary):
+	if src:
 		players.clear()
 		streams.clear()
-		var data = JSONHelper.read_json(filename, false)
+		var data = src.duplicate()
 		for k in data.keys():
 			streams[k] = load(data[k])
 

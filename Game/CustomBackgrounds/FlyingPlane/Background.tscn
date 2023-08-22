@@ -1,0 +1,147 @@
+[gd_scene load_steps=12 format=3 uid="uid://bq2f4e2r1fo51"]
+
+[ext_resource type="Script" path="res://Game/CustomBackgrounds/FlyingPlane/Background.gd" id="1_gcw21"]
+[ext_resource type="Shader" path="res://Game/CustomBackgrounds/FlyingPlane/whitener.gdshader" id="2_drlvs"]
+[ext_resource type="Texture2D" uid="uid://b5hmup4g56fyr" path="res://Game/CustomBackgrounds/FlyingPlane/assets/00051-2133317833.png" id="2_qx1bk"]
+[ext_resource type="Texture2D" uid="uid://c7fnqd8mjkt20" path="res://Game/CustomBackgrounds/FlyingPlane/assets/Plane_transparent.png" id="3_2nlkv"]
+[ext_resource type="Texture2D" uid="uid://b840x022noogi" path="res://Game/CustomBackgrounds/FlyingPlane/assets/clouds-png-23410.png" id="3_h1we0"]
+[ext_resource type="Texture2D" uid="uid://ca74egbxpl5ed" path="res://Game/CustomBackgrounds/FlyingPlane/assets/clouds-png-23416.png" id="4_25gr1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_801nv"]
+shader = ExtResource("2_drlvs")
+shader_parameter/whiteness_level = 0.0
+
+[sub_resource type="Animation" id="Animation_iqf2c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:whiteness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.08165e-12]
+}
+
+[sub_resource type="Animation" id="Animation_tsb26"]
+resource_name = "to_normal"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:whiteness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_j7wpc"]
+resource_name = "to_white"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:whiteness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.08165e-12, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s70iy"]
+_data = {
+"RESET": SubResource("Animation_iqf2c"),
+"to_normal": SubResource("Animation_tsb26"),
+"to_white": SubResource("Animation_j7wpc")
+}
+
+[node name="Background" type="ParallaxBackground"]
+script = ExtResource("1_gcw21")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.4, -0.5)
+motion_mirroring = Vector2(1536, 1024)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+material = SubResource("ShaderMaterial_801nv")
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("2_qx1bk")
+centered = false
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 1920, 1088)
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 0.3)
+motion_mirroring = Vector2(1536, 1024)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4"]
+position = Vector2(34, 4.7767)
+scale = Vector2(0.224159, 0.230275)
+texture = ExtResource("3_h1we0")
+centered = false
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 1000, 1000)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer4"]
+position = Vector2(17.2527, 60.5298)
+scale = Vector2(0.876636, 1.05083)
+texture = ExtResource("4_25gr1")
+centered = false
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 1000, 1000)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_2nlkv")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1.5, 0.5)
+motion_mirroring = Vector2(1536, 1024)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(34, -172)
+scale = Vector2(0.268, 0.3)
+texture = ExtResource("3_h1we0")
+centered = false
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 1000, 1000)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(211, 366)
+scale = Vector2(0.546999, 0.497443)
+texture = ExtResource("4_25gr1")
+centered = false
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 1000, 1000)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(2, -2)
+motion_mirroring = Vector2(1536, 1024)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(107, 444.638)
+scale = Vector2(0.845517, 0.815128)
+texture = ExtResource("4_25gr1")
+centered = false
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 1000, 1000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(-309, -108)
+scale = Vector2(0.501628, 0.495029)
+texture = ExtResource("3_h1we0")
+centered = false
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 1000, 1000)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s70iy")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -4,6 +4,7 @@ extends Control
 @export var interface_scale: float = 1.0
 @export var bus_list: Array[String] = []
 
+var config_path: String = ""
 var scene_config_data = {}
 var timelines_list = {}
 @onready var scene_folder = $VBoxContainer/TabContainer/Scene/MarginContainer/VBoxContainer/GridContainer/SceneFolder
@@ -15,7 +16,7 @@ var timelines_list = {}
 @onready var rootsModal = $RootsEditorModal
 @onready var choicesModal = $ChoicesModal
 
-@onready var background_grid = $VBoxContainer/TabContainer/Backgrounds/MarginContainer/ScrollContainer/GridContainer
+@onready var background_grid = $VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer/ScrollContainer/GridContainer
 var background_children_list = []
 var background_dict : Dictionary
 var background_store: Dictionary
@@ -62,7 +63,7 @@ func reimport_slot(filename):
 	
 	
 func _on_scene_folder_changed(path):
-	var config_path = path + "config.json"
+	config_path = path + "config.json"
 	if !FileAccess.file_exists(config_path):
 		JSONHelper.save_json(config_path, {})
 		_on_scene_folder_changed(path)
@@ -81,21 +82,28 @@ func _on_scene_folder_changed(path):
 	timeline_list_combobox.selected = timelines_list.keys().find(scene_config_data.start)
 	scene_file.text = scene_config_data.scene
 	
-	background_dict = JSONHelper.read_json(path + "configs/backgrounds.json")
+	background_dict = scene_config_data.backgrounds if scene_config_data.has("backgrounds") else {}
 	clear_backgrounds_objects()
 	render_background_objects(background_dict, background_dict)
+	scene_config_data.backgrounds = background_dict
 	
-	videos_dict = JSONHelper.read_json(path + "configs/videos.json")
+	videos_dict = scene_config_data.videos if scene_config_data.has("videos") else {}
 	clear_videos_objects()
 	render_videos_objects(videos_dict, videos_dict)
+	scene_config_data.videos = videos_dict
 	
-	audios_dict = JSONHelper.read_json(path + "configs/sounds.json")
+	audios_dict = scene_config_data.sounds if scene_config_data.has("sounds") else {}
 	clear_audios_objects()
 	render_audios_objects(audios_dict, audios_dict)
+	scene_config_data.sounds = audios_dict
 	
-	characters_dict = JSONHelper.read_json(path + "configs/characters.json")
+	characters_dict = scene_config_data.characters if scene_config_data.has("backgrounds") else {
+		"characters": {},
+		"persons": {}
+	}
 	clear_characters_objects()
 	render_characters_objects(characters_dict, characters_dict)
+	scene_config_data.characters = characters_dict
 	
 	
 func clear_backgrounds_objects():
@@ -252,10 +260,9 @@ func _on_margin_container_dropped_data(paths):
 	render_background_objects(newDict, background_dict)
 
 
-func _on_save_backgrounds_button_pressed():
-	JSONHelper.save_json(scene_folder.text + "configs/backgrounds.json", background_dict)
-
-
+func save_scene_config():
+	JSONHelper.save_json(config_path, scene_config_data)
+	
 func _on_videos_dropped_data(paths):
 	var newDict = {}
 	for p in paths:
@@ -294,9 +301,6 @@ func _on_videos_selected(paths: PackedStringArray):
 			newDict[k] = p
 	render_videos_objects(newDict, videos_dict)
 	_file_dialog.queue_free()
-
-func _on_save_videos_button_pressed():
-	JSONHelper.save_json(scene_folder.text + "configs/videos.json", videos_dict)
 
 func _on_reload_button_pressed():
 	_on_scene_folder_changed(scene_folder.text)
@@ -341,11 +345,6 @@ func _on_audios_selected(paths: PackedStringArray):
 			newDict[k] = p
 	render_audios_objects(newDict, audios_dict)
 	_file_dialog.queue_free()
-
-func _on_save_audios_button_pressed():
-	JSONHelper.save_json(scene_folder.text + "configs/sounds.json", audios_dict)
-
-
 	
 func _on_remove_characters_button_2_pressed():
 	var to_remove = []
@@ -372,9 +371,6 @@ func _on_add_characters_button_pressed():
 			}
 		}, characters_dict)
 	pass
-
-func _on_save_characters_button_pressed():
-	JSONHelper.save_json(scene_folder.text + "configs/characters.json", characters_dict)
 
 
 func _on_load_timeline_button_pressed():

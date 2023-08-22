@@ -16,6 +16,7 @@ extends Control
 @export_file("*.wav", "*.ogg", "*.mp3") var clickingSound: set = setClickingSound
 
 var current_meta = null
+var dialog_tool_type: String = "TEXT_AREA"
 
 
 signal on_text_clicked(event)

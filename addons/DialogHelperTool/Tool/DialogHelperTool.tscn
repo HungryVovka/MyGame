@@ -238,57 +238,52 @@ theme_override_constants/separation = 8
 visible = false
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Backgrounds"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Backgrounds"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.011
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -11.33
-offset_right = 3.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Backgrounds/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 40
 script = ExtResource("4_47ay6")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Backgrounds/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Backgrounds/MarginContainer/ScrollContainer"]
+[node name="GridContainer" type="HFlowContainer" parent="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer/ScrollContainer"]
 clip_contents = true
 layout_mode = 2
-columns = 4
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/TabContainer/Backgrounds"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -254.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/TabContainer/Backgrounds/HBoxContainer"]
+layout_mode = 2
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Backgrounds/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer2"]
 custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="AddBackgroundButton" type="Button" parent="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer"]
+[node name="AddBackgroundButton" type="Button" parent="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Add "
 
-[node name="RemoveBackgroundButton2" type="Button" parent="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer"]
+[node name="RemoveBackgroundButton2" type="Button" parent="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Remove Selected"
 
-[node name="SaveBackgroundsButton" type="Button" parent="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer"]
+[node name="SaveBackgroundsButton" type="Button" parent="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Save"
@@ -498,21 +493,21 @@ layout_mode = 1
 [connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/MoveDownTimelineItemButton" to="." method="_on_move_down_timeline_item_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/RootsEditorButton" to="." method="_on_roots_editor_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/TabContainer/Timeline/MarginContainer/VBoxContainer/ScrollContainer2/HBoxContainer/RootList" to="." method="_on_root_list_item_selected"]
-[connection signal="dropped_data" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer" to="." method="_on_margin_container_dropped_data"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_background_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_background_button_2_pressed"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="_on_save_backgrounds_button_pressed"]
+[connection signal="dropped_data" from="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer" to="." method="_on_margin_container_dropped_data"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_background_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_background_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Backgrounds/HBoxContainer/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="save_scene_config"]
 [connection signal="dropped_data" from="VBoxContainer/TabContainer/Videos/MarginContainer" to="." method="_on_videos_dropped_data"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Videos/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_videos_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Videos/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_videos_button_2_pressed"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Videos/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="_on_save_videos_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Videos/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="save_scene_config"]
 [connection signal="dropped_data" from="VBoxContainer/TabContainer/Audios/MarginContainer" to="." method="_on_audios_dropped_data"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Audios/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_audios_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Audios/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_audios_button_2_pressed"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Audios/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="_on_save_audios_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Audios/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="save_scene_config"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/AddBackgroundButton" to="." method="_on_add_characters_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/RemoveBackgroundButton2" to="." method="_on_remove_characters_button_2_pressed"]
-[connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="_on_save_characters_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Characters/MarginContainer2/VBoxContainer/SaveBackgroundsButton" to="." method="save_scene_config"]
 [connection signal="back_clicked" from="ScriptModal" to="." method="_on_script_window_popup_hide"]
 [connection signal="success" from="ScriptModal" to="." method="_on_script_window_text_saved"]
 [connection signal="back_clicked" from="TransitionsModal" to="." method="_on_transitions_modal_back_clicked"]

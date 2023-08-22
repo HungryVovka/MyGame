@@ -15,6 +15,8 @@ var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").n
 var shader_animations = {}
 var prev_had_blend = false
 
+var dialog_tool_type: String = "BACKGROUND"
+
 func switch(forward: bool):
 	if forward:
 		move_child(first, 2)
@@ -35,8 +37,16 @@ func setMovable(value):
 	first.movable = value
 	second.movable = value
 	
+func clear():
+	current.clear()
+	other().clear()
+	current.reset_shaders()
+	other().reset_shaders()
 	
 func set_background(res, has_transition: bool = false, shader_params: Dictionary = {}):
+	if !res:
+		clear()
+		return
 	if !has_transition:
 		current = second
 		current.set_background(res, has_transition, shader_params)
@@ -57,7 +67,7 @@ func set_background(res, has_transition: bool = false, shader_params: Dictionary
 		else:
 			current.set_background(res, has_transition, shader_params)
 
-func apply_shader(id: String, params: Dictionary, texture = null, where: String = "under"):
+func apply_shader(id: String, params: Dictionary = {}, texture = null, where: String = "under"):
 	var mat = Shaders.new_material(id, params)
 	var dest: TextureRect = under if where == "under" else face
 	if id != "":

@@ -2,9 +2,11 @@ extends VideoStreamPlayer
 
 var image = null
 
-@onready
-var bgTexture = $"../TextureRect"
-	
+@onready var bgTexture = $"../TextureRect"
+@onready var videoTexture = $"../VideoFrame"
+
+signal videoTextureCreated(tex)
+
 func reset_image():
 	image = null
 	
@@ -12,7 +14,7 @@ func _process(_delta):
 	if is_playing() && stream_position && !image:
 		store_first_frame()
 		set_process(false)
-
+		
 func _on_finished():
 	play()
 
@@ -23,3 +25,5 @@ func store_first_frame():
 		if texture:
 			bgTexture.texture = texture
 			image = newImage
+		videoTexture.texture = newImage
+		videoTextureCreated.emit(newImage)

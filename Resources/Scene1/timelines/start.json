@@ -3,6 +3,14 @@
 	"events": [
 		{
 			"background": {
+				"clickable": false,
+				"name": "res://Game/CustomBackgrounds/FlyingPlane/ui.tscn",
+				"video": ""
+			},
+			"text": ""
+		},
+		{
+			"background": {
 				"clickable": true,
 				"fade": 7,
 				"name": "1.png",
@@ -34,6 +42,22 @@
 					"swipe_speed_v": 4.00000000000002
 				}
 			},
+			"choices": {
+				"choices": [
+					{
+						"id": "daddy",
+						"root": "/my_choice/yes",
+						"text": "daddy"
+					},
+					{
+						"id": "refuse",
+						"root": "/my_choice/454",
+						"text": "refuse"
+					}
+				],
+				"id": "my_choice",
+				"scene": "res://Game/ChoicesScenes/TestScene.tscn"
+			},
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
@@ -42,7 +66,6 @@
 				"name": "Airplane Outside",
 				"volume": 0.05
 			},
-			"script": "func start(_dialog, _event):\n\tpass\n\t\nfunc condition(_dialog, _event):\n\treturn true",
 			"state": {
 				"telka": "Mom"
 			},
@@ -305,6 +328,7 @@
 		},
 		{
 			"background": {
+				"clickable": false,
 				"name": "3 (4)",
 				"transition": {
 					"blend": false,
@@ -1062,7 +1086,10 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"script": "func start(dialog, event):\n\tdialog.get_parent().background.apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
+			"script": "func start(dialog, event):\n\tdialog.get_parent().backgrounds[0].apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
+			"state": {
+
+			},
 			"text": "",
 			"timer": 3
 		},
@@ -1118,7 +1145,10 @@
 				"name": "BlackScreen"
 			},
 			"id": "qq",
-			"script": "func start(dialog, event):\n\tdialog.get_parent().background.remove_shader(\"face\")\n\tdialog.get_parent().background.movable = 0\nfunc condition(dialog, event):\n\treturn true",
+			"script": "func start(dialog, event):\n\tdialog.get_parent().backgrounds[0].remove_shader(\"face\")\n\tdialog.get_parent().backgrounds[0].movable = 0\nfunc condition(dialog, event):\n\treturn true",
+			"state": {
+
+			},
 			"text": "",
 			"timer": 3
 		},

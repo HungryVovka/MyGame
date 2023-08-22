@@ -6,6 +6,7 @@ extends Control
 
 
 var choice_type: String = "CHOICE_CONTROL"
+var dialog_tool_type: String = "CHOICE_CONTROL"
 var entered : bool = false
 signal pressed(id)
 

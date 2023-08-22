@@ -2,28 +2,14 @@ extends Node
 
 signal make_choice(id)
 
+var LayoutManager = preload("res://addons/DialogHelperTool/Shared/LayoutManager.gd").new()
+
 var items = []
 
 func _ready():
-	items = findChoiceControls(get_all_children(get_parent()))
+	items = LayoutManager.findControlsInChildren(get_parent(), "CHOICE_CONTROL")
 	for i in items:
 		i.connect("pressed", on_make_choice)
-	
-func get_all_children(in_node, arr = []):
-	arr.push_back(in_node)
-	for child in in_node.get_children():
-		arr = get_all_children(child,arr)
-	return arr
-
-func findChoiceControls(items: Array): 
-	var foundChoices = []
-	for i in items:
-		var item: Node = i
-		var props = item.get_property_list()
-		for p in props:
-			if p["name"] == "choice_type":
-				foundChoices.push_back(i)
-	return foundChoices
 	
 func on_make_choice(id: String):
 	make_choice.emit(id)

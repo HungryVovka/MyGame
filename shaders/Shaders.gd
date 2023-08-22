@@ -3,7 +3,8 @@ extends Node
 @export var list: Dictionary = {
 	"god_light": "res://shaders/GodLight.gdshader",
 	"vignette": "res://shaders/vingette.gdshader",
-	"clouds": "res://shaders/сlouds.gdshader"
+	"clouds": "res://shaders/сlouds.gdshader",
+	"crt": "res://shaders/crt.gdshader"
 }
 
 func new_material(id: String, params: Dictionary = {}):

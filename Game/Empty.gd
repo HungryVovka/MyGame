@@ -26,13 +26,13 @@ func _ready():
 	_progress(0.0)
 	
 func _scene_ready(value: String, scene_name: String):
-	var cfg = _read_json(value + "config.json");
+	var cfg: Dictionary = _read_json(value + "config.json");
 	var dict = {
 		"timeline": value + "timelines/" + cfg.start + ".json",
-		"backgrounds": value + "configs/backgrounds.json",
-		"videos": value + "configs/videos.json",
-		"sounds": value + "configs/sounds.json",
-		"characters": value + "configs/characters.json",
+		"backgrounds": cfg.backgrounds,
+		"videos": cfg.videos,
+		"sounds": cfg.sounds,
+		"characters": cfg.characters,
 		"end": cfg.end,
 		"scene_root": value,
 		"scene_name": scene_name,

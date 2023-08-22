@@ -21,6 +21,7 @@ func _exit_tree():
 	get_editor_interface().get_editor_main_screen().remove_child(dock)
 	dock.queue_free()
 	remove_custom_type("ChoiceControlContainer")
+	remove_custom_type("DialogLayout")
 	
 
 func _enter_tree():
@@ -31,6 +32,7 @@ func _enter_tree():
 	dock.connect("reimport", rescan_fs)
 	
 	add_custom_type("ChoiceControlContainer", "Control", load("res://addons/DialogHelperTool/Game/ChoiceControl/ChoiceSceneContainer.gd"), null)
+	add_custom_type("DialogLayout", "Control", load("res://addons/DialogHelperTool/Game/DialogScene/DialogLayout.gd"), null)
 	var bus_resource = load("res://default_bus_layout.tres")
 	for i in range(0, 999):
 		var iBus = bus_resource.get("bus/" + str(i) + "/name")
