@@ -7,9 +7,9 @@ extends Control
 @export_file("*.json") var characters
 
 @onready var label = $Label
-@onready var dialog = $DialogSystem
 @onready var menu = $GameMenu
 @onready var menuPlayer = $MenuPlayer
+var dialog : Node
 
 var menu_is_hiding = false
 
@@ -26,8 +26,32 @@ var dict = {
 
 var cached_save = {}
 
+var layouts = [
+	preload("res://Game/MainDialogLayout.tscn"),
+	preload("res://Game/DialogLayouts/Main/SecondLayout.tscn")
+]
+
+var current_layout_index = 0
+
+func next_layout():
+	if dialog:
+		var managers = dialog.extractManagers()
+		dialog.get_parent().remove_child(dialog)
+		dialog.queue_free()
+		current_layout_index = (current_layout_index + 1) % layouts.size()
+		dialog = layouts[current_layout_index].instantiate()
+		dialog.embedManagers(managers)
+		$LayoutContainer.add_child(dialog)
+		managers.dialogManager.play_current_event()
+	else:
+		dialog = layouts[0].instantiate()
+		$LayoutContainer.add_child(dialog)
 
 func _ready():
+	
+	dialog = layouts[0].instantiate()
+	$LayoutContainer.add_child(dialog)
+	
 	var cfg = DialogState.scene_state
 	if cfg.is_empty():
 		dialog.setDialogParams(dict)

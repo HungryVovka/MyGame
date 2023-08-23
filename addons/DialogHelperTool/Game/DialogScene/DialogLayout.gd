@@ -1,8 +1,8 @@
 extends Control
 
 @onready var textArea
-@onready var dialogManager
-@onready var audioManager
+var dialogManager: DialogManager
+var audioManager: AudioManager
 @onready var backgrounds = []
 @onready var choicesBlocks = []
 @onready var videoPlayers = []
@@ -34,12 +34,44 @@ var typeD : Dictionary = {
 	"state": "dict",
 }
 
+func extractManagers() -> Dictionary:
+	dialogManager.disconnect("end", on_dialog_manager_end)
+	dialogManager.disconnect("personAnimation", person_animation)
+	dialogManager.disconnect("personSource", set_person_source)
+	dialogManager.disconnect("personVisible", set_person_visible)
+	dialogManager.disconnect("playSound", on_dialog_manager_play_sound)
+	dialogManager.disconnect("playVideo", on_dialog_manager_play_video)
+	dialogManager.disconnect("resetCharacter", on_dialog_manager_reset_character)
+	dialogManager.disconnect("setBackground", on_dialog_manager_set_background)
+	dialogManager.disconnect("setCustomBackground", on_dialog_manager_set_custom_background)
+	dialogManager.disconnect("setBackgroundClickable", on_dialog_manager_set_background_clickable)
+	dialogManager.disconnect("showChoices", on_dialog_manager_show_choices)
+	dialogManager.disconnect("stopSound", on_dialog_manager_stop_sound)
+	dialogManager.disconnect("stopVideo", on_dialog_manager_stop_video)
+	dialogManager.disconnect("updateCharacter", on_dialog_manager_update_character)
+	dialogManager.disconnect("updateText", on_dialog_manager_update_text)
+	
+	
+	remove_child(dialogManager)
+	remove_child(audioManager)
+	
+	return {
+		"audioManager": audioManager,
+		"dialogManager": dialogManager
+	}
+
+func embedManagers(src: Dictionary):
+	print("embed")
+	audioManager = src.audioManager
+	dialogManager = src.dialogManager
 func _ready():
-	print("backs ready: ")
 	connectControls()
 	for c in choicesBlocks:
 		c.visible = false
-	dialogManager = preload("res://addons/DialogHelperTool/Game/DialogManager/DialogManager.tscn").instantiate()
+	var dm_is_created = false
+	if !dialogManager:
+		dialogManager = preload("res://addons/DialogHelperTool/Game/DialogManager/DialogManager.tscn").instantiate()
+		dm_is_created = true
 	add_child(dialogManager)
 	dialogManager.connect("end", on_dialog_manager_end)
 	dialogManager.connect("personAnimation", person_animation)
@@ -56,9 +88,12 @@ func _ready():
 	dialogManager.connect("stopVideo", on_dialog_manager_stop_video)
 	dialogManager.connect("updateCharacter", on_dialog_manager_update_character)
 	dialogManager.connect("updateText", on_dialog_manager_update_text)
-	dialogManager.timeline = fn
 	
-	audioManager = preload("res://addons/DialogHelperTool/Game/AudioManager/AudioManager.tscn").instantiate()
+	if dm_is_created:
+		dialogManager.timeline = fn
+	
+	if !audioManager:
+		audioManager = preload("res://addons/DialogHelperTool/Game/AudioManager/AudioManager.tscn").instantiate()
 	add_child(audioManager)
 
 	var timer = Timer.new()
@@ -77,7 +112,8 @@ func connectControls():
 	persons = LayoutManager.findControlsInChildren(self, "PERSON_LAYOUT")
 	textArea = LayoutManager.findControlsInChildren(self, "TEXT_AREA", true)
 	
-	self.connect("gui_input", _on_background_gui_input)
+	for b in backgrounds:
+		b.connect("gui_input", _on_background_gui_input)
 	for c in choicesBlocks:
 		c.connect("choiceClicked", _on_choices_block_choice_clicked)
 	if textArea:
@@ -233,8 +269,6 @@ func _on_text_area_on_next():
 func _on_background_gui_input(event):
 	if !scene_ready:
 		return false
-	if customBackgroundChild && customBackgroundChild.has_method("_on_gui_input"):
-		customBackgroundChild._on_gui_input(event)
 	if event is InputEventMouseButton \
 		&& clickable_background \
 		&& !choice_mode() \

@@ -390,6 +390,13 @@ func _on_sound_fade_value_changed(value):
 		else:
 			data.play_sound.erase("fade")
 	updateButtons()
+	
+func _on_loop_toggled(button_pressed):
+	if data.has("play_sound"):
+		if button_pressed: 
+			data.play_sound.loop = true
+		else:
+			data.play_sound.erase("loop")
 
 
 func _on_play_sound_checkbox_toggled(button_pressed):

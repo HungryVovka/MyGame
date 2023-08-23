@@ -7,6 +7,13 @@
 				"name": "res://Game/CustomBackgrounds/FlyingPlane/ui.tscn",
 				"video": ""
 			},
+			"play_sound": {
+				"channel": "",
+				"fade": 2,
+				"loop": true,
+				"name": "Airplane Outside",
+				"volume": 0.14
+			},
 			"text": ""
 		},
 		{

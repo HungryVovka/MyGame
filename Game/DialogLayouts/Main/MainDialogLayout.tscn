@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://c126nxf8x5cia"]
+
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Game/DialogScene/DialogLayout.gd" id="1_unmpl"]
+[ext_resource type="PackedScene" uid="uid://dr1yr87qslefe" path="res://addons/DialogHelperTool/Game/VideoPlayer/VideoPlayer.tscn" id="2_bd4gk"]
+[ext_resource type="PackedScene" uid="uid://brwri52cvrt25" path="res://addons/DialogHelperTool/Game/Background/BackgroundCompose.tscn" id="3_emjuu"]
+[ext_resource type="PackedScene" uid="uid://bqvgut40x8oo3" path="res://addons/DialogHelperTool/Game/Person/PersonLayout.tscn" id="4_yp4nd"]
+[ext_resource type="PackedScene" uid="uid://digxc7fp286c2" path="res://addons/DialogHelperTool/Game/TextArea/TextArea.tscn" id="5_po7wk"]
+[ext_resource type="PackedScene" uid="uid://civ12v0wc52bt" path="res://addons/DialogHelperTool/Game/ChoiceControl/ChoiceBlock/ChoicesBlock.tscn" id="6_coxd1"]
+
+[node name="MainDialogLayout" type="Control" node_paths=PackedStringArray("choiceSceneContainer", "backgroundSceneContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_unmpl")
+choiceSceneContainer = NodePath("VideoPlayer/BackgroundCompose/CustomBackgroundContainer/PersonLayout/CustomChoiceSceneContainer")
+backgroundSceneContainer = NodePath("VideoPlayer/BackgroundCompose/CustomBackgroundContainer")
+
+[node name="VideoPlayer" parent="." instance=ExtResource("2_bd4gk")]
+layout_mode = 1
+mouse_filter = 1
+
+[node name="BackgroundCompose" parent="VideoPlayer" instance=ExtResource("3_emjuu")]
+layout_mode = 1
+mouse_filter = 1
+
+[node name="CustomBackgroundContainer" type="Control" parent="VideoPlayer/BackgroundCompose"]
+layout_mode = 1
+anchor_right = 2.174
+anchor_bottom = 2.632
+offset_right = -2254.08
+offset_bottom = -1762.56
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="PersonLayout" parent="VideoPlayer/BackgroundCompose/CustomBackgroundContainer" instance=ExtResource("4_yp4nd")]
+layout_mode = 1
+mouse_filter = 1
+
+[node name="CustomChoiceSceneContainer" type="Control" parent="VideoPlayer/BackgroundCompose/CustomBackgroundContainer/PersonLayout"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextArea" parent="VideoPlayer/BackgroundCompose/CustomBackgroundContainer/PersonLayout/CustomChoiceSceneContainer" instance=ExtResource("5_po7wk")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.115
+anchor_top = 0.639
+anchor_right = 0.901
+anchor_bottom = 0.909
+offset_left = -20.8
+offset_top = -0.120059
+offset_right = -19.92
+offset_bottom = 8.27996
+
+[node name="ChoicesBlock" parent="VideoPlayer/BackgroundCompose/CustomBackgroundContainer/PersonLayout/CustomChoiceSceneContainer/TextArea" instance=ExtResource("6_coxd1")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.799
+anchor_top = -2.247
+anchor_right = 1.072
+anchor_bottom = 0.103
+offset_left = -0.490037
+offset_top = 0.100065
+offset_right = 0.27996
+offset_bottom = 0.0999901

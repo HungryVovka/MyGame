@@ -1,3 +1,4 @@
+class_name AudioManager
 extends Node
 
 const LoopableAudio = preload("res://addons/DialogHelperTool/Game/AudioManager/LoopableAudio.gd")

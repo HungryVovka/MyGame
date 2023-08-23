@@ -1,4 +1,4 @@
 extends Node2D
 
-func _on_texture_button_pressed():
+func next_texture():
 	$Background.on_texture_button_pressed()

@@ -1,3 +1,4 @@
+class_name DialogManager
 extends Node
 
 @export_file("*.json") var timeline: set = setTimeline
@@ -93,6 +94,7 @@ func setTimeline(filename):
 		nextEventTimer.stop()
 		nextEventTimer.queue_free()
 	
+	print("resetting current event")
 	current_event = null
 	if filename:
 		text_data = JSONHelper.read_json(filename, false)
@@ -141,11 +143,23 @@ func setVideosList(src: Dictionary):
 		for k in data.keys():
 			videos_resources[k] = load(data[k])
 
-func play_next_event():
-	last_event = JSONHelper.deep_duplicate(current_pos)
-	var event = get_next_event()
-	current_event = event
-	
+
+func play_next_event(replay_last: bool = false):
+	print("play next event")
+	var event
+	if !replay_last:
+		last_event = JSONHelper.deep_duplicate(current_pos)
+		event = get_next_event()
+		current_event = event
+	else:
+		event = current_event
+		
+	play_event(event)
+
+func play_current_event():
+	play_event(current_event)	
+		
+func play_event(event: Dictionary):
 	if nextEventTimer && !nextEventTimer.is_stopped() && event:
 		nextEventTimer.stop()
 	if event:
