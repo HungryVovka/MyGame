@@ -36,12 +36,14 @@ var current_layout_index = 0
 func next_layout():
 	if dialog:
 		var managers = dialog.extractManagers()
+		var clickable_background = dialog.clickable_background
 		dialog.get_parent().remove_child(dialog)
 		dialog.queue_free()
 		current_layout_index = (current_layout_index + 1) % layouts.size()
 		dialog = layouts[current_layout_index].instantiate()
 		dialog.embedManagers(managers)
 		$LayoutContainer.add_child(dialog)
+		dialog.clickable_background = clickable_background
 		managers.dialogManager.play_current_event()
 	else:
 		dialog = layouts[0].instantiate()

@@ -4,8 +4,7 @@
 		{
 			"background": {
 				"clickable": false,
-				"name": "res://Game/CustomBackgrounds/FlyingPlane/ui.tscn",
-				"video": ""
+				"name": "res://Game/CustomBackgrounds/RelationBackground/RelationBackground.tscn"
 			},
 			"play_sound": {
 				"channel": "",
@@ -73,6 +72,7 @@
 				"name": "Airplane Outside",
 				"volume": 0.05
 			},
+			"script": "func start(_dialog, _event):\n\tpass\n\t\nfunc condition(_dialog, _event):\n\treturn false",
 			"state": {
 				"telka": "Mom"
 			},
@@ -84,7 +84,7 @@
 		{
 			"background": {
 				"clickable": true,
-				"name": "2",
+				"name": "4 (5)",
 				"transition": {
 					"blend": true,
 					"blend_mode": true,
@@ -133,7 +133,7 @@
 				"name": "звук внутри самолета",
 				"volume": 0.14
 			},
-			"text": "$(telka)"
+			"text": "Jessica is your $(jessica_relation), Katie is your $(katie_relation), Lisa is your $(lisa_relation)!"
 		},
 		{
 			"background": {

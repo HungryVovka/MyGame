@@ -233,12 +233,10 @@ func on_dialog_manager_show_choices(data):
 
 func on_dialog_manager_play_video(res):
 	for v in videoPlayers:
-		v.visible = true
 		v.play(res)
 
 func on_dialog_manager_stop_video():
 	for v in videoPlayers:
-		v.visible = false
 		v.stop()
 
 func scene_make_choice(id: String):

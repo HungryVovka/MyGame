@@ -3,7 +3,7 @@ extends Control
 @onready var player = $VideoStreamPlayer
 @onready var videoFrame = $VideoFrame
 @onready var overlay = $Overlay
-var dialog_tool_type: String = "VIDEO_PLAYER"
+var dialog_tool_type: String = "VIDEOPLAYER"
 
 func _ready():
 	videoFrame.texture = player.get_video_texture()
