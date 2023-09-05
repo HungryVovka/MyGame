@@ -34,7 +34,9 @@
 		"4 (8)": "res://Resources/Scene1/Art/4 (8).png",
 		"BlackScreen": "res://Resources/Scene1/Art/BlackScreen.png",
 		"BlackScreenCredits2": "res://Resources/Scene1/Art/BlackScreenCredits2.png",
-		"BlackScreenCredits3": "res://Resources/Scene1/Art/BlackScreenCredits3.png"
+		"BlackScreenCredits3": "res://Resources/Scene1/Art/BlackScreenCredits3.png",
+		"Untitled-2": "res://Resources/Scene1/Art/Untitled-2.png",
+		"trans": "res://Resources/Scene1/Art/trans.png"
 	},
 	"characters": {
 		"characters": {
@@ -66,6 +68,6 @@
 	},
 	"start": "start",
 	"videos": {
-		"kiss": "res://Resources/movie/JaCrp6.ogv"
+		"New project.ogv": "res://Resources/Scene1/Video/New project.ogv"
 	}
 }

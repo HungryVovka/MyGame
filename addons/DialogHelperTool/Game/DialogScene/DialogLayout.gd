@@ -73,6 +73,7 @@ func _ready():
 		dialogManager = preload("res://addons/DialogHelperTool/Game/DialogManager/DialogManager.tscn").instantiate()
 		dm_is_created = true
 	add_child(dialogManager)
+	dialogManager.get_parent().move_child(dialogManager, 0)
 	dialogManager.connect("end", on_dialog_manager_end)
 	dialogManager.connect("personAnimation", person_animation)
 	dialogManager.connect("personSource", set_person_source)

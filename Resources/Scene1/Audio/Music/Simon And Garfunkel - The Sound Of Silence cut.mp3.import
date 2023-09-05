@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dq5llug47ti70"
+path="res://.godot/imported/Simon And Garfunkel - The Sound Of Silence cut.mp3-e3d2eaaeed418ecb473b300cb2d32e4f.mp3str"
+
+[deps]
+
+source_file="res://Resources/Scene1/Audio/Music/Simon And Garfunkel - The Sound Of Silence cut.mp3"
+dest_files=["res://.godot/imported/Simon And Garfunkel - The Sound Of Silence cut.mp3-e3d2eaaeed418ecb473b300cb2d32e4f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

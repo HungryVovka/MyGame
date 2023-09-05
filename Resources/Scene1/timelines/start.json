@@ -3,67 +3,9 @@
 	"events": [
 		{
 			"background": {
-				"clickable": false,
-				"name": "res://Game/CustomBackgrounds/RelationBackground/RelationBackground.tscn"
+				"name": "1.png"
 			},
-			"play_sound": {
-				"channel": "",
-				"fade": 2,
-				"loop": true,
-				"name": "Airplane Outside",
-				"volume": 0.14
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"clickable": true,
-				"fade": 7,
-				"name": "1.png",
-				"transition": {
-					"fade_color": "#000000ff",
-					"fade_from": true,
-					"fade_speed": 1.00000000000002,
-					"fade_to": true,
-					"scale_max": 1.20000000000208,
-					"scale_min": 0.00000000000208166,
-					"scale_mode": true,
-					"scale_shift": 1.20000000000208,
-					"scale_speed": 0.00000000000002081,
-					"shake_h": true,
-					"shake_height": 10,
-					"shake_mode": true,
-					"shake_speed": 1.00000000000002,
-					"shake_time": 99999,
-					"shake_v": false,
-					"swipe_max_h": 300,
-					"swipe_max_v": 60,
-					"swipe_min_h": -1920,
-					"swipe_min_v": -1080,
-					"swipe_mode_h": true,
-					"swipe_mode_v": true,
-					"swipe_shift_h": -300,
-					"swipe_shift_v": 0,
-					"swipe_speed_h": 20,
-					"swipe_speed_v": 4.00000000000002
-				}
-			},
-			"choices": {
-				"choices": [
-					{
-						"id": "daddy",
-						"root": "/my_choice/yes",
-						"text": "daddy"
-					},
-					{
-						"id": "refuse",
-						"root": "/my_choice/454",
-						"text": "refuse"
-					}
-				],
-				"id": "my_choice",
-				"scene": "res://Game/ChoicesScenes/TestScene.tscn"
-			},
+			"jump_to": "1",
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
@@ -72,19 +14,20 @@
 				"name": "Airplane Outside",
 				"volume": 0.05
 			},
-			"script": "func start(_dialog, _event):\n\tpass\n\t\nfunc condition(_dialog, _event):\n\treturn false",
-			"state": {
-				"telka": "Mom"
-			},
-			"stats": {
-				"telka": "Mom"
+			"text": "",
+			"timer": 8
+		},
+		{
+			"background": {
+				"clickable": true,
+				"name": "1.png"
 			},
 			"text": ""
 		},
 		{
 			"background": {
-				"clickable": true,
-				"name": "4 (5)",
+				"clickable": false,
+				"name": "2",
 				"transition": {
 					"blend": true,
 					"blend_mode": true,
@@ -133,7 +76,8 @@
 				"name": "звук внутри самолета",
 				"volume": 0.14
 			},
-			"text": "Jessica is your $(jessica_relation), Katie is your $(katie_relation), Lisa is your $(lisa_relation)!"
+			"text": "",
+			"timer": 2.1
 		},
 		{
 			"background": {
@@ -335,7 +279,6 @@
 		},
 		{
 			"background": {
-				"clickable": false,
 				"name": "3 (4)",
 				"transition": {
 					"blend": false,
@@ -384,7 +327,6 @@
 		},
 		{
 			"character": "Co-pilot",
-			"id": "t",
 			"play_sound": {
 				"bus": "SFX",
 				"channel": "SFX2",
@@ -444,7 +386,6 @@
 				}
 			},
 			"character": "Captain",
-			"id": "5",
 			"text": "Oh, stop this nonsense! "
 		},
 		{
@@ -876,9 +817,9 @@
 		},
 		{
 			"background": {
+				"clickable": false,
 				"name": "3 (14)"
 			},
-			"id": "q",
 			"play_sound": {
 				"bus": "SFX",
 				"channel": "SFX1",
@@ -1093,7 +1034,7 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"script": "func start(dialog, event):\n\tdialog.get_parent().backgrounds[0].apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n\treturn true",
+			"script": "func start(dialog, event):\n    dialog.get_parent().backgrounds[0].apply_shader(\"vignette\", {\"speed\": 15.0, \"fade_out_speed\": 10}, \"\", \"face\")\nfunc condition(dialog, event):\n    return true\n",
 			"state": {
 
 			},
@@ -1151,13 +1092,16 @@
 			"background": {
 				"name": "BlackScreen"
 			},
-			"id": "qq",
 			"script": "func start(dialog, event):\n\tdialog.get_parent().backgrounds[0].remove_shader(\"face\")\n\tdialog.get_parent().backgrounds[0].movable = 0\nfunc condition(dialog, event):\n\treturn true",
-			"state": {
-
-			},
 			"text": "",
 			"timer": 3
+		},
+		{
+			"background": {
+				"name": "BlackScreen"
+			},
+			"text": "",
+			"timer": 0.1
 		},
 		{
 			"background": {
@@ -1304,125 +1248,21 @@
 					"swipe_speed_v": 0
 				}
 			},
-			"id": "1",
 			"text": "",
 			"timer": 6.5
 		},
 		{
 			"background": {
-				"name": "4",
-				"transition": {
-					"blend": false,
-					"blend_mode": false,
-					"blend_speed": 0.5,
-					"curtain_h": false,
-					"curtain_reverse_h": false,
-					"curtain_reverse_v": false,
-					"curtain_speed_h": 0,
-					"curtain_speed_v": 0,
-					"curtain_v": false,
-					"fade_color": "#000000ff",
-					"fade_from": true,
-					"fade_speed": 0.5,
-					"fade_to": false,
-					"scale_max": 1,
-					"scale_min": 0,
-					"scale_mode": false,
-					"scale_shift": 1,
-					"scale_speed": 0,
-					"shake_h": false,
-					"shake_height": 20,
-					"shake_mode": false,
-					"shake_speed": 0,
-					"shake_time": 1,
-					"shake_v": false,
-					"slide_h": false,
-					"slide_reverse": false,
-					"slide_speed": 0,
-					"slide_v": false,
-					"swipe_max_h": 1920,
-					"swipe_max_v": 1080,
-					"swipe_min_h": -1920,
-					"swipe_min_v": -1080,
-					"swipe_mode_h": false,
-					"swipe_mode_v": false,
-					"swipe_shift_h": 0,
-					"swipe_shift_v": 0,
-					"swipe_speed_h": 0,
-					"swipe_speed_v": 0
-				}
+				"name": "3 (3)",
+				"video": "New project.ogv"
 			},
-			"text": ""
+			"id": "1",
+			"text": "",
+			"timer": 5
 		},
 		{
 			"background": {
-				"name": "4 (1)",
-				"transition": {
-					"curtain_h": true,
-					"curtain_reverse_h": false,
-					"curtain_reverse_v": false,
-					"curtain_speed_h": 1,
-					"curtain_speed_v": 0,
-					"curtain_v": false,
-					"fade_color": "",
-					"fade_from": false,
-					"fade_speed": 0,
-					"fade_to": false,
-					"scale_max": 1,
-					"scale_min": 0,
-					"scale_mode": false,
-					"scale_shift": 1,
-					"scale_speed": 0,
-					"shake_h": false,
-					"shake_height": 20,
-					"shake_mode": false,
-					"shake_speed": 0,
-					"shake_time": 1,
-					"shake_v": false,
-					"slide_h": false,
-					"slide_reverse": false,
-					"slide_speed": 0,
-					"slide_v": false,
-					"swipe_max_h": 1920,
-					"swipe_max_v": 1080,
-					"swipe_min_h": -1920,
-					"swipe_min_v": -1080,
-					"swipe_mode_h": false,
-					"swipe_mode_v": false,
-					"swipe_shift_h": 0,
-					"swipe_shift_v": 0,
-					"swipe_speed_h": 0,
-					"swipe_speed_v": 0
-				}
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "4 (22)",
-				"transition": {
-					"blend": true,
-					"blend_mode": true,
-					"blend_speed": 0.5
-				}
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"clickable": true,
-				"name": "4 (2)",
-				"transition": {
-					"curtain_h": true,
-					"curtain_reverse_h": false,
-					"curtain_speed_h": 0
-				}
-			},
-			"text": ""
-		},
-		{
-			"background": {
-				"name": "4 (5)",
+				"name": "Untitled-2",
 				"transition": {
 					"blend": true,
 					"blend_mode": true,
@@ -1432,44 +1272,21 @@
 			"text": ""
 		},
 		{
-			"background": {
-				"name": "4 (6)",
-				"transition": {
-					"blend": true,
-					"blend_mode": true,
-					"blend_speed": 1
-				}
-			},
 			"text": ""
 		},
 		{
-			"background": {
-				"name": "4 (7)",
-				"transition": {
-					"blend": true,
-					"blend_mode": true,
-					"blend_speed": 1
-				}
-			},
 			"text": ""
 		},
 		{
-			"background": {
-				"clickable": true,
-				"name": "4 (8)",
-				"transition": {
-					"blend": true,
-					"blend_mode": true,
-					"blend_speed": 1
-				}
-			},
-			"id": "3",
 			"text": ""
 		},
 		{
-			"background": {
-				"name": ""
-			},
+			"text": ""
+		},
+		{
+			"text": ""
+		},
+		{
 			"text": ""
 		},
 		{
@@ -1495,59 +1312,7 @@
 		}
 	],
 	"roots": {
-		"/my_choice/": {
-			"events": []
-		},
-		"/my_choice/454": {
-			"events": []
-		},
-		"/my_choice/no": {
-			"events": [
-				{
-					"text": "NOOOOOOO"
-				}
-			]
-		},
-		"/my_choice/yes": {
-			"events": [
-				{
-					"background": {
-						"name": "BlackScreenCredits2",
-						"video": ""
-					},
-					"text": "YESSS"
-				},
-				{
-					"choices": {
-						"choices": [
-							{
-								"id": "playqq",
-								"root": "/my_choice/yes/playq/yes_mdam",
-								"text": "Yes mdam"
-							},
-							{
-								"id": "fuck_you!",
-								"root": "/my_choice/no",
-								"text": "fuck you!"
-							}
-						],
-						"id": "my_choice"
-					},
-					"text": "Should i play with ya?"
-				}
-			]
-		},
-		"/my_choice/yes/playq/yes_mdam": {
-			"events": [
-				{
-					"background": {
-						"name": "",
-						"video": "kiss"
-					},
-					"text": ""
-				}
-			]
-		}
+
 	},
 	"unique_name": "StartTimeline"
 }

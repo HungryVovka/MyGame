@@ -74,7 +74,7 @@ void vertex() {
 
 vec4 blend(vec4 color){
 	float blend_pos = min(max(time * blend_speed, 0.0), 1.0);
-	return vec4(color.rgb, blend_pos);
+	return vec4(color.rgb, blend_pos*color.a);
 }
 vec4 blend_to(vec4 color){
 	float blend_pos = min(max(time * fade_speed, 0.0), 1.0);

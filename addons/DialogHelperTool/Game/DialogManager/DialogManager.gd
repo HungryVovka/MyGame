@@ -230,10 +230,11 @@ func process_background(event):
 				setBackground.emit(null, has_transition, params)
 	if event.has("clickable"):
 		setBackgroundClickable.emit(event.clickable)
-	if event.has("video") && videos_resources.has(DialogState.pps(event.video)):
-		playVideo.emit(videos_resources[DialogState.pps(event.video)])
-	else:
-		stopVideo.emit()
+	if event.has("video"): 
+		if videos_resources.has(DialogState.pps(event.video)):
+			playVideo.emit(videos_resources[DialogState.pps(event.video)])
+		else:
+			stopVideo.emit()
 
 func process_sound(event):
 	if event.has("name") && event.has("channel"):
