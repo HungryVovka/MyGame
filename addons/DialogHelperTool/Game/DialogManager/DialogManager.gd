@@ -182,9 +182,9 @@ func play_event(event: Dictionary):
 		if event.has("jump_to"):
 			jump_to(DialogState.pps(event.jump_to))
 			return
-		updateText.emit(DialogState.pps(event.text))
 		if event.has("character"):
 			process_character(event.character)
+		updateText.emit(DialogState.pps(event.text))
 
 		if event.has("timer"):
 			if nextEventTimer:

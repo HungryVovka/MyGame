@@ -13,7 +13,6 @@ config_version=5
 config/name="The Graduate"
 run/main_scene="res://Game/Empty.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-run/delta_smoothing=false
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://icon.svg"

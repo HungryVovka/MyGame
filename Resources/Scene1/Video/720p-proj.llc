@@ -1,0 +1,10 @@
+{
+  version: 1,
+  mediaFileName: '720p.ogv',
+  cutSegments: [
+    {
+      start: 7,
+      name: '',
+    },
+  ],
+}

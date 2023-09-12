@@ -27,7 +27,7 @@ var dict = {
 var cached_save = {}
 
 var layouts = [
-	preload("res://Game/MainDialogLayout.tscn"),
+	preload("res://Game/DialogLayouts/Main/StartLayout.tscn"),
 	preload("res://Game/DialogLayouts/Main/SecondLayout.tscn")
 ]
 

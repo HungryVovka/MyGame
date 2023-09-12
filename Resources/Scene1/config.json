@@ -1,6 +1,7 @@
 {
 	"backgrounds": {
 		"1.png": "res://Resources/Scene1/Art/1.png",
+		"1080p-00.00.07.000": "res://Resources/Scene1/Video/1080p-00.00.07.000.jpeg",
 		"2": "res://Resources/Scene1/Art/2.png",
 		"3 (10)": "res://Resources/Scene1/Art/3 (10).png",
 		"3 (11)": "res://Resources/Scene1/Art/3 (11).png",
@@ -32,6 +33,7 @@
 		"4 (6)": "res://Resources/Scene1/Art/4 (6).png",
 		"4 (7)": "res://Resources/Scene1/Art/4 (7).png",
 		"4 (8)": "res://Resources/Scene1/Art/4 (8).png",
+		"720p start": "res://Resources/Scene1/Video/720p start.jpeg",
 		"BlackScreen": "res://Resources/Scene1/Art/BlackScreen.png",
 		"BlackScreenCredits2": "res://Resources/Scene1/Art/BlackScreenCredits2.png",
 		"BlackScreenCredits3": "res://Resources/Scene1/Art/BlackScreenCredits3.png",
@@ -59,6 +61,8 @@
 		"Airplane Outside": "res://Resources/Scene1/Audio/Sfx/Airplane Outside.mp3",
 		"Pilot Announcement": "res://Resources/Scene1/Audio/Sfx/Pilot Announcement.mp3",
 		"Simon And Garfunkel - The Sound Of Silence": "res://Resources/Scene1/Audio/Music/Simon And Garfunkel - The Sound Of Silence.mp3",
+		"Simon And Garfunkel - The Sound Of Silence cut": "res://Resources/Scene1/Audio/Music/Simon And Garfunkel - The Sound Of Silence cut.mp3",
+		"Simon And Garfunkel - The Sound Of Silence cut.mp3": "res://Resources/Scene1/Audio/Music/Simon And Garfunkel - The Sound Of Silence cut.mp3",
 		"Turbulence": "res://Resources/Scene1/Audio/Sfx/Turbulence.mp3",
 		"bottle-lid-click": "res://Resources/Scene1/Audio/Sfx/bottle-lid-click.wav",
 		"pilot-announcementEchoShort": "res://Resources/Scene1/Audio/Sfx/pilot-announcementEchoShort.wav",
@@ -68,6 +72,6 @@
 	},
 	"start": "start",
 	"videos": {
-		"New project.ogv": "res://Resources/Scene1/Video/New project.ogv"
+		"720p-00.00.07.000-00.01.56.833.ogv": "res://Resources/Scene1/Video/720p-00.00.07.000-00.01.56.833.ogv"
 	}
 }
