@@ -81,6 +81,9 @@ offset_top = -0.120059
 offset_right = -19.92
 offset_bottom = 8.27996
 
+[node name="TextureRect" parent="VideoPlayer/BackgroundCompose/CustomBackgroundContainer/PersonLayout/CustomChoiceSceneContainer/TextArea/VBoxContainer/Control" index="0"]
+texture = null
+
 [node name="ChoicesBlock" parent="VideoPlayer/BackgroundCompose/CustomBackgroundContainer/PersonLayout/CustomChoiceSceneContainer/TextArea" instance=ExtResource("6_coxd1")]
 layout_mode = 1
 anchors_preset = -1
