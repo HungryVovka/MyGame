@@ -42,6 +42,7 @@ func _enter_tree():
 		else:
 			break
 	dock.bus_list = bus_list
+	_make_visible(false)
 
 func _get_plugin_name():
 	return "Dialog Helper Tool"
