@@ -96,6 +96,7 @@ libraries = {
 }
 
 [node name="Button" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.065

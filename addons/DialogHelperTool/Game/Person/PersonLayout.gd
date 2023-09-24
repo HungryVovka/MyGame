@@ -24,3 +24,8 @@ func person_animation(obj: String, type: String = "dir", animation: String = "RE
 				persons[obj].play_dir(animation, time, backwards)
 			"fade":
 				persons[obj].play_fade(time, backwards)
+
+
+func _on_gui_input(event):
+	print(event)
+	pass # Replace with function body.

@@ -7,6 +7,9 @@ signal on_next()
 @onready var lisa = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/LineEdit3
 
 func _ready():
+	fadeIn()
+	
+func fadeIn():
 	$AnimationPlayer.play("appear")
 
 func _on_line_edit_text_changed(new_text):
@@ -27,3 +30,11 @@ func _on_button_pressed():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "disappear":
 		on_next.emit()
+
+
+func _on_gui_input(event):
+	pass # Replace with function body.
+
+
+func _on_line_edit_3_gui_input(event):
+	pass # Replace with function body.

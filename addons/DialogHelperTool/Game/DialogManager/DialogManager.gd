@@ -23,10 +23,12 @@ signal showChoices(data)
 signal playVideo(res)
 signal stopVideo()
 
-
 signal personVisible(name, isVisible)
 signal personSource(name, src)
 signal personAnimation(obj, type, animation, time, backwards)
+signal loadProgress(cur: int, max: int, fn: String)
+
+signal onSignal(name: String, params: Dictionary)
 
 var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
 var text_data : Dictionary = {}
@@ -94,7 +96,7 @@ func setTimeline(filename):
 		nextEventTimer.stop()
 		nextEventTimer.queue_free()
 	
-	print("resetting current event")
+	print("setting timeline", filename)
 	current_event = null
 	if filename:
 		text_data = JSONHelper.read_json(filename, false)
@@ -125,23 +127,23 @@ func setCharactersList(data: Dictionary):
 		persons_resources.clear()
 		for k in characters_data.persons.keys():
 			var res = {}
+			var ix = 1
+			var size = characters_data.persons[k].keys().size()
 			for mood in characters_data.persons[k].keys():
-				res[mood] = load(characters_data.persons[k][mood])
+				res[mood] = load(characters_data.persons[k][mood])	
+				loadProgress.emit(ix, size, characters_data.persons[k][mood])
+				ix += 1
 			persons_resources[k] = res
 
 func setBackgroundsList(src: Dictionary):
 	if src: 
 		background_resources.clear()
 		var data = src.duplicate()
-		for k in data.keys():
-			background_resources[k] = load(data[k])
 
 func setVideosList(src: Dictionary):
 	if src: 
 		videos_resources.clear()
 		var data = src.duplicate()
-		for k in data.keys():
-			videos_resources[k] = load(data[k])
 
 
 func play_next_event(replay_last: bool = false):
@@ -219,7 +221,7 @@ func process_character(event):
 func process_background(event):
 	var has_transition = event.has("transition")
 	var params = event.transition if has_transition else {}
-	var bg_name: String = DialogState.pps(event.name) if event.has("name") else null
+	var bg_name = DialogState.pps(event.name) if event.has("name") else null
 	if bg_name != null:
 		if background_resources.has(bg_name):
 			setBackground.emit(background_resources[bg_name], has_transition, params)

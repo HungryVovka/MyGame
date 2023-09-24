@@ -4,9 +4,11 @@ extends Node
 signal progress(value: float)
 signal sceneReady(value: String, request_name: String)
 
+var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
+
 var http: HTTPRequest
 var timer: Timer = null
-var scenes: Dictionary = _read_json("res://scenes/scenes.json")
+var scenes: Dictionary = JSONHelper.read_json("res://scenes/scenes.json")
 var downloadSize = 1
 var busy = false
 
@@ -18,13 +20,13 @@ func _need_downloading(filename: String, headers):
 	var cache = _generate_cachefile(headers)
 	var fn = "user://Scenes/" + filename + ".cache"
 	if FileAccess.file_exists(fn):
-		var dict = _read_json(fn)
+		var dict = JSONHelper.read_json(fn)
 		return dict.cl != cache.cl || dict.etag != cache.etag
 	else:
 		return true
 
 func _save_cachefile(filename, headers):
-	_save_json("user://Scenes/" + filename + ".cache", _generate_cachefile(headers))
+	JSONHelper.save_json("user://Scenes/" + filename + ".cache", _generate_cachefile(headers))
 	
 func _generate_cachefile(headers):
 	var cl_header: String
@@ -90,17 +92,3 @@ func downloadScene(sceneName: String):
 				)
 	add_child(head)
 	head.request(scene.url, [], HTTPClient.METHOD_HEAD);
-	
-func _read_json(filename):
-	var file = FileAccess.open(filename, FileAccess.READ)
-	var txt = file.get_as_text()
-	var data = JSON.parse_string(txt)
-	file.close()
-	return data
-	
-func _save_json(filename, data):
-	var file: FileAccess = FileAccess.open(filename, FileAccess.WRITE)
-	var txt = JSON.stringify(data)
-	file.store_string(txt)
-	file.flush()
-	file.close()

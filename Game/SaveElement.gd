@@ -31,7 +31,6 @@ func _on_texture_rect_mouse_entered():
 func _on_texture_rect_mouse_exited():
 	img.modulate = default_color
 
-
 func _on_texture_rect_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:

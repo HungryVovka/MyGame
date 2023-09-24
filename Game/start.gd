@@ -13,6 +13,8 @@ var dialog : Node
 
 var menu_is_hiding = false
 
+var JSONHelper = preload("res://addons/DialogHelperTool/Shared/JSONHelper.gd").new()
+
 var dict = {
 	"timeline": timeline,
 	"backgrounds": backgrounds,
@@ -27,8 +29,7 @@ var dict = {
 var cached_save = {}
 
 var layouts = [
-	preload("res://Game/MainDialogLayout.tscn"),
-	preload("res://Game/DialogLayouts/Main/SecondLayout.tscn")
+	preload("res://Game/DialogLayouts/Main/MainDialogLayout.tscn"),
 ]
 
 var current_layout_index = 0
@@ -54,17 +55,21 @@ func _ready():
 	dialog = layouts[0].instantiate()
 	$LayoutContainer.add_child(dialog)
 	
-	var cfg = DialogState.scene_state
-	if cfg.is_empty():
-		dialog.setDialogParams(dict)
-	else:
-		dialog.setDialogParams(cfg)
+	add_child(JSONHelper)
+	JSONHelper.later(loadDialog)
 	
 	menuPlayer.animation_finished.connect(func(_name):
 		if menu_is_hiding:
 			menu.visible = false
 			menu_is_hiding = false
 		)
+		
+func loadDialog():
+	var cfg = DialogState.scene_state
+	if cfg.is_empty():
+		dialog.setDialogParams(dict)
+	else:
+		dialog.setDialogParams(cfg)
 		
 func _input(event):
 	if event is InputEventKey:

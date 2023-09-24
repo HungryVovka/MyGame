@@ -28,6 +28,7 @@ func _enter_tree():
 	dialogToolState.state.scale = get_editor_interface().get_editor_scale()
 	dock = preload("res://addons/DialogHelperTool/Tool/DialogHelperTool.tscn").instantiate()
 	dock.interface_scale = get_editor_interface().get_editor_scale()
+	dock.editor = get_editor_interface()
 	get_editor_interface().get_editor_main_screen().add_child(dock)
 	dock.connect("reimport", rescan_fs)
 	
@@ -40,8 +41,7 @@ func _enter_tree():
 			bus_list.push_back(iBus)
 		else:
 			break
-	dock.bus_list = bus_list	
-	_make_visible(false)
+	dock.bus_list = bus_list
 
 func _get_plugin_name():
 	return "Dialog Helper Tool"

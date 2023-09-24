@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck7xxiv43xgkh"]
-
-[ext_resource type="Script" path="res://addons/DialogHelperTool/Game/DialogManager/DialogManager.gd" id="1_revum"]
-
-[node name="DialogManager" type="Node"]
-script = ExtResource("1_revum")

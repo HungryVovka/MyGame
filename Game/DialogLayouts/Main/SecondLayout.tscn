@@ -44,7 +44,6 @@ anchor_right = 2.138
 anchor_bottom = 2.053
 offset_right = 0.0759897
 offset_bottom = 0.122139
-mouse_filter = 1
 
 [node name="CustomChoiceSceneContainer" type="Control" parent="VideoPlayer/BackgroundCompose/CustomBackgroundContainer/PersonLayout"]
 layout_mode = 1

@@ -3,6 +3,7 @@ extends Control
 
 @export var interface_scale: float = 1.0
 @export var bus_list: Array[String] = []
+var editor: EditorInterface
 
 var config_path: String = ""
 var scene_config_data = {}

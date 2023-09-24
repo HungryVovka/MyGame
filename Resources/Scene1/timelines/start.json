@@ -3,9 +3,17 @@
 	"events": [
 		{
 			"background": {
+				"clickable": true,
+				"name": "3 (12)",
+				"video": ""
+			},
+			"text": ""
+		},
+		{
+			"background": {
 				"name": "1.png"
 			},
-			"jump_to": "1",
+			"jump_to": "/video_test",
 			"play_sound": {
 				"bus": "Music",
 				"channel": "Music1",
@@ -14,8 +22,11 @@
 				"name": "Airplane Outside",
 				"volume": 0.05
 			},
+			"state": {
+
+			},
 			"text": "",
-			"timer": 8
+			"timer": 2
 		},
 		{
 			"background": {
@@ -76,8 +87,11 @@
 				"name": "звук внутри самолета",
 				"volume": 0.14
 			},
-			"text": "",
-			"timer": 2.1
+			"script": "func start(_dialog, _event):\n\t_dialog.onSignal.emit(\"relation\", {})\n\t\nfunc condition(_dialog, _event):\n\treturn true",
+			"state": {
+
+			},
+			"text": ""
 		},
 		{
 			"background": {
@@ -1253,7 +1267,7 @@
 		},
 		{
 			"background": {
-				"name": "3 (3)",
+				"name": "trans",
 				"video": "New project.ogv"
 			},
 			"id": "1",
@@ -1269,9 +1283,14 @@
 					"blend_speed": 1
 				}
 			},
-			"text": ""
+			"text": "",
+			"timer": 3
 		},
 		{
+			"script": "func start(dialog, _event):\n\tdialog.get_parent().audioManager.players[\"Music1\"].volume_db = linear_to_db(0.3)\n\t\nfunc condition(_dialog, _event):\n\treturn true",
+			"state": {
+
+			},
 			"text": ""
 		},
 		{
@@ -1312,7 +1331,40 @@
 		}
 	],
 	"roots": {
+		"/video_test": {
+			"events": [
+				{
+					"background": {
+						"clickable": true,
+						"name": "720p start",
+						"transition": {
+							"blend": true,
+							"blend_mode": true,
+							"blend_speed": 1.00000000000002
+						},
+						"video": ""
+					},
+					"script": "func start(dialog, _event):\n\tdialog.get_parent().backgrounds[0].movable = 0\n\t\nfunc condition(_dialog, _event):\n\treturn true",
+					"state": {
 
+					},
+					"text": ""
+				},
+				{
+					"background": {
+						"video": "720p-00.00.07.000-00.01.56.833.ogv"
+					},
+					"text": "",
+					"timer": 0.02
+				},
+				{
+					"background": {
+						"name": ""
+					},
+					"text": ""
+				}
+			]
+		}
 	},
 	"unique_name": "StartTimeline"
 }

@@ -15,7 +15,6 @@ func _on_start_pressed():
 	get_tree().change_scene_to_file("res://Scene/start.tscn")
 
 
-
 func _on_load_pressed():
 	pass # Replace with function body.
 

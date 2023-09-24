@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dic31muyhswbr"]
+[gd_scene load_steps=12 format=3 uid="uid://b1jmdlgtlehml"]
 
-[ext_resource type="Script" path="res://Game/Empty.gd" id="1_2fgj0"]
-[ext_resource type="Texture2D" uid="uid://babddgi4u8qxo" path="res://scenes/Res/loading_tex.png" id="2_6a1tx"]
-[ext_resource type="Shader" path="res://shaders/main_menu_highlight.gdshader" id="3_qvmpc"]
+[ext_resource type="Script" path="res://addons/DialogHelperTool/Game/Loading/LoadingScene/LoadingScene.gd" id="1_4tlg0"]
+[ext_resource type="Texture2D" uid="uid://babddgi4u8qxo" path="res://scenes/Res/loading_tex.png" id="2_htgjw"]
+[ext_resource type="Shader" path="res://shaders/main_menu_highlight.gdshader" id="3_2fc7p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ntnb3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wyutf"]
-shader = ExtResource("3_qvmpc")
+shader = ExtResource("3_2fc7p")
 shader_parameter/angle = 0.26
 shader_parameter/position = 0.32
 shader_parameter/spread = 0.736
@@ -85,7 +85,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2fgj0")
+script = ExtResource("1_4tlg0")
 
 [node name="ColorRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_ntnb3")
@@ -95,7 +95,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_6a1tx")
+texture = ExtResource("2_htgjw")
 stretch_mode = 6
 
 [node name="Base" type="Control" parent="."]
@@ -114,7 +114,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_6a1tx")
+texture = ExtResource("2_htgjw")
 stretch_mode = 6
 
 [node name="Shader" type="TextureRect" parent="Base"]
@@ -126,7 +126,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_6a1tx")
+texture = ExtResource("2_htgjw")
 expand_mode = 3
 stretch_mode = 3
 

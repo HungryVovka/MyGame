@@ -32,6 +32,7 @@
 		"4 (6)": "res://Resources/Scene1/Art/4 (6).png",
 		"4 (7)": "res://Resources/Scene1/Art/4 (7).png",
 		"4 (8)": "res://Resources/Scene1/Art/4 (8).png",
+		"720p start": "res://Resources/Scene1/Art/720p start.jpg",
 		"BlackScreen": "res://Resources/Scene1/Art/BlackScreen.png",
 		"BlackScreenCredits2": "res://Resources/Scene1/Art/BlackScreenCredits2.png",
 		"BlackScreenCredits3": "res://Resources/Scene1/Art/BlackScreenCredits3.png",
@@ -68,6 +69,7 @@
 	},
 	"start": "start",
 	"videos": {
+		"720p-00.00.07.000-00.01.56.833.ogv": "res://Resources/Scene1/Video/720p-00.00.07.000-00.01.56.833.ogv",
 		"New project.ogv": "res://Resources/Scene1/Video/New project.ogv"
 	}
 }

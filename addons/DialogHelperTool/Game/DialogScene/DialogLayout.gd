@@ -3,6 +3,7 @@ extends Control
 @onready var textArea
 var dialogManager: DialogManager
 var audioManager: AudioManager
+var downloader: DialogResourceLoader = DialogResourceLoader.new()
 @onready var backgrounds = []
 @onready var choicesBlocks = []
 @onready var videoPlayers = []
@@ -61,16 +62,17 @@ func extractManagers() -> Dictionary:
 	}
 
 func embedManagers(src: Dictionary):
-	print("embed")
 	audioManager = src.audioManager
 	dialogManager = src.dialogManager
 func _ready():
 	connectControls()
+	downloader.connect("done", dialogResourcesReady)
+	add_child(downloader)
 	for c in choicesBlocks:
 		c.visible = false
 	var dm_is_created = false
 	if !dialogManager:
-		dialogManager = preload("res://addons/DialogHelperTool/Game/DialogManager/DialogManager.tscn").instantiate()
+		dialogManager = preload("res://addons/DialogHelperTool/Game/DialogManager/DialogManager.gd").new()
 		dm_is_created = true
 	add_child(dialogManager)
 	dialogManager.get_parent().move_child(dialogManager, 0)
@@ -142,15 +144,30 @@ func setDialogParams(dict: Dictionary):
 	clickable_background = dict.clickable_background
 	for c in choicesBlocks:
 		c.visible = false
-	dialogManager.videos_list = dict.videos
-	dialogManager.background_list = dict.backgrounds
-	dialogManager.character_list = dict.characters
-	audioManager.resources = dict.sounds
-	dialogManager.timeline = dict.timeline
-	dialogManager.reset_index()
-	scene_root = dict.scene_root
+	downloadResources(dict)
 	scene_src_params = dict
+	scene_root = dict.scene_root
+	
+	dialogManager.character_list = dict.characters
+	dialogManager.timeline = dict.timeline
+
+
+func downloadResources(dict: Dictionary):
+	audioManager.resources = dict.sounds
+	var fn = dict.videos.values() + dict.backgrounds.values()
+	downloader.load(fn)
+	
+func dialogResourcesReady():
+	dialogManager.background_list = scene_src_params.backgrounds
+	dialogManager.videos_list = scene_src_params.videos
+	for k in scene_src_params.videos.keys():
+		dialogManager.videos_resources[k] = downloader.store[scene_src_params.videos[k]]
+	for k in scene_src_params.backgrounds.keys():
+		dialogManager.background_resources[k] = downloader.store[scene_src_params.backgrounds[k]]
+		
+	dialogManager.reset_index()
 	dialogManager.play_next_event()
+	downloader.clear()
 
 func set_person_source(obj: String, src):
 	for p in persons:
@@ -190,20 +207,36 @@ func on_dialog_manager_update_character(portrait, character_name):
 func on_dialog_manager_update_text(text):
 	textArea.text = text
 
+
+
+var originalBackgroundContainerChildren: Array[Node] = []
+
 func on_dialog_manager_set_background(res, has_background, params):
 	for b in backgrounds:
 		b.set_background(res, has_background, params)
+	clearCustomBackground()
+		
+func clearCustomBackground():
+	for n in originalBackgroundContainerChildren:
+		n.get_parent().remove_child(n)
+		backgroundSceneContainer.add_child(n)
 	if customBackgroundChild:
 		customBackgroundChild.get_parent().remove_child(customBackgroundChild)
 		customBackgroundChild.queue_free()
 		customBackgroundChild = null
+	originalBackgroundContainerChildren.clear()
 
 func on_dialog_manager_set_custom_background(src):
-	if customBackgroundChild:
-		customBackgroundChild.get_parent().remove_child(customBackgroundChild)
-		customBackgroundChild.queue_free()
-		customBackgroundChild = null
+	clearCustomBackground()
 	customBackgroundChild = load(src).instantiate()
+	customBackgroundChild.set_mouse_filter(MOUSE_FILTER_PASS)
+	
+	var containerChildren: Array[Node] = backgroundSceneContainer.get_children()
+	for n in containerChildren:
+		originalBackgroundContainerChildren.push_back(n)
+		backgroundSceneContainer.remove_child(n)
+		customBackgroundChild.add_child(n)
+		
 	backgroundSceneContainer.add_child(customBackgroundChild)
 	if customBackgroundChild.has_signal("on_next"):
 		customBackgroundChild.connect("on_next", func(): dialogManager.play_next_event())

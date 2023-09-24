@@ -7,6 +7,7 @@ extends Control
 @onready var shader = $Base/Shader
 
 var appeared = false
+var scene_loader: SceneLoader
 	
 func _ready():
 	
@@ -14,6 +15,11 @@ func _ready():
 	
 	DownloadManager.sceneReady.connect(_scene_ready)
 	DownloadManager.progress.connect(_progress)
+	
+	scene_loader = SceneLoader.new()
+	scene_loader.connect("on_progress", _on_scene_progress)
+	scene_loader.connect("on_ready", _on_scene_ready)
+	add_child(scene_loader)
 	
 	var scene_name:String = "scene1"
 	if DialogState.gs("_next_scene") != "":
@@ -24,6 +30,11 @@ func _ready():
 	
 	DownloadManager.downloadScene(scene_name)
 	_progress(0.0)
+	
+func _on_scene_progress(value: float):
+	pb.value = value * 100.0
+func _on_scene_ready(resource: Resource):
+	get_tree().change_scene_to_packed(resource)
 	
 func _scene_ready(value: String, scene_name: String):
 	var cfg: Dictionary = _read_json(value + "config.json");
@@ -62,7 +73,7 @@ func _scene_ready(value: String, scene_name: String):
 			t.timeout.connect(
 				func():
 					DialogState.setSceneState(dict)
-					get_tree().change_scene_to_file(cfg.scene)
+					scene_loader.load(cfg.scene)
 					)
 			add_child(t)
 			t.start(0.05)

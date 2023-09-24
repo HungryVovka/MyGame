@@ -8,7 +8,7 @@ var dialog_tool_type: String = "VIDEOPLAYER"
 func _ready():
 	videoFrame.texture = player.get_video_texture()
 
-func play(res):
+func play(res: Resource):
 	player.stop()
 	player.reset_image()
 	player.set_process(true)
