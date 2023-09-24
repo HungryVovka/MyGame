@@ -1,6 +1,6 @@
 extends Control
 
-@onready var textArea = []
+@onready var textArea
 var dialogManager: DialogManager
 var audioManager: AudioManager
 var downloader: DialogResourceLoader = DialogResourceLoader.new()
@@ -113,14 +113,14 @@ func connectControls():
 	choicesBlocks = LayoutManager.findControlsInChildren(self, "CHOICES_BLOCK")
 	videoPlayers = LayoutManager.findControlsInChildren(self, "VIDEOPLAYER")
 	persons = LayoutManager.findControlsInChildren(self, "PERSON_LAYOUT")
-	textArea = LayoutManager.findControlsInChildren(self, "TEXT_AREA")
+	textArea = LayoutManager.findControlsInChildren(self, "TEXT_AREA", true)
 	
 	for b in backgrounds:
 		b.connect("gui_input", _on_background_gui_input)
 	for c in choicesBlocks:
 		c.connect("choiceClicked", _on_choices_block_choice_clicked)
-	for t in textArea:
-		t.connect("on_next", _on_text_area_on_next)
+	if textArea:
+		textArea.connect("on_next", _on_text_area_on_next)
 
 func save():
 	var result = {
@@ -185,9 +185,8 @@ func _process(_delta):
 	pass
 
 func on_dialog_manager_end():
-	for t in textArea:
-		t.resetCharacter()
-		t.text = ""
+	textArea.resetCharacter()
+	textArea.text = ""
 	if DialogState.gs("_next_timeline") != "":
 		for c in choicesBlocks:
 			c.visible = false
@@ -200,16 +199,13 @@ func on_dialog_manager_end():
 		get_tree().change_scene_to_file(loading_scene)
 
 func on_dialog_manager_reset_character():
-	for t in textArea:
-		t.resetCharacter()
+	textArea.resetCharacter()
 
 func on_dialog_manager_update_character(portrait, character_name):
-	for t in textArea:
-		t.setCharacter(portrait, character_name)
+	textArea.setCharacter(portrait, character_name)
 
 func on_dialog_manager_update_text(text):
-	for t in textArea:
-		t.text = text
+	textArea.text = text
 
 
 
@@ -297,8 +293,8 @@ func choice_mode():
 func _on_text_area_on_next():
 	if !scene_ready:
 		return
-#	if !clickable_background && textArea.text == "":
-#		return
+	if !clickable_background && textArea.text == "":
+		return
 	if !choice_mode():
 		dialogManager.play_next_event()
 		

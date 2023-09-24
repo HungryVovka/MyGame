@@ -3,7 +3,7 @@ extends Control
 @export_multiline var text:  set =  setText, get = getText
 @export var charactersPerSecond: int = 200
 @export var nextOnClick: bool = true
-@export var character:String ="":set =  setCharacterProp, get = getCharacterProp
+
 
 @onready var richLabel = $VBoxContainer/Control/TextureRect/MarginContainer/RichLabel
 @onready var characterPortrait = $VBoxContainer/CharacterLine/CharacterTexture
@@ -69,20 +69,13 @@ func next():
 	if richLabel.next():
 		on_next.emit()
 
-func setCharacterProp(value:String):
-	character = value
-	characterName.text = value
-
-func getCharacterProp():
-	return character
-
 func setCharacter(portrait, character_name):
 	characterPortrait.texture = portrait
-	setCharacterProp(character_name)
+	characterName.text = character_name
 
 func resetCharacter():
 	characterPortrait.texture = null
-	setCharacterProp("")
+	characterName.text = ""
 
 func _on_rich_label_gui_input(event):
 	if event is InputEventMouseButton:
