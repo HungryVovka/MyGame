@@ -1,6 +1,5 @@
 #!/bin/sh
-aws s3 --endpoint-url=https://storage.yandexcloud.net sync —-delete ./ s3://the-graduate-src/assets/ \
---exclude "*" \
+aws s3 --endpoint-url=https://storage.yandexcloud.net sync --delete ./ s3://the-graduate-src/assets/ --exclude "*" \
 --include "*mp3" \
 --include "*png" \
 --include "*jpg" \
@@ -9,4 +8,4 @@ aws s3 --endpoint-url=https://storage.yandexcloud.net sync —-delete ./ s3://th
 --include "*wav" \
 --include "*ogg" \
 --include "*exe" \
---include "*dmg" 
+--include "*dmg"
