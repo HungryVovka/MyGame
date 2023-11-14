@@ -1,2 +1,13 @@
 # Godot 4+ specific ignores
 .godot/
+
+# Resources
+*.mp3
+*.png
+*.jpg
+*.jpeg
+*.ogv
+*.wav
+*.ogg
+*.exe
+*.dmg
